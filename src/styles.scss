@@ -1,1 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  /* ===== Colors ===== */
+  --body-white-color: #e4e9f7;
+  --body-dark-color: #151521;
+
+  --web-menubackground: #1e1e2d;
+  --web-text-opacity: #737380;
+
+  --purple-dark: #441057;
+  --purple-white: #7b2f74;
+  --pink: #c72e7c;
+  --pink-white: #e62479;
+  --coral: #fd2d5f;
+  --white-palette: #e3e1e1;
+
+  --white: #fff;
+  --black: #000;
+
+  /* ====== Transition ====== */
+  --tran-03: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.3s ease;
+  --tran-05: all 0.3s ease;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--body-dark-color);
+}
+
+.btn {
+  width: 100%;
+  height: 40px;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  i {
+    margin-right: 8px;
+    color: var(--purple-white);
+  }
+}
+
+.btn.primary {
+  color: #fff;
+  background-color: var(--web-menubackground);
+  border: none;
+}
+
+.btn.secundary {
+  border: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: var(--purple-white);
+  color: var(--white);
+  background: var(--web-menubackground);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn.secundary:hover {
+  background-color: var(--purple-white);
+}
+
+
+
