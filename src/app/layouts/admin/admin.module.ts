@@ -1,0 +1,26 @@
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+
+import { DashboardComponent } from "src/app/pages/admin/dashboard/dashboard.component";
+import { AuthService } from "src/app/services/auth.service";
+import { SharedModule } from "src/app/shared/shared.module";
+import { AdminRoutes } from "./admin.routing";
+
+@NgModule({
+    declarations: [
+        DashboardComponent
+    ],
+    providers: [AuthService],
+    imports: [
+      CommonModule,
+      RouterModule.forChild(AdminRoutes),
+      FormsModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      SharedModule
+    ],
+  })
+  export class AdminModule {}

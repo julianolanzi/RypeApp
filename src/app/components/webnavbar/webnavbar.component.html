@@ -1,50 +1,55 @@
 <nav class="web-navbar">
     <div class="menu">
         <header>
-            <img class="logo1" src="../../../assets/img/logo-web-menu.png" alt="RypeApp">
-            <img class="logo2" src="../../../assets/img/RYPE.png" alt="RypeApp">
+            <img routerLink="/" class="logo1" src="../../../assets/img/logo-web-menu.png" alt="RypeApp">
+            <img routerLink="/" class="logo2" src="../../../assets/img/RYPE.png" alt="RypeApp">
 
         </header>
 
 
         <ul id="nav-bar" class="web-menu">
             <li>
-                <a href="#">
+                <a routerLink="/">
 
                     <span class="text nav-text">Home</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a routerLink="/about">
                     <i class='bx bx-home-alt icon'></i>
                     <span class="text nav-text">A Rype</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a routerLink="/events">
                     <i class='bx bx-home-alt icon'></i>
                     <span class="text nav-text">Eventos</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a routerLink="/trenings">
                     <i class='bx bx-home-alt icon'></i>
                     <span class="text nav-text">Treinos</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a routerLink="/contact">
                     <i class='bx bx-home-alt icon'></i>
                     <span class="text nav-text">Contato</span>
                 </a>
             </li>
             <div class="autentication">
-                <button class="btn primary"> <i class="fa fa-user-o fa-1x"></i> Entrar</button>
-                <button class="btn secundary">Registrar</button>
+                <li>
+                    <button routerLink="/auth" class="btn primary"> <i class="fa fa-user-o fa-1x"></i> Entrar</button>
+                </li>
+                <li>
+                    <button routerLink="/sing-up" class="btn secundary">Registrar</button>
+                </li>
+
             </div>
         </ul>
 
-       
+
     </div>
     <div class="mobile-menu">
         <i class="fa fa-bars" id="ham-menu"></i>
