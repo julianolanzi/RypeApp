@@ -7,6 +7,7 @@ import { BaseService } from './base.service';
 import { LocalStorageUtils } from '../utils/localstorage';
 import { RecoveryPassword } from './../models/auth/recovery-password';
 import { ResetPassword } from '../models/auth/reset-password';
+import { UserRegister } from '../models/auth/user-register';
 
 
 @Injectable()
@@ -34,6 +35,13 @@ export class SecurityService extends BaseService {
         user,
         this.ObterHeaderJson()
       )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  registrarUsuario(usuario: UserRegister): Observable<UserRegister> {
+    let response = this.http
+      .post(this.UrlServiceV1 + '/users/', usuario, this.ObterHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

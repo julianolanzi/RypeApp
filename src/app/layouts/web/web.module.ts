@@ -21,6 +21,15 @@ import { TermsComponent } from 'src/app/pages/web/terms/terms.component';
 import { ResetPasswordComponent } from 'src/app/pages/web/reset-password/reset-password.component';
 import { SecurityService } from 'src/app/services/security.service';
 
+import {
+  NgxMaskDirective,
+  NgxMaskPipe,
+  provideNgxMask,
+  IConfig,
+} from 'ngx-mask';
+
+export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -35,7 +44,7 @@ import { SecurityService } from 'src/app/services/security.service';
     TermsComponent,
     ResetPasswordComponent,
   ],
-  providers: [AuthService, SecurityService],
+  providers: [AuthService, SecurityService, provideNgxMask()],
   imports: [
     CommonModule,
     RouterModule.forChild(WebRoutes),
@@ -43,12 +52,8 @@ import { SecurityService } from 'src/app/services/security.service';
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
 })
 export class WebModule {}
-
-function provideNgxMask():
-  | import('@angular/core').Provider
-  | import('@angular/core').EnvironmentProviders {
-  throw new Error('Function not implemented.');
-}

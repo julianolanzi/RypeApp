@@ -1,1 +1,132 @@
-<p>sing-up works!</p>
+<section class="container-auth d-flex">
+    <div class="d-flex container">
+        <div class="img-planet">
+            <img src="./assets/img/key.png" alt="">
+        </div>
+        <div class="container-form">
+            <div class="text-login">
+                <h1>Crie sua conta</h1>
+                <p>Preencha os dados abaixo para criar seu cadastro 😎</p>
+            </div>
+            <form (ngSubmit)="addAcount()" [formGroup]="cadastroForm" #formDir="ngForm">
+                <div class="box-alerts">
+                    <div class="alert alert-danger" *ngIf="errors.length > 0">
+                        <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                        <ul>
+                            <li *ngFor="let error of errors">{{ error }}</li>
+                        </ul>
+                    </div>
+                    <p *ngIf="isRegisterSucess == true" class="alert alert-success">Registro realizado com sucesso.</p>
+                </div>
+                <div class="item-form">
+                    <input type="text" formControlName="nickname" placeholder="Nickname">
+                    <div class="alerts" *ngIf="nickname.invalid && formDir.submitted">
+                        <p class="text-danger">Nickname é obrigatório</p>
+                    </div>
+                </div>
+                <div class="item-form">
+                    <input type="text" formControlName="name" placeholder="Nome">
+                    <div class="alerts" *ngIf="name.invalid && formDir.submitted">
+                        <p class="text-danger">Nome é obrigatório</p>
+                    </div>
+                </div>
+                <div class="item-form">
+                    <input type="text" placeholder="Sobre Nome" formControlName="lastname">
+                    <div class="alerts" *ngIf="lastname.invalid && formDir.submitted">
+                        <p class="text-danger">Sobre Nome é obrigatório</p>
+                    </div>
+                </div>
+                <div class="item-form">
+                    <input class="datapicker" type="date" placeholder="Data de Nascimento" formControlName="birthday">
+                    <div class="alerts" *ngIf="birthday.invalid && formDir.submitted">
+                        <p class="text-danger">Data de Nascimento é obrigatório</p>
+                    </div>
+                </div>
+                <div class="item-form">
+
+
+                    <select name="country" id="country" formControlName="country"
+                        data-placeholder="Selecione seu País ">
+                        <option value="">Selecione seu País ...</option>
+                        <option value="brasil">Brasil</option>
+                        <option value="méxico">México</option>
+                        <option value="chile">Chile</option>
+                        <option value="argentina">Argentina</option>
+                    </select>
+                    <div class="alerts" *ngIf="country.invalid && formDir.submitted">
+                        <p class="text-danger">País é obrigatório</p>
+                    </div>
+                </div>
+                <div class="item-form">
+                    <div class="conteiner-gender">
+                        <div class="options-gender">
+                            <input class="" id="male" type="radio" value="Male" formControlName="gender" />
+
+                            <label class="">
+                                <div class="">Homem</div>
+                            </label>
+                        </div>
+
+                        <div class="options-gender ">
+                            <input class="female" id="famale" type="radio" value="Female" formControlName="gender" />
+
+                            <label class="">
+                                <div class="">Mulher</div>
+                            </label>
+                        </div>
+
+
+                    </div>
+                    <div class="alerts" *ngIf="gender.invalid && formDir.submitted">
+                        <p class="text-danger">Gênero é obrigatório</p>
+                    </div>
+                </div>
+
+                <div class="item-form">
+                    <input type="tel" mask="(00) 00000-0000" placeholder="Celular" formControlName="phone">
+                    <div class="alerts" *ngIf="phone.invalid && formDir.submitted">
+                        <p class="text-danger">Celular é obrigatório</p>
+
+                    </div>
+                </div>
+                <div class="item-form">
+                    <input type="text" placeholder="Email" formControlName="email">
+                    <div class="alerts" *ngIf="email.invalid && formDir.submitted">
+                        <p class="text-danger">Email é obrigatório</p>
+
+                    </div>
+                </div>
+                <div class="item-form">
+                    <input type="password" placeholder="Senha" formControlName="password">
+                    <div class="alerts" *ngIf="password.invalid && formDir.submitted">
+                        <p class="text-danger">Senha é obrigatório</p>
+                    </div>
+                </div>
+                <div class="container-terms">
+                    <input type="checkbox" formControlName="terms" value="true" />
+
+                    <p>Aceitar termos
+                        da plataforma
+                        <a routerLink="/terms" class=" link-primary">Termos</a>
+                    </p>
+                    
+                </div>
+                <div class="item-form ">
+                    <div class="alerts" *ngIf="terms.invalid && formDir.submitted">
+                        <p class="text-danger">Aceitar os termos é obrigatório</p>
+
+                    </div>
+                </div>
+
+                <div class="button-form">
+                    <button type="submit" [disabled]="!cadastroForm.valid" class="btn secundary">Criar minha conta</button>
+                </div>
+                <span>já tem conta ? <a routerLink="/auth">Fazer Login</a> </span>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div *ngIf="isLoading">
+    <app-loading></app-loading>
+</div>
