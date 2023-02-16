@@ -1,3 +1,5 @@
+import { AdminModule } from './layouts/admin/admin.module';
+import { AdminComponent } from './layouts/admin/admin.component';
 import { WebComponent } from './layouts/web/web.component';
 
 import { CommonModule } from '@angular/common';
@@ -14,6 +16,19 @@ const routes: Routes = [
         path: '',
         loadChildren: () =>
           import('src/app/layouts/web/web.module').then((m) => m.WebModule),
+      },
+    ],
+  },
+  {
+    path: '',
+    component: AdminComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('src/app/layouts/admin/admin.module').then(
+            (m) => m.AdminModule
+          ),
       },
     ],
   },

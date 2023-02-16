@@ -6,8 +6,8 @@ $red: #f01a19;
 $darkred: #7b2f74;
 
 .container {
-  width: 100%;
-  min-height: 100%;
+  width: 100vw;
+  min-height: 100vh;
   background: linear-gradient(
     to bottom,
     $midgrey 0%,
@@ -16,7 +16,8 @@ $darkred: #7b2f74;
   );
   overflow: hidden;
   top: 0;
-  z-index: 500;
+  left: 0;
+  z-index: 1000;
   position: fixed;
   display: flex;
   justify-content: center;

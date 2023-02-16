@@ -10,19 +10,21 @@ import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
 import { WebModule } from './layouts/web/web.module';
+import { SharedModule } from "./shared/shared.module";
 
 
 @NgModule({
-  declarations: [AppComponent, WebComponent, AdminComponent],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    WebModule,
-    ComponentsModule,
-    AdminModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, WebComponent, AdminComponent],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        RouterModule,
+        AppRoutingModule,
+        WebModule,
+        ComponentsModule,
+        AdminModule,
+        SharedModule
+    ]
 })
 export class AppModule {}
