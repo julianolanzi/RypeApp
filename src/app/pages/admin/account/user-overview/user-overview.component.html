@@ -12,18 +12,6 @@
         </div>
     </div>
 
-    <div class="alerts-container" *ngIf="isChangeSucess">
-        <div >
-            <p>dsa</p>
-        </div>
-        <div class="alert alert-danger" *ngIf="errors.length > 0">
-            <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
-            <ul>
-                <li *ngFor="let error of errors">{{ error }}</li>
-            </ul>
-        </div>
-    </div>
-
     <div class="container-data">
         <div class="top-container">
             <div class="title-form p-20">
@@ -31,8 +19,8 @@
 
             </div>
             <div class="buttons-conteiner p-20">
-                <button>Atualizar Foto</button>
-                <button>Atualizar Dados</button>
+                <button (click)="modal.toggle()">Atualizar Foto</button>
+                <!-- <button>Atualizar Dados</button> -->
             </div>
         </div>
         <hr>
@@ -169,7 +157,8 @@
 
 
                 <div class="bottom-container">
-                    <button type="submit">Atualizar Dados</button>
+                    <button [disabled]="!updateForm.valid || (this.updateForm.touched == false)" type="submit">Atualizar
+                        Dados</button>
                 </div>
             </form>
 
@@ -181,3 +170,28 @@
 <div *ngIf="isLoading">
     <app-loading></app-loading>
 </div>
+
+<app-modal-generic #modal>
+    <div class="container-content-modal">
+        <div class="title-modal">
+            <h1>Altere sua foto de perfil</h1>
+            <p>Selecione a foto que voce deseja</p>
+        </div>
+        <div class="modal-center">
+            <div class="container-img">
+
+                <img  [src]="this.url" alt="image" />
+
+            </div>
+            <label class="file">
+                <input type="file" (change)="onselectFile($event)" />
+                <span>Selecione sua foto</span>
+            </label>
+
+            <button *ngIf="isChangeImg == true" (click)="changeImg()" (click)="modal.toggle()"  class="btn-modal-change">Alterar</button>
+            <button (click)="modal.toggle()" class="btn-modal-close">Fechar</button>
+
+        </div>
+
+    </div>
+</app-modal-generic>

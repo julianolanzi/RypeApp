@@ -1,14 +1,15 @@
-import { LocalStorageUtils } from './../utils/localstorage';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
-export abstract class BaseService {
+import { LocalStorageUtils } from './../utils/localstorage';
 
+export abstract class BaseService {
   constructor() {}
 
   public LocalStorage = new LocalStorageUtils();
 
-  protected UrlServiceV1: string = 'https://apirypecorp-production.up.railway.app';
+  protected UrlServiceV1: string =
+    'https://apirypecorp-production.up.railway.app';
 
   protected ObterHeaderJson() {
     return {
@@ -39,7 +40,6 @@ export abstract class BaseService {
   }
 
   protected serviceError(response: Response | any) {
-
     let customError: string[] = [];
     let customResponse = { error: { errors: [] } };
     if (response instanceof HttpErrorResponse) {
@@ -58,6 +58,8 @@ export abstract class BaseService {
       response.error.errors = customError;
       return throwError(response);
     }
+  
+  
 
     if (response instanceof HttpErrorResponse) {
       customError.push(response.error.error);

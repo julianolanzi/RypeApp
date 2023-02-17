@@ -53,7 +53,6 @@ export class RecoveryPasswordComponent {
     this.router.navigate(['/reset-password/', token]);
   }
   processarFalha(fail: any) {
-    console.log(fail);
     this.isLoading = false;
     this.errors = fail.error.errors;
   }

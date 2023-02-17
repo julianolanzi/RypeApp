@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
@@ -8,10 +9,10 @@ import { BaseService } from '../base.service';
 import { User } from './../../models/account/User';
 import { UserUpdate } from './../../models/account//User-update';
 
-
 @Injectable()
 export class UserService extends BaseService {
   localStorageUtils = new LocalStorageUtils();
+
   constructor(private http: HttpClient) {
     super();
   }
@@ -19,10 +20,8 @@ export class UserService extends BaseService {
   GetUser(id: string): Observable<User> {
     let response = this.http
       .get(this.UrlServiceV1 + '/users/' + id, this.ObterAuthHeaderJson())
-      .pipe(
-        map(this.extractData),
-        catchError(this.serviceError)
-      );
+      .pipe(map(this.extractData), catchError(this.serviceError));
+
     return response;
   }
 
@@ -33,6 +32,4 @@ export class UserService extends BaseService {
 
     return response;
   }
-
-
 }

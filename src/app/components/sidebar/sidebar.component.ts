@@ -64,4 +64,31 @@ export class SidebarComponent {
       }
     });
   }
+
+  isDarkModeOn() {
+    let isActiveDarkMode = document.querySelector('.dark');
+    if(isActiveDarkMode){
+      const isActiveDarkMode = false;
+      
+    }else{}
+  }
+
+  getDebug() {
+    const name = 'isDarkMode' + '=';
+    const Cdecoded = decodeURIComponent(document.cookie);
+    const cArr = Cdecoded.split('; ');
+    let res;
+    let body = document.querySelector('.container-admin') as HTMLElement;
+    cArr.forEach((val) => {
+      if (val.indexOf(name) === 0) res = val.substring(name.length);
+    });
+
+    if (res == 'true') {
+      var chahgeDarkmode = document.getElementById('darkmode');
+      body.classList.toggle('dark');
+      return (res = true);
+    } else {
+      return (res = false);
+    }
+  }
 }

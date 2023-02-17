@@ -1,3 +1,5 @@
+import { ModalGenericComponent } from './../../../../shared/modal-generic/modal-generic.component';
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,6 +9,8 @@ import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { User } from './../../../../models/account/User';
 import { UserService } from 'src/app/services/user/user.service';
 import { UserUpdate } from './../../../../models/account/User-update';
+import { UploadImgService } from './../../../../services/imgs/upload.img.service';
+import { AlertService } from './../../../../services/utils/alert.service';
 @Component({
   selector: 'app-user-overview',
   templateUrl: './user-overview.component.html',
@@ -22,13 +26,22 @@ export class UserOverviewComponent {
   user!: User;
   userUpdate!: UserUpdate;
 
+  url: any;
+  file!: File;
+  isChangeImg: boolean = false;
+
   constructor(
     private UserService: UserService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private Alerts: AlertService,
+    private router: Router,
+    private UploadImgService: UploadImgService,
   ) {
     this.getUser();
     this.isLoading = true;
     this.isChangeSucess = true;
+    this.isChangeImg = false;
+
     this.updateForm = new FormGroup({
       nickname: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
@@ -92,6 +105,7 @@ export class UserOverviewComponent {
       (sucesso) => {
         this.processarSucesso(sucesso);
         this.user = sucesso;
+        this.url = this.user.url;
 
         this.updateForm.patchValue({
           nickname: this.user.nickname,
@@ -125,15 +139,19 @@ export class UserOverviewComponent {
     this.UserService.updateUser(this.userUpdate, this.id).subscribe(
       (sucesso) => {
         this.processarSucesso(sucesso);
+        this.Alerts.sucess('Atualizado com sucesso', 'Perfil');
       },
       (falha) => {
         this.processarFalha(falha);
+        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
       }
     );
-
   }
 
   processarFalha(fail: any) {
+    if (fail.status == 401) {
+      this.router.navigate(['/auth']);
+    }
     this.isLoading = false;
     this.errors = fail.error.errors;
   }
@@ -147,5 +165,35 @@ export class UserOverviewComponent {
     user = JSON.parse(user);
     this.id = user.id;
     return this.id;
+  }
+
+  onselectFile(e: any) {
+    if (e.target.files) {
+      this.file = e.srcElement.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+        this.isChangeImg = true;
+      };
+    }
+  }
+
+  changeImg() {
+    this.id = this.UserLocalInfo();
+    this.isLoading = true;
+    
+
+    this.UploadImgService.uploadImgUser(this.id, this.file).subscribe(
+      (sucesso) => {
+        this.processarSucesso(sucesso);
+        this.user = sucesso;
+        this.Alerts.sucess('Atualizada com sucesso', 'Foto de Perfil');
+      },
+      (falha) => {
+        this.processarFalha(falha);
+        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
+      }
+    );
   }
 }
