@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
   constructor() {}
   ngOnInit(): void {
+    this.getCookie();
     let sidebar = document.querySelector('nav') as HTMLElement;
     let sidebarContainer = document.querySelector(
       '.sidebar-container'
@@ -58,37 +59,47 @@ export class SidebarComponent {
       body.classList.toggle('dark');
 
       if (body.classList.contains('dark')) {
-        modeText.innerText = 'Light mode';
-      } else {
         modeText.innerText = 'Dark mode';
+        let isDarkMode = true;
+        this.setCookie(isDarkMode);
+      } else {
+        modeText.innerText = 'Light mode';
+        let isDarkMode = false;
+        this.setCookie(isDarkMode);
       }
     });
   }
 
-  isDarkModeOn() {
-    let isActiveDarkMode = document.querySelector('.dark');
-    if(isActiveDarkMode){
-      const isActiveDarkMode = false;
-      
-    }else{}
+  setCookie(isDarkMode: boolean) {
+    const d = new Date();
+    d.setTime(d.getTime() + 1000 * 24 * 60 * 60 * 1000);
+    let expires = 'expires=' + d.toUTCString();
+    document.cookie =
+      'RypeDarkMode' + '=' + isDarkMode + ';' + expires + ';path=/';
   }
 
-  getDebug() {
-    const name = 'isDarkMode' + '=';
+  getCookie() {
+    const name = 'RypeDarkMode' + '=';
     const Cdecoded = decodeURIComponent(document.cookie);
     const cArr = Cdecoded.split('; ');
     let res;
+
     let body = document.querySelector('.container-admin') as HTMLElement;
+    let modeSwitch = document.querySelector('.toggle-switch') as HTMLElement;
+
     cArr.forEach((val) => {
       if (val.indexOf(name) === 0) res = val.substring(name.length);
     });
 
+    if (!res) {
+      let isDarkMode = false;
+      this.setCookie(isDarkMode);
+    }
+
     if (res == 'true') {
-      var chahgeDarkmode = document.getElementById('darkmode');
       body.classList.toggle('dark');
-      return (res = true);
     } else {
-      return (res = false);
+      body.classList.remove('dark');
     }
   }
 }

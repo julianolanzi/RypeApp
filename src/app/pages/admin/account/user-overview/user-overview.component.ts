@@ -29,6 +29,7 @@ export class UserOverviewComponent {
   url: any;
   file!: File;
   isChangeImg: boolean = false;
+  isDisable: boolean = false;
 
   constructor(
     private UserService: UserService,
@@ -42,6 +43,8 @@ export class UserOverviewComponent {
     this.isChangeSucess = true;
     this.isChangeImg = false;
 
+    this.isDisable = true;
+
     this.updateForm = new FormGroup({
       nickname: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
@@ -49,12 +52,14 @@ export class UserOverviewComponent {
       idGame: new FormControl(''),
       phone: new FormControl('', [Validators.required]),
       gender: new FormControl(''),
+      email: new FormControl({value: '', disabled: true}),
       country: new FormControl(''),
       birthday: new FormControl(''),
       discord: new FormControl(''),
       instagram: new FormControl(''),
       facebook: new FormControl(''),
       youtube: new FormControl(''),
+      createdAt: new FormControl({value: '', disabled: true}),
     });
   }
   ngOnInit(): void {
@@ -70,6 +75,9 @@ export class UserOverviewComponent {
   }
   get lastname() {
     return this.updateForm.get('lastname')!;
+  }
+  get email() {
+    return this.updateForm.get('email')!;
   }
   get idGame() {
     return this.updateForm.get('idGame')!;
@@ -109,9 +117,11 @@ export class UserOverviewComponent {
 
         this.updateForm.patchValue({
           nickname: this.user.nickname,
+          idGame: this.user.idGame,
           name: this.user.name,
           lastname: this.user.lastname,
           gender: this.user.gender,
+          email: this.user.email,
           birthday: this.datePipe.transform(
             this.user.birthday,
             'yyyy-MM-dd',
@@ -119,6 +129,15 @@ export class UserOverviewComponent {
           ),
           country: this.user.country,
           phone: this.user.phone,
+          youtube: this.user.youtube,
+          discord: this.user.discord,
+          instagram: this.user.instagram,
+          facebook: this.user.facebook,
+          createdAt: this.datePipe.transform(
+            this.user.createdAt,
+            'dd-MM-yyyy',
+            'UTC',
+          ),
         });
       },
       (falha) => {

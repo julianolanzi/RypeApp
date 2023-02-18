@@ -1,45 +1,38 @@
 <div class="container-pass">
 
     <div class="container-cover">
-        <img src="./assets/img/account/CoverProfile.png" alt="">
+        <img src="./assets/img/account/updatePass.png" alt="">
     </div>
     <div class="profile-user-container">
-      
-        <!-- <div class="name-container">
-            <h1>Seven</h1>
-        </div> -->
     </div>
 
     <div class="container-data">
         <div class="top-container">
             <div class="title-form p-20">
                 <h3 class="">Atualize sua senha</h3>
-
             </div>
             <div class="buttons-conteiner p-20">
-                <!-- <button>Atualizar Foto</button>
-                <button>Atualizar Dados</button> -->
             </div>
         </div>
         <hr>
 
         <div class="container-form p-20">
 
-            <form class="d-flex-column" action="">
+            <form (ngSubmit)="updatePassWord()" class="d-flex-column" [formGroup]="updatePass" #formDir="ngForm">
                 <div class="item-form">
                     <label>Senha atual</label>
                     <div>
-                        <input type="text"  placeholder="password" />
-                        <div class="alert">
-                            <p class="">Senha é obrigatório</p>
+                        <input type="password" formControlName="password" placeholder="Senha " />
+                        <div class="alert" *ngIf="password.invalid && formDir.submitted">
+                            <p class="">Senha atual é obrigatório</p>
                         </div>
                     </div>
                 </div>
                 <div class="item-form">
                     <label>Nova Senha</label>
                     <div>
-                        <input type="text"  placeholder="newpassword" />
-                        <div class="alert">
+                        <input type="password" formControlName="newpassword" placeholder="Nova senha" />
+                        <div class="alert" *ngIf="newpassword.invalid && formDir.submitted">
                             <p class="">Nova Senha é obrigatório</p>
                         </div>
                     </div>
@@ -47,19 +40,23 @@
                 <div class="item-form">
                     <label>Confirmar nova senha</label>
                     <div>
-                        <input type="text"   placeholder="confirmpassword" />
-                        <div class="alert">
-                            <p class="">Nova Senha é obrigatório</p>
+                        <input type="password" formControlName="confirmpassword" placeholder="Confirmar nova senha" />
+                        <div class="alert" *ngIf="confirmpassword.invalid && formDir.submitted">
+                            <p class="">Confirmação de senha é obrigatório</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bottom-container">
-                    <button >Atualizar</button>
+                    <button [disabled]="!updatePass.valid" type="submit">Atualizar</button>
                 </div>
             </form>
 
         </div>
     </div>
 
+</div>
+
+<div *ngIf="isLoading">
+    <app-loading></app-loading>
 </div>
