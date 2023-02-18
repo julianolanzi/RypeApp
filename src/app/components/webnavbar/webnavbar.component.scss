@@ -66,8 +66,9 @@ nav {
 
 @media only screen and (max-width: 991px) {
   .web-navbar{
-    position: static;
+    position: fixed;
     z-index: 100;
+    height: 85px;
   }
   .mobile-menu{
     color: var(--white);

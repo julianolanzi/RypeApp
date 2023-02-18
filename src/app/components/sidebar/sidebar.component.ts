@@ -32,6 +32,12 @@ export class SidebarComponent {
 
     let subMenu = document.querySelectorAll('.sub-item');
 
+    toggle.addEventListener('click', () => {
+      sidebar.classList.toggle('close');
+      sidebarContainer.classList.toggle('close');
+      adminContent.classList.toggle('close');
+    });
+
     list.forEach((linkItem, index) => {
       linkItem.addEventListener('click', () => {
         document.querySelector('.active')?.classList.remove('active');
@@ -49,11 +55,7 @@ export class SidebarComponent {
       });
     });
 
-    toggle.addEventListener('click', () => {
-      sidebar.classList.toggle('close');
-      sidebarContainer.classList.toggle('close');
-      adminContent.classList.toggle('close');
-    });
+   
 
     modeSwitch.addEventListener('click', () => {
       body.classList.toggle('dark');
