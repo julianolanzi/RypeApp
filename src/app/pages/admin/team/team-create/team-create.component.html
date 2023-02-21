@@ -1,0 +1,120 @@
+<div class="container-page">
+    <div class="container-data">
+        <div class="top-container">
+            <div class="title-form p-20">
+                <h3 class="">Preencha os dados abaixo</h3>
+
+            </div>
+        </div>
+        <hr>
+
+        <div class="container-form p-20">
+
+            <form (ngSubmit)="createTeamData()" class="d-flex-column" [formGroup]="createTeam" #formDir="ngForm">
+                <div class="item-form">
+                    <label>Nome</label>
+                    <div>
+                        <input type="text" formControlName="name" placeholder="Nome" />
+                        <div class="alert" *ngIf="name.invalid && formDir.submitted">
+                            <p class="">Nome é obrigatório</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-form">
+                    <label>Tag Name</label>
+                    <div>
+                        <input type="text" formControlName="tagName" placeholder="tagName" />
+                        <div class="alert" *ngIf="tagName.invalid && formDir.submitted">
+                            <p class="">Tag Name é obrigatório</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-form">
+                    <label>Descrição</label>
+                    <div>
+                        <textarea name="" formControlName="description" placeholder="Descrição" cols="30"
+                            rows="10"></textarea>
+
+                    </div>
+                </div>
+
+                <div class="item-form">
+                    <label>Email</label>
+                    <div>
+                        <input type="text" formControlName="emailTeam" placeholder="Email" />
+
+                    </div>
+                </div>
+
+                <div class="item-form">
+                    <label>Escolha o tipo de time ?</label>
+                    <div class="conteiner-gender-admin">
+                        <div class="options-gender">
+                            <input type="radio" value="false" formControlName="private" />
+
+                            <label class="">
+                                <div class="">Público</div>
+                            </label>
+                        </div>
+
+                        <div class="options-gender ">
+                            <input type="radio" value="true" formControlName="private" />
+
+                            <label>
+                                <div class="">Privado</div>
+                            </label>
+                        </div>
+
+
+                    </div>
+                    <div class="alert" *ngIf="private.invalid && formDir.submitted">
+                        <p>Tipo de time é obrigatório</p>
+                    </div>
+                </div>
+
+                <div class="midia-container">
+                    <h1>Mídias Sociais</h1>
+
+                    <div class="social-container">
+                        <div class="item-form">
+                            <label>Youtube</label>
+                            <div>
+                                <input type="text" formControlName="youtubeTeam" placeholder="Youtube" />
+                            </div>
+                        </div>
+                        <div class="item-form">
+                            <label>Instagram</label>
+                            <div>
+                                <input type="text" formControlName="instagramTeam" placeholder="Instagram" />
+                            </div>
+                        </div>
+                        <div class="item-form">
+                            <label>Discord</label>
+                            <div>
+                                <input type="text" formControlName="discordTeam" placeholder="Discord" />
+                            </div>
+                        </div>
+                        <div class="item-form">
+                            <label>Facebook</label>
+                            <div>
+                                <input type="text" formControlName="facebookTeam" placeholder="Facebook" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="bottom-container">
+                    <button [disabled]="!createTeam.valid " type="submit">Cadastrar time</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading">
+    <app-loading></app-loading>
+</div>

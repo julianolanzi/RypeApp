@@ -1,0 +1,14 @@
+<div class="container-page">
+    <section *ngIf="Team"> Tem time</section>
+
+
+
+    
+    <section *ngIf="!Team">
+        <app-team-setup></app-team-setup>
+    </section>
+</div>
+
+<div *ngIf="isLoading">
+    <app-loading></app-loading>
+</div>

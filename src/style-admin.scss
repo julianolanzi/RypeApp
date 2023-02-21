@@ -1,0 +1,487 @@
+/* ===== Sidebar ADMIN ===== */
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 270px;
+  padding: 10px;
+  background-color: var(--admin-body);
+  height: 100%;
+  transition: var(--tran-05);
+}
+.sidebar-container.close {
+  height: 100vh;
+  width: 110px;
+  padding: 10px;
+
+  transition: var(--tran-05);
+}
+
+.sidebar {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  width: 250px;
+  padding: 10px 14px;
+  background: var(--sidebar-background);
+  transition: var(--tran-05);
+  z-index: 100;
+  border-radius: 15px;
+}
+
+.sidebar li {
+  list-style: none;
+  height: auto;
+  padding: 10px 0 10px 0;
+}
+
+.sidebar header .image,
+.sidebar .icon {
+  min-width: 60px;
+  border-radius: 6px;
+}
+
+.sidebar .icon {
+  min-width: 60px;
+  border-radius: 6px;
+  height: 100%;
+
+  font-size: 20px;
+}
+
+.sidebar .text,
+.sidebar .icon {
+  color: var(--sidebar-text-color);
+  transition: var(--tran-03);
+}
+
+.sidebar .text {
+  font-size: 17px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+.sidebar.close .text {
+  opacity: 0;
+}
+
+.sidebar header {
+  position: relative;
+  padding-top: 20px;
+}
+
+header .image-text .name {
+  margin-top: 2px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: x-large;
+}
+header .image-text .profession {
+  font-size: 16px;
+  margin-top: -2px;
+  display: block;
+}
+.sidebar header .image img {
+  width: 40px;
+  border-radius: 6px;
+}
+
+.sidebar header .toggle {
+  position: absolute;
+  top: 100%;
+  right: -25px;
+  transform: translateY(-50%) rotate(180deg);
+  height: 25px;
+  width: 25px;
+  background-color: var(--pink-white);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  transition: var(--tran-05);
+}
+
+.container-admin.dark .sidebar header .toggle {
+  color: var(--white);
+}
+
+.sidebar.close .toggle {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .menu {
+  margin-top: 40px;
+}
+
+.sidebar li a {
+  list-style: none;
+  height: 100%;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  transition: var(--tran-03);
+  cursor: pointer;
+}
+
+.sub-menu-container {
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+  display: none;
+  gap: 5px;
+  transition: var(--tran-02);
+}
+
+.nav-link.active .sub-menu-container {
+  display: block;
+  padding: 10px 0 5px 0;
+}
+.nav-link.active .sub-menu-container ul .sub-item {
+  justify-content: flex-start;
+  flex-direction: row;
+  padding: 5px 0 5px 0;
+}
+.nav-link.active .sub-menu-container ul .sub-item .material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 100, "GRAD" 0, "opsz" 48;
+}
+.nav-link.active .sub-menu-container ul .sub-item i {
+  color: var(--sidebar-text-color);
+}
+.nav-link.active .sub-menu-container ul .sub-item span {
+  color: var(--sidebar-text-color);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.nav-link.active a:first-child::before {
+  content: "";
+  width: 7px;
+  height: 35px;
+  background-color: var(--pink-white);
+  left: 0;
+  position: absolute;
+  box-shadow: inset 0 0 0.4em 0 var(--pink-white), 0 0 0.4em 0 var(--pink-white);
+  transition: var(--tran-03);
+}
+.nav-link.active i,
+.nav-link.active a span {
+  color: var(--pink-white);
+}
+
+.sidebar .menu-bar {
+  height: calc(100% - 10%);
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+.menu-bar::-webkit-scrollbar {
+  display: none;
+}
+.sidebar .menu-bar .mode {
+  border-radius: 6px;
+  background-color: var(--sidebar-mode-color);
+  position: relative;
+  transition: var(--tran-05);
+  margin-bottom: 15px;
+}
+
+.menu-bar .mode .sun-moon {
+  height: 50px;
+  width: 60px;
+}
+
+.mode .sun-moon i {
+  position: absolute;
+}
+.mode .sun-moon i.sun {
+  opacity: 0;
+}
+.container-admin.dark .mode .sun-moon i.sun {
+  opacity: 1;
+}
+.container-admin.dark .mode .sun-moon i.moon {
+  opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  min-width: 60px;
+
+  border-radius: 6px;
+  cursor: pointer;
+}
+.toggle-switch .switch {
+  position: relative;
+  height: 22px;
+  width: 40px;
+  border-radius: 25px;
+  background-color: var(--toggle-color);
+  transition: var(--tran-05);
+}
+
+.switch::before {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  background-color: var(--pink-white);
+  transition: var(--tran-04);
+}
+
+.container-admin.dark .switch::before {
+  background-color: var(--black);
+  left: 20px;
+}
+
+.sidebar.close {
+  height: 100%;
+  width: 85px;
+}
+
+/* ===== Sidebar ADMIN FIM ===== */
+
+.container-admin {
+  background-color: var(--admin-body);
+  height: auto;
+  min-height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transition: var(--tran-05);
+}
+
+.container-admin-content {
+  margin-left: 290px;
+  padding: 10px;
+}
+
+.container-admin-content.close {
+  margin-left: 110px;
+  display: block;
+}
+
+.container-admin-content.close .toggle {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+/* ===== NAVBAR ADMIN ===== */
+.container-navbar {
+  width: 100%;
+  height: auto;
+  background-color: var(--sidebar-background);
+  border-radius: 10px;
+  border-bottom: 3px solid var(--pink-white);
+  box-shadow: inset hs1(0 0% 100%/ 0.3), 0 0 32px 0 var(--pink-white);
+}
+/* ===== CONTAINER CONTENT ADMIN FIM ===== */
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+/* ===== CONTAINER CONTENT ADMIN  ===== */
+
+/* ===== CONTAINER PAGES ADMIN  ===== */
+.container-page {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== CONTAINER PAGES ADMIN  ===== */
+
+/* ===== SEARCH TEAM ADMIN  ===== */
+
+.search-bar {
+  justify-content: space-between;
+  width: 100%;
+
+  .item-form {
+    width: 80%;
+  }
+
+  .btn-search {
+    width: 20%;
+    height: 37px;
+    border: 2px solid var(--pink-white);
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    text-transform: uppercase;
+    padding: 5px;
+    color: var(--white);
+    background-color: var(--pink-white);
+    margin: 10px 0 0 0;
+  }
+  .btn-search:disabled {
+    opacity: 0.2;
+    cursor: auto;
+  }
+}
+.alert {
+  p {
+    color: var(--text-color);
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+}
+
+.container-search-teams {
+  width: 100%;
+  margin-top: 20px;
+  flex-wrap: wrap;
+
+  .team-item {
+    width: 280px;
+    height: 130px;
+
+    border-radius: 10px;
+
+    .image {
+      position: relative;
+      width: 67px;
+      right: -15px;
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+
+    .team-info {
+      justify-content: center;
+      padding: 5px 15px 5px 65px;
+      width: 100%;
+      height: 100%;
+      background-color: var(--background-input);
+      border-radius: 10px;
+      color: var(--text-color);
+
+      .nome-team h2 {
+        font-size: 20px;
+      }
+      .sub-item-team {
+        span {
+          font-size: 12px;
+          font-weight: 700;
+        }
+        .id-team {
+          font-size: 10px;
+        }
+        p {
+          font-size: 12px;
+        }
+
+
+      }
+      div {
+        width: 100%;
+
+        button {
+          width: 100%;
+          height: 20px;
+          border: 2px solid var(--pink-white);
+          border-radius: 5px;
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 16px;
+          text-transform: uppercase;
+          color: var(--white);
+          background-color: var(--pink-white);
+        }
+      }
+    }
+  }
+}
+
+/* ===== SEARCH TEAMADMIN FIM  ===== */
+
+/* ===== NAVBAR ADMIN FIM ===== */
+@media (max-width: 768px) {
+  .sidebar-container {
+    width: 100vw;
+    height: 100vh;
+    transition: var(--tran-05);
+    z-index: 100;
+    position: fixed;
+  }
+  .sidebar-container.close {
+    width: 0;
+    padding: 0;
+    transition: var(--tran-05);
+  }
+  .sidebar {
+    width: 95%;
+    height: 95%;
+  }
+  .sidebar.close {
+    width: 0;
+    margin-left: -30px;
+  }
+  .sidebar.close header .image img {
+    opacity: 0;
+  }
+  .sidebar header .toggle {
+    position: absolute;
+    top: 50vh;
+    right: -45px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 50px;
+    width: 50px;
+    background-color: var(--pink-white);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+  }
+  .container-admin-content {
+    display: none;
+  }
+  .container-admin-content.close {
+    margin-left: 0px;
+  }
+
+  .search-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .item-form {
+      width: 100%;
+    }
+    .item-form div input {
+      margin: 0;
+    }
+    .btn-search {
+      width: 100%;
+      margin: 0;
+    }
+  }
+
+  .container-search-teams {
+
+    .teams {
+      width: 100%;
+    }
+    .team-item {
+      width: 100%;
+      height: 130px;
+    }
+  }
+}

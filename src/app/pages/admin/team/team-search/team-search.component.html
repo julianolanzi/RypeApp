@@ -1,0 +1,71 @@
+<div class="container-page">
+    <div class="container-data">
+        <div class="top-container">
+            <div class="title-form p-20">
+                <h3 class="">Preencha os dados abaixo para buscar o time</h3>
+
+            </div>
+        </div>
+        <hr>
+
+        <div class="container-search p-20">
+            <form class="d-flex-colum" (ngSubmit)="searchTeam()" [formGroup]="teamSearch" #formDir="ngForm">
+                <div class="search-bar d-flex gap-10">
+                    <div class="item-form">
+                        <label>Nome | Tag Name ou ID</label>
+                        <div>
+                            <input type="text" formControlName="key"
+                                placeholder="Insira o nome do time, Tag Name ou ID " />
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" [disabled]="!teamSearch.valid" class="btn-search">Buscar</button>
+                </div>
+                <div class="alert" *ngIf="key.invalid && formDir.submitted">
+                    <p class="">Informar um valor é obrigatório</p>
+                </div>
+            </form>
+
+            <div class="container-search-teams d-flex gap-10">
+                <div class="teams" *ngFor="let team of Teams">
+                    <div class="team-item d-flex">
+                        <div class="image">
+                            <img src="{{team.url}}">
+                        </div>
+                        <div class="team-info d-flex-colum gap-5">
+                            <div class="nome-team">
+
+                                <h2>{{team.name}}</h2>
+                            </div>
+                            <div class="sub-item-team d-flex gap-5">
+                                <span>ID :</span>
+                                <p class="id-team">{{team.idTeam}}</p>
+                            </div>
+                            <div class="sub-item-team d-flex gap-5">
+                                <span>Tag Name :</span>
+                                <p> {{team.tagName}}</p>
+                            </div>
+                            <div class="sub-item-team d-flex gap-5">
+                                <span>Tipo :</span>
+                                <p *ngIf="team.private == false"> Público</p>
+                                <p *ngIf="team.private == true"> Privado</p>
+                            </div>
+                            <div>
+                                <button *ngIf="team.private == false" (click)="joinTeamPublic(team)">Entrar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="isLoading">
+    <app-loading></app-loading>
+</div>

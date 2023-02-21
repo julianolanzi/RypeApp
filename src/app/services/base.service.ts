@@ -8,11 +8,11 @@ export abstract class BaseService {
 
   public LocalStorage = new LocalStorageUtils();
 
-  // protected UrlServiceV1: string =
-  //   'http://localhost:3000';
+  protected UrlServiceV1: string =
+    'http://localhost:3000';
 
-    protected UrlServiceV1: string =
-    'https://apirypecorp-production.up.railway.app';
+    // protected UrlServiceV1: string =
+    // 'https://apirypecorp-production.up.railway.app';
 
   protected ObterHeaderJson() {
     return {
