@@ -1,9 +1,18 @@
+import { AdminState } from './../../../shared/statement/admin/admin.state';
+import * as authActions from '../../../shared/statement/admin/auth/auth.actions';
+
+import * as AuthSelectors from '../../../shared/statement/admin/auth/auth.selectors';
+
+import { select, Store } from '@ngrx/store';
+import { Actions, ofType } from '@ngrx/effects';
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserLogin } from 'src/app/models/auth/user-login';
 import { AuthService } from './../../../services/auth.service';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -17,11 +26,16 @@ export class AuthComponent {
   errors: any[] = [];
 
   isLoginSucess: boolean = false;
-  isLoading: boolean = false;
+  loading$!: Observable<boolean>;
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.isLoading = false;
-    this.isLoginSucess = false;
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<AdminState>,
+    private actions$: Actions
+  ) {
+    this.handleStoreActions();
+    this.loading$ = this.store.pipe(select(AuthSelectors.loading));
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -35,24 +49,48 @@ export class AuthComponent {
     return this.loginForm.get('password')!;
   }
 
+  private handleStoreActions(): void {
+    // Login success
+    this.actions$
+      .pipe(ofType(authActions.loginSuccess))
+      .subscribe();
+
+
+    // Login failure
+    this.actions$
+      .pipe(
+        ofType(authActions.loginFailure),
+        map((actions) => actions.error)
+      )
+      .subscribe((errorMessage) => {
+        console.log(errorMessage);
+        // Swal.fire('Algo deu errado!', errorMessage, 'error');
+      });
+  }
+
   Login() {
     if (this.loginForm.invalid) {
       return;
     }
     this.userLogin = Object.assign({}, this.userLogin, this.loginForm.value);
-    this.isLoading = true;
-    this.authService.loginUser(this.userLogin).subscribe(
-      (sucesso) => {
-        this.processarLoginSucesso(sucesso);
-      },
-      (falha) => {
-        this.processarFalha(falha);
-      }
-    );
+    // this.isLoading = true;
+   
+    const value = {
+      email: this.userLogin.email,
+      password: this.userLogin.password,
+    }
+    this.store.dispatch(authActions.login({ credentials: value }))
+    // this.authService.loginUser(this.userLogin).subscribe(
+    //   (sucesso) => {
+    //     this.processarLoginSucesso(sucesso);
+    //   },
+    //   (falha) => {
+    //     this.processarFalha(falha);
+    //   }
+    // );
   }
 
   processarLoginSucesso(response: any) {
-    this.isLoading = false;
     this.errors = [];
     this.isLoginSucess = true;
     this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
@@ -64,7 +102,6 @@ export class AuthComponent {
   }
 
   processarFalha(fail: any) {
-    this.isLoading = false;
     this.errors = fail.error.errors;
   }
 }

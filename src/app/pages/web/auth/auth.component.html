@@ -42,6 +42,6 @@
     </div>
 </section>
 
-<div *ngIf="isLoading">
+<div *ngIf="loading$ | async">
     <app-loading></app-loading>
 </div>

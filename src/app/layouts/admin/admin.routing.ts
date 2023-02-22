@@ -4,6 +4,6 @@ import { DashboardComponent } from './../../pages/admin/dashboard/dashboard.comp
 
 
 export const AdminRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard', component: DashboardComponent },
   
 ]

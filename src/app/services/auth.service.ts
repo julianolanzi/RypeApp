@@ -12,11 +12,12 @@ export class AuthService extends BaseService {
   constructor(private http: HttpClient) {
     super();
   }
-  loginUser(loginUser: UserLogin): Observable<UserLogin> {
+
+  loginUser(loginUser: UserLogin) {
     let response = this.http
       .post(this.UrlServiceV1 + '/auth/', loginUser, this.ObterHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
-
+    console.log(response);
     return response;
   }
 }
