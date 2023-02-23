@@ -1,9 +1,11 @@
-import { AdminState } from './../../../shared/statement/admin/admin.state';
-import * as authActions from '../../../shared/statement/admin/auth/auth.actions';
+import { LoadAuthRequestAction } from './../../../shared/state-management/actions/auth/auth-load-request.actions';
+import { GlobalState } from './../../../shared/state-management/states/global.state';
+import { AdminState } from '../../../shared/state-management/admin/admin.state';
+import * as authActions from '../../../shared/state-management/admin/auth/auth.actions';
 
-import * as AuthSelectors from '../../../shared/statement/admin/auth/auth.selectors';
+import * as AuthSelectors from '../../../shared/state-management/admin/auth/auth.selectors';
 
-import { select, Store } from '@ngrx/store';
+import { select, State, Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 
 import { Component } from '@angular/core';
@@ -21,7 +23,7 @@ import { map, Observable } from 'rxjs';
 })
 export class AuthComponent {
   loginForm!: FormGroup;
-  userLogin!: UserLogin;
+  private userLogin!: UserLogin;
 
   errors: any[] = [];
 
@@ -31,7 +33,8 @@ export class AuthComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private store: Store<AdminState>,
+    private store: Store<GlobalState>,
+    private state: State<GlobalState>,
     private actions$: Actions
   ) {
     this.handleStoreActions();
@@ -79,7 +82,7 @@ export class AuthComponent {
       email: this.userLogin.email,
       password: this.userLogin.password,
     }
-    this.store.dispatch(authActions.login({ credentials: value }))
+    this.store.dispatch(new LoadAuthRequestAction(this.userLogin));
     // this.authService.loginUser(this.userLogin).subscribe(
     //   (sucesso) => {
     //     this.processarLoginSucesso(sucesso);

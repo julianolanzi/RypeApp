@@ -1,44 +1,36 @@
-import { User } from './../../models/account/User';
+import { AuthState } from './../../shared/state-management/admin/auth/auth.reducer';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 import { Observable } from 'rxjs';
+import { GlobalState } from './../../shared/state-management/states/global.state';
+
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { AdminState } from 'src/app/shared/statement/admin/admin.state';
 import { LocalStorageUtils } from 'src/app/utils/localstorage';
-import * as AuthSelectors from '../../shared/statement/admin/auth/auth.selectors';
+import { State, Store } from '@ngrx/store';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit{
-  localStorageUtils = new LocalStorageUtils();
-  user$: Observable<any> = this.store.select(AuthSelectors.getUserInStore);
+export class NavbarComponent implements OnInit {
+  // localStorageUtils = new LocalStorageUtils();
+  // public userAuthResponse!: any;
+  // user$!: UserLoginSuccess;
   
 
-  constructor(private store: Store<AdminState>,){
-    // this.UserLocalInfo();
+  // user$ : Observable<UserLoginSuccess> = this.store.select(AuthSelector);
+  constructor(private state: State<GlobalState>, private store: Store<GlobalState>) {}
 
-
-
-  }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    console.log(this.user$);
+    // this.user$ = this.state.value.auth.auth;
+    // console.log(this.user$);
   }
 
+  // private GetUserInfo():void {
+  //   const subscription = this.store.pipe(select(AuthSelector))
+  //   .subscribe((userAuthResponse) => {
 
-  // UserLocalInfo() {
-  //   let user = this.localStorageUtils.obertUser();
-  //   user = JSON.parse(user);
-  //   let localData = {
-  //     nickname: user.nickname,
-  //     url: user.url,
-  //   };
-  //   this.user = localData;
-  //   return this.user;
+  //   })
   // }
-
 }

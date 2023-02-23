@@ -65,4 +65,3 @@ export function authReducer(state = initialState, action: Action) {
   return _authReducer(state, action);
 }
 
-export const AUTH_FEATURE_KEY = 'auth';

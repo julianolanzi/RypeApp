@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, catchError, map, of, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import * as AuthActions from '../../../../shared/statement/admin/auth/auth.actions';
+import * as AuthActions from './auth.actions';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -32,7 +32,6 @@ export class AuthEffects {
         ofType(AuthActions.loginSuccess),
         tap(() => {
           this.router.navigate(['dashboard']);
-          console.log('navigation');
         })
       ),
     { dispatch: false }
