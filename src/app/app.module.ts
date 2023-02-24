@@ -1,4 +1,4 @@
-import { AdminEffect, AdminReducer } from './shared/state-management/admin/admin.state';
+import { AccountEffect } from './shared/state-management/effects/account.effects';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { AdminModule } from './layouts/admin/admin.module';
 import { ComponentsModule } from './components/components.module';
@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer } from './shared/state-management/reducers/auth.reducer';
 import { AuthEffect } from './shared/state-management/effects/auth.effect';
+import { accountReducer } from './shared/state-management/reducers/account.reducer';
 
 @NgModule({
   declarations: [AppComponent, WebComponent, AdminComponent],
@@ -32,10 +33,12 @@ import { AuthEffect } from './shared/state-management/effects/auth.effect';
     AdminModule,
     SharedModule,
     StoreModule.forRoot({
-      auth: authReducer
+      auth: authReducer,
+      account: accountReducer,
     }),
     EffectsModule.forRoot([
-      AuthEffect
+      AuthEffect,
+      AccountEffect
     ]),
     StoreDevtoolsModule.instrument({
       maxAge:25,

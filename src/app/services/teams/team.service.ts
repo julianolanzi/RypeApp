@@ -2,8 +2,8 @@
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
 
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { BaseService } from '../base.service';
 import { TeamData } from 'src/app/models/teams/team-data';
 import { CreateTeam } from 'src/app/models/teams/create-team';
@@ -12,10 +12,9 @@ import { TeamsSearch } from 'src/app/models/teams/search-teams';
 
 @Injectable()
 export class TeamService extends BaseService {
-  localStorageUtils = new LocalStorageUtils();
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(private http: HttpClient, Store: Store) {
+    super(Store);
   }
 
   getUserTeam(id: string): Observable<TeamData> {

@@ -1,12 +1,11 @@
-import { AuthState } from './../../shared/state-management/admin/auth/auth.reducer';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
-import { Observable } from 'rxjs';
+
 import { GlobalState } from './../../shared/state-management/states/global.state';
 
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
-import { State, Store } from '@ngrx/store';
+import { State, Store, select } from '@ngrx/store';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -14,23 +13,23 @@ import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.sel
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  // localStorageUtils = new LocalStorageUtils();
-  // public userAuthResponse!: any;
-  // user$!: UserLoginSuccess;
-  
 
-  // user$ : Observable<UserLoginSuccess> = this.store.select(AuthSelector);
+  public user!: UserLoginSuccess;
+  private subscriptions: Subscription = new Subscription();
+
   constructor(private state: State<GlobalState>, private store: Store<GlobalState>) {}
 
   ngOnInit(): void {
-    // this.user$ = this.state.value.auth.auth;
-    // console.log(this.user$);
+    this.loadUser();
   }
 
-  // private GetUserInfo():void {
-  //   const subscription = this.store.pipe(select(AuthSelector))
-  //   .subscribe((userAuthResponse) => {
+  public loadUser(){
+    const subscription = this.store.pipe(select(AuthSelector)).subscribe((user) => {
+      this.user = user;
+    })
 
-  //   })
-  // }
+    this.subscriptions.add(subscription);
+  }
+
+
 }

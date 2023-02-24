@@ -1,6 +1,8 @@
-import { UserLoginSuccess } from "src/app/models/auth/user-login-success";
+import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 
 export interface AuthState {
-    auth: UserLoginSuccess;
-    authError?: Error;
+  user: UserLoginSuccess;
+  authError?: Error;
+  isAuthenticated: boolean;
+  loading: boolean;
 }

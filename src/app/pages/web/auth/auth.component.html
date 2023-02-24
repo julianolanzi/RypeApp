@@ -18,7 +18,7 @@
                             <li *ngFor="let error of errors">{{ error }}</li>
                         </ul>
                     </div>
-                    <p *ngIf="isLoginSucess == true" class="alert alert-success">Login realizado com sucesso</p>
+                    <p *ngIf="isAuthenticated$ | async" class="alert alert-success">Login realizado com sucesso</p>
                 </div>
                 <div class="item-form">
                     <input type="text" placeholder="Email" formControlName="email">

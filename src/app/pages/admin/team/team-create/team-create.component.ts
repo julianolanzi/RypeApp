@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { CreateTeam } from 'src/app/models/teams/create-team';
 import { TeamService } from 'src/app/services/teams/team.service';
 import { AlertService } from 'src/app/services/utils/alert.service';
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 
 @Component({
   selector: 'app-team-create',
@@ -20,7 +19,6 @@ export class TeamCreateComponent {
   url!: string;
 
   team!: CreateTeam;
-  localStorageUtils = new LocalStorageUtils();
   constructor(
     private TeamService: TeamService,
     private Alerts: AlertService,
@@ -56,7 +54,6 @@ export class TeamCreateComponent {
     }
     this.isLoading = true;
     this.team = Object.assign({}, this.team, this.createTeam.value);
-    this.id = this.UserLocalInfo();
     this.url = this.imgTeam();
 
     this.team = {
@@ -85,12 +82,7 @@ export class TeamCreateComponent {
     this.isLoading = false;
     this.errors = [];
   }
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    this.id = user.id;
-    return this.id;
-  }
+
   processarFalha(fail: any) {
     this.isLoading = false;
     this.errors = fail.error.errors;

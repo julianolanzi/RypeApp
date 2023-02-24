@@ -1,16 +1,18 @@
-import { ModalGenericComponent } from './../../../../shared/modal-generic/modal-generic.component';
+import { UserUpdate } from './../../../../models/account/user-update';
+import { User } from './../../../../models/account/user';
+import { AccountLoadRequestAction } from './../../../../shared/state-management/actions/account/account-load-request.actions';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
-import { User } from './../../../../models/account/User';
-import { UserService } from 'src/app/services/user/user.service';
-import { UserUpdate } from './../../../../models/account/User-update';
-import { UploadImgService } from './../../../../services/imgs/upload.img.service';
-import { AlertService } from './../../../../services/utils/alert.service';
+import { select, State, Store } from '@ngrx/store';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { Subscription } from 'rxjs';
+import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
+
 @Component({
   selector: 'app-user-overview',
   templateUrl: './user-overview.component.html',
@@ -18,33 +20,15 @@ import { AlertService } from './../../../../services/utils/alert.service';
 })
 export class UserOverviewComponent {
   updateForm!: FormGroup;
-  errors: any[] = [];
-  isLoading: boolean = false;
-  isChangeSucess: boolean = false;
-  localStorageUtils = new LocalStorageUtils();
-  id: string = '';
-  user!: User;
-  userUpdate!: UserUpdate;
 
+  public id!: string;
+  private subscriptions: Subscription = new Subscription();
+  public user!: User;
+  userUpdate!: UserUpdate
   url: any;
   file!: File;
-  isChangeImg: boolean = false;
-  isDisable: boolean = false;
 
-  constructor(
-    private UserService: UserService,
-    private datePipe: DatePipe,
-    private Alerts: AlertService,
-    private router: Router,
-    private UploadImgService: UploadImgService,
-  ) {
-    this.getUser();
-    this.isLoading = true;
-    this.isChangeSucess = true;
-    this.isChangeImg = false;
-
-    this.isDisable = true;
-
+  constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {
     this.updateForm = new FormGroup({
       nickname: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
@@ -52,19 +36,20 @@ export class UserOverviewComponent {
       idGame: new FormControl(''),
       phone: new FormControl('', [Validators.required]),
       gender: new FormControl(''),
-      email: new FormControl({value: '', disabled: true}),
+      email: new FormControl({ value: '', disabled: true }),
       country: new FormControl(''),
       birthday: new FormControl(''),
       discord: new FormControl(''),
       instagram: new FormControl(''),
       facebook: new FormControl(''),
       youtube: new FormControl(''),
-      createdAt: new FormControl({value: '', disabled: true}),
+      createdAt: new FormControl({ value: '', disabled: true }),
     });
   }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+    this.loadId();
+    this.getUserId();
+    this.loadUser();
   }
 
   get nickname() {
@@ -107,14 +92,67 @@ export class UserOverviewComponent {
     return this.updateForm.get('youtube')!;
   }
 
-  getUser() {
-    this.id = this.UserLocalInfo();
-    this.UserService.GetUser(this.id).subscribe(
-      (sucesso) => {
-        this.processarSucesso(sucesso);
-        this.user = sucesso;
-        this.url = this.user.url;
+  getUserId() {
+    this.store.dispatch(new AccountLoadRequestAction(this.id));
+  }
 
+
+
+  updateProfile() {
+    if (this.updateForm.invalid) {
+      return;
+    }
+
+    this.userUpdate = Object.assign({}, this.userUpdate, this.updateForm.value);
+    console.log(this.userUpdate);
+
+
+   
+  }
+
+  onselectFile(e: any) {
+    if (e.target.files) {
+      this.file = e.srcElement.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      };
+    }
+  }
+
+  // changeImg() {
+  //   this.id = this.UserLocalInfo();
+  //   this.isLoading = true;
+
+  //   this.UploadImgService.uploadImgUser(this.id, this.file).subscribe(
+  //     (sucesso) => {
+  //       this.processarSucesso(sucesso);
+  //       this.user = sucesso;
+  //       this.Alerts.sucess('Atualizada com sucesso', 'Foto de Perfil');
+  //     },
+  //     (falha) => {
+  //       this.processarFalha(falha);
+  //       this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
+  //     }
+  //   );
+  // }
+
+  public loadId() {
+    const subscription = this.store
+      .pipe(select(AuthSelector))
+      .subscribe((user) => {
+        this.id = user.id;
+      });
+
+    this.subscriptions.add(subscription);
+  }
+
+  public loadUser() {
+    const subscription = this.store
+      .pipe(select(AccountSelector))
+      .subscribe((user) => {
+        this.user = user;
         this.updateForm.patchValue({
           nickname: this.user.nickname,
           idGame: this.user.idGame,
@@ -136,83 +174,11 @@ export class UserOverviewComponent {
           createdAt: this.datePipe.transform(
             this.user.createdAt,
             'dd-MM-yyyy',
-            'UTC',
+            'UTC'
           ),
         });
-      },
-      (falha) => {
-        this.processarFalha(falha);
-      }
-    );
-  }
+      });
 
-  updateProfile() {
-    if (this.updateForm.invalid) {
-      return;
-    }
-
-    this.userUpdate = Object.assign({}, this.userUpdate, this.updateForm.value);
-
-    this.isLoading = true;
-
-    this.UserService.updateUser(this.userUpdate, this.id).subscribe(
-      (sucesso) => {
-        this.processarSucesso(sucesso);
-        this.Alerts.sucess('Atualizado com sucesso', 'Perfil');
-      },
-      (falha) => {
-        this.processarFalha(falha);
-        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
-      }
-    );
-  }
-
-  processarFalha(fail: any) {
-    if (fail.status == 401) {
-      this.router.navigate(['/auth']);
-    }
-    this.isLoading = false;
-    this.errors = fail.error.errors;
-  }
-  processarSucesso(response: any) {
-    this.isLoading = false;
-    this.errors = [];
-  }
-
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    this.id = user.id;
-    return this.id;
-  }
-
-  onselectFile(e: any) {
-    if (e.target.files) {
-      this.file = e.srcElement.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.url = event.target.result;
-        this.isChangeImg = true;
-      };
-    }
-  }
-
-  changeImg() {
-    this.id = this.UserLocalInfo();
-    this.isLoading = true;
-    
-
-    this.UploadImgService.uploadImgUser(this.id, this.file).subscribe(
-      (sucesso) => {
-        this.processarSucesso(sucesso);
-        this.user = sucesso;
-        this.Alerts.sucess('Atualizada com sucesso', 'Foto de Perfil');
-      },
-      (falha) => {
-        this.processarFalha(falha);
-        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
-      }
-    );
+    this.subscriptions.add(subscription);
   }
 }

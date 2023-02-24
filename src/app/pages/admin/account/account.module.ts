@@ -11,7 +11,6 @@ import {
   provideNgxMask,
 } from 'ngx-mask';
 
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { AccountRoutes } from './account.routing';
 
 import { UserSecurityComponent } from './user-security/user-security.component';
@@ -22,7 +21,7 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [UserSecurityComponent, UserOverviewComponent],
-  providers: [LocalStorageUtils, provideNgxMask()],
+  providers: [provideNgxMask()],
   imports: [
     CommonModule,
     RouterModule.forChild(AccountRoutes),

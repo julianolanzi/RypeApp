@@ -1,17 +1,18 @@
+import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
+
 import { catchError, map, Observable } from 'rxjs';
+
 import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from './base.service';
-import { LocalStorageUtils } from '../utils/localstorage';
 import { UserLogin } from '../models/auth/user-login';
 import { UserLoginSuccess } from '../models/auth/user-login-success';
 
 @Injectable()
 export class AuthService extends BaseService {
-  localStorageUtils = new LocalStorageUtils();
-  constructor(private http: HttpClient) {
-    super();
+  constructor(private http: HttpClient, Store: Store ) {
+    super(Store);
   }
 
   loginUser(loginUser: UserLogin | undefined): Observable<UserLoginSuccess> {

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 import { TeamData } from '../../../../models/teams/team-data';
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { TeamService } from 'src/app/services/teams/team.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class TeamOverviewComponent {
   isLoading: boolean = false;
   id: string = '';
   Team!: TeamData;
-  localStorageUtils = new LocalStorageUtils();
   idTeam: string = '';
   isadmin: boolean = false;
 
@@ -24,7 +22,6 @@ export class TeamOverviewComponent {
   }
 
   UserTeamInfo() {
-    this.id = this.UserLocalInfo();
 
     this.teamService.getUserTeam(this.id).subscribe(
       (sucesso) => {
@@ -45,12 +42,7 @@ export class TeamOverviewComponent {
     );
   }
 
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    this.id = user.id;
-    return this.id;
-  }
+
 
   processarSucesso(response: any) {
     this.isLoading = false;

@@ -1,10 +1,12 @@
+import { LoadAuthRequestAction } from './../actions/auth/auth-load-request.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 import { LoadAuthErrorAction } from '../actions/auth/auth-load-error.actions';
 import { LoadAuthSuccessAction } from '../actions/auth/auth-load-success.actions';
 import { AuthState } from '../states/auth.state';
+import { state } from '@angular/animations';
 
 export const initialState: AuthState = {
-  auth: {
+  user: {
     email: '',
     password: '',
     token: '',
@@ -14,20 +16,33 @@ export const initialState: AuthState = {
     team: [],
   },
   authError: undefined,
+  loading: false,
+  isAuthenticated: false,
 };
 
 const _authReducer = createReducer(
   initialState,
+  
   on(new LoadAuthSuccessAction().createAction(), (state, action) => ({
     ...state,
-    auth: { ...action.payload },
+    user: { ...action.payload },
+    loading: false,
+    isAuthenticated: true,
   })),
   on(new LoadAuthErrorAction().createAction(), (state, action) => ({
     ...state,
     authError: action.payload,
+    loading: false,
+    isAuthenticated: false,
+  })),
+  on(new LoadAuthRequestAction().createAction(), (state, action) => ({
+    ...state,
+    loading: true,
+    isAuthenticated: false,
   }))
+  
 );
 
 export function authReducer(state: any, action: Action) {
-    return _authReducer(state, action);
+  return _authReducer(state, action);
 }

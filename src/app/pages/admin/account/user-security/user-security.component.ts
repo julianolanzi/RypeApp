@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { UserChangePass } from 'src/app/models/account/user-change-pass';
 import { UserService } from 'src/app/services/user/user.service';
 import { AlertService } from 'src/app/services/utils/alert.service';
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 
 @Component({
   selector: 'app-user-security',
@@ -14,7 +13,6 @@ import { LocalStorageUtils } from 'src/app/utils/localstorage';
 })
 export class UserSecurityComponent {
   updatePass!: FormGroup;
-  localStorageUtils = new LocalStorageUtils();
   user!: UserChangePass;
   errors: any[] = [];
   data!: any;
@@ -47,27 +45,12 @@ export class UserSecurityComponent {
       return;
     }
     this.isLoading = true;
-    let localData = this.UserLocalInfo();
 
     this.data = Object.assign({}, this.user, this.updatePass.value);
 
-    this.user = {
-      password: this.data.password,
-      newpassword: this.data.newpassword,
-      confirmpassword: this.data.confirmpassword,
-      email: localData.email,
-    };
+   
 
-    this.UserService.chagePassword(this.data, localData.id).subscribe(
-      (sucesso) => {
-        this.Alerts.sucess('Senha alterada com sucesso, iremos te redirecionar para o login.', 'Tudo certo 😉');
-        this.processarSucesso(sucesso);
-      },
-      (falha) => {
-        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
-        this.processarFalha(falha);
-      }
-    );
+    
   }
 
   processarSucesso(response: any) {
@@ -84,13 +67,5 @@ export class UserSecurityComponent {
     this.errors = fail.error.errors;
   }
 
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    let localData = {
-      email: user.email,
-      id: user.id,
-    };
-    return localData;
-  }
+ 
 }
