@@ -28,7 +28,7 @@ export class AuthEffect {
             } else {
               setTimeout(() => {
                 this.router.navigate(['dashboard']);
-              }, 4000);
+              }, 2000);
               return new LoadAuthSuccessAction(response);
             }
           }),

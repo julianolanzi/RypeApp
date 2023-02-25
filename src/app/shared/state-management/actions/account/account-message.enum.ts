@@ -10,4 +10,8 @@ export enum AccountMessageEnum {
     LOAD_ACCOUNT_UPDATE_PASSWORD_REQUEST = '[ACCOUNT] Load update password request',
     LOAD_ACCOUNT_UPDATE_PASSWORD_SUCCESS = '[ACCOUNT] Load update password success',
     LOAD_ACCOUNT_UPDATE_PASSWORD_ERROR  = '[ACCOUNT] Load update password error',
+
+    LOAD_ACCOUNT_UPDATE_IMG_REQUEST = '[ACCOUNT] Load update img request',
+    LOAD_ACCOUNT_UPDATE_IMG_SUCCESS = '[ACCOUNT] Load update img success',
+    LOAD_ACCOUNT_UPDATE_IMG_ERROR = '[ACCOUNT] Load update img error',
 }

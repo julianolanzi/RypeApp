@@ -27,19 +27,19 @@ export class UserService extends BaseService {
     return response;
   }
 
-  updateUser(user: UserUpdate, id: string): Observable<any> {
+  updateUser(user: UserUpdate): Observable<User> {
     let response = this.http
-      .put(this.UrlServiceV1 + '/users/' + id, user, this.ObterAuthHeaderJson())
+      .put(this.UrlServiceV1 + '/users/' + user.id,  user, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
 
     return response;
   }
 
-  chagePassword(user: UserChangePass, id: string): Observable<any> {
+  chagePassword(updatePass: UserChangePass | undefined): Observable<any> {
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/users/updatepass/' + id,
-        user,
+        this.UrlServiceV1 + '/users/updatepass/' + updatePass?.id,
+        updatePass,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));

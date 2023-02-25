@@ -1,3 +1,6 @@
+import { AccountUpdateLoadImgRequestAction } from './../../../../shared/state-management/actions/account/account-update-load-img-request.actions';
+import { AccountUpdateLoadRequestAction } from './../../../../shared/state-management/actions/account/account-update-load.actions';
+import { isLoading } from './../../../../shared/state-management/selectors/account.selector';
 import { UserUpdate } from './../../../../models/account/user-update';
 import { User } from './../../../../models/account/user';
 import { AccountLoadRequestAction } from './../../../../shared/state-management/actions/account/account-load-request.actions';
@@ -6,12 +9,12 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
-import { select, State, Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
-import { Subscription } from 'rxjs';
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { Observable, Subscription } from 'rxjs';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
+import { UpdateImg } from 'src/app/models/account/user-update-img';
 
 @Component({
   selector: 'app-user-overview',
@@ -20,13 +23,15 @@ import { AccountSelector } from 'src/app/shared/state-management/selectors/accou
 })
 export class UserOverviewComponent {
   updateForm!: FormGroup;
-
+  loading$!: Observable<boolean>;
   public id!: string;
   private subscriptions: Subscription = new Subscription();
   public user!: User;
-  userUpdate!: UserUpdate
+  userUpdate!: UserUpdate;
   url: any;
   file!: File;
+
+  updateImg!: UpdateImg;
 
   constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {
     this.updateForm = new FormGroup({
@@ -45,6 +50,8 @@ export class UserOverviewComponent {
       youtube: new FormControl(''),
       createdAt: new FormControl({ value: '', disabled: true }),
     });
+
+    this.loading$ = this.store.pipe(select(isLoading));
   }
   ngOnInit(): void {
     this.loadId();
@@ -96,18 +103,18 @@ export class UserOverviewComponent {
     this.store.dispatch(new AccountLoadRequestAction(this.id));
   }
 
-
-
   updateProfile() {
     if (this.updateForm.invalid) {
       return;
     }
-
+    
     this.userUpdate = Object.assign({}, this.userUpdate, this.updateForm.value);
-    console.log(this.userUpdate);
+    const data = {
+      ...this.userUpdate,
+      id: this.id,
+    };
 
-
-   
+    this.store.dispatch(new AccountUpdateLoadRequestAction(data));
   }
 
   onselectFile(e: any) {
@@ -121,22 +128,15 @@ export class UserOverviewComponent {
     }
   }
 
-  // changeImg() {
-  //   this.id = this.UserLocalInfo();
-  //   this.isLoading = true;
+  changeImg() {
+    this.updateImg = {
+      file: this.file,
+      id: this.id,
+    };
 
-  //   this.UploadImgService.uploadImgUser(this.id, this.file).subscribe(
-  //     (sucesso) => {
-  //       this.processarSucesso(sucesso);
-  //       this.user = sucesso;
-  //       this.Alerts.sucess('Atualizada com sucesso', 'Foto de Perfil');
-  //     },
-  //     (falha) => {
-  //       this.processarFalha(falha);
-  //       this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
-  //     }
-  //   );
-  // }
+    this.store.dispatch(new AccountUpdateLoadImgRequestAction(this.updateImg));
+
+  }
 
   public loadId() {
     const subscription = this.store
@@ -153,6 +153,7 @@ export class UserOverviewComponent {
       .pipe(select(AccountSelector))
       .subscribe((user) => {
         this.user = user;
+        this.url = this.user.url,
         this.updateForm.patchValue({
           nickname: this.user.nickname,
           idGame: this.user.idGame,
