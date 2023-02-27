@@ -1,8 +1,10 @@
 import { AccountState } from './account.state';
 import { AuthState } from "./auth.state";
+import { GlobalPageState } from './global-pages.state';
 
 
 export interface GlobalState {
-    auth?: AuthState;
+    globalPages: GlobalPageState;
+    auth: AuthState;
     account: AccountState
 }

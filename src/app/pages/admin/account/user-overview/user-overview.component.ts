@@ -1,6 +1,6 @@
+import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { AccountUpdateLoadImgRequestAction } from './../../../../shared/state-management/actions/account/account-update-load-img-request.actions';
 import { AccountUpdateLoadRequestAction } from './../../../../shared/state-management/actions/account/account-update-load.actions';
-import { isLoading } from './../../../../shared/state-management/selectors/account.selector';
 import { UserUpdate } from './../../../../models/account/user-update';
 import { User } from './../../../../models/account/user';
 import { AccountLoadRequestAction } from './../../../../shared/state-management/actions/account/account-load-request.actions';
@@ -15,6 +15,7 @@ import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.sel
 import { Observable, Subscription } from 'rxjs';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
 import { UpdateImg } from 'src/app/models/account/user-update-img';
+import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
 @Component({
   selector: 'app-user-overview',
@@ -23,15 +24,16 @@ import { UpdateImg } from 'src/app/models/account/user-update-img';
 })
 export class UserOverviewComponent {
   updateForm!: FormGroup;
-  loading$!: Observable<boolean>;
   public id!: string;
   private subscriptions: Subscription = new Subscription();
   public user!: User;
   userUpdate!: UserUpdate;
   url: any;
   file!: File;
-
+  test$!: Observable<User>;
   updateImg!: UpdateImg;
+  loading$!: Observable<boolean>;
+
 
   constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {
     this.updateForm = new FormGroup({
@@ -51,9 +53,9 @@ export class UserOverviewComponent {
       createdAt: new FormControl({ value: '', disabled: true }),
     });
 
-    this.loading$ = this.store.pipe(select(isLoading));
   }
   ngOnInit(): void {
+    this.loading$ = this.store.pipe(select(isLoadingGlobal));
     this.loadId();
     this.getUserId();
     this.loadUser();
@@ -100,10 +102,12 @@ export class UserOverviewComponent {
   }
 
   getUserId() {
+    this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new AccountLoadRequestAction(this.id));
   }
 
   updateProfile() {
+    
     if (this.updateForm.invalid) {
       return;
     }
@@ -113,7 +117,7 @@ export class UserOverviewComponent {
       ...this.userUpdate,
       id: this.id,
     };
-
+    this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new AccountUpdateLoadRequestAction(data));
   }
 
@@ -133,7 +137,7 @@ export class UserOverviewComponent {
       file: this.file,
       id: this.id,
     };
-
+    this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new AccountUpdateLoadImgRequestAction(this.updateImg));
 
   }
@@ -153,10 +157,11 @@ export class UserOverviewComponent {
       .pipe(select(AccountSelector))
       .subscribe((user) => {
         this.user = user;
+        const { nickname, idGame } = this.user;
         this.url = this.user.url,
         this.updateForm.patchValue({
-          nickname: this.user.nickname,
-          idGame: this.user.idGame,
+          nickname,
+          idGame,
           name: this.user.name,
           lastname: this.user.lastname,
           gender: this.user.gender,
@@ -182,4 +187,9 @@ export class UserOverviewComponent {
 
     this.subscriptions.add(subscription);
   }
+
+  // ngOnDestroy(): void {
+    
+  //   this.store.dispatch(new AccountResetLoadAction());
+  // }
 }

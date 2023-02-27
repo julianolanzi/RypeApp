@@ -6,9 +6,10 @@ import { Observable, Subscription } from 'rxjs';
 
 import { UserChangePass } from 'src/app/models/account/user-change-pass';
 import { AccountUpdatePassLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update-pass-request-actions';
+import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 
-import { isLoading } from 'src/app/shared/state-management/selectors/account.selector';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({
@@ -34,7 +35,8 @@ export class UserSecurityComponent {
       confirmpassword: new FormControl('', [Validators.required]),
     });
     
-    this.loading$ = this.store.pipe(select(isLoading));
+    this.loading$ = this.store.pipe(select(isLoadingGlobal));
+
   }
 
   get password() {
@@ -62,7 +64,7 @@ export class UserSecurityComponent {
       confirmpassword: this.data.confirmpassword,
       id: this.id,
     }
-
+    this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new AccountUpdatePassLoadRequestAction(this.user));
   }
 

@@ -5,5 +5,7 @@ export interface UserLoginSuccess {
   id: string;
   nickname: string;
   url: string;
-  team: [];
+  role: string;
+  idTeam: string;
+  rolesTeam: string;
 }

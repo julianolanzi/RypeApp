@@ -7,10 +7,9 @@ import { AccountLoadRequestAction } from './../actions/account/account-load-requ
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { switchMap, map, catchError, of } from 'rxjs';
+import { switchMap, map, catchError, of, tap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -23,6 +22,9 @@ import { AccountUpdateLoadImgSuccessAction } from '../actions/account/account-up
 import { AccountUpdatePassLoadRequestAction } from '../actions/account/account-update-pass-request-actions';
 import { AccountUpdatePassLoadErrorAction } from '../actions/account/account-update-pass-error-actions';
 import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-update-pass-success-actions';
+import { Store } from '@ngrx/store';
+import { LoadingActiveAction } from '../actions/global-pages/loading-load-active.actions';
+import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -31,12 +33,14 @@ export class AccountEffect {
   loadadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountMessageEnum.LOAD_ACCOUNT),
+ 
       switchMap((action: AccountLoadRequestAction) => {
         return this.userService.GetUser(action.payload).pipe(
           map((response) => {
             if (!response) {
               return new AccountLoadErrorAction();
             } else {
+              this.store.dispatch(new LoadingDisabledAction());
               return new AccountLoadSuccessAction(response);
             }
           }),
@@ -59,6 +63,8 @@ export class AccountEffect {
             if (!response) {
               return new AccountUpdateLoadErrorAction();
             } else {
+              this.store.dispatch(new LoadingDisabledAction());
+              this.Alerts.success('com sucesso', 'Perfil atualizado');
               return new AccountUpdateLoadSuccessAction(response);
             }
           }),
@@ -72,37 +78,44 @@ export class AccountEffect {
     )
   );
 
-  updateImg$ = createEffect(() => this.actions$.pipe(
-    ofType(AccountMessageEnum.LOAD_ACCOUNT_UPDATE_IMG_REQUEST),
-    switchMap((action: AccountUpdateLoadImgRequestAction) => {
-      return this.imgService.uploadImgUser(action.payload).pipe(
-        map((response) => {
-          if(!response){
-            return new AccountUpdateLoadImgErrorAction();
-          }else{
-            this.Alerts.sucess('Imagem atualizada com sucesso', 'Boa');
-            return new AccountUpdateLoadImgSuccessAction(response);
-          }
-        }),
-        catchError((error) => {
-          const err = error.error.error;
-          this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-          return of(new AccountUpdateLoadImgErrorAction(error));
-        })
-      )
-    })
-  ));
+  updateImg$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AccountMessageEnum.LOAD_ACCOUNT_UPDATE_IMG_REQUEST),
+      switchMap((action: AccountUpdateLoadImgRequestAction) => {
+        return this.imgService.uploadImgUser(action.payload).pipe(
+          map((response) => {
+            if (!response) {
+              return new AccountUpdateLoadImgErrorAction();
+            } else {
+              this.store.dispatch(new LoadingDisabledAction());
+              this.Alerts.success('Imagem atualizada com sucesso', 'Boa');
+              return new AccountUpdateLoadImgSuccessAction(response);
+            }
+          }),
+          catchError((error) => {
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new AccountUpdateLoadImgErrorAction(error));
+          })
+        );
+      })
+    )
+  );
 
-  updatePass$ = createEffect(() => 
+  updatePass$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountMessageEnum.LOAD_ACCOUNT_UPDATE_PASSWORD_REQUEST),
       switchMap((action: AccountUpdatePassLoadRequestAction) => {
         return this.userService.chagePassword(action.payload).pipe(
           map((response) => {
-            if(!response){
+            if (!response) {
               return new AccountUpdatePassLoadErrorAction();
-            }else{
-              this.Alerts.sucess('Nova senha será exigida no seu próximo login', 'Senha alterada com sucesso');
+            } else {
+              this.store.dispatch(new LoadingDisabledAction());
+              this.Alerts.success(
+                'Nova senha será exigida no seu próximo login',
+                'Senha alterada com sucesso'
+              );
               return new AccountUpdatePassLoadSuccessAction(response);
             }
           }),
@@ -111,7 +124,7 @@ export class AccountEffect {
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new AccountUpdatePassLoadErrorAction(error));
           })
-        )
+        );
       })
     )
   );
@@ -119,8 +132,8 @@ export class AccountEffect {
   constructor(
     private actions$: Actions,
     private userService: UserService,
-    private router: Router,
+    private store: Store,
     private Alerts: AlertService,
-    private imgService: UploadImgService,
+    private imgService: UploadImgService
   ) {}
 }

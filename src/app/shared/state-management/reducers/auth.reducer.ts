@@ -3,7 +3,6 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { LoadAuthErrorAction } from '../actions/auth/auth-load-error.actions';
 import { LoadAuthSuccessAction } from '../actions/auth/auth-load-success.actions';
 import { AuthState } from '../states/auth.state';
-import { state } from '@angular/animations';
 
 export const initialState: AuthState = {
   user: {
@@ -13,7 +12,9 @@ export const initialState: AuthState = {
     id: '',
     nickname: '',
     url: '',
-    team: [],
+    role: '',
+    idTeam: '',
+    rolesTeam: '',
   },
   authError: undefined,
   loading: false,

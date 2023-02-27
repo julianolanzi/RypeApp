@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 
 import { TeamData } from '../../../../models/teams/team-data';
 import { TeamService } from 'src/app/services/teams/team.service';
+import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { Subscription } from 'rxjs';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { select, Store } from '@ngrx/store';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 
 @Component({
   selector: 'app-team-overview',
@@ -16,40 +21,23 @@ export class TeamOverviewComponent {
   idTeam: string = '';
   isadmin: boolean = false;
 
-  constructor(private teamService: TeamService) {
-    this.isLoading = true;
-    this.UserTeamInfo();
-  }
-
-  UserTeamInfo() {
-
-    this.teamService.getUserTeam(this.id).subscribe(
-      (sucesso) => {
-        this.processarSucesso(sucesso);
-        this.isLoading = false;
-
-        this.Team = sucesso;
+  public user!: UserLoginSuccess;
+  private subscriptions: Subscription = new Subscription();
+  constructor(private store: Store<GlobalState>) {
     
-        console.log(this.Team);
-        if (this.Team.data.role == 'admin') {
-          this.isadmin = true;
-          console.log(this.isadmin);
-        }
-      },
-      (falha) => {
-        this.processarFalha(falha);
-      }
-    );
+  }
+
+  ngOnInit(): void {
+    this.loadUser();
   }
 
 
+  public loadUser(){
+    const subscription = this.store.pipe(select(AuthSelector)).subscribe((user) => {
+      this.user = user;
+      this.idTeam = this.user.idTeam;
+    })
 
-  processarSucesso(response: any) {
-    this.isLoading = false;
-    this.errors = [];
-  }
-  processarFalha(fail: any) {
-    this.isLoading = false;
-    this.errors = fail.error.errors;
+    this.subscriptions.add(subscription);
   }
 }

@@ -17,6 +17,9 @@ import { UserSecurityComponent } from './user-security/user-security.component';
 import { UserOverviewComponent } from './user-overview/user-overview.component';
 import { SharedModule } from '../../../shared/shared.module';
 
+import { ImageCropperModule } from 'ngx-image-cropper';
+
+
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
@@ -31,6 +34,7 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    ImageCropperModule
   ],
 })
 export class AccountModule {}

@@ -64,7 +64,7 @@ export class TeamSearchComponent {
     this.TeamService.joinTeam(data).subscribe(
       (sucesso) => {
         this.processarSucessoJoinTeam(sucesso);
-        this.Alerts.sucess('Agora voce faz parte do time', 'Parabéns');
+        this.Alerts.success('Agora voce faz parte do time', 'Parabéns');
       },
       (falha) => {
         this.processarFalha(falha);

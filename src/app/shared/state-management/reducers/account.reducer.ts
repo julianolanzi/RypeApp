@@ -13,6 +13,7 @@ import { AccountUpdateLoadImgSuccessAction } from '../actions/account/account-up
 import { AccountUpdatePassLoadRequestAction } from '../actions/account/account-update-pass-request-actions';
 import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-update-pass-success-actions';
 import { AccountUpdatePassLoadErrorAction } from '../actions/account/account-update-pass-error-actions';
+import { AccountResetLoadAction } from '../actions/account/account-reset-load.actions';
 
 export const initialState: AccountState = {
   account: {
@@ -121,15 +122,12 @@ const _accountReducer = createReducer(
   })),
 
   on(new AccountUpdatePassLoadRequestAction().createAction(), (state) => {
-    return {...state, loading: true};
+    return { ...state, loading: true };
   }),
 
-  on(
-    new AccountUpdatePassLoadSuccessAction().createAction(),
-    (state) => {
-      return {...state, loading: false};
-    }
-  ),
+  on(new AccountUpdatePassLoadSuccessAction().createAction(), (state) => {
+    return { ...state, loading: false };
+  }),
 
   on(
     new AccountUpdatePassLoadErrorAction().createAction(),
@@ -139,7 +137,12 @@ const _accountReducer = createReducer(
       loading: false,
       ischange: false,
     })
-  )
+  ),
+
+  on(new AccountResetLoadAction().createAction(), (state) => ({
+    ...state,
+    ...initialState,
+  }))
 );
 
 export function accountReducer(state: any, action: Action) {

@@ -65,7 +65,7 @@ export class TeamCreateComponent {
     this.TeamService.createTeam(this.team).subscribe(
       (sucesso) => {
         this.processarSucesso(sucesso);
-        this.Alerts.sucess('Criado com sucesso voce será redirecionado', 'Time');
+        this.Alerts.success('Criado com sucesso voce será redirecionado', 'Time');
 
         setTimeout(() => {
           this.router.navigate(['/team-overview']);

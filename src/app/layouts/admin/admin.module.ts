@@ -1,3 +1,4 @@
+import { LoadingComponent } from './../../shared/loading/loading.component';
 
 import { CommonModule, DatePipe } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
@@ -18,7 +19,7 @@ import { TeamModule } from './../../pages/admin/team/team.module';
 
 @NgModule({
     declarations: [
-        DashboardComponent
+        DashboardComponent,
     ],
     providers: [AuthService, UserService, DatePipe, AlertService, UploadImgService, TeamService],
     imports: [

@@ -19,6 +19,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer } from './shared/state-management/reducers/auth.reducer';
 import { AuthEffect } from './shared/state-management/effects/auth.effect';
 import { accountReducer } from './shared/state-management/reducers/account.reducer';
+import { globalPagesReducer } from './shared/state-management/reducers/global-pages.reducer';
 
 @NgModule({
   declarations: [AppComponent, WebComponent, AdminComponent],
@@ -35,6 +36,7 @@ import { accountReducer } from './shared/state-management/reducers/account.reduc
     StoreModule.forRoot({
       auth: authReducer,
       account: accountReducer,
+      globalPages: globalPagesReducer,
     }),
     EffectsModule.forRoot([
       AuthEffect,
