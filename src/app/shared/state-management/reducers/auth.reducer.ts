@@ -17,7 +17,6 @@ export const initialState: AuthState = {
     rolesTeam: '',
   },
   authError: undefined,
-  loading: false,
   isAuthenticated: false,
 };
 

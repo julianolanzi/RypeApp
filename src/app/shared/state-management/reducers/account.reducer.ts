@@ -47,7 +47,6 @@ export const initialState: AccountState = {
     createdAt: undefined,
   },
   authError: undefined,
-  loading: false,
   ischange: false,
 };
 

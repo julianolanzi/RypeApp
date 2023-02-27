@@ -15,7 +15,6 @@ import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.sel
 })
 export class TeamOverviewComponent {
   errors: any[] = [];
-  isLoading: boolean = false;
   id: string = '';
   Team!: TeamData;
   idTeam: string = '';

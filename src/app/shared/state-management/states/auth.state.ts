@@ -4,5 +4,4 @@ export interface AuthState {
   user: UserLoginSuccess;
   authError?: Error;
   isAuthenticated: boolean;
-  loading: boolean;
 }

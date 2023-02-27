@@ -10,7 +10,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserLogin } from 'src/app/models/auth/user-login';
 import {
   isAuthenticated,
-  IsLoading,
 } from 'src/app/shared/state-management/selectors/auth.selector';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';

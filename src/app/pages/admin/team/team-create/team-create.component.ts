@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 
 import { CreateTeam } from 'src/app/models/teams/create-team';
-import { TeamService } from 'src/app/services/teams/team.service';
-import { AlertService } from 'src/app/services/utils/alert.service';
+import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+import { TeamLoadCreateRequestAction } from 'src/app/shared/state-management/actions/teams/team-load-create-request.actions';
+
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({
   selector: 'app-team-create',
@@ -14,17 +19,14 @@ import { AlertService } from 'src/app/services/utils/alert.service';
 export class TeamCreateComponent {
   errors: any[] = [];
   createTeam!: FormGroup;
-  isLoading: boolean = false;
   id: string = '';
   url!: string;
 
+  loading$!: Observable<boolean>;
+  private subscriptions: Subscription = new Subscription();
   team!: CreateTeam;
-  constructor(
-    private TeamService: TeamService,
-    private Alerts: AlertService,
-    private router: Router
-  ) {
-    this.isLoading = false;
+
+  constructor(private store: Store<GlobalState>) {
     this.createTeam = new FormGroup({
       name: new FormControl('', [Validators.required]),
       tagName: new FormControl('', [Validators.required]),
@@ -36,6 +38,12 @@ export class TeamCreateComponent {
       description: new FormControl(''),
       private: new FormControl('', [Validators.required]),
     });
+
+    this.loading$ = this.store.pipe(select(isLoadingGlobal));
+  }
+
+  ngOnInit(): void {
+  this.loadUser();
   }
 
   get name() {
@@ -52,46 +60,25 @@ export class TeamCreateComponent {
     if (this.createTeam.invalid) {
       return;
     }
-    this.isLoading = true;
     this.team = Object.assign({}, this.team, this.createTeam.value);
-    this.url = this.imgTeam();
 
-    this.team = {
+    const data = {
       ...this.team,
-      admin: this.id,
-      url: this.url,
-      name: this.team.name.toLowerCase(),
+      url: 'https://rype-app.vercel.app/assets/img/avatars/team/logo-team.jpg',
     };
-    this.TeamService.createTeam(this.team).subscribe(
-      (sucesso) => {
-        this.processarSucesso(sucesso);
-        this.Alerts.success('Criado com sucesso voce será redirecionado', 'Time');
 
-        setTimeout(() => {
-          this.router.navigate(['/team-overview']);
-        }, 4000);
-      },
-      (falha) => {
-        this.processarFalha(falha);
-        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
-      }
-    );
- 
-  }
-  processarSucesso(response: any) {
-    this.isLoading = false;
-    this.errors = [];
+    // this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new TeamLoadCreateRequestAction(data));
   }
 
-  processarFalha(fail: any) {
-    this.isLoading = false;
-    this.errors = fail.error.errors;
-  }
-  imgTeam() {
-    const path = 'https://rype-app.vercel.app';
-    var img = '/assets/img/avatars/team/logo-team.jpg';
 
-    let url = path + '/' + img;
-    return url;
+
+  public loadUser() {
+    const subscription = this.store
+      .pipe(select(AuthSelector))
+      .subscribe((user) => {
+        this.id = user.id;
+      });
+    this.subscriptions.add(subscription);
   }
 }

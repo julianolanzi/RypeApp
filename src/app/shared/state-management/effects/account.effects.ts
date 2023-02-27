@@ -23,7 +23,6 @@ import { AccountUpdatePassLoadRequestAction } from '../actions/account/account-u
 import { AccountUpdatePassLoadErrorAction } from '../actions/account/account-update-pass-error-actions';
 import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-update-pass-success-actions';
 import { Store } from '@ngrx/store';
-import { LoadingActiveAction } from '../actions/global-pages/loading-load-active.actions';
 import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
 
 @Injectable({

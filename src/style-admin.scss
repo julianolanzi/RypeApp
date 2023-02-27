@@ -29,7 +29,7 @@
   .nav-link:hover .sub-menu-container {
     width: 250px;
     height: auto;
-    background: #35444e;
+    background: var(--sidebar-background);
     display: block;
     left: 70px;
     position: absolute;

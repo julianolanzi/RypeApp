@@ -4,7 +4,6 @@ export interface CreateTeam {
     description: string;
     instagramTeam: string;
     discordTeam: string;
-    admin: string;
     emailTeam: string;
     facebookTeam: string;
     youtubeTeam: string;
