@@ -18,8 +18,8 @@ import { UpdateImg } from 'src/app/models/account/user-update-img';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-load-request.actions';
 
-import { UserUpdate } from 'src/app/models/account/user-update';
 import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
+import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
 
 
 
@@ -34,7 +34,7 @@ export class UserOverviewComponent {
   public id!: string;
   private subscriptions: Subscription = new Subscription();
   public user!: UserSuccessResponse;
-  userUpdate!: UserUpdate;
+  userUpdate!: UserUpdateRequest;
   url: any;
   file!: File;
   updateImg!: UpdateImg;

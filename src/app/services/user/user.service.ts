@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from '../base.service';
 import { UserChangePass } from 'src/app/models/account/user-change-pass';
-import { UserUpdate } from 'src/app/models/account/user-update';
 import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
+import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
 
 
 
@@ -27,7 +27,7 @@ export class UserService extends BaseService {
     return response;
   }
 
-  updateUser(user: UserUpdate): Observable<UserSuccessResponse> {
+  updateUser(user: UserUpdateRequest): Observable<UserSuccessResponse> {
     let response = this.http
       .put(this.UrlServiceV1 + '/users/' + user.id,  user, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
