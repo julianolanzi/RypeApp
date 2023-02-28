@@ -53,22 +53,6 @@ export class AccountEffect {
     )
   );
 
-  // loadUser$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AccountMessageEnum.LOAD_ACCOUNT),
-  //     exhaustMap((action: AccountLoadRequestAction) =>
-  //       this.userService.GetUser(action.payload).pipe(
-  //         map((sucesso) => {
-  //           return new AccountLoadSuccessAction(sucesso);
-  //         }),
-  //         catchError((error) => {
-  //           const err = error.error.error;
-  //           return of(new AccountLoadErrorAction(error));
-  //         })
-  //       )
-  //     )
-  //   )
-  // );
 
   updateUser$ = createEffect(() =>
     this.actions$.pipe(
