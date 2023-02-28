@@ -6,4 +6,3 @@ export interface AccountState {
     authError?: Error;
     ischange: boolean;
   }
-  
