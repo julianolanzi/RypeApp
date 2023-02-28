@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 
 import { TeamData } from '../../../../models/teams/team-data';
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { TeamService } from 'src/app/services/teams/team.service';
+import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { Subscription } from 'rxjs';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { select, Store } from '@ngrx/store';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 
 @Component({
   selector: 'app-team-overview',
@@ -11,53 +15,28 @@ import { TeamService } from 'src/app/services/teams/team.service';
 })
 export class TeamOverviewComponent {
   errors: any[] = [];
-  isLoading: boolean = false;
   id: string = '';
   Team!: TeamData;
-  localStorageUtils = new LocalStorageUtils();
   idTeam: string = '';
   isadmin: boolean = false;
 
-  constructor(private teamService: TeamService) {
-    this.isLoading = true;
-    this.UserTeamInfo();
-  }
-
-  UserTeamInfo() {
-    this.id = this.UserLocalInfo();
-
-    this.teamService.getUserTeam(this.id).subscribe(
-      (sucesso) => {
-        this.processarSucesso(sucesso);
-        this.isLoading = false;
-
-        this.Team = sucesso;
+  public user!: UserLoginSuccess;
+  private subscriptions: Subscription = new Subscription();
+  constructor(private store: Store<GlobalState>) {
     
-        console.log(this.Team);
-        if (this.Team.data.role == 'admin') {
-          this.isadmin = true;
-          console.log(this.isadmin);
-        }
-      },
-      (falha) => {
-        this.processarFalha(falha);
-      }
-    );
   }
 
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    this.id = user.id;
-    return this.id;
+  ngOnInit(): void {
+    this.loadUser();
   }
 
-  processarSucesso(response: any) {
-    this.isLoading = false;
-    this.errors = [];
-  }
-  processarFalha(fail: any) {
-    this.isLoading = false;
-    this.errors = fail.error.errors;
+
+  public loadUser(){
+    const subscription = this.store.pipe(select(AuthSelector)).subscribe((user) => {
+      this.user = user;
+      this.idTeam = this.user.idTeam;
+    })
+
+    this.subscriptions.add(subscription);
   }
 }

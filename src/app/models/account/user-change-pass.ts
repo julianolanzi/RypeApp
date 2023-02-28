@@ -3,4 +3,5 @@ export interface UserChangePass {
   password: string;
   newpassword: string;
   confirmpassword: string;
+  id: string;
 }

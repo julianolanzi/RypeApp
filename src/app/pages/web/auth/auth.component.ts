@@ -1,9 +1,18 @@
+import { LoadAuthRequestAction } from './../../../shared/state-management/actions/auth/auth-load-request.actions';
+import { GlobalState } from './../../../shared/state-management/states/global.state';
+
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { UserLogin } from 'src/app/models/auth/user-login';
-import { AuthService } from './../../../services/auth.service';
+import {
+  isAuthenticated,
+} from 'src/app/shared/state-management/selectors/auth.selector';
+import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
 @Component({
   selector: 'app-auth',
@@ -12,21 +21,25 @@ import { AuthService } from './../../../services/auth.service';
 })
 export class AuthComponent {
   loginForm!: FormGroup;
-  userLogin!: UserLogin;
+  private userLogin!: UserLogin;
 
   errors: any[] = [];
 
-  isLoginSucess: boolean = false;
-  isLoading: boolean = false;
+  loading$!: Observable<boolean>;
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.isLoading = false;
-    this.isLoginSucess = false;
+  isAuthenticated$!: Observable<boolean>;
+  constructor(
+    private store: Store<GlobalState>,
+  ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
+    this.loading$ = this.store.pipe(select(isLoadingGlobal));
+    this.isAuthenticated$ = this.store.pipe(select(isAuthenticated));
   }
+
+  ngOnInit(): void {}
 
   get email() {
     return this.loginForm.get('email')!;
@@ -40,31 +53,12 @@ export class AuthComponent {
       return;
     }
     this.userLogin = Object.assign({}, this.userLogin, this.loginForm.value);
-    this.isLoading = true;
-    this.authService.loginUser(this.userLogin).subscribe(
-      (sucesso) => {
-        this.processarLoginSucesso(sucesso);
-      },
-      (falha) => {
-        this.processarFalha(falha);
-      }
-    );
-  }
 
-  processarLoginSucesso(response: any) {
-    this.isLoading = false;
-    this.errors = [];
-    this.isLoginSucess = true;
-    this.authService.LocalStorage.salvarDadosLocaisUsuario(response);
-    if (response != this.errors) {
-      setTimeout(() => {
-        this.router.navigate(['/dashboard']);
-      }, 2000);
-    }
-  }
-
-  processarFalha(fail: any) {
-    this.isLoading = false;
-    this.errors = fail.error.errors;
+    const value = {
+      email: this.userLogin.email,
+      password: this.userLogin.password,
+    };
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new LoadAuthRequestAction(this.userLogin));
   }
 }

@@ -102,7 +102,6 @@ export class SingUpComponent {
     this.isRegisterSucess = true;
     this.errors = [];
 
-    this.securityService.LocalStorage.salvarDadosLocaisUsuario(response);
     if (response != this.errors) {
     }
     setTimeout(() => {

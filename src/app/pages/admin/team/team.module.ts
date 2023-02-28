@@ -12,7 +12,6 @@ import {
   provideNgxMask,
 } from 'ngx-mask';
 
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { TeamOverviewComponent } from './team-overview/team-overview.component';
 
 import { SharedModule } from '../../../shared/shared.module';
@@ -25,7 +24,7 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [TeamOverviewComponent, TeamSetupComponent, TeamCreateComponent, TeamSearchComponent],
-  providers: [LocalStorageUtils, provideNgxMask()],
+  providers: [provideNgxMask()],
   imports: [
     CommonModule,
     RouterModule.forChild(TeamRoutes),

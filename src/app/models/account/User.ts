@@ -9,7 +9,7 @@ export interface User {
     url: string;
     gender: string;
     country: string;
-    birthday: Date;
+    birthday: Date | undefined;
     verify: boolean;
     discord: string;
     instagram: string;
@@ -19,10 +19,10 @@ export interface User {
         teamName: string;
         tagName: string;
         ranking: number;
-        admin: number;
+        admin: string;
         url: string;
         description: string;
-        createdAt: Date;
+        createdAt: Date | undefined;
     }]
-    createdAt: Date;
+    createdAt: Date | undefined;
 }

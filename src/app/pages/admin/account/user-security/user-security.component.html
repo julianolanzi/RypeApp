@@ -1,7 +1,7 @@
 <div class="container-page">
 
     <div class="container-cover">
-        <img src="./assets/img/account/updatePass.png" alt="">
+        <img src="./assets/img/account/update-pass-cover.png" alt="">
     </div>
     <div class="profile-user-container">
     </div>
@@ -57,6 +57,6 @@
 
 </div>
 
-<div *ngIf="isLoading">
+<div *ngIf="loading$ | async">
     <app-loading></app-loading>
 </div>

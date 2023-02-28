@@ -1,18 +1,24 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { throwError } from 'rxjs';
 
-import { LocalStorageUtils } from './../utils/localstorage';
+import { select, Store } from '@ngrx/store';
+import { Subscription, throwError } from 'rxjs';
+
+import { UserLoginSuccess } from '../models/auth/user-login-success';
+import { AuthSelector } from '../shared/state-management/selectors/auth.selector';
 
 export abstract class BaseService {
-  constructor() {}
+  public user!: UserLoginSuccess;
+  private subscriptions: Subscription = new Subscription();
 
-  public LocalStorage = new LocalStorageUtils();
+  constructor(private store: Store) {
+    this.store = store;
+    this.loadUser();
+  }
 
-  protected UrlServiceV1: string =
-    'http://localhost:3000';
+  protected UrlServiceV1: string = 'http://localhost:3000';
 
-    // protected UrlServiceV1: string =
-    // 'https://apirypecorp-production.up.railway.app';
+  // protected UrlServiceV1: string =
+  // 'https://apirypecorp-production.up.railway.app';
 
   protected ObterHeaderJson() {
     return {
@@ -26,14 +32,14 @@ export abstract class BaseService {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.LocalStorage.obterTokenUsuario()}`,
+        Authorization: `Bearer ${this.user.token}`,
       }),
     };
   }
   protected ObterAuthHeaderUploadJson() {
     return {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${this.LocalStorage.obterTokenUsuario()}`,
+        Authorization: `Bearer ${this.user.token}`,
       }),
     };
   }
@@ -61,8 +67,6 @@ export abstract class BaseService {
       response.error.errors = customError;
       return throwError(response);
     }
-  
-  
 
     if (response instanceof HttpErrorResponse) {
       customError.push(response.error.error);
@@ -70,5 +74,15 @@ export abstract class BaseService {
     }
 
     return throwError(response);
+  }
+
+  public loadUser() {
+    const subscription = this.store
+      .pipe(select(AuthSelector))
+      .subscribe((user: any) => {
+        this.user = user;
+      });
+
+    this.subscriptions.add(subscription);
   }
 }

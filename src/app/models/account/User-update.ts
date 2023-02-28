@@ -6,9 +6,10 @@ export interface UserUpdate {
     phone: string;
     gender: string;
     country: string;
-    birthday: Date;
+    birthday: string;
     discord: string;
     instagram: string;
     facebook: string;
     youtube: string;
+    id: string;
 }

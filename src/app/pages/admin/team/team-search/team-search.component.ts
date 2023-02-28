@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { TeamService } from 'src/app/services/teams/team.service';
 import { AlertService } from 'src/app/services/utils/alert.service';
 
@@ -14,7 +13,6 @@ import { AlertService } from 'src/app/services/utils/alert.service';
 export class TeamSearchComponent {
   isLoading: boolean = false;
   errors: any[] = [];
-  localStorageUtils = new LocalStorageUtils();
   teamSearch!: FormGroup;
 
   Teams: any[] | undefined;
@@ -56,7 +54,6 @@ export class TeamSearchComponent {
 
   joinTeamPublic(team: any) {
     this.isLoading = true;
-    this.idUser = this.UserLocalInfo();
     this.idTeam = team._id;
 
     const data = {
@@ -67,7 +64,7 @@ export class TeamSearchComponent {
     this.TeamService.joinTeam(data).subscribe(
       (sucesso) => {
         this.processarSucessoJoinTeam(sucesso);
-        this.Alerts.sucess('Agora voce faz parte do time', 'Parabéns');
+        this.Alerts.success('Agora voce faz parte do time', 'Parabéns');
       },
       (falha) => {
         this.processarFalha(falha);
@@ -93,10 +90,5 @@ export class TeamSearchComponent {
     this.isLoading = false;
     this.errors = fail.error.errors;
   }
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    this.idUser = user.id;
-    return this.idUser;
-  }
+  
 }

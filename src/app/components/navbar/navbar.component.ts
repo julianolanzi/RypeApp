@@ -1,30 +1,37 @@
-import { Component } from '@angular/core';
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
+import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+
+import { GlobalState } from './../../shared/state-management/states/global.state';
+
+import { Component, OnInit } from '@angular/core';
+import { State, Store, select } from '@ngrx/store';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { Subscription, Observable } from 'rxjs';
+import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
-  localStorageUtils = new LocalStorageUtils();
+export class NavbarComponent implements OnInit {
 
-  user!: any;
+  public user!: UserLoginSuccess;
+  private subscriptions: Subscription = new Subscription();
+  url$!: Observable<string>;
+  constructor(private state: State<GlobalState>, private store: Store<GlobalState>) {}
 
-  constructor(){
-    this.UserLocalInfo();
+  ngOnInit(): void {
+    this.loadUser();
+    this.url$ = this.store.pipe(select(url));
   }
 
+  public loadUser(){
+    const subscription = this.store.pipe(select(AuthSelector)).subscribe((user) => {
+      this.user = user;
+    })
 
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    let localData = {
-      nickname: user.nickname,
-      url: user.url,
-    };
-    this.user = localData;
-    return this.user;
+    this.subscriptions.add(subscription);
   }
+
 
 }

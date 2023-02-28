@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 export class AlertService {
   constructor() {}
 
-  public sucess(message: string, title?: any): void {
+  public success(message: string, title?: any): void {
     this.showAlert(title, message, 'success');
   }
   public info(message: string, title?: any): void {

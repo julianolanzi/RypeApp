@@ -1,9 +1,9 @@
 <div class="container-page">
 
     <div class="container-cover">
-        <img src="./assets/img/account/CoverProfile.png" alt="">
+        <img src="./assets/img/account/cover-profile.png" alt="">
     </div>
-    <div *ngIf="this.user" class="profile-user-container">
+    <div class="profile-user-container">
         <div class="img-container">
             <img class="img-profile" src="{{this.user.url}}" alt="">
         </div>
@@ -76,7 +76,7 @@
                     <label>Email </label>
                     <p>No momento não é possivel mudar o e-mail de cadastro.</p>
                     <div>
-                        <input type="text"  formControlName="email"/>
+                        <input type="text" formControlName="email" />
                     </div>
                 </div>
                 <div class="item-form">
@@ -165,7 +165,7 @@
                 <div class="item-form">
                     <label>Data de criação</label>
                     <div>
-                        <input type="text"  formControlName="createdAt"/>
+                        <input type="text" formControlName="createdAt" />
                     </div>
                 </div>
 
@@ -181,7 +181,7 @@
 
 </div>
 
-<div *ngIf="isLoading">
+<div *ngIf="loading$ | async">
     <app-loading></app-loading>
 </div>
 
@@ -194,7 +194,7 @@
         <div class="modal-center">
             <div class="container-img">
 
-                <img  [src]="this.url" alt="image" />
+                <img [src]="this.url" alt="image" />
 
             </div>
             <label class="file">
@@ -202,7 +202,7 @@
                 <span>Selecione sua foto</span>
             </label>
 
-            <button *ngIf="isChangeImg == true" (click)="changeImg()" (click)="modal.toggle()"  class="btn-modal-change">Alterar</button>
+            <button (click)="modal.toggle()" (click)="changeImg()" class="btn-modal-change">Alterar</button>
             <button (click)="modal.toggle()" class="btn-modal-close">Fechar</button>
 
         </div>

@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 
 import { UserChangePass } from 'src/app/models/account/user-change-pass';
-import { UserService } from 'src/app/services/user/user.service';
-import { AlertService } from 'src/app/services/utils/alert.service';
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
+import { AccountUpdatePassLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update-pass-request-actions';
+import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({
   selector: 'app-user-security',
@@ -14,22 +19,24 @@ import { LocalStorageUtils } from 'src/app/utils/localstorage';
 })
 export class UserSecurityComponent {
   updatePass!: FormGroup;
-  localStorageUtils = new LocalStorageUtils();
   user!: UserChangePass;
-  errors: any[] = [];
-  data!: any;
-  isLoading: boolean = false;
+  loading$!: Observable<boolean>;
+  data: any;
+  id: string = '';
+  email: string = '';
+  private subscriptions: Subscription = new Subscription();
 
-  constructor(
-    private UserService: UserService,
-    private Alerts: AlertService,
-    private router: Router
-  ) {
+
+  constructor(private router: Router, private store: Store<GlobalState>) {
+    this.loadId();
     this.updatePass = new FormGroup({
       password: new FormControl('', [Validators.required]),
       newpassword: new FormControl('', [Validators.required]),
       confirmpassword: new FormControl('', [Validators.required]),
     });
+    
+    this.loading$ = this.store.pipe(select(isLoadingGlobal));
+
   }
 
   get password() {
@@ -46,51 +53,30 @@ export class UserSecurityComponent {
     if (this.updatePass.invalid) {
       return;
     }
-    this.isLoading = true;
-    let localData = this.UserLocalInfo();
+
 
     this.data = Object.assign({}, this.user, this.updatePass.value);
 
     this.user = {
+      email: this.email,
       password: this.data.password,
       newpassword: this.data.newpassword,
       confirmpassword: this.data.confirmpassword,
-      email: localData.email,
-    };
-
-    this.UserService.chagePassword(this.data, localData.id).subscribe(
-      (sucesso) => {
-        this.Alerts.sucess('Senha alterada com sucesso, iremos te redirecionar para o login.', 'Tudo certo 😉');
-        this.processarSucesso(sucesso);
-      },
-      (falha) => {
-        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
-        this.processarFalha(falha);
-      }
-    );
+      id: this.id,
+    }
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new AccountUpdatePassLoadRequestAction(this.user));
   }
 
-  processarSucesso(response: any) {
-    this.isLoading = false;
-    this.errors = [];
+  public loadId() {
+    const subscription = this.store
+      .pipe(select(AuthSelector))
+      .subscribe((user) => {
+        this.id = user.id;
+        this.email = user.email;
+      });
 
-    setTimeout(() => {
-      this.router.navigate(['/auth']);
-    }, 4000);
+    this.subscriptions.add(subscription);
   }
 
-  processarFalha(fail: any) {
-    this.isLoading = false;
-    this.errors = fail.error.errors;
-  }
-
-  UserLocalInfo() {
-    let user = this.localStorageUtils.obertUser();
-    user = JSON.parse(user);
-    let localData = {
-      email: user.email,
-      id: user.id,
-    };
-    return localData;
-  }
 }

@@ -11,18 +11,20 @@ import {
   provideNgxMask,
 } from 'ngx-mask';
 
-import { LocalStorageUtils } from 'src/app/utils/localstorage';
 import { AccountRoutes } from './account.routing';
 
 import { UserSecurityComponent } from './user-security/user-security.component';
 import { UserOverviewComponent } from './user-overview/user-overview.component';
 import { SharedModule } from '../../../shared/shared.module';
 
+import { ImageCropperModule } from 'ngx-image-cropper';
+
+
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [UserSecurityComponent, UserOverviewComponent],
-  providers: [LocalStorageUtils, provideNgxMask()],
+  providers: [provideNgxMask()],
   imports: [
     CommonModule,
     RouterModule.forChild(AccountRoutes),
@@ -32,6 +34,7 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    ImageCropperModule
   ],
 })
 export class AccountModule {}

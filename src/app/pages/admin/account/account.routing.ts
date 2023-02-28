@@ -5,6 +5,14 @@ import { UserSecurityComponent } from './user-security/user-security.component';
 import { UserOverviewComponent } from './user-overview/user-overview.component';
 
 export const AccountRoutes: Routes = [
-  { path: 'overview', component: UserOverviewComponent, canActivate: [AuthGuard] },
-  { path: 'security', component: UserSecurityComponent, canActivate: [AuthGuard] },
+  {
+    path: 'overview',
+    component: UserOverviewComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'security',
+    component: UserSecurityComponent,
+    canActivate: [AuthGuard],
+  },
 ];

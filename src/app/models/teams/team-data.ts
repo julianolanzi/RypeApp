@@ -25,6 +25,6 @@ export interface TeamData {
     lines: Array<any>;
     private: string;
 
-    createdAt: Date;
+    createdAt: Date | undefined;
   };
 }
