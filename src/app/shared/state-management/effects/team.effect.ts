@@ -10,6 +10,8 @@ import { AlertService } from 'src/app/services/utils/alert.service';
 import { TeamService } from 'src/app/services/teams/team.service';
 
 import { TeamMessageEnum } from '../actions/teams/team-message.enum';
+import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,7 @@ export class TeamEffect {
 
 
 
-    create$ = createEffect(() => 
+    create$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TeamMessageEnum.LOAD_TEAM_CREATE_REQUEST),
       exhaustMap((action: TeamLoadCreateRequestAction) => {
@@ -27,6 +29,7 @@ export class TeamEffect {
             return new TeamLoadCreateSuccessAction(response);
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new TeamLoadCreateErrorAction(error));
@@ -38,6 +41,7 @@ export class TeamEffect {
   constructor(
     private actions$: Actions,
     private Alerts: AlertService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private store: Store,
   ) {}
 }

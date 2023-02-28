@@ -44,6 +44,7 @@ export class AccountEffect {
             }
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new AccountLoadErrorAction(error));
@@ -69,6 +70,7 @@ export class AccountEffect {
             }
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new AccountUpdateLoadErrorAction(error));
@@ -87,12 +89,14 @@ export class AccountEffect {
             if (!response) {
               return new AccountUpdateLoadImgErrorAction();
             } else {
+
               this.store.dispatch(new LoadingDisabledAction());
               this.Alerts.success('Imagem atualizada com sucesso', 'Boa');
               return new AccountUpdateLoadImgSuccessAction(response);
             }
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new AccountUpdateLoadImgErrorAction(error));
@@ -120,6 +124,7 @@ export class AccountEffect {
             }
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new AccountUpdatePassLoadErrorAction(error));

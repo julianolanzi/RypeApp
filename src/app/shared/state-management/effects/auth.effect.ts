@@ -27,19 +27,18 @@ export class AuthEffect {
       switchMap((action: LoadAuthRequestAction) => {
         return this.AuthService.loginUser(action.payload).pipe(
           map((response) => {
-            if (!response) {
-              return new LoadAuthErrorAction();
-            } else {
-              setTimeout(() => {
-                this.router.navigate(['dashboard']);
-              }, 2000);
-              
-              this.store.dispatch(new UpdateImgAccountAction(response));
-              this.store.dispatch(new LoadingDisabledAction());
-              return new LoadAuthSuccessAction(response);
-            }
+            setTimeout(() => {
+              this.router.navigate(['dashboard']);
+            }, 2000);
+
+            this.store.dispatch(new UpdateImgAccountAction(response));
+            this.store.dispatch(new LoadingDisabledAction());
+            return new LoadAuthSuccessAction(response);
           }),
           catchError((error) => {
+            console.log('caindo no erro');
+            this.store.dispatch(new LoadingDisabledAction());
+
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new LoadAuthErrorAction(error));
