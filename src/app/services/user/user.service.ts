@@ -1,4 +1,3 @@
-import { User } from './../../models/account/user';
 import { Store } from '@ngrx/store';
 
 import { Injectable } from '@angular/core';
@@ -8,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { BaseService } from '../base.service';
 import { UserChangePass } from 'src/app/models/account/user-change-pass';
 import { UserUpdate } from 'src/app/models/account/user-update';
+import { User } from 'src/app/models/account/user';
 
 
 

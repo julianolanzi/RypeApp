@@ -1,9 +1,4 @@
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
-import { AccountUpdateLoadImgRequestAction } from './../../../../shared/state-management/actions/account/account-update-load-img-request.actions';
-import { AccountUpdateLoadRequestAction } from './../../../../shared/state-management/actions/account/account-update-load.actions';
-import { UserUpdate } from './../../../../models/account/user-update';
-import { User } from './../../../../models/account/user';
-import { AccountLoadRequestAction } from './../../../../shared/state-management/actions/account/account-load-request.actions';
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +11,11 @@ import { Observable, Subscription } from 'rxjs';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
 import { UpdateImg } from 'src/app/models/account/user-update-img';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-load-request.actions';
+import { User } from 'src/app/models/account/user';
+import { UserUpdate } from 'src/app/models/account/user-update';
+import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load.actions';
+import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load-img-request.actions';
 
 @Component({
   selector: 'app-user-overview',
