@@ -3,32 +3,27 @@ import { TeamLoadCreateErrorAction } from '../actions/teams/team-load-create-err
 import { TeamLoadCreateSuccessAction } from '../actions/teams/team-load-create-success.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
-import { TeamMessageEnum } from '../actions/teams/team-message.enum';
-import { switchMap, catchError, map, of } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { UploadImgService } from 'src/app/services/imgs/upload.img.service';
+import { switchMap, catchError, map, of, exhaustMap } from 'rxjs';
 import { AlertService } from 'src/app/services/utils/alert.service';
 import { TeamService } from 'src/app/services/teams/team.service';
 
-import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
+import { TeamMessageEnum } from '../actions/teams/team-message.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeamEffect {
-  createTeam$ = createEffect(() =>
+
+
+
+    create$ = createEffect(() => 
     this.actions$.pipe(
-      ofType(TeamMessageEnum.LOAD_TEAM_CREATE),
-      switchMap((action: TeamLoadCreateRequestAction) => {
-        return this.TeamService.createTeam(action.payload).pipe(
+      ofType(TeamMessageEnum.LOAD_TEAM_CREATE_REQUEST),
+      exhaustMap((action: TeamLoadCreateRequestAction) => {
+        return this.teamService.createTeam(action.payload).pipe(
           map((response) => {
-            setTimeout(() => {
-              this.router.navigate(['/team-overview']);
-            }, 4000);
-            // this.store.dispatch(new LoadingDisabledAction());
             return new TeamLoadCreateSuccessAction(response);
           }),
           catchError((error) => {
@@ -38,15 +33,11 @@ export class TeamEffect {
           })
         );
       })
-    )
-  );
+    ));
 
   constructor(
     private actions$: Actions,
-    private store: Store,
-    private router: Router,
     private Alerts: AlertService,
-    private imgService: UploadImgService,
-    private TeamService: TeamService
+    private teamService: TeamService
   ) {}
 }

@@ -7,7 +7,7 @@ import { AccountLoadRequestAction } from './../actions/account/account-load-requ
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { switchMap, map, catchError, of, tap } from 'rxjs';
+import { switchMap, map, catchError, of, tap, exhaustMap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
@@ -32,8 +32,8 @@ export class AccountEffect {
   loadadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountMessageEnum.LOAD_ACCOUNT),
- 
-      switchMap((action: AccountLoadRequestAction) => {
+
+      exhaustMap((action: AccountLoadRequestAction) => {
         return this.userService.GetUser(action.payload).pipe(
           map((response) => {
             if (!response) {
@@ -53,10 +53,27 @@ export class AccountEffect {
     )
   );
 
+  // loadUser$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(AccountMessageEnum.LOAD_ACCOUNT),
+  //     exhaustMap((action: AccountLoadRequestAction) =>
+  //       this.userService.GetUser(action.payload).pipe(
+  //         map((sucesso) => {
+  //           return new AccountLoadSuccessAction(sucesso);
+  //         }),
+  //         catchError((error) => {
+  //           const err = error.error.error;
+  //           return of(new AccountLoadErrorAction(error));
+  //         })
+  //       )
+  //     )
+  //   )
+  // );
+
   updateUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountMessageEnum.LOAD_ACCOUNT_UPDATE_REQUEST),
-      switchMap((action: AccountUpdateLoadRequestAction) => {
+      exhaustMap((action: AccountUpdateLoadRequestAction) => {
         return this.userService.updateUser(action.payload).pipe(
           map((response) => {
             if (!response) {
@@ -80,7 +97,7 @@ export class AccountEffect {
   updateImg$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountMessageEnum.LOAD_ACCOUNT_UPDATE_IMG_REQUEST),
-      switchMap((action: AccountUpdateLoadImgRequestAction) => {
+      exhaustMap((action: AccountUpdateLoadImgRequestAction) => {
         return this.imgService.uploadImgUser(action.payload).pipe(
           map((response) => {
             if (!response) {
@@ -104,7 +121,7 @@ export class AccountEffect {
   updatePass$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AccountMessageEnum.LOAD_ACCOUNT_UPDATE_PASSWORD_REQUEST),
-      switchMap((action: AccountUpdatePassLoadRequestAction) => {
+      exhaustMap((action: AccountUpdatePassLoadRequestAction) => {
         return this.userService.chagePassword(action.payload).pipe(
           map((response) => {
             if (!response) {

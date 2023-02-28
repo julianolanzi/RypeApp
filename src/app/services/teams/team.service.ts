@@ -14,7 +14,7 @@ export class TeamService extends BaseService {
   constructor(private http: HttpClient, Store: Store) {
     super(Store);
   }
-  createTeam(data: CreateTeam | undefined): Observable<CreateTeamSuccess> {
+  createTeam(data: CreateTeam| undefined): Observable<CreateTeamSuccess> {
     let response = this.http
       .post(this.UrlServiceV1 + '/teams/', data, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
