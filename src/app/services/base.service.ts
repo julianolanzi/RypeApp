@@ -15,10 +15,10 @@ export abstract class BaseService {
     this.loadUser();
   }
 
-  protected UrlServiceV1: string = 'http://localhost:3000';
+  // protected UrlServiceV1: string = 'http://localhost:3000';
 
-  // protected UrlServiceV1: string =
-  // 'https://apirypecorp-production.up.railway.app';
+  protected UrlServiceV1: string =
+  'https://apirypecorp-production.up.railway.app';
 
   protected ObterHeaderJson() {
     return {
