@@ -1,4 +1,7 @@
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load.actions';
+import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load-img-request.actions';
+
 
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,15 +10,19 @@ import { DatePipe } from '@angular/common';
 import { select, Store } from '@ngrx/store';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
-import { Observable, Subscription } from 'rxjs';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
+
+import { Observable, Subscription } from 'rxjs';
+
 import { UpdateImg } from 'src/app/models/account/user-update-img';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-load-request.actions';
+
 import { User } from 'src/app/models/account/user';
 import { UserUpdate } from 'src/app/models/account/user-update';
-import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load.actions';
-import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load-img-request.actions';
+
+
+
 
 @Component({
   selector: 'app-user-overview',
@@ -34,7 +41,6 @@ export class UserOverviewComponent {
   updateImg!: UpdateImg;
   loading$!: Observable<boolean>;
 
-
   constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {
     this.updateForm = new FormGroup({
       nickname: new FormControl('', [Validators.required]),
@@ -52,7 +58,6 @@ export class UserOverviewComponent {
       youtube: new FormControl(''),
       createdAt: new FormControl({ value: '', disabled: true }),
     });
-
   }
   ngOnInit(): void {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
@@ -107,11 +112,10 @@ export class UserOverviewComponent {
   }
 
   updateProfile() {
-    
     if (this.updateForm.invalid) {
       return;
     }
-    
+
     this.userUpdate = Object.assign({}, this.userUpdate, this.updateForm.value);
     const data = {
       ...this.userUpdate,
@@ -139,7 +143,6 @@ export class UserOverviewComponent {
     };
     this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new AccountUpdateLoadImgRequestAction(this.updateImg));
-
   }
 
   public loadId() {
@@ -158,38 +161,38 @@ export class UserOverviewComponent {
       .subscribe((user) => {
         this.user = user;
         const { nickname, idGame } = this.user;
-        this.url = this.user.url,
-        this.updateForm.patchValue({
-          nickname,
-          idGame,
-          name: this.user.name,
-          lastname: this.user.lastname,
-          gender: this.user.gender,
-          email: this.user.email,
-          birthday: this.datePipe.transform(
-            this.user.birthday,
-            'yyyy-MM-dd',
-            'UTC'
-          ),
-          country: this.user.country,
-          phone: this.user.phone,
-          youtube: this.user.youtube,
-          discord: this.user.discord,
-          instagram: this.user.instagram,
-          facebook: this.user.facebook,
-          createdAt: this.datePipe.transform(
-            this.user.createdAt,
-            'dd-MM-yyyy',
-            'UTC'
-          ),
-        });
+        (this.url = this.user.url),
+          this.updateForm.patchValue({
+            nickname,
+            idGame,
+            name: this.user.name,
+            lastname: this.user.lastname,
+            gender: this.user.gender,
+            email: this.user.email,
+            birthday: this.datePipe.transform(
+              this.user.birthday,
+              'yyyy-MM-dd',
+              'UTC'
+            ),
+            country: this.user.country,
+            phone: this.user.phone,
+            youtube: this.user.youtube,
+            discord: this.user.discord,
+            instagram: this.user.instagram,
+            facebook: this.user.facebook,
+            createdAt: this.datePipe.transform(
+              this.user.createdAt,
+              'dd-MM-yyyy',
+              'UTC'
+            ),
+          });
       });
 
     this.subscriptions.add(subscription);
   }
 
   // ngOnDestroy(): void {
-    
+
   //   this.store.dispatch(new AccountResetLoadAction());
   // }
 }

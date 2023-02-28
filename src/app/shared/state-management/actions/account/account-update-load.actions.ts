@@ -1,5 +1,4 @@
 import { createAction } from '@ngrx/store';
-import { UserUpdate } from 'src/app/models/account/user-update';
 import { CustomAction } from '../custom.actions';
 import { AccountMessageEnum } from './account-message.enum';
 
