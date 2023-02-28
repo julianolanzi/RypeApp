@@ -18,7 +18,7 @@ export abstract class BaseService {
   // protected UrlServiceV1: string = 'http://localhost:3000';
 
   protected UrlServiceV1: string =
-  'https://apirypecorp-production.up.railway.app';
+  'https://jealous-trench-coat-bear.cyclic.app';
 
   protected ObterHeaderJson() {
     return {
