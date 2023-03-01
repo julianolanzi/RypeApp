@@ -1,4 +1,5 @@
 export interface TeamDataSuccess {
+  _id: string;
   idTeam: string;
   name: string;
   tagName: string;

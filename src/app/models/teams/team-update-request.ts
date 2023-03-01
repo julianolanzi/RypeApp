@@ -1,4 +1,5 @@
 export interface TeamUpdateInfo {
+  id: string;
   name: string;
   tagName: string;
   description: string;

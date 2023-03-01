@@ -8,6 +8,12 @@ import { TeamLoadInfoRequestAction } from '../actions/teams/team-load-info-reque
 import { TeamLoadInfoSuccessAction } from '../actions/teams/team-load-info-success.actions';
 import { TeamLoadSuccessAction } from '../actions/teams/team-load-success.actions';
 import { TeamLoadAction } from '../actions/teams/team-load.actions';
+import { TeamLoadUpdateErrorAction } from '../actions/teams/update/team-load-error-info.actions';
+import { TeamLoadUpdateSuccessAction } from '../actions/teams/update/team-load-success-info.actions';
+import { TeamLoadUpdateErrorImg } from '../actions/teams/update/team-load-update-img-error.actions';
+import { TeamLoadUpdateRequestImg } from '../actions/teams/update/team-load-update-img-request.actions';
+import { TeamLoadUpdateSuccessImg } from '../actions/teams/update/team-load-update-img-success.actions';
+import { TeamLoadUpdateRequestAction } from '../actions/teams/update/team-load-update-info.actions';
 
 import { TeamState } from './../states/teams.state';
 
@@ -34,6 +40,7 @@ export const initialState: TeamState = {
     createdAt: undefined,
   },
   teamInfo: {
+    _id: '',
     idTeam: '',
     name: '',
     tagName: '',
@@ -116,6 +123,51 @@ const _teamReducer = createReducer(
     authError: action.payload,
     teamSearch: [],
     isLoadingTeam: false,
+  })),
+
+  on(new TeamLoadUpdateRequestAction().createAction(), (state) => ({
+    ...state,
+    authError: undefined,
+    teamSearch: [],
+    isLoadingTeam: false,
+  })),
+  on(new TeamLoadUpdateSuccessAction().createAction(), (state, action) => ({
+    ...state,
+    authError: undefined,
+    teamInfo: action.payload,
+    teamSearch: [],
+    isLoadingTeam: false,
+  })),
+  on(new TeamLoadUpdateErrorAction().createAction(), (state, action) => ({
+    ...state,
+    authError: action.payload,
+    teamSearch: [],
+    isLoadingTeam: false,
+  })),
+  on(new TeamLoadUpdateRequestImg().createAction(), (state, action) => ({
+    ...state,
+    authError: undefined,
+    isLoadingTeam: false,
+    teamSearch: [],
+  })),
+  on(new TeamLoadUpdateSuccessImg().createAction(), (state, action) => {
+    const newTeam = {
+      ...state.teamInfo,
+      url: action.payload.url,
+    };
+    return {
+      ...state,
+      teamInfo: newTeam,
+      authError: undefined,
+      isLoadingTeam: false,
+      teamSearch: [],
+    };
+  }),
+  on(new TeamLoadUpdateErrorImg().createAction(), (state, action) => ({
+    ...state,
+    authError: action.payload,
+    isLoadingTeam: false,
+    teamSearch: [],
   }))
 );
 

@@ -9,6 +9,7 @@ import { CreateTeamSuccess } from 'src/app/models/teams/create-team-success';
 import { CreateTeam } from 'src/app/models/teams/create-team';
 import { TeamsSearch } from 'src/app/models/teams/search-teams';
 import { TeamData } from 'src/app/models/teams/team-data';
+import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
 
 @Injectable()
 export class TeamService extends BaseService {
@@ -57,6 +58,18 @@ export class TeamService extends BaseService {
     let response = this.http
       .get(this.UrlServiceV1 + '/teams/' + id, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  updateInfoTeam(upTeam: TeamUpdateInfo | undefined ): Observable<TeamDataSuccess> {
+    let response = this.http
+      .put(
+        this.UrlServiceV1 + '/teams/' + upTeam?.id,
+        upTeam,
+        this.ObterAuthHeaderJson()
+      )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+
     return response;
   }
 }

@@ -7,7 +7,7 @@ import { AccountLoadRequestAction } from './../actions/account/account-load-requ
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { switchMap, map, catchError, of, tap, exhaustMap } from 'rxjs';
+import { map, catchError, of, exhaustMap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 

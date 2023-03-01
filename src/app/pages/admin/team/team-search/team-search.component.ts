@@ -9,6 +9,7 @@ import { TeamSearchSelector } from 'src/app/shared/state-management/selectors/te
 import { SearchTeamSuccess } from 'src/app/models/teams/search-team-sucess';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actions/teams/team-load-request-public-team.actions';
+import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 
 @Component({
   selector: 'app-team-search',
@@ -57,11 +58,9 @@ export class TeamSearchComponent {
       user: this.user.id,
       team: this.idTeam,
     };
-
-   this.store.dispatch(new TeamLoadRequestPublicTeam(data));
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new TeamLoadRequestPublicTeam(data));
   }
-
-
 
   public loadUser() {
     const subscription = this.store

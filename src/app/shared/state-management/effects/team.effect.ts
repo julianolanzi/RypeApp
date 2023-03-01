@@ -22,6 +22,13 @@ import { TeamLoadRequestPublicTeam } from '../actions/teams/team-load-request-pu
 import { TeamLoadInfoSuccessAction } from '../actions/teams/team-load-info-success.actions';
 import { TeamLoadInfoRequestAction } from '../actions/teams/team-load-info-request.actions';
 import { TeamLoadInfoErrorAction } from '../actions/teams/team-load-info-error.actions';
+import { TeamLoadUpdateRequestAction } from '../actions/teams/update/team-load-update-info.actions';
+import { TeamLoadUpdateErrorAction } from '../actions/teams/update/team-load-error-info.actions';
+import { TeamLoadUpdateSuccessAction } from '../actions/teams/update/team-load-success-info.actions';
+import { TeamLoadUpdateRequestImg } from '../actions/teams/update/team-load-update-img-request.actions';
+import { UploadImgService } from 'src/app/services/imgs/upload.img.service';
+import { TeamLoadUpdateErrorImg } from '../actions/teams/update/team-load-update-img-error.actions';
+import { TeamLoadUpdateSuccessImg } from '../actions/teams/update/team-load-update-img-success.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -112,11 +119,52 @@ export class TeamEffect {
     )
   );
 
+  updateInfoTeam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TeamMessageEnum.LOAD_TEAM_UPDATE_REQUEST),
+      exhaustMap((action: TeamLoadUpdateRequestAction) => {
+        return this.teamService.updateInfoTeam(action.payload).pipe(
+          map((response) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            return new TeamLoadUpdateSuccessAction(response);
+          }),
+          catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new TeamLoadUpdateErrorAction(error));
+          })
+        );
+      })
+    )
+  );
+
+  updateImgTeam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TeamMessageEnum.LOAD_TEAM_UPDATE_IMG_REQUEST),
+      exhaustMap((action: TeamLoadUpdateRequestImg) => {
+        return this.imgService.uploadImgTeam(action.payload).pipe(
+          map((response) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            return new TeamLoadUpdateSuccessImg(response);
+          }),
+          catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new TeamLoadUpdateErrorImg(error));
+          })
+        );
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private Alerts: AlertService,
     private teamService: TeamService,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private imgService: UploadImgService
   ) {}
 }

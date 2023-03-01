@@ -5,18 +5,24 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
+import { UpdateImgTeam } from 'src/app/models/teams/team-update-img';
 import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/team-load-info-request.actions';
+import { TeamLoadUpdateRequestImg } from 'src/app/shared/state-management/actions/teams/update/team-load-update-img-request.actions';
+import { TeamLoadUpdateRequestAction } from 'src/app/shared/state-management/actions/teams/update/team-load-update-info.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
-import { TeamDataSelector, TeamLoadingTeam } from 'src/app/shared/state-management/selectors/team.selector';
+import {
+  TeamDataSelector,
+  TeamLoadingTeam,
+} from 'src/app/shared/state-management/selectors/team.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({
   selector: 'app-team-settings',
   templateUrl: './team-settings.component.html',
-  styleUrls: ['./team-settings.component.scss']
+  styleUrls: ['./team-settings.component.scss'],
 })
 export class TeamSettingsComponent {
   updateForm!: FormGroup;
@@ -30,12 +36,12 @@ export class TeamSettingsComponent {
   url: any;
   file!: File;
   isprivate: string = '';
+  updateImgTeam!: UpdateImgTeam;
 
   private subscriptions: Subscription = new Subscription();
 
   constructor(private store: Store<GlobalState>, private datePipe: DatePipe) {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
-
 
     this.updateForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -48,6 +54,7 @@ export class TeamSettingsComponent {
       youtubeTeam: new FormControl(''),
       private: new FormControl('', [Validators.required]),
       createdAt: new FormControl({ value: '', disabled: true }),
+      idTeam: new FormControl({ value: '', disabled: true }),
     });
   }
   get name() {
@@ -67,10 +74,9 @@ export class TeamSettingsComponent {
     this.loadTeamInfo();
   }
 
-  initForm(){
-    if(!this.isLoadingInfo){
+  initForm() {
+    if (!this.isLoadingInfo) {
       this.getTeam();
-
     }
   }
   getTeam() {
@@ -96,7 +102,12 @@ export class TeamSettingsComponent {
 
     this.teamUpdate = Object.assign({}, this.teamUpdate, this.updateForm.value);
 
-    console.log(this.teamUpdate);
+    this.teamUpdate = {
+      ...this.teamUpdate,
+      id: this.Team._id,
+    };
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new TeamLoadUpdateRequestAction(this.teamUpdate));
   }
 
   onselectFile(e: any) {
@@ -109,11 +120,22 @@ export class TeamSettingsComponent {
       };
     }
   }
-  public loadInfoTeam(){
-    const subscription = this.store.pipe(select(TeamLoadingTeam)).subscribe((ative) => {
-      this.isLoadingInfo = ative;
-    })
+  public loadInfoTeam() {
+    const subscription = this.store
+      .pipe(select(TeamLoadingTeam))
+      .subscribe((ative) => {
+        this.isLoadingInfo = ative;
+      });
     this.subscriptions.add(subscription);
+  }
+
+  changeImg() {
+    this.updateImgTeam = {
+      file: this.file,
+      id: this.Team._id,
+    };
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new TeamLoadUpdateRequestImg(this.updateImgTeam));
   }
 
   public loadTeamInfo() {
@@ -124,6 +146,7 @@ export class TeamSettingsComponent {
         this.url = team.url;
         this.isprivate = this.Team.private.toString();
         this.updateForm.patchValue({
+          idTeam: this.Team.idTeam,
           name: this.Team.name,
           tagName: this.Team.tagName,
           description: this.Team.description,
@@ -144,8 +167,7 @@ export class TeamSettingsComponent {
     this.subscriptions.add(subscription);
   }
 
-   ngOnDestroy(): void {
-
+  ngOnDestroy(): void {
     // this.store.dispatch(new AccountResetLoadAction());
   }
 }

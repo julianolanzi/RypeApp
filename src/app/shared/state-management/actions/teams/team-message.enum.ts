@@ -17,4 +17,13 @@ export enum TeamMessageEnum {
     LOAD_TEAM_INFO_SUCCESS = '[TEAM] Load request success',
     LOAD_TEAM_INFO_ERROR = '[TEAM] Load request error',
 
+
+    LOAD_TEAM_UPDATE_REQUEST = '[TEAM] Load update infos',
+    LOAD_TEAM_UPDATE_SUCCESS = '[TEAM] Load success infos',
+    LOAD_TEAM_UPDATE_ERROR = '[TEAM] Load error infos',
+
+    LOAD_TEAM_UPDATE_IMG_REQUEST = '[TEAM] Load update img request',
+    LOAD_TEAM_UPDATE_IMG_SUCCESS = '[TEAM] Load update img success',
+    LOAD_TEAM_UPDATE_IMG_ERROR = '[TEAM] Load update img error',
+
 }

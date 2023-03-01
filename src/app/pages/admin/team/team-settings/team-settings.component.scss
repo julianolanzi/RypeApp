@@ -13,6 +13,7 @@
     border-bottom-left-radius: 0;
     object-fit: cover;
     object-position: top;
+
   }
 }
 
@@ -40,6 +41,8 @@
   border: 8px;
   border-style: solid;
   border-color: var(--background-mode);
+  background-color: var(--background-mode);
+
 }
 
 .name-container {
