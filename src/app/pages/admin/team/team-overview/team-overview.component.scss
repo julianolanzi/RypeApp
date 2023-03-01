@@ -111,6 +111,7 @@ h1 {
       border-style: solid;
       border-radius: 5px;
       border-color: var(--text-color);
+      object-fit: cover;
     }
   }
 }
@@ -142,6 +143,7 @@ h1 {
       bottom: -30px;
       left: -7px;
       border-radius: 10px;
+      object-fit: cover;
     }
 
     .infos-item {
@@ -160,9 +162,8 @@ h1 {
     padding: 15px;
   }
 
-
-  .container-sub-adms{
-    .container-items{
+  .container-sub-adms {
+    .container-items {
       flex-direction: column;
       flex-direction: unset;
     }
