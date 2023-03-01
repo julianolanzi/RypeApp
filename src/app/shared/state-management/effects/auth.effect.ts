@@ -36,7 +36,6 @@ export class AuthEffect {
             return new LoadAuthSuccessAction(response);
           }),
           catchError((error) => {
-            console.log('caindo no erro');
             this.store.dispatch(new LoadingDisabledAction());
 
             const err = error.error.error;

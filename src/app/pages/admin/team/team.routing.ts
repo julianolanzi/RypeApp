@@ -1,3 +1,4 @@
+import { TeamSettingsComponent } from './team-settings/team-settings.component';
 
 import { Routes } from '@angular/router';
 
@@ -7,6 +8,8 @@ import { TeamCreateComponent } from './team-create/team-create.component';
 import { TeamSearchComponent } from './team-search/team-search.component';
 
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { TeamUpdateMemberComponent } from './team-update-member/team-update-member.component';
+import { TeamUpdateAdminComponent } from './team-update-admin/team-update-admin.component';
 
 export const TeamRoutes: Routes = [
   {
@@ -27,6 +30,21 @@ export const TeamRoutes: Routes = [
   {
     path: 'team-create',
     component: TeamCreateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'team-settings',
+    component: TeamSettingsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'team-members',
+    component: TeamUpdateMemberComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'team-admins',
+    component: TeamUpdateAdminComponent,
     canActivate: [AuthGuard],
   },
 ];

@@ -29,7 +29,7 @@
             </form>
 
             <div class="container-search-teams d-flex gap-10">
-                <div class="teams" *ngFor="let team of Teams">
+                <div class="teams" *ngFor="let team of Teams$ | async">
                     <div class="team-item d-flex">
                         <div class="image">
                             <img src="{{team.url}}">
@@ -66,6 +66,6 @@
 
 </div>
 
-<div *ngIf="isLoading">
+<!-- <div *ngIf="isLoading">
     <app-loading></app-loading>
-</div>
+</div> -->

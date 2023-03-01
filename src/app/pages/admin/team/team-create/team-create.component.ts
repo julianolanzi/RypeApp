@@ -64,10 +64,10 @@ export class TeamCreateComponent {
 
     const data = {
       ...this.team,
-      url: 'https://rype-app.vercel.app/assets/img/avatars/team/logo-team.jpg',
+      url: './assets/img/teams/logo-team.jpg',
     };
 
-    // this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new TeamLoadCreateRequestAction(data));
   }
 

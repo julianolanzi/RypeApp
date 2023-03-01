@@ -1,3 +1,4 @@
+import { TeamDataSuccess } from './../../models/teams/team-data-sucess';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +15,7 @@ export class TeamService extends BaseService {
   constructor(private http: HttpClient, Store: Store) {
     super(Store);
   }
-  createTeam(data: CreateTeam| undefined): Observable<CreateTeamSuccess> {
+  createTeam(data: CreateTeam | undefined): Observable<CreateTeamSuccess> {
     let response = this.http
       .post(this.UrlServiceV1 + '/teams/', data, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -48,6 +49,13 @@ export class TeamService extends BaseService {
         data,
         this.ObterAuthHeaderJson()
       )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  getById(id: string | undefined): Observable<TeamDataSuccess> {
+    let response = this.http
+      .get(this.UrlServiceV1 + '/teams/' + id, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

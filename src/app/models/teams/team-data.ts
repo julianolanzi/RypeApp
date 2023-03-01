@@ -23,7 +23,7 @@ export interface TeamData {
     members: Array<any>;
     adminMembers: Array<any>;
     lines: Array<any>;
-    private: string;
+    private: boolean;
 
     createdAt: Date | undefined;
   };

@@ -22,7 +22,7 @@ export const initialState: AuthState = {
 
 const _authReducer = createReducer(
   initialState,
-  
+
   on(new LoadAuthSuccessAction().createAction(), (state, action) => ({
     ...state,
     user: { ...action.payload },
@@ -39,8 +39,9 @@ const _authReducer = createReducer(
     ...state,
     loading: true,
     isAuthenticated: false,
+    isLoadingTeam: false,
   }))
-  
+
 );
 
 export function authReducer(state: any, action: Action) {

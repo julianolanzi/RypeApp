@@ -1,9 +1,14 @@
-import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { TeamService } from 'src/app/services/teams/team.service';
-import { AlertService } from 'src/app/services/utils/alert.service';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { Store, select } from '@ngrx/store';
+import { TeamLoadAction } from 'src/app/shared/state-management/actions/teams/team-load.actions';
+import { Observable, Subscription } from 'rxjs';
+import { TeamSearchSelector } from 'src/app/shared/state-management/selectors/team.selector';
+import { SearchTeamSuccess } from 'src/app/models/teams/search-team-sucess';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actions/teams/team-load-request-public-team.actions';
 
 @Component({
   selector: 'app-team-search',
@@ -11,20 +16,18 @@ import { AlertService } from 'src/app/services/utils/alert.service';
   styleUrls: ['./team-search.component.scss'],
 })
 export class TeamSearchComponent {
-  isLoading: boolean = false;
   errors: any[] = [];
   teamSearch!: FormGroup;
 
-  Teams: any[] | undefined;
-  idUser: string = '';
+  Teams$: Observable<SearchTeamSuccess[]> =
+    this.store.select(TeamSearchSelector);
+  user: any;
   idTeam: string = '';
   teamKey: string = '';
 
-  constructor(
-    private TeamService: TeamService,
-    private Alerts: AlertService,
-    private router: Router
-  ) {
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(private store: Store<GlobalState>) {
     this.teamSearch = new FormGroup({
       key: new FormControl('', [Validators.required]),
     });
@@ -33,62 +36,39 @@ export class TeamSearchComponent {
   get key() {
     return this.teamSearch.get('key')!;
   }
+  ngOnInit(): void {
+    this.loadUser();
+  }
 
   searchTeam() {
-    this.Teams = [];
+    // this.Teams = [];
     if (this.teamSearch.invalid) {
       return;
     }
     this.teamKey = this.teamSearch.value.key;
 
-    this.TeamService.searchTeams(this.teamKey).subscribe(
-      (sucesso) => {
-        this.processarSucesso(sucesso);
-      },
-      (falha) => {
-        this.processarFalha(falha);
-        this.Alerts.error(falha.error.error, 'Ops');
-      }
-    );
+    this.store.dispatch(new TeamLoadAction(this.teamKey));
   }
 
   joinTeamPublic(team: any) {
-    this.isLoading = true;
     this.idTeam = team._id;
 
     const data = {
-      user: this.idUser,
+      user: this.user.id,
       team: this.idTeam,
     };
 
-    this.TeamService.joinTeam(data).subscribe(
-      (sucesso) => {
-        this.processarSucessoJoinTeam(sucesso);
-        this.Alerts.success('Agora voce faz parte do time', 'Parabéns');
-      },
-      (falha) => {
-        this.processarFalha(falha);
-        this.Alerts.error(falha.error.error, 'Ops, Aconteceu um erro 🥺');
-      }
-    );
+   this.store.dispatch(new TeamLoadRequestPublicTeam(data));
   }
 
-  processarSucesso(response: any) {
-    this.Teams = response;
-    this.isLoading = false;
-    this.errors = [];
-  }
-  processarSucessoJoinTeam(response: any) {
-    this.isLoading = false;
-    this.errors = [];
 
-    setTimeout(() => {
-      this.router.navigate(['/team-overview']);
-    }, 4000);
+
+  public loadUser() {
+    const subscription = this.store
+      .pipe(select(AuthSelector))
+      .subscribe((user) => {
+        this.user = user;
+      });
+    this.subscriptions.add(subscription);
   }
-  processarFalha(fail: any) {
-    this.isLoading = false;
-    this.errors = fail.error.errors;
-  }
-  
 }

@@ -1,31 +1,31 @@
-import { TeamDataSuccess } from './../../../../models/teams/team-data-sucess';
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
-import { Observable, Subscription } from 'rxjs';
-import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { Observable, Subscription } from 'rxjs';
+import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
+import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/team-load-info-request.actions';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
-import { TeamDataSelector } from 'src/app/shared/state-management/selectors/team.selector';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
-import { DatePipe } from '@angular/common';
+import { TeamDataSelector, TeamLoadingTeam } from 'src/app/shared/state-management/selectors/team.selector';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({
-  selector: 'app-team-overview',
-  templateUrl: './team-overview.component.html',
-  styleUrls: ['./team-overview.component.scss'],
+  selector: 'app-team-settings',
+  templateUrl: './team-settings.component.html',
+  styleUrls: ['./team-settings.component.scss']
 })
-export class TeamOverviewComponent {
+export class TeamSettingsComponent {
   updateForm!: FormGroup;
   teamUpdate!: TeamUpdateInfo;
   Team!: TeamDataSuccess;
   idTeam: string = '';
   isadmin: boolean = false;
   loading$!: Observable<boolean>;
+  isLoadingInfo!: boolean;
   public user!: UserLoginSuccess;
   url: any;
   file!: File;
@@ -35,6 +35,7 @@ export class TeamOverviewComponent {
 
   constructor(private store: Store<GlobalState>, private datePipe: DatePipe) {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
+
 
     this.updateForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -61,10 +62,17 @@ export class TeamOverviewComponent {
 
   ngOnInit(): void {
     this.loadUser();
-    this.getTeam();
+    this.loadInfoTeam();
+    this.initForm();
     this.loadTeamInfo();
   }
 
+  initForm(){
+    if(!this.isLoadingInfo){
+      this.getTeam();
+
+    }
+  }
   getTeam() {
     this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new TeamLoadInfoRequestAction(this.idTeam));
@@ -101,6 +109,12 @@ export class TeamOverviewComponent {
       };
     }
   }
+  public loadInfoTeam(){
+    const subscription = this.store.pipe(select(TeamLoadingTeam)).subscribe((ative) => {
+      this.isLoadingInfo = ative;
+    })
+    this.subscriptions.add(subscription);
+  }
 
   public loadTeamInfo() {
     const subscription = this.store
@@ -128,5 +142,10 @@ export class TeamOverviewComponent {
       });
 
     this.subscriptions.add(subscription);
+  }
+
+   ngOnDestroy(): void {
+
+    // this.store.dispatch(new AccountResetLoadAction());
   }
 }

@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -19,11 +18,22 @@ import { TeamRoutes } from './team.routing';
 import { TeamSetupComponent } from './team-setup/team-setup.component';
 import { TeamCreateComponent } from './team-create/team-create.component';
 import { TeamSearchComponent } from './team-search/team-search.component';
+import { TeamSettingsComponent } from './team-settings/team-settings.component';
+import { TeamUpdateMemberComponent } from './team-update-member/team-update-member.component';
+import { TeamUpdateAdminComponent } from './team-update-admin/team-update-admin.component';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
-  declarations: [TeamOverviewComponent, TeamSetupComponent, TeamCreateComponent, TeamSearchComponent],
+  declarations: [
+    TeamOverviewComponent,
+    TeamSetupComponent,
+    TeamCreateComponent,
+    TeamSearchComponent,
+    TeamSettingsComponent,
+    TeamUpdateMemberComponent,
+    TeamUpdateAdminComponent,
+  ],
   providers: [provideNgxMask()],
   imports: [
     CommonModule,
