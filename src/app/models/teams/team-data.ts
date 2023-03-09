@@ -12,6 +12,7 @@ export interface TeamData {
       url: string;
       nickname: string;
       country: string;
+      verify:string;
     };
     description: string;
     emailTeam: string;

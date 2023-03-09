@@ -19,6 +19,9 @@ import { TeamLoadInfoRequestAction } from '../actions/teams/update-team/team-loa
 import { TeamLoadInfoSuccessAction } from '../actions/teams/update-team/team-load-info-success.actions';
 import { TeamLoadUpdateRequestImg } from '../actions/teams/team-img/team-load-update-img-request.actions';
 import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-update-img-success.actions';
+import { TeamLoadSearchMemberRequestAction } from '../actions/teams/search-members/team-load-search-member-request.actions';
+import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-members/team-load-search-member-success.actions';
+import { TeamLoadSearchMemberErrorAction } from '../actions/teams/search-members/team-load-search-member-error.actions';
 
 export const initialState: TeamState = {
   team: {
@@ -70,6 +73,7 @@ export const initialState: TeamState = {
   authError: undefined,
   teamSearch: [],
   isLoadingTeam: false,
+  searchMembers: [],
 };
 
 const _teamReducer = createReducer(
@@ -171,6 +175,25 @@ const _teamReducer = createReducer(
     authError: action.payload,
     isLoadingTeam: false,
     teamSearch: [],
+  })),
+  on(new TeamLoadSearchMemberRequestAction().createAction(), (state, action) => ({
+    ...state,
+    authError: undefined,
+    teamSearch: [],
+    searchMembers: [],
+  })),
+  on(new TeamLoadSearchMemberSuccessAction().createAction(), (state, action) => ({
+    ...state,
+    authError: undefined,
+    teamSearch: [],
+    searchMembers: [...action.payload],
+  })),
+  on(new TeamLoadSearchMemberErrorAction().createAction(), (state, action) => ({
+    ...state,
+    authError: action.payload,
+    isLoadingTeam: false,
+    teamSearch: [],
+    searchMembers: [],
   }))
 );
 

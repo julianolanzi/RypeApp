@@ -389,8 +389,8 @@ header .image-text .profession {
   flex-wrap: wrap;
 
   .team-item {
-    width: 280px;
-    height: 130px;
+    width: 300px;
+    height: auto;
 
     border-radius: 10px;
 
@@ -408,7 +408,7 @@ header .image-text .profession {
 
     .team-info {
       justify-content: center;
-      padding: 5px 15px 5px 65px;
+      padding: 9px 15px 13px 65px;
       width: 100%;
       height: 100%;
       background-color: var(--background-input);
@@ -429,6 +429,20 @@ header .image-text .profession {
         p {
           font-size: 12px;
         }
+        .img-country {
+          img {
+            width: 25px;
+            height: 20px;
+            border-radius: 2px;
+          }
+        }
+        .ability{
+          img{
+            width: 35px;
+            height: 35px;
+          }
+        }
+
       }
       div {
         width: 100%;
@@ -544,6 +558,7 @@ header .image-text .profession {
         display: flex;
         align-items: center;
         flex-direction: row;
+        justify-content: center;
         gap: 5px;
         img {
           width: 35px;

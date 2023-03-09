@@ -4,11 +4,14 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
+import { SearchMemberSucess } from 'src/app/models/teams/team-search-member-success';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+import { TeamLoadSearchMemberRequestAction } from 'src/app/shared/state-management/actions/teams/search-members/team-load-search-member-request.actions';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import {
+  SearchMembers,
   TeamDataSelector,
   TeamLoadingTeam,
 } from 'src/app/shared/state-management/selectors/team.selector';
@@ -22,6 +25,8 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 export class TeamUpdateMemberComponent {
   memberSearch!: FormGroup;
   userSelect!: any;
+
+  resultSearch$: Observable<SearchMemberSucess[]> = this.store.select(SearchMembers);
 
   private subscriptions: Subscription = new Subscription();
   public user!: UserLoginSuccess;
@@ -46,7 +51,7 @@ export class TeamUpdateMemberComponent {
     }
     this.userSelect = this.memberSearch.value.key;
 
-    console.log(this.userSelect);
+    this.store.dispatch(new TeamLoadSearchMemberRequestAction(this.userSelect));
   }
 
   ngOnInit(): void {

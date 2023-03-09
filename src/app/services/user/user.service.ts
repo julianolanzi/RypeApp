@@ -45,4 +45,14 @@ export class UserService extends BaseService {
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
+
+  searchByUserKey(key: string | undefined): Observable<any>{
+    let response = this.http
+    .get(this.UrlServiceV1 + '/users/userkey/' + key, this.ObterAuthHeaderJson())
+    .pipe(
+      map(this.extractData),
+      catchError(this.serviceError)
+    );
+    return response;
+  }
 }

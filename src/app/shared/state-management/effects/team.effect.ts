@@ -31,6 +31,10 @@ import { TeamLoadInfoRequestAction } from '../actions/teams/update-team/team-loa
 import { TeamLoadInfoSuccessAction } from '../actions/teams/update-team/team-load-info-success.actions';
 import { TeamLoadUpdateRequestImg } from '../actions/teams/team-img/team-load-update-img-request.actions';
 import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-update-img-success.actions';
+import { TeamLoadSearchMemberRequestAction } from '../actions/teams/search-members/team-load-search-member-request.actions';
+import { UserService } from 'src/app/services/user/user.service';
+import { TeamLoadSearchMemberErrorAction } from '../actions/teams/search-members/team-load-search-member-error.actions';
+import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-members/team-load-search-member-success.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -161,10 +165,32 @@ export class TeamEffect {
     )
   );
 
+  searchMembers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TeamMessageEnum.LOAD_TEAM_SEARCH_MEMBER_REQUEST),
+      exhaustMap((action: TeamLoadSearchMemberRequestAction) => {
+        return this.userService.searchByUserKey(action.payload).pipe(
+          map((response) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            console.log(response);
+            return new TeamLoadSearchMemberSuccessAction(response);
+          }),
+          catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new TeamLoadSearchMemberErrorAction(error));
+          })
+        )
+      })
+    )
+  )
+
   constructor(
     private actions$: Actions,
     private Alerts: AlertService,
     private teamService: TeamService,
+    private userService: UserService,
     private store: Store,
     private router: Router,
     private imgService: UploadImgService

@@ -26,4 +26,8 @@ export enum TeamMessageEnum {
     LOAD_TEAM_UPDATE_IMG_SUCCESS = '[TEAM] Load update img success',
     LOAD_TEAM_UPDATE_IMG_ERROR = '[TEAM] Load update img error',
 
+    LOAD_TEAM_SEARCH_MEMBER_REQUEST = '[TEAM] Load search member request',
+    LOAD_TEAM_SEARCH_MEMBER_SUCCESS = '[TEAM] Load search member success',
+    LOAD_TEAM_SEARCH_MEMBER_ERROR = '[TEAM] Load search member error',
+
 }
