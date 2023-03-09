@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 
 import { CreateTeam } from 'src/app/models/teams/create-team';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
-import { TeamLoadCreateRequestAction } from 'src/app/shared/state-management/actions/teams/team-load-create-request.actions';
+import { TeamLoadCreateRequestAction } from 'src/app/shared/state-management/actions/teams/create-team/team-load-create-request.actions';
 
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';

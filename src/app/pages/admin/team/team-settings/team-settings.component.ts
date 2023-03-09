@@ -8,8 +8,8 @@ import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
 import { UpdateImgTeam } from 'src/app/models/teams/team-update-img';
 import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
-import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/team-load-info-request.actions';
-import { TeamLoadUpdateRequestImg } from 'src/app/shared/state-management/actions/teams/update/team-load-update-img-request.actions';
+import { TeamLoadUpdateRequestImg } from 'src/app/shared/state-management/actions/teams/team-img/team-load-update-img-request.actions';
+import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
 import { TeamLoadUpdateRequestAction } from 'src/app/shared/state-management/actions/teams/update/team-load-update-info.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
@@ -29,7 +29,6 @@ export class TeamSettingsComponent {
   teamUpdate!: TeamUpdateInfo;
   Team!: TeamDataSuccess;
   idTeam: string = '';
-  isadmin: boolean = false;
   loading$!: Observable<boolean>;
   isLoadingInfo!: boolean;
   public user!: UserLoginSuccess;

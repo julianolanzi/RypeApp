@@ -1,21 +1,24 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { TeamLoadCreateErrorAction } from '../actions/teams/team-load-create-error.actions';
-import { TeamLoadCreateRequestAction } from '../actions/teams/team-load-create-request.actions';
-import { TeamLoadCreateSuccessAction } from '../actions/teams/team-load-create-success.actions';
-import { TeamLoadErrorAction } from '../actions/teams/team-load-error.actions';
-import { TeamLoadInfoErrorAction } from '../actions/teams/team-load-info-error.actions';
-import { TeamLoadInfoRequestAction } from '../actions/teams/team-load-info-request.actions';
-import { TeamLoadInfoSuccessAction } from '../actions/teams/team-load-info-success.actions';
-import { TeamLoadSuccessAction } from '../actions/teams/team-load-success.actions';
-import { TeamLoadAction } from '../actions/teams/team-load.actions';
+import { TeamLoadCreateErrorAction } from '../actions/teams/create-team/team-load-create-error.actions';
+import { TeamLoadCreateRequestAction } from '../actions/teams/create-team/team-load-create-request.actions';
+import { TeamLoadCreateSuccessAction } from '../actions/teams/create-team/team-load-create-success.actions';
+
+import { TeamLoadErrorAction } from '../actions/teams/team-load/team-load-error.actions';
+import { TeamLoadInfoErrorAction } from '../actions/teams/update-team/team-load-info-error.actions';
+
+import { TeamLoadSuccessAction } from '../actions/teams/team-load/team-load-success.actions';
 import { TeamLoadUpdateErrorAction } from '../actions/teams/update/team-load-error-info.actions';
 import { TeamLoadUpdateSuccessAction } from '../actions/teams/update/team-load-success-info.actions';
-import { TeamLoadUpdateErrorImg } from '../actions/teams/update/team-load-update-img-error.actions';
-import { TeamLoadUpdateRequestImg } from '../actions/teams/update/team-load-update-img-request.actions';
-import { TeamLoadUpdateSuccessImg } from '../actions/teams/update/team-load-update-img-success.actions';
+import { TeamLoadUpdateErrorImg } from '../actions/teams/team-img/team-load-update-img-error.actions';
+
 import { TeamLoadUpdateRequestAction } from '../actions/teams/update/team-load-update-info.actions';
 
 import { TeamState } from './../states/teams.state';
+import { TeamLoadAction } from '../actions/teams/team-load/team-load.actions';
+import { TeamLoadInfoRequestAction } from '../actions/teams/update-team/team-load-info-request.actions';
+import { TeamLoadInfoSuccessAction } from '../actions/teams/update-team/team-load-info-success.actions';
+import { TeamLoadUpdateRequestImg } from '../actions/teams/team-img/team-load-update-img-request.actions';
+import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-update-img-success.actions';
 
 export const initialState: TeamState = {
   team: {

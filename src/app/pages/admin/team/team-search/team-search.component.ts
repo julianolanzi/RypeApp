@@ -3,13 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { Store, select } from '@ngrx/store';
-import { TeamLoadAction } from 'src/app/shared/state-management/actions/teams/team-load.actions';
 import { Observable, Subscription } from 'rxjs';
 import { TeamSearchSelector } from 'src/app/shared/state-management/selectors/team.selector';
 import { SearchTeamSuccess } from 'src/app/models/teams/search-team-sucess';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actions/teams/team-load-request-public-team.actions';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+import { TeamLoadAction } from 'src/app/shared/state-management/actions/teams/team-load/team-load.actions';
 
 @Component({
   selector: 'app-team-search',

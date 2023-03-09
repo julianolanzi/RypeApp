@@ -44,10 +44,10 @@
       cursor: pointer;
       padding: 10px;
       padding: 10px 0px 10px 0px;
-      .material-symbols-outlined{
+      .material-symbols-outlined {
         font-variation-settings: "FILL" 1, "wght" 100, "GRAD" 0, "opsz" 48;
       }
-      div{
+      div {
         margin: 5px 0 5px 0;
       }
       span {
@@ -55,7 +55,6 @@
         font-size: 14px;
         font-weight: 100;
       }
-
     }
   }
 }
@@ -178,8 +177,6 @@ header .image-text .profession {
   transition: var(--tran-02);
 }
 
-
-
 .nav-link.active .sub-menu-container {
   display: block;
   padding: 10px 0 5px 0;
@@ -217,7 +214,6 @@ header .image-text .profession {
 .nav-link.active a span {
   color: var(--pink-white);
 }
-
 
 .sidebar .menu-bar {
   height: calc(100% - 10%);
@@ -406,6 +402,7 @@ header .image-text .profession {
         width: 100px;
         height: 100px;
         border-radius: 50%;
+        object-fit: cover;
       }
     }
 
@@ -440,13 +437,14 @@ header .image-text .profession {
           width: 100%;
           height: 20px;
           border: 2px solid var(--pink-white);
-          border-radius: 5px;
+          border-radius: 3px;
           font-size: 12px;
           font-weight: 700;
           line-height: 16px;
           text-transform: uppercase;
           color: var(--white);
           background-color: var(--pink-white);
+          margin-top: 5px;
         }
       }
     }
@@ -454,6 +452,124 @@ header .image-text .profession {
 }
 
 /* ===== SEARCH TEAMADMIN FIM  ===== */
+/* ===== SEARCH USERS AND ADMIN TEAM  ===== */
+.container-description {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .description p {
+    color: var(--text-color);
+    font-size: 14px;
+  }
+}
+
+.container-items-team {
+  .container-items-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    span {
+      color: var(--text-color);
+      font-size: xx-large;
+      font-weight: bold;
+      display: inherit;
+    }
+  }
+
+  .container-items {
+    display: flex;
+    gap: 10px;
+    margin-top: 84px;
+    justify-content: center;
+    flex-direction: row;
+    flex-flow: row wrap;
+    .item {
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      background-image: linear-gradient(
+          to bottom,
+          rgb(230 36 121),
+          rgba(255, 255, 255, 0)
+        ),
+      linear-gradient(to bottom, #35444e, rgba(109, 109, 109, 0));
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      padding: 20px;
+      .imagem-item {
+        justify-content: center;
+        display: flex;
+        height: 60px;
+
+        img {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          top: -77px;
+          position: relative;
+          box-shadow: 0 8px 23px 7px rgb(0 0 0 / 50%);
+          object-fit: cover;
+          border-color: rgb(146, 170, 0) !important;
+          border: solid;
+          padding: 2px;
+        }
+      }
+
+      .name-item-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        .img-country {
+          img {
+            width: 25px;
+            height: 20px;
+            border-radius: 2px;
+          }
+        }
+
+        .name-item {
+          span {
+            font-size: 16px;
+            color: var(--text-color);
+          }
+        }
+      }
+
+      .infos-item {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 5px;
+        img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+    }
+    .item.admin {
+      .imagem-item {
+        img{
+          border-color: rgb(0 247 255) !important;
+        }
+      }
+    }
+
+    .item.sub-admin {
+      .imagem-item {
+        img{
+          border-color: rgb(218 78 157) !important;
+        }
+      }
+    }
+  }
+}
+
+/* ===== SEARCH USERS AND ADMIN TEAM  ===== */
 
 /* ===== NAVBAR ADMIN FIM ===== */
 @media (max-width: 768px) {
@@ -477,9 +593,9 @@ header .image-text .profession {
     width: 0;
     margin-left: -30px;
   }
-  .sidebar.close{
+  .sidebar.close {
     .nav-link.active {
-      .sub-menu-container{
+      .sub-menu-container {
         display: none;
       }
     }
@@ -532,6 +648,12 @@ header .image-text .profession {
     .team-item {
       width: 100%;
       height: 130px;
+    }
+  }
+
+  .container-items {
+    .item{
+      margin-bottom: 30px;
     }
   }
 }

@@ -7,12 +7,12 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 import { select, Store } from '@ngrx/store';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
-import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/team-load-info-request.actions';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { TeamDataSelector } from 'src/app/shared/state-management/selectors/team.selector';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
 import { DatePipe } from '@angular/common';
+import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
 
 @Component({
   selector: 'app-team-overview',

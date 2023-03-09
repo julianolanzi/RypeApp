@@ -47,50 +47,100 @@
       </div>
     </div>
 
-    <div class="container-admin-team">
-      <span class="title-float">Administrador</span>
-      <div class="admin-data d-flex">
-        <div class="img">
-          <img src="{{this.Team.admin.url}}" alt="">
+
+
+    <div class="container-items-team">
+      <div class="container-items-title">
+        <span>Adm</span>
+      </div>
+      <div class="container-items" >
+        <div  class="item admin gap-10 ">
+
+          <div class="imagem-item">
+            <img src="{{this.Team.admin.url}}" alt="">
+          </div>
+          <div class="name-item-container">
+            <div class="name-item">
+              <span>{{this.Team.admin.nickname}}</span>
+            </div>
+            <div class="img-country">
+              <img *ngIf="this.Team.admin.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
+              <img *ngIf="this.Team.admin.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
+              <img *ngIf="this.Team.admin.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
+              <img *ngIf="this.Team.admin.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
+            </div>
+          </div>
+          <div class="infos-item">
+            <!-- <img *ngIf="this.Team.admin" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/suporte.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/sniper.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt=""> -->
+          </div>
+
         </div>
-        <h2>{{this.Team.admin.nickname}}</h2>
       </div>
     </div>
 
-    <div class="container-sub-adms">
-      <div class="title-sub-admins">
-        <span>Sub-administradores</span>
+
+
+    <div class="container-items-team">
+      <div class="container-items-title">
+        <span>Sub Adm,s</span>
       </div>
-      <div class="container-items d-flex mt-15" *ngFor="let admin of this.Team.adminMembers">
-        <div class="item gap-10 d-flex">
+      <div class="container-items" >
+        <div *ngFor="let member of this.Team.adminMembers" class="item sub-admin gap-10 ">
 
-          <div class="imagem-admin">
-            <img src="{{admin.url}}" alt="">
-          </div>
-          <div class="infos-item  d-flex-column">
-            <h2>{{admin.name}}</h2>
-            <p>{{this.Team.tagName }} {{admin.nickname}}</p>
-            <p>{{admin.country}}</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container-sub-adms">
-      <div class="title-sub-admins">
-        <span>Membros</span>
-      </div>
-      <div class="container-items d-flex mt-15" *ngFor="let member of this.Team.members">
-        <div class="item gap-10 d-flex">
-
-          <div class="imagem-admin">
+          <div class="imagem-item">
             <img src="{{member.url}}" alt="">
           </div>
-          <div class="infos-item  d-flex-column">
-            <h2>{{member.name}}</h2>
-            <p>{{this.Team.tagName }} {{member.nickname}}</p>
-            <p>{{member.country}}</p>
+          <div class="name-item-container">
+            <div class="name-item">
+              <span>{{member.nickname}}</span>
+            </div>
+            <div class="img-country">
+              <img *ngIf="member.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
+              <img *ngIf="member.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
+              <img *ngIf="member.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
+              <img *ngIf="member.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
+            </div>
+          </div>
+          <div class="infos-item">
+            <img *ngIf="member.verify" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/suporte.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/sniper.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt="">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container-items-team">
+      <div class="container-items-title">
+        <span>Membros</span>
+      </div>
+      <div class="container-items" >
+        <div *ngFor="let member of this.Team.members" class="item gap-10 ">
+
+          <div class="imagem-item">
+            <img src="{{member.url}}" alt="">
+          </div>
+          <div class="name-item-container">
+            <div class="name-item">
+              <span>{{member.nickname}}</span>
+            </div>
+            <div class="img-country">
+              <img *ngIf="member.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
+              <img *ngIf="member.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
+              <img *ngIf="member.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
+              <img *ngIf="member.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
+            </div>
+          </div>
+          <div class="infos-item">
+            <img *ngIf="member.verify" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/suporte.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/sniper.png" alt="">
+            <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt="">
           </div>
 
         </div>
