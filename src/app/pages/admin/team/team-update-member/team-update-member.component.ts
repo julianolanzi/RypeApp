@@ -3,10 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { RemoveMembers } from 'src/app/models/teams/manage-team/team-remove-member';
 import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
 import { SearchMemberSucess } from 'src/app/models/teams/team-search-member-success';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadSearchMemberRequestAction } from 'src/app/shared/state-management/actions/teams/search-members/team-load-search-member-request.actions';
+import { TeamRemoveMemberRequestAction } from 'src/app/shared/state-management/actions/teams/team-remove-member/team-load-remove-member-request.actions';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
@@ -25,8 +27,8 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 export class TeamUpdateMemberComponent {
   memberSearch!: FormGroup;
   userSelect!: any;
-
-  resultSearch$: Observable<SearchMemberSucess[]> = this.store.select(SearchMembers);
+  resultSearch$: Observable<SearchMemberSucess[]> =
+    this.store.select(SearchMembers);
 
   private subscriptions: Subscription = new Subscription();
   public user!: UserLoginSuccess;
@@ -34,6 +36,7 @@ export class TeamUpdateMemberComponent {
   loading$!: Observable<boolean>;
   idTeam: string = '';
   team!: TeamDataSuccess;
+  removeMemberUser!: RemoveMembers;
 
   constructor(private store: Store<GlobalState>) {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
@@ -100,5 +103,20 @@ export class TeamUpdateMemberComponent {
         this.isLoadingInfo = ative;
       });
     this.subscriptions.add(subscription);
+  }
+
+  public removeMember(item: any) {
+    this.removeMemberUser = {
+      idUser: item._id,
+      idTeam: this.idTeam,
+    };
+
+    this.store.dispatch(
+      new TeamRemoveMemberRequestAction(this.removeMemberUser)
+    );
+  }
+
+  public promoveAdm(item: string) {
+    console.log(item);
   }
 }

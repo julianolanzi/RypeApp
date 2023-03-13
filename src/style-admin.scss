@@ -465,6 +465,8 @@ header .image-text .profession {
   }
 }
 
+
+
 /* ===== SEARCH TEAMADMIN FIM  ===== */
 /* ===== SEARCH USERS AND ADMIN TEAM  ===== */
 .container-description {
@@ -504,11 +506,9 @@ header .image-text .profession {
       display: flex;
       flex-direction: column;
       background-image: linear-gradient(
-          to bottom,
-          rgb(230 36 121),
-          rgba(255, 255, 255, 0)
+        var(--linear-gradient)
         ),
-      linear-gradient(to bottom, #35444e, rgba(109, 109, 109, 0));
+      linear-gradient(var(--linear-gradient-2));
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       padding: 20px;
@@ -549,7 +549,7 @@ header .image-text .profession {
         .name-item {
           span {
             font-size: 16px;
-            color: var(--text-color);
+            color: var(--text-color-background);
           }
         }
       }
@@ -581,6 +581,8 @@ header .image-text .profession {
         }
       }
     }
+
+
   }
 }
 

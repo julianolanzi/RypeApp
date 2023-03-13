@@ -30,4 +30,8 @@ export enum TeamMessageEnum {
     LOAD_TEAM_SEARCH_MEMBER_SUCCESS = '[TEAM] Load search member success',
     LOAD_TEAM_SEARCH_MEMBER_ERROR = '[TEAM] Load search member error',
 
+
+    LOAD_TEAM_REMOVE_MEMBER_REQUEST = '[TEAM] Load remove member request',
+    LOAD_TEAM_REMOVE_MEMBER_SUCCESS = '[TEAM] Load remove member success',
+    LOAD_TEAM_REMOVE_MEMBER_ERROR = '[TEAM] Load remove member error',
 }

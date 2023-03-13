@@ -1,4 +1,4 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on, Action, createAction } from '@ngrx/store';
 import { TeamLoadCreateErrorAction } from '../actions/teams/create-team/team-load-create-error.actions';
 import { TeamLoadCreateRequestAction } from '../actions/teams/create-team/team-load-create-request.actions';
 import { TeamLoadCreateSuccessAction } from '../actions/teams/create-team/team-load-create-success.actions';
@@ -22,6 +22,9 @@ import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-up
 import { TeamLoadSearchMemberRequestAction } from '../actions/teams/search-members/team-load-search-member-request.actions';
 import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-members/team-load-search-member-success.actions';
 import { TeamLoadSearchMemberErrorAction } from '../actions/teams/search-members/team-load-search-member-error.actions';
+import { TeamRemoveMemberRequestAction } from '../actions/teams/team-remove-member/team-load-remove-member-request.actions';
+import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-member/team-load-remove-member-success.actions';
+import { TeamRemoveMemberErrorAction } from '../actions/teams/team-remove-member/team-load-remove-member-error.actions';
 
 export const initialState: TeamState = {
   team: {
@@ -115,7 +118,6 @@ const _teamReducer = createReducer(
   on(new TeamLoadInfoRequestAction().createAction(), (state) => ({
     ...state,
     authError: undefined,
-    teamSearch: [],
     isLoadingTeam: false,
   })),
   on(new TeamLoadInfoSuccessAction().createAction(), (state, action) => ({
@@ -194,6 +196,22 @@ const _teamReducer = createReducer(
     isLoadingTeam: false,
     teamSearch: [],
     searchMembers: [],
+  })),
+  on(new TeamRemoveMemberRequestAction().createAction(), (state, action) => ({
+    ...state,
+    authError: undefined,
+    teamSearch: [],
+    teamInfo: {...initialState.teamInfo},
+  })),
+  on(new TeamRemoveMemberSuccessAction().createAction(), (state, action) => ({
+    ...state,
+    authError: undefined,
+    teamSearch: [],
+  })),
+  on(new TeamRemoveMemberErrorAction().createAction(), (state, action) => ({
+    ...state,
+    authError: action.payload,
+    teamSearch: [],
   }))
 );
 

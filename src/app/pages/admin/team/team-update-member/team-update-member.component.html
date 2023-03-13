@@ -102,10 +102,10 @@
           <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt=""> -->
         </div>
         <div>
-          <button>Promover</button>
+          <button (click)="promoveAdm(member)" class="btn-admin option2">Promover a Adm</button>
         </div>
         <div>
-          <button>Remover</button>
+          <button (click)="removeMember(member)" class="btn-admin option1">Remover</button>
         </div>
 
       </div>

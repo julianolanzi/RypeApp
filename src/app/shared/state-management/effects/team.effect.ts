@@ -35,6 +35,9 @@ import { TeamLoadSearchMemberRequestAction } from '../actions/teams/search-membe
 import { UserService } from 'src/app/services/user/user.service';
 import { TeamLoadSearchMemberErrorAction } from '../actions/teams/search-members/team-load-search-member-error.actions';
 import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-members/team-load-search-member-success.actions';
+import { TeamRemoveMemberErrorAction } from '../actions/teams/team-remove-member/team-load-remove-member-error.actions';
+import { TeamRemoveMemberRequestAction } from '../actions/teams/team-remove-member/team-load-remove-member-request.actions';
+import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-member/team-load-remove-member-success.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -112,6 +115,7 @@ export class TeamEffect {
         return this.teamService.getById(action.payload).pipe(
           map((response) => {
             this.store.dispatch(new LoadingDisabledAction());
+
             return new TeamLoadInfoSuccessAction(response);
           }),
           catchError((error) => {
@@ -172,7 +176,7 @@ export class TeamEffect {
         return this.userService.searchByUserKey(action.payload).pipe(
           map((response) => {
             this.store.dispatch(new LoadingDisabledAction());
-            console.log(response);
+            this.store.dispatch(new TeamLoadInfoRequestAction());
             return new TeamLoadSearchMemberSuccessAction(response);
           }),
           catchError((error) => {
@@ -184,6 +188,28 @@ export class TeamEffect {
         )
       })
     )
+  )
+
+  removeMember$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(TeamMessageEnum.LOAD_TEAM_REMOVE_MEMBER_REQUEST),
+        exhaustMap((action: TeamRemoveMemberRequestAction) => {
+            return this.teamService.quitMember(action.payload).pipe(
+              map((response) => {
+                this.store.dispatch(new LoadingDisabledAction());
+                this.store.dispatch(new TeamLoadInfoRequestAction(action.payload?.idTeam));
+                this.Alerts.success('Feito !', 'Membro removido com sucesso');
+                return new TeamRemoveMemberSuccessAction(response);
+              }),
+              catchError((error) => {
+                this.store.dispatch(new LoadingDisabledAction());
+                const err = error.error.error;
+                this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                return of(new TeamRemoveMemberErrorAction(error));
+              })
+            )
+        })
+      )
   )
 
   constructor(

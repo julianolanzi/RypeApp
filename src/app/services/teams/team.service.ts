@@ -10,6 +10,8 @@ import { CreateTeam } from 'src/app/models/teams/create-team';
 import { TeamsSearch } from 'src/app/models/teams/search-teams';
 import { TeamData } from 'src/app/models/teams/team-data';
 import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
+import { RemoveMembers } from 'src/app/models/teams/manage-team/team-remove-member';
+import { RemoveMembersSuccess } from 'src/app/models/teams/manage-team/team-remove-member-success';
 
 @Injectable()
 export class TeamService extends BaseService {
@@ -61,11 +63,61 @@ export class TeamService extends BaseService {
     return response;
   }
 
-  updateInfoTeam(upTeam: TeamUpdateInfo | undefined ): Observable<TeamDataSuccess> {
+  updateInfoTeam(
+    upTeam: TeamUpdateInfo | undefined
+  ): Observable<TeamDataSuccess> {
     let response = this.http
       .put(
         this.UrlServiceV1 + '/teams/' + upTeam?.id,
         upTeam,
+        this.ObterAuthHeaderJson()
+      )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+
+    return response;
+  }
+
+  quitTeam(id: string): Observable<any> {
+    let response = this.http
+      .delete(
+        this.UrlServiceV1 + '/teams/quit/team/' + id,
+        this.ObterAuthHeaderJson()
+      )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  updateAdminMember(team: string, user: any): Observable<any> {
+    let response = this.http
+      .put(
+        this.UrlServiceV1 + '/teams/admin/' + team,
+        user,
+        this.ObterAuthHeaderJson()
+      )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+
+    return response;
+  }
+
+  quitMember(data: RemoveMembers | undefined): Observable<any> {
+    let idteam = data?.idTeam;
+    let user = {member: data?.idUser}
+
+    let response = this.http
+      .put(
+        this.UrlServiceV1 + '/teams/quit/member/' + idteam,
+        user,
+        this.ObterAuthHeaderJson()
+      )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+
+    return response;
+  }
+  updateMemberTeam(team: string, user: any): Observable<any> {
+    let response = this.http
+      .put(
+        this.UrlServiceV1 + '/teams/member/' + team,
+        user,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
