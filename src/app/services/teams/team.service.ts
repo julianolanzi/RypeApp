@@ -12,6 +12,7 @@ import { TeamData } from 'src/app/models/teams/team-data';
 import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
 import { RemoveMembers } from 'src/app/models/teams/manage-team/team-remove-member';
 import { RemoveMembersSuccess } from 'src/app/models/teams/manage-team/team-remove-member-success';
+import { PromoteAdmin } from 'src/app/models/teams/manage-team/team-promote-admin';
 
 @Injectable()
 export class TeamService extends BaseService {
@@ -113,10 +114,14 @@ export class TeamService extends BaseService {
 
     return response;
   }
-  updateMemberTeam(team: string, user: any): Observable<any> {
+  updateMemberTeam(data: PromoteAdmin | undefined): Observable<any> {
+    let idteam = data?.idTeam;
+    let user = {member: data?.idUser}
+
+    console.log('caindo na service');
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/teams/member/' + team,
+        this.UrlServiceV1 + '/teams/admin/' + idteam,
         user,
         this.ObterAuthHeaderJson()
       )

@@ -115,7 +115,7 @@ export class SingUpComponent {
 
   imgMale() {
     let number = Math.floor(Math.random() * 5 + 1);
-    const path = 'https://rype-app.vercel.app/';
+    const path = 'https://rype-app.vercel.app';
     var img = '';
     switch (number) {
       case 1:
@@ -143,7 +143,7 @@ export class SingUpComponent {
 
   imgFamele() {
     let number = Math.floor(Math.random() * 5 + 1);
-    const path = 'https://rype-app.vercel.app/';
+    const path = 'https://rype-app.vercel.app';
     var img = '';
     switch (number) {
       case 1:

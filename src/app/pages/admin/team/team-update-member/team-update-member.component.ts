@@ -1,3 +1,4 @@
+import { PromoteAdmin } from './../../../../models/teams/manage-team/team-promote-admin';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
@@ -18,6 +19,7 @@ import {
   TeamLoadingTeam,
 } from 'src/app/shared/state-management/selectors/team.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { TeamLoadPromoteAdminRequestAction } from 'src/app/shared/state-management/actions/teams/team-promote-admin/team-load-promote-admin-request.actions';
 
 @Component({
   selector: 'app-team-update-member',
@@ -37,6 +39,7 @@ export class TeamUpdateMemberComponent {
   idTeam: string = '';
   team!: TeamDataSuccess;
   removeMemberUser!: RemoveMembers;
+  promoteAdmin!: PromoteAdmin;
 
   constructor(private store: Store<GlobalState>) {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
@@ -116,7 +119,11 @@ export class TeamUpdateMemberComponent {
     );
   }
 
-  public promoveAdm(item: string) {
-    console.log(item);
+  public promoteAdm(item: any) {
+    this.promoteAdmin = {
+      idUser: item._id,
+      idTeam: this.idTeam,
+    }
+    this.store.dispatch(new TeamLoadPromoteAdminRequestAction(this.promoteAdmin));
   }
 }

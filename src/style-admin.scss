@@ -403,6 +403,8 @@ header .image-text .profession {
         height: 100px;
         border-radius: 50%;
         object-fit: cover;
+        position: absolute;
+        z-index: 10 !important;
       }
     }
 

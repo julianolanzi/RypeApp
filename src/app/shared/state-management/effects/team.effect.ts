@@ -1,4 +1,4 @@
-
+import { TeamMessageEnum } from './../actions/teams/team-message.enum';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
@@ -7,7 +7,6 @@ import { catchError, map, of, exhaustMap } from 'rxjs';
 import { AlertService } from 'src/app/services/utils/alert.service';
 import { TeamService } from 'src/app/services/teams/team.service';
 
-import { TeamMessageEnum } from '../actions/teams/team-message.enum';
 import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
 import { Store } from '@ngrx/store';
 import { TeamLoadErrorAction } from '../actions/teams/team-load/team-load-error.actions';
@@ -38,6 +37,9 @@ import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-membe
 import { TeamRemoveMemberErrorAction } from '../actions/teams/team-remove-member/team-load-remove-member-error.actions';
 import { TeamRemoveMemberRequestAction } from '../actions/teams/team-remove-member/team-load-remove-member-request.actions';
 import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-member/team-load-remove-member-success.actions';
+import { TeamLoadPromoteAdminRequestAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-request.actions';
+import { TeamLoadPromoteAdminErrorAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-error.actions';
+import { TeamLoadPromoteAdminSuccessAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-success.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -176,7 +178,7 @@ export class TeamEffect {
         return this.userService.searchByUserKey(action.payload).pipe(
           map((response) => {
             this.store.dispatch(new LoadingDisabledAction());
-            this.store.dispatch(new TeamLoadInfoRequestAction());
+
             return new TeamLoadSearchMemberSuccessAction(response);
           }),
           catchError((error) => {
@@ -185,32 +187,58 @@ export class TeamEffect {
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new TeamLoadSearchMemberErrorAction(error));
           })
-        )
+        );
       })
     )
-  )
+  );
 
   removeMember$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(TeamMessageEnum.LOAD_TEAM_REMOVE_MEMBER_REQUEST),
-        exhaustMap((action: TeamRemoveMemberRequestAction) => {
-            return this.teamService.quitMember(action.payload).pipe(
-              map((response) => {
-                this.store.dispatch(new LoadingDisabledAction());
-                this.store.dispatch(new TeamLoadInfoRequestAction(action.payload?.idTeam));
-                this.Alerts.success('Feito !', 'Membro removido com sucesso');
-                return new TeamRemoveMemberSuccessAction(response);
-              }),
-              catchError((error) => {
-                this.store.dispatch(new LoadingDisabledAction());
-                const err = error.error.error;
-                this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-                return of(new TeamRemoveMemberErrorAction(error));
-              })
-            )
-        })
-      )
-  )
+    this.actions$.pipe(
+      ofType(TeamMessageEnum.LOAD_TEAM_REMOVE_MEMBER_REQUEST),
+      exhaustMap((action: TeamRemoveMemberRequestAction) => {
+        return this.teamService.quitMember(action.payload).pipe(
+          map((response) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(
+              new TeamLoadInfoRequestAction(action.payload?.idTeam)
+            );
+            this.Alerts.success('Feito !', 'Membro removido com sucesso');
+            return new TeamRemoveMemberSuccessAction(response);
+          }),
+          catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new TeamRemoveMemberErrorAction(error));
+          })
+        );
+      })
+    )
+  );
+
+  promoteAdmin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TeamMessageEnum.LOAD_TEAM_PROMOTE_ADMIN_REQUEST),
+      exhaustMap((action: TeamLoadPromoteAdminRequestAction) => {
+        return this.teamService.updateMemberTeam(action.payload).pipe(
+          map((response) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(
+              new TeamLoadInfoRequestAction(action.payload?.idTeam)
+            );
+            this.Alerts.success('Membro Promovido a Admin', 'Feito !');
+            return new TeamLoadPromoteAdminSuccessAction(response);
+          }),
+          catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new TeamLoadPromoteAdminErrorAction(error));
+          })
+        );
+      })
+    )
+  );
 
   constructor(
     private actions$: Actions,

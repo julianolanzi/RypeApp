@@ -12,7 +12,7 @@
       <form class="d-flex-colum" (ngSubmit)="memberSearchKey()" [formGroup]="memberSearch" #formDir="ngForm">
         <div class="search-bar d-flex gap-10">
           <div class="item-form">
-            <label>Nome | Tag Name ou ID</label>
+            <label>Nome | Nick</label>
             <div>
               <input type="text" formControlName="key" placeholder="Insira o nome do time, Tag Name ou ID " />
 
@@ -27,43 +27,50 @@
         </div>
       </form>
 
-      <div class="container-search-teams d-flex gap-10">
-        <div class="teams" *ngFor="let member of resultSearch$ | async">
-          <div class="team-item d-flex">
-            <div class="image">
-              <img src="{{member.url}}">
+
+
+
+      <div class="container-items-team">
+
+        <div class="container-items">
+          <div *ngFor="let member of resultSearch$ | async" class="item gap-10 ">
+
+            <div class="imagem-item">
+              <img src="{{member.url}}" alt="">
             </div>
-            <div class="team-info d-flex-colum gap-5">
-              <div class="nome-team">
-
-                <h2>{{member.name}}</h2>
+            <div class="name-item-container">
+              <div class="name-item">
+                <span>{{member.name}}</span>
               </div>
-              <div class="sub-item-team d-flex gap-5">
-                <span>NickName :</span>
-                <p> {{member.nickname}}</p>
-              </div>
-              <div class="sub-item-team d-flex gap-5">
-                <span>País : {{member.country}}</span>
-
-                <div class="img-country">
-                  <img *ngIf="member.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
-                  <img *ngIf="member.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
-                  <img *ngIf="member.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
-                  <img *ngIf="member.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
-                </div>
-              </div>
-
-              <div class="sub-item-team  d-flex gap-5">
-                <div class="ability">
-                  <img *ngIf="member.verify" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png"
-                    alt="">
-                </div>
-              </div>
-              <div>
-                <button>Entrar</button>
-              </div>
-
             </div>
+            <div class="name-item-container">
+              <div class="name-item">
+                <span>{{member.nickname}}</span>
+              </div>
+              <div class="img-country">
+                <img *ngIf="member.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
+                <img *ngIf="member.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
+                <img *ngIf="member.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
+                <img *ngIf="member.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
+              </div>
+            </div>
+            <div *ngIf="member.team.length > 0" class="name-item-container">
+              <div class="name-item">
+                <span>Clan: {{member.team[0]?.name}}</span>
+              </div>
+            </div>
+            <div class="infos-item">
+              <img *ngIf="member.verify" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png" alt="">
+              <!-- <img *ngIf="member.verify" src="./assets/img/flags/suporte.png" alt="">
+              <img *ngIf="member.verify" src="./assets/img/flags/sniper.png" alt="">
+              <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt=""> -->
+            </div>
+            <div>
+
+              <button *ngIf="member.team.length == 0 " class="btn-admin option2">Enviar Solicitação</button>
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -76,7 +83,8 @@
 
   <div class="container-items-team">
     <div class="container-items-title">
-      <span>Membros</span>
+      <span *ngIf="this.team.members.length != 0">Membros</span>
+      <span *ngIf="this.team.members.length == 0">Nenhum Membro encontrado 🤷🏻‍♂️</span>
     </div>
     <div class="container-items">
       <div *ngFor="let member of this.team.members" class="item gap-10 ">
@@ -102,7 +110,7 @@
           <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt=""> -->
         </div>
         <div>
-          <button (click)="promoveAdm(member)" class="btn-admin option2">Promover a Adm</button>
+          <button (click)="promoteAdm(member)" class="btn-admin option2">Promover a Adm</button>
         </div>
         <div>
           <button (click)="removeMember(member)" class="btn-admin option1">Remover</button>

@@ -4,5 +4,5 @@ export interface SearchMemberSucess {
   country: string;
   verify: boolean;
   url: string;
-  team: [];
+  team: any;
 }
