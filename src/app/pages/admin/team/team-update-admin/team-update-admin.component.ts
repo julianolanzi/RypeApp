@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { RemoveAdmin } from 'src/app/models/teams/manage-team/team-remove-admin';
+import { RemoveMembers } from 'src/app/models/teams/manage-team/team-remove-member';
 import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+import { TeamLoadRemoveAdminRequestAction } from 'src/app/shared/state-management/actions/teams/remove-admin/team-load-remove-admin-request.actions';
+import { TeamRemoveMemberRequestAction } from 'src/app/shared/state-management/actions/teams/team-remove-member/team-load-remove-member-request.actions';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
@@ -19,6 +23,8 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
   styleUrls: ['./team-update-admin.component.scss'],
 })
 export class TeamUpdateAdminComponent {
+  removeMemberUser!: RemoveMembers;
+  removeAdmin!: RemoveAdmin;
   team!: TeamDataSuccess;
   idTeam: string = '';
   loading$!: Observable<boolean>;
@@ -68,6 +74,26 @@ export class TeamUpdateAdminComponent {
         this.isLoadingInfo = ative;
       });
     this.subscriptions.add(subscription);
+  }
+
+  removeAdminUser(item: any){
+    this.removeAdmin = {
+      idUser: item._id,
+      idTeam: this.idTeam,
+    }
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new TeamLoadRemoveAdminRequestAction(this.removeAdmin));
+  }
+
+  public removeMember(item: any) {
+    this.removeMemberUser = {
+      idUser: item._id,
+      idTeam: this.idTeam,
+    };
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(
+      new TeamRemoveMemberRequestAction(this.removeMemberUser)
+    );
   }
 
   public loadTeamInfo() {

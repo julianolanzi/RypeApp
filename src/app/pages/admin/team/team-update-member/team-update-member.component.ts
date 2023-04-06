@@ -113,7 +113,7 @@ export class TeamUpdateMemberComponent {
       idUser: item._id,
       idTeam: this.idTeam,
     };
-
+    this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(
       new TeamRemoveMemberRequestAction(this.removeMemberUser)
     );
@@ -124,6 +124,7 @@ export class TeamUpdateMemberComponent {
       idUser: item._id,
       idTeam: this.idTeam,
     }
+    this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new TeamLoadPromoteAdminRequestAction(this.promoteAdmin));
   }
 }

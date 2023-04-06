@@ -40,6 +40,9 @@ import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-memb
 import { TeamLoadPromoteAdminRequestAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-request.actions';
 import { TeamLoadPromoteAdminErrorAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-error.actions';
 import { TeamLoadPromoteAdminSuccessAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-success.actions';
+import { TeamLoadRemoveAdminRequestAction } from '../actions/teams/remove-admin/team-load-remove-admin-request.actions';
+import { TeamLoadRemoveAdminErrorAction } from '../actions/teams/remove-admin/team-load-remove-admin-error.actions';
+import { TeamLoadRemoveAdminSuccessAction } from '../actions/teams/remove-admin/team-load-remove-admin-success.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -234,6 +237,30 @@ export class TeamEffect {
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new TeamLoadPromoteAdminErrorAction(error));
+          })
+        );
+      })
+    )
+  );
+
+  removeAdmin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TeamMessageEnum.LOAD_TEAM_REMOVE_ADMIN_REQUEST),
+      exhaustMap((action: TeamLoadRemoveAdminRequestAction) => {
+        return this.teamService.removeAdminTeam(action.payload).pipe(
+          map((response) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(
+              new TeamLoadInfoRequestAction(action.payload?.idTeam)
+            );
+            this.Alerts.success('admin rebaixado a membro', 'Feito !');
+            return new TeamLoadRemoveAdminSuccessAction(response);
+          }),
+          catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new TeamLoadRemoveAdminErrorAction(error));
           })
         );
       })

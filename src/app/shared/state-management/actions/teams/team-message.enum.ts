@@ -37,5 +37,9 @@ export enum TeamMessageEnum {
 
     LOAD_TEAM_PROMOTE_ADMIN_REQUEST = '[TEAM] Load promote admin request',
     LOAD_TEAM_PROMOTE_ADMIN_SUCCESS = '[TEAM] Load promote admin success',
-    LOAD_TEAM_PROMOTE_ADMIN_ERROR = '[TEAM] Load promote admin error'
+    LOAD_TEAM_PROMOTE_ADMIN_ERROR = '[TEAM] Load promote admin error',
+
+    LOAD_TEAM_REMOVE_ADMIN_REQUEST = '[TEAM] Load remove admin request',
+    LOAD_TEAM_REMOVE_ADMIN_SUCCESS = '[TEAM] Load remove admin success',
+    LOAD_TEAM_REMOVE_ADMIN_ERROR = '[TEAM] Load remove admin error'
 }
