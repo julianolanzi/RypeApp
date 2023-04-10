@@ -6,6 +6,8 @@ import { Subscription, throwError } from 'rxjs';
 import { UserLoginSuccess } from '../models/auth/user-login-success';
 import { AuthSelector } from '../shared/state-management/selectors/auth.selector';
 
+import { environment } from "../environments/environment";
+
 export abstract class BaseService {
   public user!: UserLoginSuccess;
   private subscriptions: Subscription = new Subscription();
@@ -15,7 +17,7 @@ export abstract class BaseService {
     this.loadUser();
   }
 
-  protected UrlServiceV1: string = 'http://localhost:3000';
+  protected UrlServiceV1: string = environment.UrlService;
 
   // protected UrlServiceV1: string =
   // 'https://jealous-trench-coat-bear.cyclic.app';

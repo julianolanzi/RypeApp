@@ -25,6 +25,11 @@ import { globalPagesReducer } from './shared/state-management/reducers/global-pa
 import { teamReducer } from './shared/state-management/reducers/team.reducer';
 import { notificationsReducer } from './shared/state-management/reducers/notifications.reducer';
 
+import { environment } from "./environments/environment";
+
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
+
 @NgModule({
   declarations: [AppComponent, WebComponent, AdminComponent],
   providers: [],
