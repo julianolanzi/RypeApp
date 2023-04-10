@@ -327,13 +327,19 @@ header .image-text .profession {
 }
 /* ===== CONTAINER CONTENT ADMIN FIM ===== */
 
-.container-content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-  padding: 20px;
+.container-all {
+    display: flex;
+    padding: 20px;
+  .container-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
 }
+
+
 
 /* ===== CONTAINER CONTENT ADMIN  ===== */
 

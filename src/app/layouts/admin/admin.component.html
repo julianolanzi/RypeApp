@@ -1,15 +1,19 @@
 <section id="darkmode" class="container-admin">
-    <app-sidebar></app-sidebar>
-    <div class="container-admin-content close">
-        <div class="container-navbar">
-            <app-navbar></app-navbar>
-        </div>
-        <div class="container-content">
-            <router-outlet></router-outlet>
-        </div>
-        <!-- <div class="container-footer">
+  <app-sidebar></app-sidebar>
+  <div class="container-admin-content close">
+    <div class="container-navbar">
+      <app-navbar></app-navbar>
+    </div>
+    <div class="container-all">
+      <div class="container-content">
+        <router-outlet></router-outlet>
+      </div>
+      <app-notifications></app-notifications>
+    </div>
+
+    <!-- <div class="container-footer">
             <app-footer></app-footer>
         </div> -->
-    </div>
+  </div>
 
 </section>

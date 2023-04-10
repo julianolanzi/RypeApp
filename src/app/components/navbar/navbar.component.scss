@@ -13,6 +13,13 @@
   h3 {
     color: var(--text-color);
   }
+  .notifications{
+    color: var(--text-color);
+
+    a {
+      cursor: pointer;
+    }
+  }
 
   .window-img {
     width: 50px;

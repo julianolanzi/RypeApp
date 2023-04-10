@@ -88,7 +88,7 @@ export class TeamOverviewComponent {
 
     this.teamUpdate = Object.assign({}, this.teamUpdate, this.updateForm.value);
 
-    console.log(this.teamUpdate);
+
   }
 
   onselectFile(e: any) {

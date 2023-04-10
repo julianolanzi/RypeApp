@@ -1,0 +1,50 @@
+<div class="container-notifications close">
+  <h3>Notificações</h3>
+
+  <div *ngIf="this.notific.length == 0 || isAdmin == false">
+    <div class="not-notifications">
+      <div class="icon-note-notifications">
+        <span class="material-symbols-outlined">
+          notifications_off
+        </span>
+      </div>
+      <p>Sem notificações aproveite e navegue na plataforma</p>
+    </div>
+  </div>
+
+  <div *ngFor="let notification of this.notific">
+    <div *ngIf="notification.type == 'team' && isAdmin == true " class="container-content-nf">
+      <div class="item-container" (click)="openNotifi(notification)">
+
+        <div *ngIf="notification.ready == false" class="border-nf-true"></div>
+        <div *ngIf="notification.ready == true" class="border-nf-false"></div>
+        <div class="content">
+          <div class="title">{{notification.title}}</div>
+          <div class="description">{{notification.description.message}}</div>
+          <div *ngIf="notification.type == 'team' " class="flag-team">time</div>
+
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="notification.type == 'user' || notification.type == 'platform'" class="container-content-nf">
+      <div class="item-container" (click)="openNotifi(notification)">
+
+        <div *ngIf="notification.ready == true" class="border-nf-true"></div>
+        <div *ngIf="notification.ready == false" class="border-nf-false"></div>
+        <div class="content">
+          <div class="title">{{notification.title}}</div>
+          <div class="description">{{notification.description.message}}</div>
+
+          <div *ngIf="notification.type == 'user' " class="flag-user">Aviso</div>
+          <div *ngIf="notification.type == 'platform' " class="flag-rype">rype</div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>

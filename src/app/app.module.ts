@@ -1,3 +1,4 @@
+import { NotificationsEffect } from './shared/state-management/effects/notifications.effects';
 import { TeamEffect } from './shared/state-management/effects/team.effect';
 import { AccountEffect } from './shared/state-management/effects/account.effects';
 import { AdminComponent } from './layouts/admin/admin.component';
@@ -22,6 +23,7 @@ import { AuthEffect } from './shared/state-management/effects/auth.effect';
 import { accountReducer } from './shared/state-management/reducers/account.reducer';
 import { globalPagesReducer } from './shared/state-management/reducers/global-pages.reducer';
 import { teamReducer } from './shared/state-management/reducers/team.reducer';
+import { notificationsReducer } from './shared/state-management/reducers/notifications.reducer';
 
 @NgModule({
   declarations: [AppComponent, WebComponent, AdminComponent],
@@ -40,11 +42,12 @@ import { teamReducer } from './shared/state-management/reducers/team.reducer';
       account: accountReducer,
       team: teamReducer,
       globalPages: globalPagesReducer,
-
+      notifications: notificationsReducer,
     }),
     EffectsModule.forRoot([
       AuthEffect,
       AccountEffect,
+      NotificationsEffect,
       TeamEffect,
     ]),
     StoreDevtoolsModule.instrument({

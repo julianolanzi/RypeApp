@@ -29,7 +29,7 @@ export class AuthEffect {
           map((response) => {
             setTimeout(() => {
               this.router.navigate(['dashboard']);
-            }, 2000);
+            }, 1000);
 
             this.store.dispatch(new UpdateImgAccountAction(response));
             this.store.dispatch(new LoadingDisabledAction());

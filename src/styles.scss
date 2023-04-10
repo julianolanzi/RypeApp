@@ -44,6 +44,7 @@
   --text-color-sucess: mediumseagreen;
 
   --background-input: #f5f8fa;
+  --modal-background: #ebebeb;
 
   --linear-gradient: to bottom, rgb(255 0 112), rgba(255, 255, 255, 0);
   --linear-gradient-2: to bottom, #fa0870, rgba(109, 109, 109, 0);
@@ -70,6 +71,7 @@ body {
   --text-color-background: #ccc;
   --background-input: #25333c;
   transition: var(--tran-05);
+  --modal-background: #2e3d46;
 
   --linear-gradient: to bottom, rgb(255 0 112), rgba(255, 255, 255, 0);
   --linear-gradient-2: to bottom, #35444e, rgba(109, 109, 109, 0);
