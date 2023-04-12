@@ -8,7 +8,7 @@ import { select, Store } from '@ngrx/store';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
-import { TeamDataSelector } from 'src/app/shared/state-management/selectors/team.selector';
+import { TeamDataSelector, TeamLoadingTeam } from 'src/app/shared/state-management/selectors/team.selector';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
 import { DatePipe } from '@angular/common';
@@ -31,10 +31,13 @@ export class TeamOverviewComponent {
   file!: File;
   isprivate: string = '';
 
+  isTeam: boolean = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(private store: Store<GlobalState>, private datePipe: DatePipe) {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
+    this.isTeam = false;
+
 
     this.updateForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -60,14 +63,17 @@ export class TeamOverviewComponent {
   }
 
   ngOnInit(): void {
+    this.isTeam = false;
     this.loadUser();
     this.getTeam();
     this.loadTeamInfo();
   }
 
   getTeam() {
-    this.store.dispatch(new LoadingActiveAction());
-    this.store.dispatch(new TeamLoadInfoRequestAction(this.idTeam));
+    if (this.idTeam != '') {
+      this.store.dispatch(new LoadingActiveAction());
+      this.store.dispatch(new TeamLoadInfoRequestAction(this.idTeam));
+    }
   }
 
   public loadUser() {
@@ -76,6 +82,8 @@ export class TeamOverviewComponent {
       .subscribe((user) => {
         this.user = user;
         this.idTeam = this.user.idTeam;
+        if(this.idTeam == ''){
+        }
       });
 
     this.subscriptions.add(subscription);
@@ -87,8 +95,6 @@ export class TeamOverviewComponent {
     }
 
     this.teamUpdate = Object.assign({}, this.teamUpdate, this.updateForm.value);
-
-
   }
 
   onselectFile(e: any) {
@@ -107,6 +113,9 @@ export class TeamOverviewComponent {
       .pipe(select(TeamDataSelector))
       .subscribe((team) => {
         this.Team = team;
+        if(this.Team.idTeam  != ''){
+          this.isTeam = true;
+        }
         this.url = team.url;
         this.isprivate = this.Team.private.toString();
         this.updateForm.patchValue({

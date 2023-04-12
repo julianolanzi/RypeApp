@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { BaseService } from '../base.service';
 import { UserNotificationsSuccess } from 'src/app/models/notifications/notifications-user-success';
 import { TeamNotificationsSuccess } from 'src/app/models/notifications/notifications-team-success';
+import { RequestTeam } from 'src/app/models/notifications/notifications-request-team';
 
 @Injectable()
 export class NotificationsService extends BaseService {
@@ -31,6 +32,20 @@ export class NotificationsService extends BaseService {
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  deleteNotifications(id: string | undefined): Observable<any> {
+    let response = this.http
+    .delete(this.UrlServiceV1 + '/notifications/delete/' + id, this.ObterAuthHeaderJson())
+    .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  requestInviteTeam(data: RequestTeam | undefined): Observable<any>{
+    let response = this.http
+    .post(this.UrlServiceV1 + '/notifications/requestTeamUser',  data, this.ObterAuthHeaderJson())
+    .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
 }

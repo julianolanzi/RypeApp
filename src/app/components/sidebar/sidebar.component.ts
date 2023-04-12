@@ -1,4 +1,12 @@
+import {
+  AuthSelector,
+  isAdmin,
+} from './../../shared/state-management/selectors/auth.selector';
 import { Component } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,7 +14,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  constructor() {}
+  private subscriptions: Subscription = new Subscription();
+  isAdmin!: any;
+  isAdminTeam!: any;
+  public user!: UserLoginSuccess;
+  constructor(private store: Store<GlobalState>) {}
   ngOnInit(): void {
     this.getCookie();
     let sidebar = document.querySelector('nav') as HTMLElement;
@@ -55,8 +67,6 @@ export class SidebarComponent {
       });
     });
 
-   
-
     modeSwitch.addEventListener('click', () => {
       body.classList.toggle('dark');
 
@@ -70,6 +80,9 @@ export class SidebarComponent {
         this.setCookie(isDarkMode);
       }
     });
+
+    this.loadUser();
+
   }
 
   setCookie(isDarkMode: boolean) {
@@ -103,5 +116,25 @@ export class SidebarComponent {
     } else {
       body.classList.remove('dark');
     }
+  }
+
+  public loadUser() {
+    const subscription = this.store
+      .pipe(select(AuthSelector))
+      .subscribe((user) => {
+        this.user = user;
+
+        if (user.rolesTeam == 'admin' || user.rolesTeam == 'sub-admin') {
+          this.isAdminTeam = true;
+        }
+        if (user.role == 'admin') {
+          this.isAdmin = true;
+        } else {
+          this.isAdmin = false;
+          this.isAdminTeam = false;
+        }
+      });
+
+    this.subscriptions.add(subscription);
   }
 }

@@ -1,7 +1,8 @@
 .container-notifications {
-  width: 300px;
-  height: 500px;
+  width: 350px;
+  height: 80%;
   background-color: var(--sidebar-background);
+  // background-color: #ccc;
   border-radius: 5px;
   border-top: 5px solid var(--pink-white);
   box-shadow: inset hs1(0 0% 100%/0.3), 0 0 32px 0 var(--pink-white);
@@ -13,10 +14,44 @@
   z-index: 300;
   right: 20px;
   flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
   h3 {
     color: var(--text-color);
     margin-bottom: 15px;
   }
+  .timer-coutdown {
+    color: var(--text-color);
+    font-size: 12px;
+  }
+  .button-refresh {
+    display: flex;
+    border-radius: 5px;
+    background-color: var(--admin);
+    min-width: 140px;
+    height: 35px;
+    border: 2px solid var(--pink-white);
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    text-transform: uppercase;
+    padding: 5px;
+    color: var(--text-color);
+    background-color: var(--admin-mode);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container-drop {
+    width: 100%;
+    height: 100%;
+    padding: 20px 10px;
+  }
+
   .not-notifications {
     display: flex;
     flex-direction: column;
@@ -26,13 +61,12 @@
     color: var(--text-color);
 
     .icon-note-notifications {
-
       .material-symbols-outlined {
         font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 200, "opsz" 48;
         font-size: 100px;
       }
     }
-    p{
+    p {
       font-size: 12px;
       margin-top: 20px;
       text-align: center;
@@ -40,8 +74,8 @@
   }
 
   .container-content-nf {
-    width: 280px;
-    height: 80px;
+    width: 100%;
+    height: auto;
     background-color: var(--admin-body);
     display: flex;
     flex-direction: row;
@@ -51,77 +85,112 @@
     .item-container {
       display: flex;
       width: 100%;
-      cursor: pointer;
+      padding: 5px;
+      .img-notification {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+      }
 
-      .border-nf-true {
-        width: 7px;
-        height: 100%;
-        background: var(--pink-white);
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-      }
-      .border-nf-false {
-        width: 7px;
-        height: 100%;
-        background: #ccc;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-      }
-      .content {
-        width: 100%;
-        height: 80px;
-        padding: 10px;
-        color: var(--text-color);
+      .flags {
+        top: 40%;
         position: relative;
-        .title {
-          font-size: 15px;
-          font-weight: 700;
-        }
-        .description {
-          font-size: 12px;
-          margin-top: 5px;
-        }
-
-        .flag-team {
-          background-color: #0084f7;
-          width: 40px;
-          border-radius: 5px;
-          font-size: 12px;
-          right: -5px;
-          top: -5px;
-          position: absolute;
-          display: flex;
-          justify-content: center;
-          font-weight: 600;
-          color: aliceblue;
-        }
+        left: -4%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background-image: url(../../../assets/img/flags/icones-nofitications.png);
+        border: none;
 
         .flag-user {
-          background-color: #ff7103;
-          width: 40px;
-          border-radius: 5px;
-          font-size: 12px;
-          right: -5px;
-          top: -5px;
-          position: absolute;
-          display: flex;
-          justify-content: center;
-          font-weight: 600;
-          color: aliceblue;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: 0px;
         }
-        .flag-rype {
-          background-color: var(--pink-white);
-          width: 40px;
-          border-radius: 5px;
-          font-size: 12px;
-          right: -5px;
-          top: -5px;
-          position: absolute;
-          display: flex;
-          justify-content: center;
-          font-weight: 600;
-          color: aliceblue;
+        .flag-platform {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: 0px -28px;
         }
+        .flag-team {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: 0px -56px;
+        }
+      }
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        h2 {
+          color: var(--text-color);
+          font-size: 16px;
+        }
+        p {
+          font-size: 12px;
+          color: var(--text-color);
+        }
+
+        .request {
+          display: flex;
+          .recusar {
+            width: 40%;
+            background-color: #fc5d78;
+            border-radius: 5px;
+
+            color: aliceblue;
+            text-align: center;
+            font-size: 10;
+            font-weight: bold;
+            padding: 2px;
+            line-height: 16px;
+            text-transform: uppercase;
+            border: 2px solid var(--admin-body);
+          }
+
+          .aceitar {
+            width: 40%;
+            background-color: #47d0bd;
+            border-radius: 5px;
+
+            color: aliceblue;
+            text-align: center;
+            font-size: 10;
+            font-weight: bold;
+            padding: 2px;
+            line-height: 16px;
+            text-transform: uppercase;
+            border: 2px solid var(--admin-body);
+          }
+        }
+      }
+      .delete-notification {
+        width: 20px;
+        height: 20px;
+        background-color: crimson;
+        border-radius: 50%;
+        right: 5px;
+        border: none;
+        position: absolute;
+        color: #fff;
+        align-items: center;
+        display: flex;
+        justify-content: center;
       }
     }
   }

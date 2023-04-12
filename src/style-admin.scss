@@ -393,6 +393,7 @@ header .image-text .profession {
   width: 100%;
   margin-top: 20px;
   flex-wrap: wrap;
+  padding-bottom: 40px;
 
   .team-item {
     width: 300px;
@@ -411,6 +412,8 @@ header .image-text .profession {
         object-fit: cover;
         position: absolute;
         z-index: 10 !important;
+        top: -50px;
+        left: -5px;
       }
     }
 
@@ -667,8 +670,10 @@ header .image-text .profession {
   }
 
   .container-search-teams {
+
     .teams {
       width: 100%;
+
     }
     .team-item {
       width: 100%;

@@ -16,4 +16,4 @@ export const TeamSearchSelector = createSelector(
 );
 export const TeamDataSelector = createSelector(TeamGlobalSelector, _teamInfo);
 export const TeamLoadingTeam = createSelector(TeamGlobalSelector, _loadingTeam);
-export const SearchMembers = createSelector(TeamGlobalSelector, _searchMembers)
+export const SearchMembers = createSelector(TeamGlobalSelector, _searchMembers);

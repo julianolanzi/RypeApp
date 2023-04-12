@@ -99,6 +99,7 @@ export class TeamEffect {
             setTimeout(() => {
               this.router.navigate(['team-overview']);
             }, 2000);
+            this.store.dispatch(new LoadingDisabledAction());
             this.Alerts.success('Agora voce faz parte do time', 'Parabéns');
             return new TeamLoadSuccessPublicTeam();
           }),

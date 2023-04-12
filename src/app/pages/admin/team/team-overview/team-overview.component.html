@@ -1,5 +1,5 @@
 <div class="container-page">
-  <section *ngIf="Team">
+  <section *ngIf="this.isTeam == true">
     <div class="container-cover">
       <img src="./assets/img/teams/team-cover.png" alt="">
     </div>
@@ -154,7 +154,7 @@
     </div>
   </section>
 
-  <section *ngIf="!Team">
+  <section *ngIf="this.isTeam == false">
     <app-team-setup></app-team-setup>
   </section>
 </div>

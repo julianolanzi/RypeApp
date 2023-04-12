@@ -6,6 +6,11 @@ import { NotificationsState } from "../states/notifications.state";
 import { TeamNotificationsGetRequest } from '../actions/notifications/team-notifications/get-notifications/notifications-team-load-request.actions';
 import { TeamNotificationsGetSuccess } from '../actions/notifications/team-notifications/get-notifications/notifications-team-load-success.actions';
 import { TeamNotificationsGetError } from '../actions/notifications/team-notifications/get-notifications/notifications-team-load-error.actions';
+import { DeleteNotificationsRequest } from '../actions/notifications/delete-notifications/notifications-delete-load-request.actions';
+import { DeleteNotificationsSuccess } from '../actions/notifications/delete-notifications/notifications-delete-load-success.actions';
+import { InviteTeamNotificationsRequest } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-request.actions';
+import { InviteTeamNotificationsSuccess } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-success.actions';
+import { InviteTeamNotificationsError } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-error.actions';
 
 export const initialState: NotificationsState = {
   userNotifications: [],
@@ -25,7 +30,6 @@ const _notificationsReducer = createReducer(
   on(new NotificationsGetUserSuccess().createAction(), (state, action) => ({
     ...state,
     userNotifications: [ ...action.payload ],
-    teamNotifications: [],
     errorNotifications: undefined,
   })),
   on(new NotificationsGetUserError().createAction(), (state, action) => ({
@@ -42,7 +46,6 @@ const _notificationsReducer = createReducer(
   })),
   on(new TeamNotificationsGetSuccess().createAction(), (state, action) => ({
     ...state,
-    userNotifications: [],
     teamNotifications: [ ...action.payload ],
     errorNotifications: undefined,
   })),
@@ -50,6 +53,28 @@ const _notificationsReducer = createReducer(
     ...state,
     userNotifications: [],
     teamNotifications: [],
+    errorNotifications: action.payload,
+  })),
+
+  on(new DeleteNotificationsRequest().createAction(), (state) => ({
+    ...state,
+  })),
+  on(new DeleteNotificationsSuccess().createAction(), (state) => ({
+    ...state,
+  })),
+  on(new DeleteNotificationsSuccess().createAction(), (state, action) => ({
+    ...state,
+    errorNotifications: action.payload,
+  })),
+
+  on(new InviteTeamNotificationsRequest().createAction(), (state) => ({
+    ...state,
+  })),
+  on(new InviteTeamNotificationsSuccess().createAction(), (state) => ({
+    ...state,
+  })),
+  on(new InviteTeamNotificationsError().createAction(), (state, action) => ({
+    ...state,
     errorNotifications: action.payload,
   })),
 

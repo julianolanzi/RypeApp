@@ -1,9 +1,11 @@
 export interface TeamNotificationsSuccess {
+  _id: string;
   title: string;
   description: {
     message: string;
     name: string;
     url: string;
+    question: boolean;
   };
   ready: boolean;
   request: boolean;
