@@ -18,6 +18,9 @@ import { DeleteNotificationsRequest } from '../actions/notifications/delete-noti
 import { InviteTeamNotificationsRequest } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-request.actions';
 import { InviteTeamNotificationsSuccess } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-success.actions';
 import { InviteTeamNotificationsError } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-error.actions';
+import { InviteUserNotificationsRequest } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-request.actions';
+import { InviteUserNotificationsSuccess } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-success.actions';
+import { InviteUserNotificationsError } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-error.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -72,21 +75,38 @@ export class NotificationsEffect {
   );
 
   requestInviteTeam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NotificationsEnum.LOAD_NOTIFICATIONS_INVITE_TEAM_REQUEST),
+      exhaustMap((action: InviteTeamNotificationsRequest) => {
+        return this.notificaService.requestInviteTeam(action.payload).pipe(
+          map((response) => {
+            this.Alerts.success('Solicitação enviada com sucesso', 'Feito');
+            return new InviteTeamNotificationsSuccess(response);
+          }),
+          catchError((error) => {
+            return of(new InviteTeamNotificationsError(error));
+          })
+        );
+      })
+    )
+  );
+
+  inviteRequestUser$ = createEffect(() =>
   this.actions$.pipe(
-    ofType(NotificationsEnum.LOAD_NOTIFICATIONS_INVITE_TEAM_REQUEST),
-    exhaustMap((action: InviteTeamNotificationsRequest) => {
-      return this.notificaService.requestInviteTeam(action.payload).pipe(
+    ofType(NotificationsEnum.LOAD_NOTIFICATIONS_INVITE_USER_REQUEST),
+    exhaustMap((action: InviteUserNotificationsRequest) => {
+      return this.notificaService.requestInviteUser(action.payload).pipe(
         map((response) => {
           this.Alerts.success('Solicitação enviada com sucesso', 'Feito');
-          return new InviteTeamNotificationsSuccess(response);
+          return new InviteUserNotificationsSuccess(response);
         }),
         catchError((error) => {
-          return of(new InviteTeamNotificationsError(error));
+          return of(new InviteUserNotificationsError(error));
         })
       )
     })
   )
-  )
+  );
 
   constructor(
     private actions$: Actions,

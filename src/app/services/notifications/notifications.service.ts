@@ -6,6 +6,7 @@ import { BaseService } from '../base.service';
 import { UserNotificationsSuccess } from 'src/app/models/notifications/notifications-user-success';
 import { TeamNotificationsSuccess } from 'src/app/models/notifications/notifications-team-success';
 import { RequestTeam } from 'src/app/models/notifications/notifications-request-team';
+import { RequestInviteUser } from 'src/app/models/notifications/notifications-request-invite-user';
 
 @Injectable()
 export class NotificationsService extends BaseService {
@@ -45,6 +46,13 @@ export class NotificationsService extends BaseService {
   requestInviteTeam(data: RequestTeam | undefined): Observable<any>{
     let response = this.http
     .post(this.UrlServiceV1 + '/notifications/requestTeamUser',  data, this.ObterAuthHeaderJson())
+    .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  requestInviteUser(data: RequestInviteUser | undefined): Observable<any>{
+    let response = this.http
+    .post(this.UrlServiceV1 + '/notifications/inviteTeamUser',  data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

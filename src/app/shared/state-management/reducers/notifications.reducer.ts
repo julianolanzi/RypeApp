@@ -11,6 +11,9 @@ import { DeleteNotificationsSuccess } from '../actions/notifications/delete-noti
 import { InviteTeamNotificationsRequest } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-request.actions';
 import { InviteTeamNotificationsSuccess } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-success.actions';
 import { InviteTeamNotificationsError } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-error.actions';
+import { InviteUserNotificationsRequest } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-request.actions';
+import { InviteUserNotificationsSuccess } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-success.actions';
+import { InviteUserNotificationsError } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-error.actions';
 
 export const initialState: NotificationsState = {
   userNotifications: [],
@@ -74,6 +77,16 @@ const _notificationsReducer = createReducer(
     ...state,
   })),
   on(new InviteTeamNotificationsError().createAction(), (state, action) => ({
+    ...state,
+    errorNotifications: action.payload,
+  })),
+  on(new InviteUserNotificationsRequest().createAction(), (state) => ({
+    ...state,
+  })),
+  on(new InviteUserNotificationsSuccess().createAction(), (state) => ({
+    ...state,
+  })),
+  on(new InviteUserNotificationsError().createAction(), (state, action) => ({
     ...state,
     errorNotifications: action.payload,
   })),

@@ -67,7 +67,8 @@
             </div>
             <div>
 
-              <button *ngIf="member.team.length == 0 " class="btn-admin option2">Enviar Solicitação</button>
+              <button *ngIf="member.team.length == 0 && this.isinviteAwait == false" (click)="inviteUserTeam(member)" class="btn-admin option2">Enviar Solicitação</button>
+              <button *ngIf="member.team.length == 0 && this.isinviteAwait == true"  class="btn-admin option1">Solicitação Enviada</button>
             </div>
 
 

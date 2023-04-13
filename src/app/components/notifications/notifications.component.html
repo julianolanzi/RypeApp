@@ -6,7 +6,7 @@
     Carregar Notificações</button>
 
   <div class="container-drop">
-    <div *ngIf="this.notific.length == 0 || isAdmin == false">
+    <div *ngIf="this.notific.length == 0">
       <div class="not-notifications">
         <div class="icon-note-notifications">
           <span class="material-symbols-outlined">
@@ -16,6 +16,7 @@
         <p>Sem notificações aproveite e navegue na plataforma</p>
       </div>
     </div>
+
 
     <div *ngFor="let notification of this.notific">
       <div *ngIf="notification.type == 'user' ||  notification.type == 'platform'" class="container-content-nf">

@@ -137,4 +137,8 @@ export class SidebarComponent {
 
     this.subscriptions.add(subscription);
   }
+
+  logaout(){
+    window.location.reload();
+  }
 }

@@ -78,7 +78,6 @@ export class TeamSearchComponent {
 
       const invite = this.verifyInvite(team._id);
 
-      console.log(team._id);
     }else {
       this.requestInvite = {
         team: team._id,

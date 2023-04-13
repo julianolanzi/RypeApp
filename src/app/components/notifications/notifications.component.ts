@@ -89,8 +89,6 @@ export class NotificationsComponent {
       .pipe(select(UserNotifications))
       .subscribe((notif) => {
         this.notific = notif;
-
-        const test = this.notific;
       });
 
     this.subscriptions.add(subscription);
@@ -120,6 +118,7 @@ export class NotificationsComponent {
   }
   deleteNotification(item: UserNotificationsSuccess) {
     const newarray = [];
+
     for (let index of this.notific) {
       if (index != item) {
         newarray.push(index);
@@ -127,6 +126,10 @@ export class NotificationsComponent {
       }
     }
     this.store.dispatch(new DeleteNotificationsRequest(item._id));
+
+    if(newarray.length == 0 ){
+      this.notific = [];
+    }
   }
   deleteTeamNotification(item: UserNotificationsSuccess) {
     const newarray = [];
@@ -137,6 +140,10 @@ export class NotificationsComponent {
       }
     }
     this.store.dispatch(new DeleteNotificationsRequest(item._id));
+
+    if(newarray.length == 0 ){
+      this.teamnf = [];
+    }
   }
   acceptRequest(item: UserNotificationsSuccess) {
     console.log('Aceitando item' + item._id);
