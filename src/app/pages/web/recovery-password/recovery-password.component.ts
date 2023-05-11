@@ -17,12 +17,16 @@ export class RecoveryPasswordComponent {
   user!: RecoveryPassword;
 
   constructor(
+    private securityService: SecurityService,
     private router: Router,
-    private securityService: SecurityService
   ) {
     this.isLoading = false;
     this.recoveryForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.pattern(/.+@.+\..+/),
+      ]),
     });
   }
 
@@ -49,8 +53,12 @@ export class RecoveryPasswordComponent {
   processarSucesso(response: any) {
     this.isLoading = true;
     this.errors = [];
-    let token = response.crypt;
-    this.router.navigate(['/reset-password/', token]);
+    this.isPassRecoverySucess = true;
+    this.isLoading = false;
+
+    setTimeout(() => {
+      this.router.navigate(['/auth']);
+    }, 4000);
   }
   processarFalha(fail: any) {
     this.isLoading = false;

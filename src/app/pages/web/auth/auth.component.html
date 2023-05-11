@@ -1,47 +1,54 @@
-<section class="container-auth d-flex">
-    <div class="d-flex container">
-        <div class="img-planet">
-            <img src="./assets/svg/planet-login.svg" alt="">
-        </div>
-
-
-        <div class="container-form">
-            <div class="text-login">
-                <h1>Login</h1>
-                <p>Partiu outro planeta 🚀</p>
-            </div>
-            <form (ngSubmit)="Login()" [formGroup]="loginForm" #formDir="ngForm">
-                <div class="box-alerts">
-                    <div class="alert alert-danger" *ngIf="errors.length > 0">
-                        <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
-                        <ul>
-                            <li *ngFor="let error of errors">{{ error }}</li>
-                        </ul>
-                    </div>
-                    <p *ngIf="isAuthenticated$ | async" class="alert alert-success">Login realizado com sucesso</p>
-                </div>
-                <div class="item-form">
-                    <input type="text" placeholder="Email" formControlName="email">
-                    <div class="alerts" *ngIf="email.invalid && formDir.submitted">
-                        <p class="text-danger">Email é obrigatório</p>
-                    </div>
-                </div>
-                <div class="item-form">
-                    <input type="password" placeholder="Password" formControlName="password">
-                    <div class="alerts" *ngIf="password.invalid && formDir.submitted">
-                        <p class="text-danger">Senha é obrigatório</p>
-                    </div>
-                    <a routerLink="/recovery-password" class="link-primary">Esqueceu a senha ?</a>
-                </div>
-                <div class="button-form">
-                    <button [disabled]="!loginForm.valid" type="submit" class="btn secundary">Login</button>
-                </div>
-                <span>Não tem uma conta? <a routerLink="/">Registre-se</a> </span>
-            </form>
-        </div>
+<section class="landing-conver" >
+  <div ></div>
+  <div class="landing-info">
+    <div class="logo">
+      <img src="../../../../assets/img/logo-web-menu.png" alt="">
     </div>
+    <h2 class="landing-info-pretitle">Bem vindo a </h2>
+    <h1 class="landing-info-title">Rype</h1>
+
+    <p class="landing-info-text">Sua rede social gamer e comunidade, Conecte-se com seus amigos e jogue com nosso sistema de gamificação e medalhas</p>
+  </div>
+
+  <div class="landing-form">
+    <div class="form-box">
+      <h2 class="form-box-title">Fazer Login</h2>
+      <form class="form" (ngSubmit)="Login()" [formGroup]="loginForm" #formDir="ngForm">
+        <div class="box-alerts">
+            <div class="alert alert-danger" *ngIf="errors.length > 0">
+                <h3 id="msgRetorno">Opa! Alguma coisa não deu certo:</h3>
+                <ul>
+                    <li *ngFor="let error of errors">{{ error }}</li>
+                </ul>
+            </div>
+            <p *ngIf="isAuthenticated$ | async" class="alert alert-success">Login realizado com sucesso</p>
+        </div>
+        <div class="item-form">
+            <input type="text" placeholder="Email" formControlName="email">
+            <div class="alerts" *ngIf="email.invalid && formDir.submitted">
+                <p class="text-danger">Email é obrigatório</p>
+            </div>
+        </div>
+        <div class="item-form">
+            <input type="password" placeholder="Password" formControlName="password">
+            <div class="alerts" *ngIf="password.invalid && formDir.submitted">
+                <p class="text-danger">Senha é obrigatório</p>
+            </div>
+
+        </div>
+        <a routerLink="/recovery-password" class="link-primary">Esqueceu a senha ?</a>
+        <div class="button-form">
+            <button [disabled]="!loginForm.valid" type="submit" class="button bt-color">Login</button>
+        </div>
+        <div class="login">
+        <span>Não tem uma conta? <a routerLink="/sing-up">Registre-se</a> </span>
+      </div>
+    </form>
+
+    </div>
+  </div>
 </section>
 
 <div *ngIf="loading$ | async">
-    <app-loading></app-loading>
+  <app-loading></app-loading>
 </div>

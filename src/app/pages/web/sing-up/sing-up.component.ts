@@ -25,16 +25,17 @@ export class SingUpComponent {
     this.cadastroForm = new FormGroup({
       nickname: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
       birthday: new FormControl('', [Validators.required]),
       phone: new FormControl('', [
         Validators.required,
         Validators.pattern('^((\\+55-?)|0)?[0-9]{11}$'),
       ]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.pattern(/.+@.+\..+/),
+      ]),
       password: new FormControl('', [Validators.required]),
-      country: new FormControl('', [Validators.required]),
-      gender: new FormControl('', [Validators.required]),
       url: new FormControl(''),
       terms: new FormControl('', [
         Validators.required,
@@ -46,12 +47,6 @@ export class SingUpComponent {
   get nickname() {
     return this.cadastroForm.get('nickname')!;
   }
-  get gender() {
-    return this.cadastroForm.get('gender')!;
-  }
-  get country() {
-    return this.cadastroForm.get('country')!;
-  }
   get terms() {
     return this.cadastroForm.get('terms')!;
   }
@@ -61,9 +56,7 @@ export class SingUpComponent {
   get name() {
     return this.cadastroForm.get('name')!;
   }
-  get lastname() {
-    return this.cadastroForm.get('lastname')!;
-  }
+
   get birthday() {
     return this.cadastroForm.get('birthday')!;
   }
@@ -80,13 +73,9 @@ export class SingUpComponent {
     }
     this.User = Object.assign({}, this.User, this.cadastroForm.value);
 
-    if (this.User.gender == 'Male') {
-      let url = this.imgMale();
-      this.User.url = url;
-    } else {
-      let url = this.imgFamele();
-      this.User.url = url;
-    }
+    let url = this.randomImg();
+    this.User.url = url;
+
     this.isLoading = true;
     this.securityService.registrarUsuario(this.User).subscribe(
       (sucesso) => {
@@ -113,10 +102,11 @@ export class SingUpComponent {
     this.errors = fail.error.errors;
   }
 
-  imgMale() {
-    let number = Math.floor(Math.random() * 5 + 1);
+  randomImg() {
+    let number = Math.floor(Math.random() * 10 + 1);
     const path = 'https://rype-app.vercel.app';
     var img = '';
+
     switch (number) {
       case 1:
         img = 'assets/img/avatars/male/1.jpg';
@@ -133,32 +123,19 @@ export class SingUpComponent {
       case 5:
         img = 'assets/img/avatars/male/5.jpg';
         break;
-      default:
-        console.log('imagem sem carregamento');
-    }
-
-    let url = path + '/' + img;
-    return url;
-  }
-
-  imgFamele() {
-    let number = Math.floor(Math.random() * 5 + 1);
-    const path = 'https://rype-app.vercel.app';
-    var img = '';
-    switch (number) {
-      case 1:
+      case 6:
         img = 'assets/img/avatars/female/1.jpg';
         break;
-      case 2:
+      case 7:
         img = 'assets/img/avatars/female/2.jpg';
         break;
-      case 3:
+      case 8:
         img = 'assets/img/avatars/female/3.jpg';
         break;
-      case 4:
+      case 9:
         img = 'assets/img/avatars/female/4.jpg';
         break;
-      case 5:
+      case 10:
         img = 'assets/img/avatars/female/5.jpg';
         break;
       default:

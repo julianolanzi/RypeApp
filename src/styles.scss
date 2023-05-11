@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');/* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
   padding: 0;
+  border: none;
+  outline: none;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: Rajdhani, sans-serif;
 }
 
 .material-symbols-outlined {
@@ -133,6 +133,8 @@ body {
   display: flex;
   align-items: center;
   cursor: pointer;
+  font-size: 1.1rem;
+  font-family: Rajdhani, sans-serif;
 
   i {
     margin-right: 8px;
@@ -218,7 +220,8 @@ body {
   color: var(--pink);
   font-size: 14px;
   padding: 5px 0px;
-  font-family: "Montserrat", sans-serif;
+  font-family: Rajdhani, sans-serif;
+  text-transform: uppercase;
 }
 .box-alerts {
   display: flex;
@@ -234,9 +237,11 @@ body {
     border: 2px solid rgb(40, 154, 91);
     padding: 10px;
     border-radius: 5px;
-    font-family: "Montserrat", sans-serif;
+    color: #fff;
+    font-family: Rajdhani, sans-serif;
     // text-transform: uppercase;
     font-weight: bold;
+    margin-bottom: 10px;
   }
 
   .alert-danger {
@@ -245,7 +250,8 @@ body {
     padding: 10px;
     border-radius: 5px;
     color: #ffffff;
-
+    width: 100%;
+    margin-bottom: 10px;
     ul {
       list-style: none;
       margin-top: 5px;
@@ -256,174 +262,7 @@ body {
   display: flex;
   padding: 5px 0px;
 }
-.container-auth {
-  color: var(--white-palette);
 
-  height: 100%;
-  margin-top: 50px;
-  .container {
-    flex-direction: column;
-  }
-  .img-planet {
-    padding: 20px;
-    img {
-      width: 100%;
-      max-width: 200px;
-      max-height: 200px;
-      height: 100%;
-    }
-  }
-
-  .container-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Montserrat", sans-serif;
-    width: 100%;
-    min-width: 350px;
-    height: auto;
-    padding: 30px;
-    // background-color: var(--purple-dark);
-    border-radius: 5px;
-    // border: 2px solid var(--purple-white);
-
-    h1 {
-      text-align: center;
-      font-size: 30px;
-      font-family: "Montserrat", sans-serif;
-      color: var(--pink);
-    }
-
-    p {
-      text-align: center;
-      font-size: 12px;
-      font-family: "Montserrat", sans-serif;
-      color: var(--white-palette);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      .item-form {
-        width: 100%;
-        margin-top: 20px;
-      }
-
-      input {
-        width: 100%;
-        height: 50px;
-        border-radius: 5px;
-        background-color: var(--body-dark-color);
-        border: 2px solid var(--purple-white);
-        color: var(--white-palette);
-        padding: 5px;
-      }
-      input::-webkit-calendar-picker-indicator {
-        color: #fff;
-        background-color: var(--white-palette);
-        border-radius: 5px;
-      }
-
-      .button-form {
-        margin-top: 20px;
-        width: 100%;
-        justify-content: center;
-        button {
-          display: flex;
-          justify-content: center;
-          width: 100%;
-        }
-      }
-      .button-form button:disabled {
-        opacity: 0.4;
-        cursor: auto;
-      }
-      .button-form button:hover:disabled {
-        opacity: 0.4;
-        cursor: auto;
-        background-color: var(--web-menubackground);
-      }
-
-      select {
-        width: 100%;
-        height: 50px;
-        background-color: var(--body-dark-color);
-        border: 2px solid var(--purple-white);
-        color: var(--white-palette);
-        border-radius: 5px;
-      }
-      .conteiner-gender {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-
-        .options-gender {
-          display: flex;
-          align-items: center;
-
-          input {
-            width: 20px;
-            height: 20px;
-            appearance: none;
-            -webkit-appearance: none;
-            border: 0.2rem solid #fff;
-            background-color: var(--web-menubackground);
-            border-radius: 50%;
-          }
-          input:checked {
-            background-color: var(--pink);
-          }
-
-          label {
-            margin-left: 5px;
-          }
-
-          .female {
-            margin-left: 10px;
-          }
-        }
-      }
-
-      span {
-        margin-top: 10px;
-        text-align: center;
-        font-size: 12px;
-        font-family: "Montserrat", sans-serif;
-        color: var(--white-palette);
-
-        a {
-          text-decoration: none;
-          color: var(--pink);
-        }
-      }
-
-      .container-terms {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        margin: 20px 0 0 0;
-
-        input {
-          width: 20px;
-          height: 20px;
-          appearance: none;
-          -webkit-appearance: none;
-          border: 0.2rem solid #fff;
-          background-color: var(--web-menubackground);
-          border-radius: 15%;
-        }
-        input:checked {
-          background-color: var(--pink);
-        }
-        p {
-          margin-left: 10px;
-        }
-      }
-    }
-  }
-}
 
 .p-20 {
   padding: 20px;

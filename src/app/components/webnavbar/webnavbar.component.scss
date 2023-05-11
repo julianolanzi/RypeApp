@@ -37,6 +37,9 @@ nav {
   ul li a {
     text-decoration: none;
     color: var(--web-text-opacity);
+    font-family: Rajdhani, sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
   }
   ul li a:hover {
     text-decoration: none;
@@ -66,7 +69,7 @@ nav {
 
 @media only screen and (max-width: 991px) {
   .web-navbar{
-    position: fixed;
+    position: inherit;
     z-index: 100;
     height: 85px;
   }
@@ -98,11 +101,11 @@ nav {
     flex-direction: column;
     padding: 0;
 
-   
+
     button{
       margin-top: 10px;
     }
   }
 
-  
+
 }
