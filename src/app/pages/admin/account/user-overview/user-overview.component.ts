@@ -1,6 +1,5 @@
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
-import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load.actions';
-import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-update-load-img-request.actions';
+import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-img/account-update-load-img-request.actions';
 
 
 import { Component } from '@angular/core';
@@ -16,10 +15,11 @@ import { Observable, Subscription } from 'rxjs';
 
 import { UpdateImg } from 'src/app/models/account/user-update-img';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
-import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-load-request.actions';
 
 import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
 import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
+import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-overview/account-load-request.actions';
+import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update/account-update-load.actions';
 
 
 

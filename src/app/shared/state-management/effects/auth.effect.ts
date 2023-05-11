@@ -3,17 +3,18 @@ import { LoadAuthErrorAction } from './../actions/auth/auth-load-error.actions';
 import { LoadAuthRequestAction } from '../actions/auth/auth-load-request.actions';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { switchMap, catchError, map, of, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { AuthMessageEnum } from '../actions/auth/auth-message.enum';
-import { switchMap, catchError, map, of, tap } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
 
+
+import { AuthService } from 'src/app/services/auth.service';
 import { AlertService } from 'src/app/services/utils/alert.service';
+
 import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
-import { Store } from '@ngrx/store';
 import { UpdateImgAccountAction } from '../actions/global-pages/global-load-update-img.actions';
 
 @Injectable({

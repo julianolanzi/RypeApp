@@ -9,22 +9,15 @@ import { TeamService } from 'src/app/services/teams/team.service';
 
 import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
 import { Store } from '@ngrx/store';
-import { TeamLoadErrorAction } from '../actions/teams/team-load/team-load-error.actions';
 import { TeamLoadSuccessAction } from '../actions/teams/team-load/team-load-success.actions';
 import { Router } from '@angular/router';
-import { TeamLoadSuccessPublicTeam } from '../actions/teams/team-load-success-public-team.actions';
-import { TeamLoadErrorPublicTeam } from '../actions/teams/team-load-error-public-team.actions';
-import { TeamLoadRequestPublicTeam } from '../actions/teams/team-load-request-public-team.actions';
+import { TeamLoadRequestPublicTeam } from '../actions/teams/request-public-team/team-load-request-public-team.actions';
 
-import { TeamLoadInfoErrorAction } from '../actions/teams/update-team/team-load-info-error.actions';
 import { TeamLoadUpdateRequestAction } from '../actions/teams/update/team-load-update-info.actions';
-import { TeamLoadUpdateErrorAction } from '../actions/teams/update/team-load-error-info.actions';
 import { TeamLoadUpdateSuccessAction } from '../actions/teams/update/team-load-success-info.actions';
 import { UploadImgService } from 'src/app/services/imgs/upload.img.service';
-import { TeamLoadUpdateErrorImg } from '../actions/teams/team-img/team-load-update-img-error.actions';
 import { TeamLoadCreateRequestAction } from '../actions/teams/create-team/team-load-create-request.actions';
 import { TeamLoadCreateSuccessAction } from '../actions/teams/create-team/team-load-create-success.actions';
-import { TeamLoadCreateErrorAction } from '../actions/teams/create-team/team-load-create-error.actions';
 import { TeamLoadAction } from '../actions/teams/team-load/team-load.actions';
 import { TeamLoadInfoRequestAction } from '../actions/teams/update-team/team-load-info-request.actions';
 import { TeamLoadInfoSuccessAction } from '../actions/teams/update-team/team-load-info-success.actions';
@@ -32,17 +25,15 @@ import { TeamLoadUpdateRequestImg } from '../actions/teams/team-img/team-load-up
 import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-update-img-success.actions';
 import { TeamLoadSearchMemberRequestAction } from '../actions/teams/search-members/team-load-search-member-request.actions';
 import { UserService } from 'src/app/services/user/user.service';
-import { TeamLoadSearchMemberErrorAction } from '../actions/teams/search-members/team-load-search-member-error.actions';
 import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-members/team-load-search-member-success.actions';
-import { TeamRemoveMemberErrorAction } from '../actions/teams/team-remove-member/team-load-remove-member-error.actions';
 import { TeamRemoveMemberRequestAction } from '../actions/teams/team-remove-member/team-load-remove-member-request.actions';
 import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-member/team-load-remove-member-success.actions';
 import { TeamLoadPromoteAdminRequestAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-request.actions';
-import { TeamLoadPromoteAdminErrorAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-error.actions';
 import { TeamLoadPromoteAdminSuccessAction } from '../actions/teams/team-promote-admin/team-load-promote-admin-success.actions';
 import { TeamLoadRemoveAdminRequestAction } from '../actions/teams/remove-admin/team-load-remove-admin-request.actions';
-import { TeamLoadRemoveAdminErrorAction } from '../actions/teams/remove-admin/team-load-remove-admin-error.actions';
 import { TeamLoadRemoveAdminSuccessAction } from '../actions/teams/remove-admin/team-load-remove-admin-success.actions';
+import { TeamLoadGlobalErrorAction } from '../actions/teams/team-load-global-error.actions';
+import { TeamLoadSuccessPublicTeam } from '../actions/teams/request-public-team/team-load-success-public-team.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -64,7 +55,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadCreateErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -83,7 +74,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -107,7 +98,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadErrorPublicTeam(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -128,7 +119,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadInfoErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -148,7 +139,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadUpdateErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -168,7 +159,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadUpdateErrorImg(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -189,7 +180,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadSearchMemberErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -213,7 +204,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamRemoveMemberErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -237,7 +228,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadPromoteAdminErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })
@@ -261,7 +252,7 @@ export class TeamEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new TeamLoadRemoveAdminErrorAction(error));
+            return of(new TeamLoadGlobalErrorAction(error));
           })
         );
       })

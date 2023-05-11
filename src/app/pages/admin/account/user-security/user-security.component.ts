@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
 import { UserChangePass } from 'src/app/models/account/user-change-pass';
-import { AccountUpdatePassLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update-pass-request-actions';
+import { AccountUpdatePassLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-reset-password/account-update-pass-request-actions';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
@@ -34,7 +34,7 @@ export class UserSecurityComponent {
       newpassword: new FormControl('', [Validators.required]),
       confirmpassword: new FormControl('', [Validators.required]),
     });
-    
+
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
 
   }

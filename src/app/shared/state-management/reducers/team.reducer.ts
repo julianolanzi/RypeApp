@@ -1,15 +1,10 @@
 import { createReducer, on, Action, createAction } from '@ngrx/store';
-import { TeamLoadCreateErrorAction } from '../actions/teams/create-team/team-load-create-error.actions';
 import { TeamLoadCreateRequestAction } from '../actions/teams/create-team/team-load-create-request.actions';
 import { TeamLoadCreateSuccessAction } from '../actions/teams/create-team/team-load-create-success.actions';
 
-import { TeamLoadErrorAction } from '../actions/teams/team-load/team-load-error.actions';
-import { TeamLoadInfoErrorAction } from '../actions/teams/update-team/team-load-info-error.actions';
 
 import { TeamLoadSuccessAction } from '../actions/teams/team-load/team-load-success.actions';
-import { TeamLoadUpdateErrorAction } from '../actions/teams/update/team-load-error-info.actions';
 import { TeamLoadUpdateSuccessAction } from '../actions/teams/update/team-load-success-info.actions';
-import { TeamLoadUpdateErrorImg } from '../actions/teams/team-img/team-load-update-img-error.actions';
 
 import { TeamLoadUpdateRequestAction } from '../actions/teams/update/team-load-update-info.actions';
 
@@ -21,10 +16,9 @@ import { TeamLoadUpdateRequestImg } from '../actions/teams/team-img/team-load-up
 import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-update-img-success.actions';
 import { TeamLoadSearchMemberRequestAction } from '../actions/teams/search-members/team-load-search-member-request.actions';
 import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-members/team-load-search-member-success.actions';
-import { TeamLoadSearchMemberErrorAction } from '../actions/teams/search-members/team-load-search-member-error.actions';
 import { TeamRemoveMemberRequestAction } from '../actions/teams/team-remove-member/team-load-remove-member-request.actions';
 import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-member/team-load-remove-member-success.actions';
-import { TeamRemoveMemberErrorAction } from '../actions/teams/team-remove-member/team-load-remove-member-error.actions';
+import { TeamLoadGlobalErrorAction } from '../actions/teams/team-load-global-error.actions';
 
 export const initialState: TeamState = {
   team: {
@@ -88,7 +82,7 @@ const _teamReducer = createReducer(
     authError: undefined,
     teamSearch: [],
   })),
-  on(new TeamLoadCreateErrorAction().createAction(), (state, action) => ({
+  on(new TeamLoadGlobalErrorAction().createAction(), (state, action) => ({
     ...state,
     authError: action.payload,
     teamSearch: [],
@@ -109,11 +103,7 @@ const _teamReducer = createReducer(
     teamSearch: [...action.payload],
     authError: undefined,
   })),
-  on(new TeamLoadErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    teamSearch: [],
-  })),
+
 
   on(new TeamLoadInfoRequestAction().createAction(), (state) => ({
     ...state,
@@ -126,12 +116,6 @@ const _teamReducer = createReducer(
     teamInfo: action.payload,
     teamSearch: [],
     isLoadingTeam: true,
-  })),
-  on(new TeamLoadInfoErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    teamSearch: [],
-    isLoadingTeam: false,
   })),
 
   on(new TeamLoadUpdateRequestAction().createAction(), (state) => ({
@@ -147,12 +131,7 @@ const _teamReducer = createReducer(
     teamSearch: [],
     isLoadingTeam: false,
   })),
-  on(new TeamLoadUpdateErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    teamSearch: [],
-    isLoadingTeam: false,
-  })),
+
   on(new TeamLoadUpdateRequestImg().createAction(), (state, action) => ({
     ...state,
     authError: undefined,
@@ -172,12 +151,7 @@ const _teamReducer = createReducer(
       teamSearch: [],
     };
   }),
-  on(new TeamLoadUpdateErrorImg().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    isLoadingTeam: false,
-    teamSearch: [],
-  })),
+
   on(new TeamLoadSearchMemberRequestAction().createAction(), (state, action) => ({
     ...state,
     authError: undefined,
@@ -190,13 +164,7 @@ const _teamReducer = createReducer(
     teamSearch: [],
     searchMembers: [...action.payload],
   })),
-  on(new TeamLoadSearchMemberErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    isLoadingTeam: false,
-    teamSearch: [],
-    searchMembers: [],
-  })),
+
   on(new TeamRemoveMemberRequestAction().createAction(), (state, action) => ({
     ...state,
     authError: undefined,
@@ -208,11 +176,7 @@ const _teamReducer = createReducer(
     authError: undefined,
     teamSearch: [],
   })),
-  on(new TeamRemoveMemberErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    teamSearch: [],
-  }))
+
 );
 
 export function teamReducer(state: any, action: Action) {

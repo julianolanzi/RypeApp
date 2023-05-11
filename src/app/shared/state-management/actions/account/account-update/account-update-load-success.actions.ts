@@ -1,6 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { CustomAction } from "../custom.actions";
-import { AccountMessageEnum } from "./account-message.enum";
+import { CustomAction } from "../../custom.actions";
+import { AccountMessageEnum } from "../account-message.enum";
 import { UserSuccessResponse } from "src/app/models/account/user-success-response";
 
 

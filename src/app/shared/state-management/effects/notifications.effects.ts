@@ -1,5 +1,4 @@
 import { NotificationsGetUserSuccess } from './../actions/notifications/user-notifications/get-notifications/notifications-load-success.actions';
-import { NotificationsGetUserError } from './../actions/notifications/user-notifications/get-notifications/notifications-load-error.actions';
 import { exhaustMap, catchError, map, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,16 +10,15 @@ import { NotificationsEnum } from '../actions/notifications/notifications.enum';
 import { NotificationsGetUserRequest } from '../actions/notifications/user-notifications/get-notifications/notifications-load-request.actions';
 import { TeamNotificationsGetRequest } from '../actions/notifications/team-notifications/get-notifications/notifications-team-load-request.actions';
 import { TeamNotificationsGetSuccess } from '../actions/notifications/team-notifications/get-notifications/notifications-team-load-success.actions';
-import { TeamNotificationsGetError } from '../actions/notifications/team-notifications/get-notifications/notifications-team-load-error.actions';
-import { DeleteNotificationsError } from '../actions/notifications/delete-notifications/notifications-delete-load-error.actions';
 import { DeleteNotificationsSuccess } from '../actions/notifications/delete-notifications/notifications-delete-load-success.actions';
 import { DeleteNotificationsRequest } from '../actions/notifications/delete-notifications/notifications-delete-load-request.actions';
 import { InviteTeamNotificationsRequest } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-request.actions';
 import { InviteTeamNotificationsSuccess } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-success.actions';
-import { InviteTeamNotificationsError } from '../actions/notifications/team-notifications/request-invite-team/notifications-team-invite-error.actions';
 import { InviteUserNotificationsRequest } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-request.actions';
 import { InviteUserNotificationsSuccess } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-success.actions';
-import { InviteUserNotificationsError } from '../actions/notifications/team-notifications/request-invite-user/notifications-user-invite-error.actions';
+import { QuestionTeamNotificationsRequest } from '../actions/notifications/team-notifications/update-notifications/notifications-team-question-request.actions';
+import { QuestionTeamNotificationsSuccess } from '../actions/notifications/team-notifications/update-notifications/notifications-team-question-success.actions';
+import { NotificationGlobalError } from '../actions/notifications/notifications-global-erros.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +33,7 @@ export class NotificationsEffect {
             return new NotificationsGetUserSuccess(response);
           }),
           catchError((error) => {
-            return of(new NotificationsGetUserError(error));
+            return of(new NotificationGlobalError(error));
           })
         );
       })
@@ -51,7 +49,7 @@ export class NotificationsEffect {
             return new TeamNotificationsGetSuccess(response);
           }),
           catchError((error) => {
-            return of(new TeamNotificationsGetError(error));
+            return of(new NotificationGlobalError(error));
           })
         );
       })
@@ -67,7 +65,7 @@ export class NotificationsEffect {
             return new DeleteNotificationsSuccess(response);
           }),
           catchError((error) => {
-            return of(new DeleteNotificationsError(error));
+            return of(new NotificationGlobalError(error));
           })
         );
       })
@@ -84,7 +82,7 @@ export class NotificationsEffect {
             return new InviteTeamNotificationsSuccess(response);
           }),
           catchError((error) => {
-            return of(new InviteTeamNotificationsError(error));
+            return of(new NotificationGlobalError(error));
           })
         );
       })
@@ -92,20 +90,36 @@ export class NotificationsEffect {
   );
 
   inviteRequestUser$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(NotificationsEnum.LOAD_NOTIFICATIONS_INVITE_USER_REQUEST),
-    exhaustMap((action: InviteUserNotificationsRequest) => {
-      return this.notificaService.requestInviteUser(action.payload).pipe(
-        map((response) => {
-          this.Alerts.success('Solicitação enviada com sucesso', 'Feito');
-          return new InviteUserNotificationsSuccess(response);
-        }),
-        catchError((error) => {
-          return of(new InviteUserNotificationsError(error));
-        })
-      )
-    })
-  )
+    this.actions$.pipe(
+      ofType(NotificationsEnum.LOAD_NOTIFICATIONS_INVITE_USER_REQUEST),
+      exhaustMap((action: InviteUserNotificationsRequest) => {
+        return this.notificaService.requestInviteUser(action.payload).pipe(
+          map((response) => {
+            this.Alerts.success('Solicitação enviada com sucesso', 'Feito');
+            return new InviteUserNotificationsSuccess(response);
+          }),
+          catchError((error) => {
+            return of(new NotificationGlobalError(error));
+          })
+        );
+      })
+    )
+  );
+
+  updateQuestionTeam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NotificationsEnum.LOAD_NOTIFICATIONS_QUESTION_TEAM_REQUEST),
+      exhaustMap((action: QuestionTeamNotificationsRequest) => {
+        return this.notificaService.UpdateQuestionTeam(action.payload).pipe(
+          map((response) => {
+            return new QuestionTeamNotificationsSuccess(response);
+          }),
+          catchError((error) => {
+            return of(new NotificationGlobalError(error));
+          })
+        );
+      })
+    )
   );
 
   constructor(

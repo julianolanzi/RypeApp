@@ -4,4 +4,5 @@ export interface SearchTeamSuccess {
   url: string;
   private: boolean;
   name: string;
+
 }

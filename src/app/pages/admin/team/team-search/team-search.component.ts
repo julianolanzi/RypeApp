@@ -7,7 +7,6 @@ import { Observable, Subscription } from 'rxjs';
 import { TeamSearchSelector } from 'src/app/shared/state-management/selectors/team.selector';
 import { SearchTeamSuccess } from 'src/app/models/teams/search-team-sucess';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
-import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actions/teams/team-load-request-public-team.actions';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadAction } from 'src/app/shared/state-management/actions/teams/team-load/team-load.actions';
 import { UserNotifications } from 'src/app/shared/state-management/selectors/notifications.selector';
@@ -15,6 +14,7 @@ import { UserNotificationsSuccess } from 'src/app/models/notifications/notificat
 import { AlertService } from 'src/app/services/utils/alert.service';
 import { RequestTeam } from 'src/app/models/notifications/notifications-request-team';
 import { InviteTeamNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/team-notifications/request-invite-team/notifications-team-invite-request.actions';
+import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actions/teams/request-public-team/team-load-request-public-team.actions';
 
 @Component({
   selector: 'app-team-search',
@@ -83,7 +83,7 @@ export class TeamSearchComponent {
         team: team._id,
         type: 'team'
       }
-      this.isinviteAwait = true;
+      this.isinviteAwait = false;
       this.store.dispatch(new InviteTeamNotificationsRequest(this.requestInvite));
     }
   }
@@ -91,7 +91,8 @@ export class TeamSearchComponent {
   public verifyInvite(id: string) {
     for (let item of this.notifications) {
       if (id == item.team) {
-        this.isinviteAwait = true;
+        this.isinviteAwait = false;
+
         this.Alerts.error('Voce já possui uma solicitação com esse time.', 'Ops');
       }
       if (id != item.team) {

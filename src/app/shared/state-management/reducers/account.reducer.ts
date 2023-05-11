@@ -1,19 +1,16 @@
 import { createReducer, Action, on } from '@ngrx/store';
 
-import { AccountUpdateLoadImgErrorAction } from './../actions/account/account-update-load-img-error.actions';
-import { AccountUpdateLoadRequestAction } from './../actions/account/account-update-load.actions';
-import { AccountLoadErrorAction } from './../actions/account/account-load-error.actions';
-import { AccountLoadSuccessAction } from './../actions/account/account-load-success.actions';
-import { AccountLoadRequestAction } from '../actions/account/account-load-request.actions';
 import { AccountState } from '../states/account.state';
-import { AccountUpdateLoadErrorAction } from '../actions/account/account-update-load-error.actions';
-import { AccountUpdateLoadSuccessAction } from '../actions/account/account-update-load-success.actions';
-import { AccountUpdateLoadImgRequestAction } from '../actions/account/account-update-load-img-request.actions';
-import { AccountUpdateLoadImgSuccessAction } from '../actions/account/account-update-load-img-success.actions';
-import { AccountUpdatePassLoadRequestAction } from '../actions/account/account-update-pass-request-actions';
-import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-update-pass-success-actions';
-import { AccountUpdatePassLoadErrorAction } from '../actions/account/account-update-pass-error-actions';
-import { AccountResetLoadAction } from '../actions/account/account-reset-load.actions';
+import { AccountUpdateLoadSuccessAction } from '../actions/account/account-update/account-update-load-success.actions';
+import { AccountUpdateLoadImgRequestAction } from '../actions/account/account-img/account-update-load-img-request.actions';
+import { AccountUpdatePassLoadRequestAction } from '../actions/account/account-reset-password/account-update-pass-request-actions';
+
+import { AccountLoadRequestAction } from '../actions/account/account-overview/account-load-request.actions';
+import { AccountLoadSuccessAction } from '../actions/account/account-overview/account-load-success.actions';
+import { AccountLoadGlobalErrorAction } from '../actions/account/account-global-error.actions';
+import { AccountUpdateLoadRequestAction } from '../actions/account/account-update/account-update-load.actions';
+import { AccountUpdateLoadImgSuccessAction } from '../actions/account/account-img/account-update-load-img-success.actions';
+import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-reset-password/account-update-pass-success-actions';
 
 export const initialState: AccountState = {
   account: {
@@ -52,6 +49,14 @@ export const initialState: AccountState = {
 
 const _accountReducer = createReducer(
   initialState,
+
+  on(new AccountLoadGlobalErrorAction().createAction(), (state, action) => ({
+    ...state,
+    authError: action.payload,
+    loading: false,
+    ischange: false,
+  })),
+
   on(new AccountLoadRequestAction().createAction(), (state, action) => ({
     ...state,
     authError: undefined,
@@ -62,12 +67,6 @@ const _accountReducer = createReducer(
     ...state,
     account: { ...action.payload },
     authError: undefined,
-    loading: false,
-    ischange: false,
-  })),
-  on(new AccountLoadErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
     loading: false,
     ischange: false,
   })),
@@ -84,12 +83,6 @@ const _accountReducer = createReducer(
     authError: undefined,
     loading: false,
     ischange: true,
-  })),
-  on(new AccountUpdateLoadErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    loading: false,
-    ischange: false,
   })),
 
   on(new AccountUpdateLoadImgRequestAction().createAction(), (state) => ({
@@ -113,12 +106,6 @@ const _accountReducer = createReducer(
       };
     }
   ),
-  on(new AccountUpdateLoadImgErrorAction().createAction(), (state, action) => ({
-    ...state,
-    authError: action.payload,
-    loading: false,
-    ischange: false,
-  })),
 
   on(new AccountUpdatePassLoadRequestAction().createAction(), (state) => {
     return { ...state, loading: true };
@@ -126,22 +113,7 @@ const _accountReducer = createReducer(
 
   on(new AccountUpdatePassLoadSuccessAction().createAction(), (state) => {
     return { ...state, loading: false };
-  }),
-
-  on(
-    new AccountUpdatePassLoadErrorAction().createAction(),
-    (state, action) => ({
-      ...state,
-      authError: action.payload,
-      loading: false,
-      ischange: false,
-    })
-  ),
-
-  on(new AccountResetLoadAction().createAction(), (state) => ({
-    ...state,
-    ...initialState,
-  }))
+  })
 );
 
 export function accountReducer(state: any, action: Action) {

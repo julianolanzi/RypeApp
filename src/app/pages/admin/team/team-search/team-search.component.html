@@ -53,7 +53,7 @@
               </div>
               <div>
                 <button *ngIf="team.private == false" (click)="joinTeamPublic(team)">Entrar</button>
-                <button *ngIf="team.private == true && this.isinviteAwait ==false"
+                <button *ngIf="team.private == true && this.isinviteAwait == false"
                   (click)="requestTeamPrivate(team)">Solicitar</button>
                 <button *ngIf="team.private == true && this.isinviteAwait ==true"
                   >Solicitação enviada</button>

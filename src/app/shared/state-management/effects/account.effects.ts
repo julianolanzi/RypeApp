@@ -1,29 +1,29 @@
-import { AccountUpdateLoadSuccessAction } from './../actions/account/account-update-load-success.actions';
-import { AccountUpdateLoadErrorAction } from './../actions/account/account-update-load-error.actions';
-import { AccountUpdateLoadRequestAction } from './../actions/account/account-update-load.actions';
-import { AccountLoadSuccessAction } from './../actions/account/account-load-success.actions';
-import { AccountLoadErrorAction } from './../actions/account/account-load-error.actions';
-import { AccountLoadRequestAction } from './../actions/account/account-load-request.actions';
-
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
 import { map, catchError, of, exhaustMap } from 'rxjs';
-
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { UserService } from 'src/app/services/user/user.service';
-
 import { AlertService } from 'src/app/services/utils/alert.service';
-import { AccountMessageEnum } from '../actions/account/account-message.enum';
-import { AccountUpdateLoadImgRequestAction } from '../actions/account/account-update-load-img-request.actions';
 import { UploadImgService } from 'src/app/services/imgs/upload.img.service';
-import { AccountUpdateLoadImgErrorAction } from '../actions/account/account-update-load-img-error.actions';
-import { AccountUpdateLoadImgSuccessAction } from '../actions/account/account-update-load-img-success.actions';
-import { AccountUpdatePassLoadRequestAction } from '../actions/account/account-update-pass-request-actions';
-import { AccountUpdatePassLoadErrorAction } from '../actions/account/account-update-pass-error-actions';
-import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-update-pass-success-actions';
-import { Store } from '@ngrx/store';
+
+import { AccountMessageEnum } from '../actions/account/account-message.enum';
+
+import { AccountUpdateLoadImgRequestAction } from '../actions/account/account-img/account-update-load-img-request.actions';
+import { AccountUpdateLoadImgSuccessAction } from '../actions/account/account-img/account-update-load-img-success.actions';
+
+import { AccountUpdateLoadSuccessAction } from '../actions/account/account-update/account-update-load-success.actions';
+import { AccountUpdatePassLoadRequestAction } from '../actions/account/account-reset-password/account-update-pass-request-actions';
+
+import { AccountLoadRequestAction } from '../actions/account/account-overview/account-load-request.actions';
+import { AccountLoadSuccessAction } from '../actions/account/account-overview/account-load-success.actions';
+
 import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
+
+import { AccountUpdateLoadRequestAction } from '../actions/account/account-update/account-update-load.actions';
+import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-reset-password/account-update-pass-success-actions';
+
+import { AccountLoadGlobalErrorAction } from '../actions/account/account-global-error.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class AccountEffect {
         return this.userService.GetUser(action.payload).pipe(
           map((response) => {
             if (!response) {
-              return new AccountLoadErrorAction();
+              return new AccountLoadGlobalErrorAction();
             } else {
               this.store.dispatch(new LoadingDisabledAction());
               return new AccountLoadSuccessAction(response);
@@ -47,13 +47,12 @@ export class AccountEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new AccountLoadErrorAction(error));
+            return of(new AccountLoadGlobalErrorAction(error));
           })
         );
       })
     )
   );
-
 
   updateUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -62,7 +61,7 @@ export class AccountEffect {
         return this.userService.updateUser(action.payload).pipe(
           map((response) => {
             if (!response) {
-              return new AccountUpdateLoadErrorAction();
+              return new AccountLoadGlobalErrorAction();
             } else {
               this.store.dispatch(new LoadingDisabledAction());
               this.Alerts.success('com sucesso', 'Perfil atualizado');
@@ -73,7 +72,7 @@ export class AccountEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new AccountUpdateLoadErrorAction(error));
+            return of(new AccountLoadGlobalErrorAction(error));
           })
         );
       })
@@ -87,9 +86,8 @@ export class AccountEffect {
         return this.imgService.uploadImgUser(action.payload).pipe(
           map((response) => {
             if (!response) {
-              return new AccountUpdateLoadImgErrorAction();
+              return new AccountLoadGlobalErrorAction();
             } else {
-
               this.store.dispatch(new LoadingDisabledAction());
               this.Alerts.success('Imagem atualizada com sucesso', 'Boa');
               return new AccountUpdateLoadImgSuccessAction(response);
@@ -99,7 +97,7 @@ export class AccountEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new AccountUpdateLoadImgErrorAction(error));
+            return of(new AccountLoadGlobalErrorAction(error));
           })
         );
       })
@@ -113,7 +111,7 @@ export class AccountEffect {
         return this.userService.chagePassword(action.payload).pipe(
           map((response) => {
             if (!response) {
-              return new AccountUpdatePassLoadErrorAction();
+              return new AccountLoadGlobalErrorAction();
             } else {
               this.store.dispatch(new LoadingDisabledAction());
               this.Alerts.success(
@@ -127,7 +125,7 @@ export class AccountEffect {
             this.store.dispatch(new LoadingDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-            return of(new AccountUpdatePassLoadErrorAction(error));
+            return of(new AccountLoadGlobalErrorAction(error));
           })
         );
       })
