@@ -15,7 +15,7 @@ import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-r
 export const initialState: AccountState = {
   account: {
     id: '',
-    idGame: '',
+    idRype: '',
     nickname: '',
     name: '',
     lastname: '',
@@ -26,10 +26,26 @@ export const initialState: AccountState = {
     country: '',
     birthday: undefined,
     verify: false,
-    discord: '',
-    instagram: '',
-    facebook: '',
-    youtube: '',
+    social:
+    {
+      discord: '',
+      instagram: '',
+      facebook: '',
+      youtube: '',
+      twitter: '',
+      twitch: '',
+      psn: '',
+      xbox: '',
+      idGame: '',
+    },
+    address: {
+      city: '',
+      district: '',
+      number: '',
+      street1: '',
+      street2: '',
+      zipcode: '',
+    },
     team: [
       {
         teamName: '',

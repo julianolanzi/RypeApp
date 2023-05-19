@@ -1,211 +1,46 @@
 <div class="container-page">
 
-    <div class="container-cover">
+  <div class="container-cover">
 
+  </div>
+  <div class="profile-user-container">
+    <div class="img-container">
+      <img class="img-profile" src="{{this.user.url}}" alt="">
     </div>
-    <div class="profile-user-container">
-        <div class="img-container">
-            <img class="img-profile" src="{{this.user.url}}" alt="">
-        </div>
-        <div class="name-container">
-            <h1>{{this.user.nickname}}</h1>
-        </div>
+    <div class="name-container">
+      <h1>{{this.user.nickname}}</h1>
     </div>
-
-    <div class="container-data">
-        <div class="top-container">
-            <div class="title-form p-20">
-                <h3 class="">Detalhes da conta</h3>
-
-            </div>
-            <div class="buttons-conteiner p-20">
-                <button (click)="modal.toggle()">Atualizar Foto</button>
-                <!-- <button>Atualizar Dados</button> -->
-            </div>
-        </div>
-        <hr>
-
-        <div class="container-form p-20">
-
-            <form (ngSubmit)="updateProfile()" class="d-flex-column" [formGroup]="updateForm" #formDir="ngForm">
-                <div class="item-form">
-                    <label>Id Game</label>
-                    <div>
-                        <input type="text" formControlName="idGame" placeholder="UUID" />
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>Nick</label>
-                    <div>
-                        <input type="text" formControlName="nickname" placeholder="Nick" />
-                        <div class="alert" *ngIf="nickname.invalid && formDir.submitted">
-                            <p class="">Nick é obrigatório</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-two-options">
-                    <div class="item-form">
-                        <label>Nome</label>
-                        <div>
-                            <input type="text" formControlName="name" placeholder="Nome" />
-                            <div class="alert" *ngIf="name.invalid && formDir.submitted">
-                                <p class="">Nome é obrigatório</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-form">
-                        <label>Sobre Nome</label>
-                        <div>
-                            <input type="text" formControlName="lastname" placeholder="Sobre Nome" />
-                            <div class="alert" *ngIf="lastname.invalid && formDir.submitted">
-                                <p class="">Sobre Nome é obrigatório</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>Telefone</label>
-                    <div>
-                        <input type="tel" mask="(00) 00000-0000" formControlName="phone" placeholder="Celular" />
-                        <div class="alert" *ngIf="phone.invalid && formDir.submitted">
-                            <p class="">Celular é obrigatório</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>Email </label>
-                    <p>No momento não é possivel mudar o e-mail de cadastro.</p>
-                    <div>
-                        <input type="text" formControlName="email" />
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>Data de Nascimento</label>
-                    <div>
-                        <input class="datapicker" type="date" formControlName="birthday"
-                            placeholder="Data de Nascimento" />
-                        <div class="alert" *ngIf="birthday.invalid && formDir.submitted">
-                            <p class="">Data de Nascimento é obrigatório</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>Como você se identifica ?</label>
-                    <div class="conteiner-gender-admin">
-                        <div class="options-gender">
-                            <input id="male" type="radio" value="Male" formControlName="gender" />
-
-                            <label class="">
-                                <div class="">Homem</div>
-                            </label>
-                        </div>
-
-                        <div class="options-gender ">
-                            <input id="famale" type="radio" value="Female" formControlName="gender" />
-
-                            <label>
-                                <div class="">Mulher</div>
-                            </label>
-                        </div>
+  </div>
 
 
-                    </div>
-                    <div class="alerts" *ngIf="gender.invalid && formDir.submitted">
-                        <p class="text-danger">Gênero é obrigatório</p>
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>País</label>
-                    <div>
-                        <select name="country" id="country" formControlName="country"
-                            data-placeholder="Selecione seu País ">
-                            <option value="">Selecione seu País ...</option>
-                            <option value="brasil">Brasil</option>
-                            <option value="méxico">México</option>
-                            <option value="chile">Chile</option>
-                            <option value="argentina">Argentina</option>
-                        </select>
-                        <div class="alerts" *ngIf="country.invalid && formDir.submitted">
-                            <p class="text-danger">País é obrigatório</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="midia-container">
-                    <h1>Mídias Sociais</h1>
-
-                    <div class="social-container">
-                        <div class="item-form">
-                            <label>Youtube</label>
-                            <div>
-                                <input type="text" formControlName="youtube" placeholder="Youtube" />
-                            </div>
-                        </div>
-                        <div class="item-form">
-                            <label>Instagram</label>
-                            <div>
-                                <input type="text" formControlName="instagram" placeholder="Instagram" />
-                            </div>
-                        </div>
-                        <div class="item-form">
-                            <label>Discord</label>
-                            <div>
-                                <input type="text" formControlName="discord" placeholder="Discord" />
-                            </div>
-                        </div>
-                        <div class="item-form">
-                            <label>Facebook</label>
-                            <div>
-                                <input type="text" formControlName="facebook" placeholder="Facebook" />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="item-form">
-                    <label>Data de criação</label>
-                    <div>
-                        <input type="text" formControlName="createdAt" />
-                    </div>
-                </div>
-
-
-                <div class="bottom-container">
-                    <button [disabled]="!updateForm.valid || (this.updateForm.touched == false)" type="submit">Atualizar
-                        Dados</button>
-                </div>
-            </form>
-
-        </div>
-    </div>
 
 </div>
 
 <div *ngIf="loading$ | async">
-    <app-loading></app-loading>
+  <app-loading></app-loading>
 </div>
 
 <app-modal-generic #modal>
-    <div class="container-content-modal">
-        <div class="title-modal">
-            <h1>Altere sua foto de perfil</h1>
-            <p>Selecione a foto que voce deseja</p>
-        </div>
-        <div class="modal-center">
-            <div class="container-img">
+  <div class="container-content-modal">
+    <div class="title-modal">
+      <h1>Altere sua foto de perfil</h1>
+      <p>Selecione a foto que voce deseja</p>
+    </div>
+    <div class="modal-center">
+      <div class="container-img">
 
-                <img [src]="this.url" alt="image" />
+        <img [src]="this.url" alt="image" />
 
-            </div>
-            <label class="file">
-                <input type="file" (change)="onselectFile($event)" />
-                <span>Selecione sua foto</span>
-            </label>
+      </div>
+      <label class="file">
+        <input type="file" (change)="onselectFile($event)" />
+        <span>Selecione sua foto</span>
+      </label>
 
-            <button (click)="modal.toggle()" (click)="changeImg()" class="btn-modal-change">Alterar</button>
-            <button (click)="modal.toggle()" class="btn-modal-close">Fechar</button>
-
-        </div>
+      <button (click)="modal.toggle()" (click)="changeImg()" class="btn-modal-change">Alterar</button>
+      <button (click)="modal.toggle()" class="btn-modal-close">Fechar</button>
 
     </div>
+
+  </div>
 </app-modal-generic>

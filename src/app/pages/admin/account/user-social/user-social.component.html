@@ -1,0 +1,117 @@
+<section class="container-hub">
+    <div class="container-cover-hub-account">
+        <img src="./assets/img/account/accounthub-icon.png" alt="">
+        <h2 class="title-cover-hub">Hub de conta</h2>
+        <p class="text-cover-hub">Alterar dados de perfil, foto, e muitos mais</p>
+    </div>
+    <div class="container-hub-content">
+        <div class="header-content">
+            <p class="pre-title">Meu Perfil</p>
+            <h2 class="title">Midias</h2>
+        </div>
+
+        <div class="grid-column">
+            <div class="widget-box">
+                <p class="widget-box-title">Suas redes sociais</p>
+                <div class="widget-box-content">
+                    <form (ngSubmit)="updateMedias()"  [formGroup]="updateSocialMedias" #formDir="ngForm" class="form" >
+                        <div class="form-row">
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link discord">
+                                        <img src="./assets/img/discord.png" alt="">
+                                    </div>
+                                    <label for="">Discord Username</label>
+                                    <input type="discord" formControlName="discord" placeholder="Discord Username" />
+                                   
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link instagram">
+                                        <img src="./assets/img/instagram.png" alt="">
+                                    </div>
+                                    <label for="">Instagram Username</label>
+                                    <input type="instagram" formControlName="instagram" placeholder="instagram Username" />
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link facebook">
+                                        <img src="./assets/img/facebook.png" alt="">
+                                    </div>
+                                    <label for="">Facebook Username</label>
+                                    <input type="facebook" formControlName="facebook" placeholder="Facebook Username" />
+                                   
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link youtube">
+                                        <img src="./assets/img/youtube.png" alt="">
+                                    </div>
+                                    <label for="">Youtube Username</label>
+                                    <input type="youtube" formControlName="youtube" placeholder="Youtube Username" />
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link twitter">
+                                        <img src="./assets/img/twitter.png" alt="">
+                                    </div>
+                                    <label for="">Twitter Username</label>
+                                    <input type="twitter" formControlName="twitter" placeholder="Twitter Username" />
+                                   
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link psn">
+                                        <img src="./assets/img/psn.png" alt="">
+                                    </div>
+                                    <label for="">PSN Username</label>
+                                    <input type="psn" formControlName="psn" placeholder="Psn Username" />
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link xbox">
+                                        <img src="./assets/img/xbox.png" alt="">
+                                    </div>
+                                    <label for="">XBOX Username</label>
+                                    <input type="xbox" formControlName="xbox" placeholder="Xbox Username" />
+                                   
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <div class="form-input social-input">
+                                    <div class="social-link twitch">
+                                        <img src="./assets/img/twitch.png" alt="">
+                                    </div>
+                                    <label for="">Twitch Username</label>
+                                    <input type="twitch" formControlName="twitch" placeholder="Twitch Username" />
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="button" [disabled]="!updateSocialMedias.valid || (this.updateSocialMedias.touched == false)" type="submit">Atualizar
+                            Dados</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

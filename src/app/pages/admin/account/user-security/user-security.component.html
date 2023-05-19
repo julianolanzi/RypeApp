@@ -1,59 +1,66 @@
-<div class="container-page">
-
-
-    <div class="profile-user-container">
+<section class="container-hub">
+    <div class="container-cover-hub-account">
+        <img src="./assets/img/account/accounthub-icon.png" alt="">
+        <h2 class="title-cover-hub">Hub de conta</h2>
+        <p class="text-cover-hub">Alterar dados de perfil, foto, e muitos mais</p>
     </div>
+    <div class="container-hub-content">
+        <div class="header-content">
+            <p class="pre-title">Meu Perfil</p>
+            <h2 class="title">Alterar Senha</h2>
+        </div>
 
-    <div class="container-data">
-        <div class="top-container">
-            <div class="title-form p-20">
-                <h3 class="">Atualize sua senha</h3>
-            </div>
-            <div class="buttons-conteiner p-20">
+        <div class="grid-column">
+            <div class="widget-box">
+                <div class="widget-box-content">
+                    <form (ngSubmit)="updatePassWord()" class="form" [formGroup]="updatePass" #formDir="ngForm">
+                        <div class="form-row">
+                            <div class="form-item">
+                                <div class="form-input">
+                                    <label>Senha atual</label>
+
+                                    <input type="password" formControlName="password" placeholder="Senha " />
+                                    <div class="alert" *ngIf="password.invalid && formDir.submitted">
+                                        <p class="">Senha atual é obrigatório</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-item">
+                                <div class="form-input">
+                                    <label for="">Nova Senha</label>
+                                    <input type="password" formControlName="newpassword" placeholder="Nova senha" />
+                                    <div class="alert" *ngIf="newpassword.invalid && formDir.submitted">
+                                        <p class="">Nova Senha é obrigatório</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <div class="form-input">
+                                    <label>Confirmar nova senha</label>
+                                    <input type="password" formControlName="confirmpassword"
+                                        placeholder="Confirmar nova senha" />
+                                    <div class="alert" *ngIf="confirmpassword.invalid && formDir.submitted">
+                                        <p class="">Confirmação de senha é obrigatório</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button class="button" [disabled]="!updatePass.valid" type="submit">Atualizar</button>
+
+                    </form>
+                </div>
             </div>
         </div>
-        <hr>
-
-        <div class="container-form p-20">
-
-            <form (ngSubmit)="updatePassWord()" class="d-flex-column" [formGroup]="updatePass" #formDir="ngForm">
-                <div class="item-form">
-                    <label>Senha atual</label>
-                    <div>
-                        <input type="password" formControlName="password" placeholder="Senha " />
-                        <div class="alert" *ngIf="password.invalid && formDir.submitted">
-                            <p class="">Senha atual é obrigatório</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>Nova Senha</label>
-                    <div>
-                        <input type="password" formControlName="newpassword" placeholder="Nova senha" />
-                        <div class="alert" *ngIf="newpassword.invalid && formDir.submitted">
-                            <p class="">Nova Senha é obrigatório</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item-form">
-                    <label>Confirmar nova senha</label>
-                    <div>
-                        <input type="password" formControlName="confirmpassword" placeholder="Confirmar nova senha" />
-                        <div class="alert" *ngIf="confirmpassword.invalid && formDir.submitted">
-                            <p class="">Confirmação de senha é obrigatório</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bottom-container">
-                    <button [disabled]="!updatePass.valid" type="submit">Atualizar</button>
-                </div>
-            </form>
-
-        </div>
     </div>
 
-</div>
+</section>
+
+
+
 
 <div *ngIf="loading$ | async">
     <app-loading></app-loading>

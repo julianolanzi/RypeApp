@@ -1,6 +1,6 @@
 export interface UserSuccessResponse {
     id: string;
-    idGame: string;
+    idRype: string;
     nickname: string;
     name: string;
     lastname: string;
@@ -11,10 +11,25 @@ export interface UserSuccessResponse {
     country: string;
     birthday: Date | undefined;
     verify: boolean;
-    discord: string;
-    instagram: string;
-    facebook: string;
-    youtube: string;
+    social: {
+        discord: string;
+        instagram: string;
+        facebook: string;
+        youtube: string;
+        twitter: string;
+        twitch: string;
+        psn: string;
+        xbox: string;
+        idGame:string;
+    }
+    address: {
+        city: string;
+        district: string;
+        number: string;
+        street1: string;
+        street2: string;
+        zipcode: string;
+    }
     team: [{
         teamName: string;
         tagName: string;

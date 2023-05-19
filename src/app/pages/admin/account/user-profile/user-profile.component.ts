@@ -1,42 +1,43 @@
-import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
-import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-img/account-update-load-img-request.actions';
-
-
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-
-import { select, Store } from '@ngrx/store';
-import { GlobalState } from 'src/app/shared/state-management/states/global.state';
-import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
-import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
-
+import { Component } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
-import { UpdateImg } from 'src/app/models/account/user-update-img';
-import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { select, Store } from '@ngrx/store';
 
+import { UpdateImg } from 'src/app/models/account/user-update-img';
+
+
+import { GlobalState } from 'src/app/shared/state-management/states/global.state';
+import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
+import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-img/account-update-load-img-request.actions';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
 import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
 import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-overview/account-load-request.actions';
 import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update/account-update-load.actions';
-
-
-
+import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
+import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
+import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
 @Component({
-  selector: 'app-user-overview',
-  templateUrl: './user-overview.component.html',
-  styleUrls: ['./user-overview.component.scss'],
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.scss']
 })
-export class UserOverviewComponent {
+export class UserProfileComponent {
+  cover = './assets/img/account/cover-1.jpg'
   updateForm!: FormGroup;
-  public id!: string;
+  updateFormAdress!: FormGroup;
   private subscriptions: Subscription = new Subscription();
   public user!: UserSuccessResponse;
   userUpdate!: UserUpdateRequest;
+  userAdress!: UserUpdateRequest;
+
+  public id!: string;
   url: any;
   file!: File;
+
+
   updateImg!: UpdateImg;
   loading$!: Observable<boolean>;
 
@@ -44,20 +45,26 @@ export class UserOverviewComponent {
     this.updateForm = new FormGroup({
       nickname: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
-      idGame: new FormControl(''),
+      lastname: new FormControl(''),
       phone: new FormControl('', [Validators.required]),
       gender: new FormControl(''),
       email: new FormControl({ value: '', disabled: true }),
       country: new FormControl(''),
       birthday: new FormControl(''),
-      discord: new FormControl(''),
-      instagram: new FormControl(''),
-      facebook: new FormControl(''),
-      youtube: new FormControl(''),
+      idRype: new FormControl({ value: '', disabled: true }),
       createdAt: new FormControl({ value: '', disabled: true }),
     });
+
+    this.updateFormAdress = new FormGroup({
+      city: new FormControl(''),
+      district: new FormControl(''),
+      number: new FormControl(''),
+      street1: new FormControl(''),
+      street2: new FormControl(''),
+      zipcode: new FormControl(''),
+    })
   }
+
   ngOnInit(): void {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
     this.loadId();
@@ -74,11 +81,8 @@ export class UserOverviewComponent {
   get lastname() {
     return this.updateForm.get('lastname')!;
   }
-  get email() {
-    return this.updateForm.get('email')!;
-  }
-  get idGame() {
-    return this.updateForm.get('idGame')!;
+  get idRype() {
+    return this.updateForm.get('idRype')!;
   }
   get phone() {
     return this.updateForm.get('phone')!;
@@ -86,23 +90,8 @@ export class UserOverviewComponent {
   get gender() {
     return this.updateForm.get('gender')!;
   }
-  get country() {
-    return this.updateForm.get('country')!;
-  }
   get birthday() {
     return this.updateForm.get('birthday')!;
-  }
-  get discord() {
-    return this.updateForm.get('discord')!;
-  }
-  get instagram() {
-    return this.updateForm.get('instagram')!;
-  }
-  get facebook() {
-    return this.updateForm.get('facebook')!;
-  }
-  get youtube() {
-    return this.updateForm.get('youtube')!;
   }
 
   getUserId() {
@@ -114,8 +103,8 @@ export class UserOverviewComponent {
     if (this.updateForm.invalid) {
       return;
     }
-
-    this.userUpdate = Object.assign({}, this.userUpdate, this.updateForm.value);
+    this.userUpdate = this.user,
+      this.userUpdate = Object.assign({}, this.userUpdate, this.updateForm.value);
     const data = {
       ...this.userUpdate,
       id: this.id,
@@ -123,25 +112,23 @@ export class UserOverviewComponent {
     this.store.dispatch(new LoadingActiveAction());
     this.store.dispatch(new AccountUpdateLoadRequestAction(data));
   }
-
-  onselectFile(e: any) {
-    if (e.target.files) {
-      this.file = e.srcElement.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.url = event.target.result;
-      };
+  updateInfoAdress() {
+    if (this.updateFormAdress.invalid) {
+      return;
     }
-  }
+    this.userUpdate = this.user,
+      this.userAdress = Object.assign({}, this.userAdress, this.updateFormAdress.value);
 
-  changeImg() {
-    this.updateImg = {
-      file: this.file,
+    const data = {
+      ...this.userUpdate,
+      address: {
+        ...this.userAdress,
+      },
       id: this.id,
     };
+
     this.store.dispatch(new LoadingActiveAction());
-    this.store.dispatch(new AccountUpdateLoadImgRequestAction(this.updateImg));
+    this.store.dispatch(new AccountUpdateLoadRequestAction(data));
   }
 
   public loadId() {
@@ -157,13 +144,12 @@ export class UserOverviewComponent {
   public loadUser() {
     const subscription = this.store
       .pipe(select(AccountSelector))
-      .subscribe((user) => {
-        this.user = user;
-        const { nickname, idRype } = this.user;
+      .subscribe((response) => {
+        this.user = response;
+        const { nickname } = this.user;
         (this.url = this.user.url),
           this.updateForm.patchValue({
             nickname,
-            idRype,
             name: this.user.name,
             lastname: this.user.lastname,
             gender: this.user.gender,
@@ -175,25 +161,43 @@ export class UserOverviewComponent {
             ),
             country: this.user.country,
             phone: this.user.phone,
-            social: {
-              youtube: this.user.social.youtube,
-              discord: this.user.social.discord,
-              instagram: this.user.social.instagram,
-              facebook: this.user.social.facebook,
-            },
+            idRype: this.user.idRype,
             createdAt: this.datePipe.transform(
               this.user.createdAt,
               'dd-MM-yyyy',
               'UTC'
             ),
           });
-      });
 
+        this.updateFormAdress.patchValue({
+          city: this.user.address.city,
+          district: this.user.address.district,
+          number: this.user.address.number,
+          street1: this.user.address.street1,
+          street2: this.user.address.street2,
+          zipcode: this.user.address.zipcode,
+        })
+      });
     this.subscriptions.add(subscription);
   }
 
-  // ngOnDestroy(): void {
+  changeImg() {
+    this.updateImg = {
+      file: this.file,
+      id: this.id,
+    };
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new AccountUpdateLoadImgRequestAction(this.updateImg));
+  }
 
-  //   this.store.dispatch(new AccountResetLoadAction());
-  // }
+  onselectFile(e: any) {
+    if (e.target.files) {
+      this.file = e.srcElement.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      };
+    }
+  }
 }
