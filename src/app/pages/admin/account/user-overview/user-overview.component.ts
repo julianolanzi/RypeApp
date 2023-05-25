@@ -30,6 +30,7 @@ import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/
   styleUrls: ['./user-overview.component.scss'],
 })
 export class UserOverviewComponent {
+  cover = './assets/img/account/cover-1.jpg'
   updateForm!: FormGroup;
   public id!: string;
   private subscriptions: Subscription = new Subscription();
@@ -41,22 +42,7 @@ export class UserOverviewComponent {
   loading$!: Observable<boolean>;
 
   constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {
-    this.updateForm = new FormGroup({
-      nickname: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
-      idGame: new FormControl(''),
-      phone: new FormControl('', [Validators.required]),
-      gender: new FormControl(''),
-      email: new FormControl({ value: '', disabled: true }),
-      country: new FormControl(''),
-      birthday: new FormControl(''),
-      discord: new FormControl(''),
-      instagram: new FormControl(''),
-      facebook: new FormControl(''),
-      youtube: new FormControl(''),
-      createdAt: new FormControl({ value: '', disabled: true }),
-    });
+  
   }
   ngOnInit(): void {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
@@ -157,37 +143,11 @@ export class UserOverviewComponent {
   public loadUser() {
     const subscription = this.store
       .pipe(select(AccountSelector))
-      .subscribe((user) => {
-        this.user = user;
-        const { nickname, idRype } = this.user;
-        (this.url = this.user.url),
-          this.updateForm.patchValue({
-            nickname,
-            idRype,
-            name: this.user.name,
-            lastname: this.user.lastname,
-            gender: this.user.gender,
-            email: this.user.email,
-            birthday: this.datePipe.transform(
-              this.user.birthday,
-              'yyyy-MM-dd',
-              'UTC'
-            ),
-            country: this.user.country,
-            phone: this.user.phone,
-            social: {
-              youtube: this.user.social.youtube,
-              discord: this.user.social.discord,
-              instagram: this.user.social.instagram,
-              facebook: this.user.social.facebook,
-            },
-            createdAt: this.datePipe.transform(
-              this.user.createdAt,
-              'dd-MM-yyyy',
-              'UTC'
-            ),
-          });
-      });
+      .subscribe((user) => 
+        this.user = user
+     
+        
+      );
 
     this.subscriptions.add(subscription);
   }
