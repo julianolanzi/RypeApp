@@ -496,9 +496,13 @@ header .image-text .profession {
           background-color: var(--pink-white);
           margin-top: 5px;
         }
+       
       }
     }
   }
+}
+.margin{
+  margin-top: 10px;
 }
 
 /* ===== SEARCH TEAMADMIN FIM  ===== */
@@ -1157,6 +1161,39 @@ header .image-text .profession {
       font-size: 80%;
       font-weight: 400;
 
+      .form-two-options {
+        display: grid;
+        grid-template-columns: 2fr 50%;
+        justify-content: center;
+        grid-gap: 10px;
+
+        .options-radio {
+          margin-top: 20px;
+
+          input[type="radio"] {
+            width: 100%;
+            height: 70px;
+            appearance: none;
+  
+          }
+  
+          input[type="radio"]:checked {
+            background-color: var(--pink-white);
+          }
+          span {
+            position: relative;
+            top: -49px;
+            left: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+          }
+        }
+
+       
+
+      }
+
       .social-link {
         position: absolute;
         top: 4px;
@@ -1256,6 +1293,18 @@ header .image-text .profession {
       font-weight: 700;
     }
 
+    textarea {
+      width: 100%;
+      height: 112px;
+      font-size: 1rem;
+      padding: 10px 18px;
+      background-color: var(--background-mode);
+      border: 1px solid var(--pink);
+      color: var(--text-color);
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
     select {
       width: 100%;
       height: 48px;
@@ -1323,7 +1372,8 @@ header .image-text .profession {
         justify-content: center;
         align-items: center;
         display: flex;
-        .user-stats-container{
+
+        .user-stats-container {
           padding-left: 0;
         }
       }
