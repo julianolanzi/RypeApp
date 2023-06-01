@@ -25,6 +25,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
   styleUrls: ['./team-settings.component.scss'],
 })
 export class TeamSettingsComponent {
+  cover = './assets/img/teams/cover-team.jpg'
   updateForm!: FormGroup;
   teamUpdate!: TeamUpdateInfo;
   Team!: TeamDataSuccess;

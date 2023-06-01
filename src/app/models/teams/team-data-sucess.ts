@@ -16,6 +16,7 @@ export interface TeamDataSuccess {
   youtubeTeam: string;
   instagramTeam: string;
   url: string;
+  urlCover: string;
   members: Array<any>;
   adminMembers: Array<any>;
   lines: Array<any>;

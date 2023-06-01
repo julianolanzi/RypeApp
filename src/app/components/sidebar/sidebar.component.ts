@@ -58,6 +58,7 @@ export class SidebarComponent {
     });
 
     subMenu.forEach((linkItem, index) => {
+ 
       linkItem.addEventListener('click', () => {
         if (width < 769) {
           sidebar.classList.toggle('close');
@@ -83,6 +84,37 @@ export class SidebarComponent {
 
     this.loadUser();
 
+  }
+
+  ngAfterViewInit(): void {
+    let sidebar = document.querySelector('nav') as HTMLElement;
+    let sidebarContainer = document.querySelector(
+      '.sidebar-container'
+    ) as HTMLElement;
+    let toggle = document.querySelector('.toggle') as HTMLElement;
+
+    let adminContent = document.querySelector(
+      '.container-admin-content'
+    ) as HTMLElement;
+    
+    let width =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
+
+    let subMenu = document.querySelectorAll('.sub-item');
+    subMenu.forEach((linkItem, index) => {
+     
+      linkItem.addEventListener('click', () => {
+        if (width < 769) {
+          sidebar.classList.toggle('close');
+          sidebarContainer.classList.toggle('close');
+          adminContent.classList.toggle('close');
+        }
+      });
+    });
+
+    
   }
 
   setCookie(isDarkMode: boolean) {

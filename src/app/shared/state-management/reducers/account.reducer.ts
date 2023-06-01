@@ -15,6 +15,7 @@ import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-r
 export const initialState: AccountState = {
   account: {
     id: '',
+    urlCover: '',
     idRype: '',
     nickname: '',
     name: '',

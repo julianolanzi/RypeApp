@@ -25,7 +25,6 @@ import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/globa
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent {
-  cover = './assets/img/account/cover-1.jpg'
   updateForm!: FormGroup;
   updateFormAdress!: FormGroup;
   private subscriptions: Subscription = new Subscription();
@@ -170,12 +169,12 @@ export class UserProfileComponent {
           });
 
         this.updateFormAdress.patchValue({
-          city: this.user.address.city,
-          district: this.user.address.district,
-          number: this.user.address.number,
-          street1: this.user.address.street1,
-          street2: this.user.address.street2,
-          zipcode: this.user.address.zipcode,
+          city: this.user.address?.city,
+          district: this.user.address?.district,
+          number: this.user.address?.number,
+          street1: this.user.address?.street1,
+          street2: this.user.address?.street2,
+          zipcode: this.user.address?.zipcode,
         })
       });
     this.subscriptions.add(subscription);

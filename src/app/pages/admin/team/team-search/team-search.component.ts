@@ -23,7 +23,7 @@ import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actio
 })
 export class TeamSearchComponent {
   teamSearch!: FormGroup;
-
+  cover = './assets/img/teams/cover-team.jpg'
   notifications!: UserNotificationsSuccess[];
 
   Teams$: Observable<SearchTeamSuccess[]> =
@@ -31,7 +31,7 @@ export class TeamSearchComponent {
   user: any;
   idTeam: string = '';
   teamKey: string = '';
-
+  
   requestInvite!: RequestTeam;
 
   isinviteAwait: boolean = false;

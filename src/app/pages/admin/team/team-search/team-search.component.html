@@ -16,7 +16,7 @@
               <div class="form-input">
                 <label>Nome | Tag Name ou ID</label>
                 <input type="text" formControlName="key" placeholder="Insira o nome do time, Tag Name ou ID " />
-                
+
               </div>
               <button type="submit" [disabled]="!teamSearch.valid" class="button margin">Buscar</button>
               <br>
@@ -25,13 +25,14 @@
               </div>
 
             </div>
-           
+
           </div>
 
 
         </form>
 
-        <div class="container-search-teams d-flex gap-10">
+
+        <!-- <div class="container-search-teams d-flex gap-10">
           <div class="teams" *ngFor="let team of Teams$ | async">
             <div class="team-item d-flex">
               <div class="image">
@@ -65,8 +66,73 @@
               </div>
             </div>
           </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="grid grid-4-4-4">
+      <div class="user-preview" *ngFor="let team of Teams$ | async">
+        <img class="user-preview-cover big" src="{{this.cover}}" alt="">
+        <div class="user-preview-info">
+          <div class="tag-sticker">
+            <span *ngIf="team.private == false" class="material-symbols-outlined">
+              lock
+            </span>
+            <span *ngIf="team.private == true" class="material-symbols-outlined">
+              public
+            </span>
+          </div>
+
+          <div class="user-short-description ">
+            <div class="user-short-description-avatar not-progress">
+              <div class="user-avatar-border">
+                <div class="hexagon-120-130">
+                  <svg width="120" height="130" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <clipPath id="avatar-border-not-progress">
+                        <path
+                          d="M4.11577 27.8749L56.4381 1.9679C58.2364 1.0775 60.3451 1.06759 62.1517 1.94105L115.829 27.8937C118.074 28.979 119.5 31.2525 119.5 33.7456V94.9462C119.5 97.396 118.123 99.6378 115.937 100.745L62.2608 127.933C60.3947 128.878 58.1877 128.867 56.3308 127.904L4.00703 100.763C1.8524 99.6449 0.5 97.4199 0.5 94.9926V33.6999C0.5 31.2288 1.90123 28.9714 4.11577 27.8749Z"
+                          stroke="black" />
+
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="user-avatar-content">
+                <div class="hexagon-image-100-110">
+                  <svg width="100" height="110" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <clipPath id="avatar-img-big">
+                        <path
+                          d="M4.0803 23.3469L46.5221 2.0089C48.3397 1.09512 50.4802 1.08496 52.3063 1.98146L95.8645 23.3655C98.0898 24.458 99.5 26.7212 99.5 29.2003V79.7071C99.5 82.1425 98.1386 84.3736 95.9729 85.4874L52.4161 107.889C50.5304 108.859 48.2903 108.848 46.4142 107.86L3.97091 85.5049C1.83629 84.3806 0.5 82.1664 0.5 79.7538V29.1543C0.5 26.6974 1.88525 24.4505 4.0803 23.3469Z"
+                          stroke="black" />
+
+
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <img src="{{team.url}}" alt="">
+                </div>
+              </div>
+
+
+
+            </div>
+            <p class="user-short-description-title">{{team.name}}</p>
+            <p class="user-short-description-text"> {{team.tagName}}</p>
+            <div class="user-preview-actions">
+
+              <button class="button" *ngIf="team.private == false" (click)="joinTeamPublic(team)">Entrar</button>
+              <button class="button" *ngIf="team.private == true && this.isinviteAwait == false"
+                (click)="requestTeamPrivate(team)">Solicitar</button>
+              <button class="button" *ngIf="team.private == true && this.isinviteAwait ==true">Solicitação
+                enviada</button>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>

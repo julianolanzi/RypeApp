@@ -86,15 +86,15 @@ export class UserSocialComponent {
       .subscribe((response) => {
         this.user = response;
         this.updateSocialMedias.patchValue({
-          discord: this.user.social.discord,
-          instagram: this.user.social.instagram,
-          facebook: this.user.social.facebook,
-          youtube: this.user.social.youtube,
-          twitter: this.user.social.twitter,
-          twitch: this.user.social.twitch,
-          psn: this.user.social.psn,
-          xbox: this.user.social.xbox,
-          idGame: this.user.social.idGame,
+          discord: this.user.social?.discord,
+          instagram: this.user.social?.instagram,
+          facebook: this.user.social?.facebook,
+          youtube: this.user.social?.youtube,
+          twitter: this.user.social?.twitter,
+          twitch: this.user.social?.twitch,
+          psn: this.user.social?.psn,
+          xbox: this.user.social?.xbox,
+          idGame: this.user.social?.idGame,
         });
 
       });

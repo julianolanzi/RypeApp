@@ -1,6 +1,7 @@
 export interface UserSuccessResponse {
     id: string;
     idRype: string;
+    urlCover: string;
     nickname: string;
     name: string;
     lastname: string;

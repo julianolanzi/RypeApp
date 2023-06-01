@@ -13,8 +13,9 @@ export interface CreateTeamSuccess {
   members: [];
   lines: [];
   adminMembers: [];
-  id: string;
+  _id: string;
   url: string;
   private: boolean;
   createdAt: Date | undefined;
+
 }

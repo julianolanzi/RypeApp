@@ -1,6 +1,6 @@
 <section class="container-hub">
   <div class="profile-header">
-    <img class="profile-header-cover" src="{{this.cover}}" alt="">
+    <img class="profile-header-cover" src="{{this.user.urlCover}}" alt="">
   </div>
   <div class="profile-header-info">
     <div class="user-short-description ">
@@ -89,7 +89,7 @@
       </div>
 
 
-      <div class="profile-header-social-links ">
+      <div class="profile-header-social-links " *ngIf="this.user.social">
         <a class="social-link-all discord" *ngIf="this.user.social.discord" title="{{this.user.social.discord}}"><img
             src="./assets/img/discord.png" alt=""></a>
 
@@ -109,9 +109,9 @@
           href="https://twitter.com/{{this.user.social.twitter}}" target="_blank"><img src="./assets/img/twitter.png"
             alt=""></a>
 
-        <a class="social-link-all psn" title="{{this.user.social.psn}}"><img src="./assets/img/psn.png" alt=""></a>
+        <a class="social-link-all psn" *ngIf="this.user.social.psn" title="{{this.user.social.psn}}"><img src="./assets/img/psn.png" alt=""></a>
 
-        <a class="social-link-all xbox" title="{{this.user.social.xbox}}"><img src="./assets/img/xbox.png" alt=""></a>
+        <a class="social-link-all xbox" *ngIf="this.user.social.xbox" title="{{this.user.social.xbox}}"><img src="./assets/img/xbox.png" alt=""></a>
 
         <a class="social-link-all twitch" *ngIf="this.user.social.twitch"
           href="https://www.twitch.tv/{{this.user.social.twitch}}" target="_blank"><img src="./assets/img/twitch.png"
@@ -126,3 +126,7 @@
 
   </div>
 </section>
+
+<div *ngIf="loading$ | async">
+  <app-loading></app-loading>
+</div>

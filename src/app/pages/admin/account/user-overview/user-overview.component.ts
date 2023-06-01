@@ -30,7 +30,7 @@ import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/
   styleUrls: ['./user-overview.component.scss'],
 })
 export class UserOverviewComponent {
-  cover = './assets/img/account/cover-1.jpg'
+ 
   updateForm!: FormGroup;
   public id!: string;
   private subscriptions: Subscription = new Subscription();

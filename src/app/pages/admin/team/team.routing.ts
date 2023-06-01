@@ -10,6 +10,7 @@ import { TeamSearchComponent } from './team-search/team-search.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { TeamUpdateMemberComponent } from './team-update-member/team-update-member.component';
 import { TeamUpdateAdminComponent } from './team-update-admin/team-update-admin.component';
+import { TeamUserSearchComponent } from './team-user-search/team-user-search.component';
 
 export const TeamRoutes: Routes = [
   {
@@ -45,6 +46,11 @@ export const TeamRoutes: Routes = [
   {
     path: 'team-admins',
     component: TeamUpdateAdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'team-search-user',
+    component: TeamUserSearchComponent,
     canActivate: [AuthGuard],
   },
 ];

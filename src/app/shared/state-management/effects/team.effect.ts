@@ -49,6 +49,9 @@ export class TeamEffect {
               this.router.navigate(['team-overview']);
             }, 3000);
             this.store.dispatch(new LoadingDisabledAction());
+
+
+            // this.store.dispatch(new TeamLoadInfoRequestAction(response._id));
             return new TeamLoadCreateSuccessAction(response);
           }),
           catchError((error) => {
@@ -133,6 +136,7 @@ export class TeamEffect {
         return this.teamService.updateInfoTeam(action.payload).pipe(
           map((response) => {
             this.store.dispatch(new LoadingDisabledAction());
+            this.Alerts.success('Atualização realizada com sucesso', 'Feito !');
             return new TeamLoadUpdateSuccessAction(response);
           }),
           catchError((error) => {
@@ -153,6 +157,7 @@ export class TeamEffect {
         return this.imgService.uploadImgTeam(action.payload).pipe(
           map((response) => {
             this.store.dispatch(new LoadingDisabledAction());
+            this.Alerts.success('Foto Atualizada com sucesso', 'Feito !');
             return new TeamLoadUpdateSuccessImg(response);
           }),
           catchError((error) => {
@@ -267,5 +272,5 @@ export class TeamEffect {
     private store: Store,
     private router: Router,
     private imgService: UploadImgService
-  ) {}
+  ) { }
 }

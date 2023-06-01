@@ -23,7 +23,7 @@ import { TeamLoadGlobalErrorAction } from '../actions/teams/team-load-global-err
 export const initialState: TeamState = {
   team: {
     idTeam: '',
-    id: '',
+    _id: '',
     name: '',
     tagName: '',
     ranking: '',
@@ -60,6 +60,7 @@ export const initialState: TeamState = {
     youtubeTeam: '',
     instagramTeam: '',
     url: '',
+    urlCover: '',
     members: [],
     adminMembers: [],
     lines: [],

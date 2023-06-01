@@ -1,190 +1,97 @@
-<div class="container-page">
-  <section *ngIf="this.isTeam == true">
-    <div class="container-cover">
+<section class="container-hub">
+  <div class="profile-header">
+    <img class="profile-header-cover" src="{{this.Team.urlCover}}" alt="">
+  </div>
 
-    </div>
-    <div class="team-user-container">
-      <div class="img-container">
-        <img class="img-team" src="{{this.Team.url}}" alt="">
-      </div>
-      <h1>{{this.Team.name.toUpperCase()}}</h1>
-      <div class="container-overview-team d-flex">
-        <div *ngIf="this.Team.discordTeam" class="social-item d-flex">
-          <div class="img-icon">
-            <img src="./assets/img/discord.png" alt="">
-          </div>
-          <a href="{{this.Team.discordTeam}}">Discord</a>
-        </div>
-        <div *ngIf="this.Team.youtubeTeam" class="social-item d-flex">
-          <div class="img-icon">
-            <img src="./assets/img/youtube.png" alt="">
-          </div>
-          <a href="{{this.Team.youtubeTeam}}">Youtube</a>
-        </div>
+  <div class="profile-header-info v2">
+    <div class="user-short-description ">
+      <a class="user-short-description-avatar big">
+        <div class="user-avatar-border">
+          <div class="hexagon-148-164">
+            <svg width="148" height="164" viewBox="0 0 148 164" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <clipPath id="avatar-border-big">
+                  <path
+                    d="M4.06316 35.5349L70.2195 2.02899C72.0463 1.10378 74.2023 1.09351 76.0378 2.00127L143.881 35.5532C146.098 36.6492 147.5 38.9074 147.5 41.3797V120.947C147.5 123.376 146.146 125.602 143.99 126.719L76.1479 161.868C74.2529 162.849 71.9966 162.838 70.1112 161.838L3.95349 126.736C1.82854 125.608 0.5 123.4 0.5 120.994V41.3336C0.5 38.8836 1.87754 36.6418 4.06316 35.5349Z"
+                    stroke="black" />
 
-        <div *ngIf="this.Team.facebookTeam" class="social-item d-flex">
-          <div class="img-icon">
-            <img src="./assets/img/facebook.png" alt="">
+                </clipPath>
+              </defs>
+            </svg>
           </div>
-          <a href="{{this.Team.facebookTeam}}">Facebook</a>
-        </div>
-        <div *ngIf="this.Team.instagramTeam" class="social-item d-flex">
-          <div class="img-icon">
-            <img src="./assets/img/instagram.png" alt="">
-          </div>
-          <a href="{{this.Team.instagramTeam}}">Instagram</a>
         </div>
 
-      </div>
-    </div>
+        <div class="user-avatar-content">
+          <div class="hexagon-image-124-136">
+            <svg width="124" height="136" viewBox="0 0 124 136" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <clipPath id="avatar-img-big">
+                  <path d="M4.08714 29.2202L58.386 2.00094C60.1999 1.09169 62.3342 1.08158 64.1566 1.97361L119.858 29.2387C122.087 30.3299 123.5 32.5951 123.5 35.0769V99.5508C123.5 101.989 122.136 104.222 119.966 105.335L64.2663 133.897C62.3843 134.863 60.1506 134.852 58.2782 133.868L3.97788 105.352C1.83939 104.229 0.5 102.013 0.5 99.5975V35.0309C0.5 32.5713 1.88833 30.3224 4.08714 29.2202Z" stroke="black"/>
 
-    <div *ngIf="this.Team.description" class="container-description">
-      <div class="title">
-        <h1>Descrição & Regras</h1>
-      </div>
-      <div class="description">
-        <p>{{this.Team.description}}</p>
-      </div>
+
+
+                </clipPath>
+              </defs>
+            </svg>
+            <img src="{{this.Team.url}}" alt="">
+          </div>
+        </div>
+
+      </a>
+      <p class="user-short-description-title">{{this.Team.name}}</p>
+      <p class="user-short-description-text"> {{this.Team.tagName}}</p>
     </div>
 
-
-
-    <div class="container-items-team">
-      <div class="container-items-title">
-        <span>Adm</span>
-      </div>
-      <div class="container-items" >
-        <div  class="item admin gap-10 ">
-
-          <div class="imagem-item">
-            <img src="{{this.Team.admin.url}}" alt="">
+    <div class="profile-header-social-links-wrap">
+      <div class="user-stats">
+        <div class="user-stats-container">
+          <div class="user-stat" *ngIf="this.Team.private == false">
+            <span class="material-symbols-outlined">
+              public
+              </span>
+              Público
           </div>
-          <div class="name-item-container">
-            <div class="name-item">
-              <span>{{this.Team.admin.nickname}}</span>
-            </div>
-            <div class="img-country">
-              <img *ngIf="this.Team.admin.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
-              <img *ngIf="this.Team.admin.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
-              <img *ngIf="this.Team.admin.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
-              <img *ngIf="this.Team.admin.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
-            </div>
+          <div class="user-stat" *ngIf="this.Team.private == true">
+            <span class="material-symbols-outlined">
+              lock
+              </span>
+              Privado
           </div>
-          <div class="infos-item">
-            <img *ngIf="this.Team.admin" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png" alt="">
-            <!-- <img *ngIf="member.verify" src="./assets/img/flags/suporte.png" alt="">
-            <img *ngIf="member.verify" src="./assets/img/flags/sniper.png" alt="">
-            <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt=""> -->
-          </div>
-
+        
         </div>
       </div>
-    </div>
 
 
+      <div class="profile-header-social-links " >
+        <a class="social-link-all discord" *ngIf="this.Team.discordTeam" title="{{this.Team.discordTeam}}"><img
+            src="./assets/img/discord.png" alt=""></a>
 
-    <div class="container-items-team">
-      <div class="container-items-title">
-        <span>Sub Adm,s</span>
+        <a class="social-link-all instagram" *ngIf="this.Team.instagramTeam"
+          href="https://www.instagram.com/{{this.Team.instagramTeam}}" target="_blank"><img
+            src="./assets/img/instagram.png" alt=""></a>
+
+        <a class="social-link-all facebook" *ngIf="this.Team.facebookTeam"
+          href="https://www.facebook.com/{{this.Team.facebookTeam}}" target="_blank"><img
+            src="./assets/img/facebook.png" alt=""></a>
+
+        <a class="social-link-all youtube" *ngIf="this.Team.youtubeTeam"
+          href="https://www.youtube.com/{{this.Team.youtubeTeam}}" target="_blank"><img
+            src="./assets/img/youtube.png" alt=""></a>
+
+
       </div>
-      <div class="container-items" >
-        <div *ngFor="let member of this.Team.adminMembers" class="item sub-admin gap-10 ">
-
-          <div class="imagem-item">
-            <img src="{{member.url}}" alt="">
-          </div>
-          <div class="name-item-container">
-            <div class="name-item">
-              <span>{{member.nickname}}</span>
-            </div>
-            <div class="img-country">
-              <img *ngIf="member.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
-              <img *ngIf="member.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
-              <img *ngIf="member.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
-              <img *ngIf="member.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
-            </div>
-          </div>
-          <div class="infos-item">
-            <img *ngIf="member.verify" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png" alt="">
-            <!-- <img *ngIf="member.verify" src="./assets/img/flags/suporte.png" alt="">
-            <img *ngIf="member.verify" src="./assets/img/flags/sniper.png" alt="">
-            <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt=""> -->
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container-items-team">
-      <div class="container-items-title">
-        <span>Membros</span>
-      </div>
-      <div class="container-items" >
-        <div *ngFor="let member of this.Team.members" class="item gap-10 ">
-
-          <div class="imagem-item">
-            <img src="{{member.url}}" alt="">
-          </div>
-          <div class="name-item-container">
-            <div class="name-item">
-              <span>{{member.nickname}}</span>
-            </div>
-            <div class="img-country">
-              <img *ngIf="member.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
-              <img *ngIf="member.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
-              <img *ngIf="member.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
-              <img *ngIf="member.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
-            </div>
-          </div>
-          <div class="infos-item">
-            <img *ngIf="member.verify" alt="Verificado" title="Verificado" src="./assets/img/flags/verificado.png" alt="">
-            <!-- <img *ngIf="member.verify" src="./assets/img/flags/suporte.png" alt="">
-            <img *ngIf="member.verify" src="./assets/img/flags/sniper.png" alt="">
-            <img *ngIf="member.verify" src="./assets/img/flags/rush.png" alt=""> -->
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container-data">
 
 
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <section *ngIf="this.isTeam == false">
-    <app-team-setup></app-team-setup>
-  </section>
-</div>
+
+
+
+
 
 <div *ngIf="loading$ | async">
   <app-loading></app-loading>
 </div>
-
-
-<app-modal-generic #modal>
-  <div class="container-content-modal">
-    <div class="title-modal">
-      <h1>Altere a foto do time</h1>
-      <p>Selecione a foto que voce deseja</p>
-    </div>
-    <div class="modal-center">
-      <div class="container-img">
-
-        <img [src]="this.url" alt="image" />
-
-      </div>
-      <label class="file">
-        <input type="file" (change)="onselectFile($event)" />
-        <span>Selecione sua foto</span>
-      </label>
-
-      <button (click)="modal.toggle()" class="btn-modal-change">Alterar</button>
-      <button (click)="modal.toggle()" class="btn-modal-close">Fechar</button>
-
-    </div>
-
-  </div>
-</app-modal-generic>

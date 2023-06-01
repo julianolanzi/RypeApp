@@ -1,0 +1,177 @@
+<section class="container-hub">
+    <div class="container-cover-hub-account">
+        <img src="./assets/img/teams/icon-team.png" alt="">
+        <h2 class="title-cover-hub">Hub de Time</h2>
+        <p class="text-cover-hub">Busque um time para participar</p>
+    </div>
+
+    <div class="container-hub-content">
+        <div class="widget-box">
+            <p class="widget-box-title">Preencha os dados para buscar os jogadores</p>
+      
+            <div class="widget-box-content">
+              <form class="form" (ngSubmit)="memberSearchKey()" [formGroup]="memberSearch" #formDir="ngForm">
+                <div class="form-row">
+                  <div class="form-item">
+                    <div class="form-input">
+                      <label>Nome | Nick</label>
+                      <input type="text" formControlName="key" placeholder="Insira o nome do jogador, Tag Name ou ID " />
+      
+                    </div>
+                    <button type="submit" class="button margin">Buscar</button>
+                    <div class="alert" *ngIf="key.invalid && formDir.submitted">
+                      <p class="form-alert">Informar um valor é obrigatório</p>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="grid grid-4-4-4">
+        <div *ngFor="let member of resultSearch$ | async" class="user-preview">
+          <img class="user-preview-cover big" src="{{member.urlCover}}" alt="">
+          <div class="user-preview-info">
+            <div *ngIf="member.team.length > 0" class="tag-sticker" title="{{member.team[0]?.name}}" >
+              <span   class="material-symbols-outlined">
+                groups
+              </span>
+              
+            </div>
+  
+            <div class="user-short-description ">
+              <div class="user-short-description-avatar members">
+                <div class="user-avatar-border">
+                  <div class="hexagon-120-130">
+                    <svg width="120" height="130" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-border-not-progress">
+                          <path
+                            d="M4.11577 27.8749L56.4381 1.9679C58.2364 1.0775 60.3451 1.06759 62.1517 1.94105L115.829 27.8937C118.074 28.979 119.5 31.2525 119.5 33.7456V94.9462C119.5 97.396 118.123 99.6378 115.937 100.745L62.2608 127.933C60.3947 128.878 58.1877 128.867 56.3308 127.904L4.00703 100.763C1.8524 99.6449 0.5 97.4199 0.5 94.9926V33.6999C0.5 31.2288 1.90123 28.9714 4.11577 27.8749Z"
+                            stroke="black" />
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+  
+                <div class="user-avatar-content">
+                  <div class="hexagon-image-82-90">
+                    <svg width="82" height="90" viewBox="0 0 82 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-82-90">
+                          <path
+                            d="M4.08547 18.8325L37.6344 2.00288C39.4491 1.09253 41.585 1.08241 43.4083 1.97552L77.8593 18.8511C80.0875 19.9425 81.5 22.2073 81.5 24.6884V64.434C81.5 66.8715 80.1363 69.1041 77.9676 70.217L43.518 87.8954C41.6351 88.8616 39.3998 88.8507 37.5265 87.8662L3.97618 70.2344C1.83864 69.1111 0.5 66.8954 0.5 64.4806V24.6425C0.5 22.1835 1.88757 19.9351 4.08547 18.8325Z"
+                            stroke="black" />
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    <img src="{{member.url}}" alt="">
+                  </div>
+                </div>
+                <div class="user-avatar-progress">
+                  <div class="hexagon-image-100-110">
+  
+                    <svg width="100" height="110" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+                      <defs>
+                        <clipPath id="progress-110">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M44.6829 1.16491C47.6686 -0.371842 51.1857 -0.389058 54.1858 1.11877L94.032 21.1451C97.7034 22.9904 100 26.8042 100 30.9484V78.0988C100 82.1705 97.7825 85.9294 94.21 87.8105L54.3654 108.79C51.2675 110.421 47.5867 110.402 44.5048 108.74L5.69768 87.8151C2.17677 85.9166 0 82.1865 0 78.1526V30.8954C0 26.7881 2.25619 23.002 5.87733 21.1382L44.6829 1.16491ZM51.6816 6.19438C50.2758 5.48786 48.6347 5.49574 47.2352 6.2161L8.42961 26.1894C6.72516 27.0667 5.61798 28.8792 5.61798 30.8954V78.1526C5.61798 80.1324 6.68619 81.9196 8.34499 82.814L47.1521 103.739C48.5973 104.519 50.3149 104.527 51.767 103.762L91.6115 82.7833C93.2938 81.8975 94.382 80.0973 94.382 78.0988V30.9484C94.382 28.9139 93.255 27.0889 91.5277 26.2207L51.6816 6.19438Z"
+                            fill="black" />
+  
+  
+  
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+  
+                <div class="user-avatar-progress-border">
+                  <div class="hexagon-image-100-110">
+                    <svg width="100" height="110" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-progress-front">
+                          <path
+                            d="M89.8254 25.3116L51.57 4.98056L54.5189 0.0656024L95.5865 20.825C98.2627 22.1778 99.95 24.9214 99.95 27.9201V79.4242C99.95 82.3702 98.3209 85.0747 95.7166 86.4519L53.1779 108.948C50.8217 110.194 47.9979 110.176 45.6575 108.901L4.19613 86.3091C1.64043 84.9165 0.05 82.2387 0.05 79.3282V31.8018H5.54561L5.86724 74.9409C5.88906 77.8675 7.49755 80.5517 10.068 81.9511L45.6539 101.324C47.9993 102.601 50.8252 102.631 53.1978 101.406L89.7425 82.5254C92.4175 81.1435 94.0976 78.3843 94.0976 75.3735V32.4201C94.0976 29.4429 92.4544 26.7088 89.8254 25.3116Z"
+                            fill="#E62479" stroke="#E62479" stroke-width="0.1" />
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+  
+  
+              </div>
+              <p class="user-short-description-title">{{member.name}}</p>
+              <p class="user-short-description-text">{{member.nickname}}</p>
+  
+              <div class="user-short-description-info">
+                <div *ngIf="member.country" class="description-country">
+                  <div class="country-details">
+                    <span class="material-symbols-outlined">
+                      public
+                    </span>
+                    <p *ngIf="member.country == 'brasil'">Brasil</p>
+                    <p *ngIf="member.country == 'méxico'">México</p>
+                    <p *ngIf="member.country == 'chile'">Chile</p>
+                    <p *ngIf="member.country == 'argentina'">Argentina</p>
+  
+                  </div>
+  
+                  <img *ngIf="member.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
+                  <img *ngIf="member.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
+                  <img *ngIf="member.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
+                  <img *ngIf="member.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
+                </div>
+                <div class="user-social-links small" *ngIf="this.member.social">
+                  <a class="social-link-all discord" *ngIf="this.member.social.discord" title="{{this.member.social.discord}}"><img
+                    src="./assets/img/discord.png" alt=""></a>
+        
+                <a class="social-link-all instagram" *ngIf="this.member.social.instagram"
+                  href="https://www.instagram.com/{{this.member.social.instagram}}" target="_blank"><img
+                    src="./assets/img/instagram.png" alt=""></a>
+        
+                <a class="social-link-all facebook" *ngIf="this.member.social.facebook"
+                  href="https://www.facebook.com/{{this.member.social.facebook}}" target="_blank"><img
+                    src="./assets/img/facebook.png" alt=""></a>
+        
+                <a class="social-link-all youtube" *ngIf="this.member.social.youtube"
+                  href="https://www.youtube.com/{{this.member.social.youtube}}" target="_blank"><img
+                    src="./assets/img/youtube.png" alt=""></a>
+        
+                <a class="social-link-all twitter" *ngIf="this.member.social.twitter"
+                  href="https://twitter.com/{{this.member.social.twitter}}" target="_blank"><img src="./assets/img/twitter.png"
+                    alt=""></a>
+        
+                <a class="social-link-all psn" *ngIf="this.member.social.psn" title="{{this.member.social.psn}}"><img src="./assets/img/psn.png" alt=""></a>
+        
+                <a class="social-link-all xbox" *ngIf="this.member.social.xbox" title="{{this.member.social.xbox}}"><img src="./assets/img/xbox.png" alt=""></a>
+        
+                <a class="social-link-all twitch" *ngIf="this.member.social.twitch"
+                  href="https://www.twitch.tv/{{this.member.social.twitch}}" target="_blank"><img src="./assets/img/twitch.png"
+                    alt=""></a>
+                </div>
+              </div>
+
+             
+              <div class="user-preview-actions">
+                <button *ngIf="member.team.length == 0 && this.isinviteAwait == false" (click)="inviteUserTeam(member)"
+                  class="button">Enviar Solicitação</button>
+                <button *ngIf="member.team.length == 0 && this.isinviteAwait == true" class="button">Solicitação
+                  Enviada</button>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+
+</section>

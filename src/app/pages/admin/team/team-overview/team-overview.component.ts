@@ -9,8 +9,7 @@ import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.sel
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { TeamDataSelector, TeamLoadingTeam } from 'src/app/shared/state-management/selectors/team.selector';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
+
 import { DatePipe } from '@angular/common';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
 
@@ -20,15 +19,12 @@ import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actio
   styleUrls: ['./team-overview.component.scss'],
 })
 export class TeamOverviewComponent {
-  updateForm!: FormGroup;
-  teamUpdate!: TeamUpdateInfo;
   Team!: TeamDataSuccess;
   idTeam: string = '';
   isadmin: boolean = false;
   loading$!: Observable<boolean>;
   public user!: UserLoginSuccess;
   url: any;
-  file!: File;
   isprivate: string = '';
 
   isTeam: boolean = false;
@@ -39,28 +35,9 @@ export class TeamOverviewComponent {
     this.isTeam = false;
 
 
-    this.updateForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      tagName: new FormControl('', [Validators.required]),
-      description: new FormControl(''),
-      instagramTeam: new FormControl(''),
-      discordTeam: new FormControl(''),
-      emailTeam: new FormControl(''),
-      facebookTeam: new FormControl(''),
-      youtubeTeam: new FormControl(''),
-      private: new FormControl('', [Validators.required]),
-      createdAt: new FormControl({ value: '', disabled: true }),
-    });
+
   }
-  get name() {
-    return this.updateForm.get('name')!;
-  }
-  get tagName() {
-    return this.updateForm.get('tagName')!;
-  }
-  get private() {
-    return this.updateForm.get('private')!;
-  }
+
 
   ngOnInit(): void {
     this.isTeam = false;
@@ -82,58 +59,27 @@ export class TeamOverviewComponent {
       .subscribe((user) => {
         this.user = user;
         this.idTeam = this.user.idTeam;
-        if(this.idTeam == ''){
+        if (this.idTeam == '') {
         }
       });
 
     this.subscriptions.add(subscription);
   }
 
-  updateinfoTeam() {
-    if (this.updateForm.invalid) {
-      return;
-    }
 
-    this.teamUpdate = Object.assign({}, this.teamUpdate, this.updateForm.value);
-  }
 
-  onselectFile(e: any) {
-    if (e.target.files) {
-      this.file = e.srcElement.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.url = event.target.result;
-      };
-    }
-  }
 
   public loadTeamInfo() {
     const subscription = this.store
       .pipe(select(TeamDataSelector))
       .subscribe((team) => {
         this.Team = team;
-        if(this.Team.idTeam  != ''){
+        if (this.Team.idTeam != '') {
           this.isTeam = true;
         }
         this.url = team.url;
         this.isprivate = this.Team.private.toString();
-        this.updateForm.patchValue({
-          name: this.Team.name,
-          tagName: this.Team.tagName,
-          description: this.Team.description,
-          private: this.isprivate,
-          emailTeam: this.Team.emailTeam,
-          instagramTeam: this.Team.instagramTeam,
-          discordTeam: this.Team.discordTeam,
-          facebookTeam: this.Team.facebookTeam,
-          youtubeTeam: this.Team.youtubeTeam,
-          createdAt: this.datePipe.transform(
-            this.Team.createdAt,
-            'dd-MM-yyyy',
-            'UTC'
-          ),
-        });
+
       });
 
     this.subscriptions.add(subscription);
