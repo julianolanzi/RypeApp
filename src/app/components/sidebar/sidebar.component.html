@@ -42,19 +42,19 @@
             </a>
             <div class="sub-menu-container">
               <ul>
-                <div routerLink="/overview" class="sub-item d-flex">
+                <div routerLink="/overview" *ngIf="this.isUser == true" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Overview</span>
                 </div>
-                <div routerLink="/profile" class="sub-item d-flex">
+                <div routerLink="/profile" *ngIf="this.isUser == true" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Perfil</span>
                 </div>
-                <div routerLink="/social" class="sub-item d-flex">
+                <div routerLink="/social" *ngIf="this.isUser == true" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Media e Stream</span>
                 </div>
-                <div routerLink="/security" class="sub-item d-flex">
+                <div routerLink="/security" *ngIf="this.isUser == true" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Alterar senha</span>
                 </div>
@@ -112,7 +112,7 @@
             </a>
             <div class="sub-menu-container">
               <ul>
-                <div routerLink="team-overview" class="sub-item d-flex">
+                <div *ngIf="this.isUser == true" routerLink="team-overview" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Meu Clan</span>
                 </div>

@@ -17,8 +17,11 @@ export class SidebarComponent {
   private subscriptions: Subscription = new Subscription();
   isAdmin!: any;
   isAdminTeam!: any;
+  isUser!:any;
   public user!: UserLoginSuccess;
-  constructor(private store: Store<GlobalState>) {}
+  constructor(private store: Store<GlobalState>) {
+    this.isUser = true;
+  }
   ngOnInit(): void {
     this.getCookie();
     let sidebar = document.querySelector('nav') as HTMLElement;
@@ -104,7 +107,7 @@ export class SidebarComponent {
 
     let subMenu = document.querySelectorAll('.sub-item');
     subMenu.forEach((linkItem, index) => {
-     
+   
       linkItem.addEventListener('click', () => {
         if (width < 769) {
           sidebar.classList.toggle('close');
