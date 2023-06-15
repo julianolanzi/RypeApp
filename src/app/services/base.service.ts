@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-
+import { environment } from '../../environments/environment';
 import { select, Store } from '@ngrx/store';
 import { Subscription, throwError } from 'rxjs';
 
@@ -17,6 +17,7 @@ export abstract class BaseService {
 
   // protected UrlServiceV1: string = 'http://localhost:3000';
 
+  protected UrlAuth: string = environment.UrlAuth;
   protected UrlServiceV1: string =
   'https://jealous-trench-coat-bear.cyclic.app';
 

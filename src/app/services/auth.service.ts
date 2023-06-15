@@ -17,7 +17,7 @@ export class AuthService extends BaseService {
 
   loginUser(loginUser: UserLogin | undefined): Observable<UserLoginSuccess> {
     let response = this.http
-      .post(this.UrlServiceV1 + '/auth/', loginUser, this.ObterHeaderJson())
+      .post(this.UrlAuth + '/auth/', loginUser, this.ObterHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
