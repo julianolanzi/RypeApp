@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    UrlAuth: 'http://localhost:3333'
+    UrlAuth: 'https://auth.api.rypegg.com'
 };
