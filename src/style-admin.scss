@@ -1230,6 +1230,7 @@ header .image-text .profession {
         height: 110px;
         position: relative;
         clip-path: url(#avatar-progress-front);
+        -webkit-clip-path
         svg {
           
           background-color: var(--pink-white);
