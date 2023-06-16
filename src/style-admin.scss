@@ -1094,8 +1094,9 @@ header .image-text .profession {
         height: 110px;
         position: relative;
         clip-path: url(#avatar-border);
+
         svg {
-          
+
           background-color: var(--background-mode);
         }
       }
@@ -1105,8 +1106,10 @@ header .image-text .profession {
         height: 130px;
         position: relative;
         clip-path: url(#avatar-border-not-progress);
+        -webkit-clip-path: url(#avatar-border-not-progress);
+
         svg {
-         
+
           background-color: var(--background-mode);
         }
       }
@@ -1116,6 +1119,7 @@ header .image-text .profession {
         height: 164px;
         position: relative;
         clip-path: url(#avatar-border-big);
+        -webkit-clip-path: url(#avatar-border-big);
 
         svg {
 
@@ -1212,8 +1216,10 @@ header .image-text .profession {
         height: 136px;
         position: relative;
         clip-path: url(#avatar-progress-back-big);
+        -webkit-clip-path: url(#avatar-progress-back-big);
+
         svg {
-         
+
           background-color: var(--text-color);
         }
       }
@@ -1230,9 +1236,10 @@ header .image-text .profession {
         height: 110px;
         position: relative;
         clip-path: url(#avatar-progress-front);
-        -webkit-clip-path
+        -webkit-clip-path: url(#avatar-progress-front);
+
         svg {
-          
+
           background-color: var(--pink-white);
         }
       }
@@ -1252,9 +1259,10 @@ header .image-text .profession {
         width: 124px;
         height: 136px;
         position: relative;
-
+        clip-path: url(#avatar-progress-front);
+        -webkit-clip-path: url(#avatar-progress-front);
         svg {
-          clip-path: url(#avatar-progress-front);
+
           background-color: var(--pink-white);
         }
       }
