@@ -63,6 +63,7 @@
         font-weight: 100;
       }
     }
+
     .sub-item:hover {
       background-color: var(--sidebar-mode-color);
     }
@@ -1092,9 +1093,9 @@ header .image-text .profession {
         width: 100px;
         height: 110px;
         position: relative;
-
+        clip-path: url(#avatar-border);
         svg {
-          clip-path: url(#avatar-border);
+          
           background-color: var(--background-mode);
         }
       }
@@ -1103,9 +1104,9 @@ header .image-text .profession {
         width: 120px;
         height: 130px;
         position: relative;
-
+        clip-path: url(#avatar-border-not-progress);
         svg {
-          clip-path: url(#avatar-border-not-progress);
+         
           background-color: var(--background-mode);
         }
       }
@@ -1114,9 +1115,10 @@ header .image-text .profession {
         width: 148px;
         height: 164px;
         position: relative;
+        clip-path: url(#avatar-border-big);
 
         svg {
-          clip-path: url(#avatar-border-big);
+
           background-color: var(--background-mode);
         }
       }
@@ -1209,9 +1211,9 @@ header .image-text .profession {
         width: 124px;
         height: 136px;
         position: relative;
-
+        clip-path: url(#avatar-progress-back-big);
         svg {
-          clip-path: url(#avatar-progress-back-big);
+         
           background-color: var(--text-color);
         }
       }
@@ -1227,9 +1229,9 @@ header .image-text .profession {
         width: 100px;
         height: 110px;
         position: relative;
-
+        clip-path: url(#avatar-progress-front);
         svg {
-          clip-path: url(#avatar-progress-front);
+          
           background-color: var(--pink-white);
         }
       }
