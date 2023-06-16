@@ -19,7 +19,7 @@ export class SecurityService extends BaseService {
   recoveryPassword(email: RecoveryPassword): Observable<any> {
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/auth/forgot_password',
+        this.UrlAuth + '/auth/forgot_password',
         email,
         this.ObterHeaderJson()
       )
@@ -30,7 +30,7 @@ export class SecurityService extends BaseService {
   resetPassword(user: ResetPassword, token: string): Observable<any> {
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/auth/reset_password/' + token,
+        this.UrlAuth + '/auth/reset_password/' + token,
         user,
         this.ObterHeaderJson()
       )
@@ -40,7 +40,7 @@ export class SecurityService extends BaseService {
 
   registrarUsuario(usuario: UserRegister): Observable<UserRegister> {
     let response = this.http
-      .post(this.UrlServiceV1 + '/users/', usuario, this.ObterHeaderJson())
+      .post(this.UrlAuth + '/users/', usuario, this.ObterHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

@@ -18,6 +18,7 @@ export abstract class BaseService {
   // protected UrlServiceV1: string = 'http://localhost:3000';
 
   protected UrlAuth: string = environment.UrlAuth;
+  protected UrluserTeam:string = environment.UrlUserTeam;
   protected UrlServiceV1: string =
   'https://jealous-trench-coat-bear.cyclic.app';
 

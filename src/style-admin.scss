@@ -1094,6 +1094,7 @@ header .image-text .profession {
         height: 110px;
         position: relative;
         clip-path: url(#avatar-border);
+        -webkit-clip-path: url(#avatar-border);
 
         svg {
 
@@ -1196,6 +1197,7 @@ header .image-text .profession {
 
         svg {
           clip-path: url(#progress-110);
+          -webkit-clip-path: url(#progress-110);
           background-color: var(--text-color);
         }
       }
@@ -1207,6 +1209,7 @@ header .image-text .profession {
 
         svg {
           clip-path: url(#avatar-progress-back);
+          -webkit-clip-path: url(#avatar-progress-back);
           background-color: var(--text-color);
         }
       }
@@ -1251,6 +1254,7 @@ header .image-text .profession {
 
         svg {
           clip-path: url(#avatar-progress);
+          -webkit-clip-path: url(#avatar-progress);
           background-color: var(--pink-white);
         }
       }

@@ -22,7 +22,7 @@ export class TeamService extends BaseService {
   }
   createTeam(data: CreateTeam | undefined): Observable<CreateTeamSuccess> {
     let response = this.http
-      .post(this.UrlServiceV1 + '/teams/', data, this.ObterAuthHeaderJson())
+      .post(this.UrluserTeam + '/teams/', data, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
@@ -30,7 +30,7 @@ export class TeamService extends BaseService {
   getUserTeam(id: string): Observable<TeamData> {
     let response = this.http
       .get(
-        this.UrlServiceV1 + '/teams/search/user/' + id,
+        this.UrluserTeam + '/teams/search/user/' + id,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -40,7 +40,7 @@ export class TeamService extends BaseService {
   searchTeams(key: string | undefined): Observable<TeamsSearch> {
     let response = this.http
       .get(
-        this.UrlServiceV1 + '/teams/search/' + key,
+        this.UrluserTeam + '/teams/search/' + key,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -50,7 +50,7 @@ export class TeamService extends BaseService {
   joinTeam(data: any | undefined): Observable<any> {
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/teams/teampublic',
+        this.UrluserTeam + '/teams/teampublic',
         data,
         this.ObterAuthHeaderJson()
       )
@@ -60,7 +60,7 @@ export class TeamService extends BaseService {
 
   getById(id: string | undefined): Observable<TeamDataSuccess> {
     let response = this.http
-      .get(this.UrlServiceV1 + '/teams/' + id, this.ObterAuthHeaderJson())
+      .get(this.UrluserTeam + '/teams/' + id, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
@@ -70,7 +70,7 @@ export class TeamService extends BaseService {
   ): Observable<TeamDataSuccess> {
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/teams/' + upTeam?.id,
+        this.UrluserTeam + '/teams/' + upTeam?.id,
         upTeam,
         this.ObterAuthHeaderJson()
       )
@@ -82,7 +82,7 @@ export class TeamService extends BaseService {
   quitTeam(id: string): Observable<any> {
     let response = this.http
       .delete(
-        this.UrlServiceV1 + '/teams/quit/team/' + id,
+        this.UrluserTeam + '/teams/quit/team/' + id,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -92,7 +92,7 @@ export class TeamService extends BaseService {
   updateAdminMember(team: string, user: any): Observable<any> {
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/teams/admin/' + team,
+        this.UrluserTeam + '/teams/admin/' + team,
         user,
         this.ObterAuthHeaderJson()
       )
@@ -107,7 +107,7 @@ export class TeamService extends BaseService {
 
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/teams/quit/member/' + idteam,
+        this.UrluserTeam + '/teams/quit/member/' + idteam,
         user,
         this.ObterAuthHeaderJson()
       )
@@ -121,7 +121,7 @@ export class TeamService extends BaseService {
 
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/teams/admin/' + idteam,
+        this.UrluserTeam + '/teams/admin/' + idteam,
         user,
         this.ObterAuthHeaderJson()
       )
@@ -136,7 +136,7 @@ export class TeamService extends BaseService {
 
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/teams/update/member/' + idteam,
+        this.UrluserTeam + '/teams/update/member/' + idteam,
         user,
         this.ObterAuthHeaderJson()
       )
