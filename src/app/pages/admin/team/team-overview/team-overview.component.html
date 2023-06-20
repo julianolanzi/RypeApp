@@ -1,8 +1,7 @@
-<section class="container-hub">
+<section *ngIf="this.Team._id" class="container-hub">
   <div class="profile-header">
     <img class="profile-header-cover" src="{{this.Team.urlCover}}" alt="">
   </div>
-
   <div class="profile-header-info v2">
     <div class="user-short-description ">
       <a class="user-short-description-avatar big">
@@ -20,16 +19,14 @@
             </svg>
           </div>
         </div>
-
         <div class="user-avatar-content">
           <div class="hexagon-image-124-136">
             <svg width="124" height="136" viewBox="0 0 124 136" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <clipPath id="avatar-img-big">
-                  <path d="M4.08714 29.2202L58.386 2.00094C60.1999 1.09169 62.3342 1.08158 64.1566 1.97361L119.858 29.2387C122.087 30.3299 123.5 32.5951 123.5 35.0769V99.5508C123.5 101.989 122.136 104.222 119.966 105.335L64.2663 133.897C62.3843 134.863 60.1506 134.852 58.2782 133.868L3.97788 105.352C1.83939 104.229 0.5 102.013 0.5 99.5975V35.0309C0.5 32.5713 1.88833 30.3224 4.08714 29.2202Z" stroke="black"/>
-
-
-
+                  <path
+                    d="M4.08714 29.2202L58.386 2.00094C60.1999 1.09169 62.3342 1.08158 64.1566 1.97361L119.858 29.2387C122.087 30.3299 123.5 32.5951 123.5 35.0769V99.5508C123.5 101.989 122.136 104.222 119.966 105.335L64.2663 133.897C62.3843 134.863 60.1506 134.852 58.2782 133.868L3.97788 105.352C1.83939 104.229 0.5 102.013 0.5 99.5975V35.0309C0.5 32.5713 1.88833 30.3224 4.08714 29.2202Z"
+                    stroke="black" />
                 </clipPath>
               </defs>
             </svg>
@@ -41,28 +38,27 @@
       <p class="user-short-description-title">{{this.Team.name}}</p>
       <p class="user-short-description-text"> {{this.Team.tagName}}</p>
     </div>
-
     <div class="profile-header-social-links-wrap">
       <div class="user-stats">
         <div class="user-stats-container">
           <div class="user-stat" *ngIf="this.Team.private == false">
             <span class="material-symbols-outlined">
               public
-              </span>
-              Público
+            </span>
+            Público
           </div>
           <div class="user-stat" *ngIf="this.Team.private == true">
             <span class="material-symbols-outlined">
               lock
-              </span>
-              Privado
+            </span>
+            Privado
           </div>
-        
+
         </div>
       </div>
 
 
-      <div class="profile-header-social-links " >
+      <div class="profile-header-social-links ">
         <a class="social-link-all discord" *ngIf="this.Team.discordTeam" title="{{this.Team.discordTeam}}"><img
             src="./assets/img/discord.png" alt=""></a>
 
@@ -75,21 +71,15 @@
             src="./assets/img/facebook.png" alt=""></a>
 
         <a class="social-link-all youtube" *ngIf="this.Team.youtubeTeam"
-          href="https://www.youtube.com/{{this.Team.youtubeTeam}}" target="_blank"><img
-            src="./assets/img/youtube.png" alt=""></a>
-
-
+          href="https://www.youtube.com/{{this.Team.youtubeTeam}}" target="_blank"><img src="./assets/img/youtube.png"
+            alt=""></a>
       </div>
-
-
 
     </div>
   </div>
 </section>
 
-
-
-
+<app-team-setup *ngIf="this.Team._id == ''"></app-team-setup>
 
 
 <div *ngIf="loading$ | async">

@@ -33,9 +33,6 @@ export class TeamOverviewComponent {
   constructor(private store: Store<GlobalState>, private datePipe: DatePipe) {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
     this.isTeam = false;
-
-
-
   }
 
 
@@ -74,6 +71,7 @@ export class TeamOverviewComponent {
       .pipe(select(TeamDataSelector))
       .subscribe((team) => {
         this.Team = team;
+        console.log(this.Team);
         if (this.Team.idTeam != '') {
           this.isTeam = true;
         }

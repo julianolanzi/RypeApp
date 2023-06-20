@@ -40,7 +40,7 @@ export class SecurityService extends BaseService {
 
   registrarUsuario(usuario: UserRegister): Observable<UserRegister> {
     let response = this.http
-      .post(this.UrlAuth + '/users/', usuario, this.ObterHeaderJson())
+      .post(this.UrluserTeam + '/users/', usuario, this.ObterHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

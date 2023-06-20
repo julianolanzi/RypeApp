@@ -21,7 +21,7 @@ export class UploadImgService extends BaseService {
 
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/users/img/' + img.id,
+        this.UrlImgUpload + '/users/img/' + img.id,
         formData,
         this.ObterAuthHeaderUploadJson()
       )
@@ -35,7 +35,7 @@ export class UploadImgService extends BaseService {
 
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/teams/img/' + img.id,
+        this.UrlImgUpload + '/teams/img/' + img.id,
         formData,
         this.ObterAuthHeaderUploadJson()
       )

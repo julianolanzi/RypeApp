@@ -19,7 +19,7 @@ export class NotificationsService extends BaseService {
 
     let response = this.http
       .get(
-        this.UrlServiceV1 + '/notifications/getUser/' + id,
+        this.UrlNotifications + '/notifications/getUser/' + id,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -30,7 +30,7 @@ export class NotificationsService extends BaseService {
 
     let response = this.http
       .get(
-        this.UrlServiceV1 + '/notifications/getTeam/' + id,
+        this.UrlNotifications + '/notifications/getTeam/' + id,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -39,28 +39,28 @@ export class NotificationsService extends BaseService {
 
   deleteNotifications(id: string | undefined): Observable<any> {
     let response = this.http
-    .delete(this.UrlServiceV1 + '/notifications/delete/' + id, this.ObterAuthHeaderJson())
+    .delete(this.UrlNotifications + '/notifications/delete/' + id, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
 
   requestInviteTeam(data: RequestTeam | undefined): Observable<any>{
     let response = this.http
-    .post(this.UrlServiceV1 + '/notifications/requestTeamUser',  data, this.ObterAuthHeaderJson())
+    .post(this.UrlNotifications + '/notifications/requestTeamUser',  data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
 
   requestInviteUser(data: RequestInviteUser | undefined): Observable<any>{
     let response = this.http
-    .post(this.UrlServiceV1 + '/notifications/inviteTeamUser',  data, this.ObterAuthHeaderJson())
+    .post(this.UrlNotifications + '/notifications/inviteTeamUser',  data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
 
   UpdateQuestionTeam(data: RequestQuestionTeam | undefined): Observable<any>{
     let response = this.http
-    .post(this.UrlServiceV1 + '/notifications/userInvite',  data, this.ObterAuthHeaderJson())
+    .post(this.UrlNotifications + '/notifications/userInvite',  data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
