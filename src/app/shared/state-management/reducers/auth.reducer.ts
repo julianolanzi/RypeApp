@@ -3,6 +3,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { LoadAuthErrorAction } from '../actions/auth/auth-load-error.actions';
 import { LoadAuthSuccessAction } from '../actions/auth/auth-load-success.actions';
 import { AuthState } from '../states/auth.state';
+import { TeamLoadCreateSuccessAction } from '../actions/teams/create-team/team-load-create-success.actions';
 
 export const initialState: AuthState = {
   user: {
@@ -40,7 +41,19 @@ const _authReducer = createReducer(
     loading: true,
     isAuthenticated: false,
     isLoadingTeam: false,
-  }))
+  })),
+  on(new TeamLoadCreateSuccessAction().createAction(), (state, action) => ( {
+    user: {
+      ...state.user,
+      idTeam: action.payload._id,
+      rolesTeam: "admin",
+    },
+    loading: false,
+    isAuthenticated: true,
+  }) ),
+
+
+
 
 );
 

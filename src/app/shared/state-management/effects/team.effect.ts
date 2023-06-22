@@ -49,9 +49,6 @@ export class TeamEffect {
               this.router.navigate(['team-overview']);
             }, 3000);
             this.store.dispatch(new LoadingDisabledAction());
-
-
-            // this.store.dispatch(new TeamLoadInfoRequestAction(response._id));
             return new TeamLoadCreateSuccessAction(response);
           }),
           catchError((error) => {

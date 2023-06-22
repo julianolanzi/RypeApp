@@ -116,19 +116,19 @@
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Meu Clan</span>
                 </div>
-                <div  *ngIf="this.isAdminTeam == true" routerLink="team-settings" class="sub-item d-flex">
+                <div  *ngIf="this.isAdminTeam$ | async" routerLink="team-settings" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Alterar dados</span>
                 </div>
-                <div  *ngIf="this.isAdminTeam == true" routerLink="team-search-user" class="sub-item d-flex">
+                <div  *ngIf="this.isAdminTeam$ | async" routerLink="team-search-user" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Buscar Jogadores</span>
                 </div>
-                <div *ngIf="this.isAdminTeam == true" routerLink="team-members" class="sub-item d-flex">
+                <div *ngIf="this.isAdminTeam$ | async" routerLink="team-members" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Gerenciar Membros</span>
                 </div>
-                <div *ngIf="this.isAdminTeam == true" routerLink="team-admins" class="sub-item d-flex">
+                <div *ngIf="this.isAdminTeam$ | async" routerLink="team-admins" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Gerenciar Adm,s</span>
                 </div>

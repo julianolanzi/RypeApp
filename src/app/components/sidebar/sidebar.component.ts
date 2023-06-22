@@ -4,7 +4,7 @@ import {
 } from './../../shared/state-management/selectors/auth.selector';
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 
@@ -17,13 +17,15 @@ import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 export class SidebarComponent {
   private subscriptions: Subscription = new Subscription();
   isAdmin!: any;
-  isAdminTeam!: any;
+  isAdminTeam$: Observable<boolean> | undefined;
   isUser!:any;
   public user!: UserLoginSuccess;
   constructor(private store: Store<GlobalState>) {
     this.isUser = true;
   }
   ngOnInit(): void {
+    this.isAdminTeam$ = of(false);
+    this.isAdmin = false;
     this.getCookie();
     let sidebar = document.querySelector('nav') as HTMLElement;
     let sidebarContainer = document.querySelector(
@@ -161,13 +163,13 @@ export class SidebarComponent {
         this.user = user;
 
         if (user.rolesTeam == 'admin' || user.rolesTeam == 'sub-admin') {
-          this.isAdminTeam = true;
+          this.isAdminTeam$ = of(true);
         }
         if (user.role == 'admin') {
           this.isAdmin = true;
         } else {
           this.isAdmin = false;
-          this.isAdminTeam = false;
+   
         }
       });
 

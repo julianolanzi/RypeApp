@@ -142,7 +142,7 @@ export class SingUpComponent {
         console.log('imagem sem carregamento');
     }
 
-    let url = path + '/' + img;
+    let url =  './' + img;
     return url;
   }
 }

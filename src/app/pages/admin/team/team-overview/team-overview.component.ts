@@ -71,7 +71,6 @@ export class TeamOverviewComponent {
       .pipe(select(TeamDataSelector))
       .subscribe((team) => {
         this.Team = team;
-        console.log(this.Team);
         if (this.Team.idTeam != '') {
           this.isTeam = true;
         }
