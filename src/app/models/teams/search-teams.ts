@@ -5,7 +5,8 @@ export interface TeamsSearch {
   url: string;
   private: boolean;
   idTeam: string;
-
-  
+  urlCover: string;
+  isNotInvite:boolean;
   createdAt: Date;
+  id: string;
 }

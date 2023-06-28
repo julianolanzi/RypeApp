@@ -40,7 +40,7 @@ export class TeamService extends BaseService {
   searchTeams(key: string | undefined): Observable<TeamsSearch> {
     let response = this.http
       .get(
-        this.UrluserTeam + '/teams/search/' + key,
+        this.UrlNotifications + '/notifications/team/searchTeam/' + key,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -79,7 +79,7 @@ export class TeamService extends BaseService {
     return response;
   }
 
-  quitTeam(id: string): Observable<any> {
+  quitTeam(id: string | undefined): Observable<any> {
     let response = this.http
       .delete(
         this.UrluserTeam + '/teams/quit/team/' + id,

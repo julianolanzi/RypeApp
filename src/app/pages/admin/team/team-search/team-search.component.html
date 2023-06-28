@@ -71,13 +71,13 @@
     </div>
     <div class="grid grid-4-4-4">
       <div class="user-preview" *ngFor="let team of Teams$ | async">
-        <img class="user-preview-cover big" src="{{this.cover}}" alt="">
+        <img class="user-preview-cover big" src="{{team.urlCover}}" alt="">
         <div class="user-preview-info">
           <div class="tag-sticker">
-            <span *ngIf="team.private == false" class="material-symbols-outlined">
+            <span *ngIf="team.private == true" class="material-symbols-outlined">
               lock
             </span>
-            <span *ngIf="team.private == true" class="material-symbols-outlined">
+            <span *ngIf="team.private == false" class="material-symbols-outlined">
               public
             </span>
           </div>
@@ -117,16 +117,15 @@
               </div>
 
 
-
             </div>
             <p class="user-short-description-title">{{team.name}}</p>
             <p class="user-short-description-text"> {{team.tagName}}</p>
             <div class="user-preview-actions">
 
-              <button class="button" *ngIf="team.private == false" (click)="joinTeamPublic(team)">Entrar</button>
-              <button class="button" *ngIf="team.private == true && this.isinviteAwait == false"
-                (click)="requestTeamPrivate(team)">Solicitar</button>
-              <button class="button" *ngIf="team.private == true && this.isinviteAwait ==true">Solicitação
+              <button class="button" *ngIf="team.private == false" id="{{team.id}}"   (click)="joinTeamPublic(team); disableButton(team.id);">Entrar</button>
+              <button class="button" *ngIf="team.isNotInvite == false" id="{{team.id}}" 
+                (click)="requestTeamPrivate(team); disableButton(team.id);">Solicitar</button>
+              <button class="button" *ngIf="team.isNotInvite == true" disabled>Solicitação
                 enviada</button>
             </div>
           </div>
@@ -136,14 +135,3 @@
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
-
-<!-- <div *ngIf="isLoading">
-    <app-loading></app-loading>
-</div> -->

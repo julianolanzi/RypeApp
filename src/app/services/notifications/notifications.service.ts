@@ -19,7 +19,7 @@ export class NotificationsService extends BaseService {
 
     let response = this.http
       .get(
-        this.UrlNotifications + '/notifications/getUser/' + id,
+        this.UrlNotifications + '/notifications/user/getUser/' + id,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -30,7 +30,7 @@ export class NotificationsService extends BaseService {
 
     let response = this.http
       .get(
-        this.UrlNotifications + '/notifications/getTeam/' + id,
+        this.UrlNotifications + '/notifications/team/getTeam/' + id,
         this.ObterAuthHeaderJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));
@@ -46,14 +46,14 @@ export class NotificationsService extends BaseService {
 
   requestInviteTeam(data: RequestTeam | undefined): Observable<any>{
     let response = this.http
-    .post(this.UrlNotifications + '/notifications/requestTeamUser',  data, this.ObterAuthHeaderJson())
+    .post(this.UrlNotifications + '/notifications/team/requestTeamUser',  data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
 
   requestInviteUser(data: RequestInviteUser | undefined): Observable<any>{
     let response = this.http
-    .post(this.UrlNotifications + '/notifications/inviteTeamUser',  data, this.ObterAuthHeaderJson())
+    .post(this.UrlNotifications + '/notifications/user/inviteTeamUser',  data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
@@ -61,6 +61,19 @@ export class NotificationsService extends BaseService {
   UpdateQuestionTeam(data: RequestQuestionTeam | undefined): Observable<any>{
     let response = this.http
     .post(this.UrlNotifications + '/notifications/userInvite',  data, this.ObterAuthHeaderJson())
+    .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  acceptInviteNotifications(data: UserNotificationsSuccess | undefined):Observable<string>{
+    let response = this.http
+    .put(this.UrlNotifications + '/notifications/acceptInvite', data, this.ObterAuthHeaderJson())
+    .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+  recuseInviteNotifications(data: UserNotificationsSuccess | undefined):Observable<string>{
+    let response = this.http
+    .put(this.UrlNotifications + '/notifications/recuseInvite', data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

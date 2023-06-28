@@ -48,7 +48,7 @@ export class UserService extends BaseService {
 
   searchByUserKey(key: string | undefined): Observable<any>{
     let response = this.http
-    .get(this.UrluserTeam + '/users/userkey/' + key, this.ObterAuthHeaderJson())
+    .get(this.UrlNotifications + '/notifications/user/searchUser/' + key, this.ObterAuthHeaderJson())
     .pipe(
       map(this.extractData),
       catchError(this.serviceError)

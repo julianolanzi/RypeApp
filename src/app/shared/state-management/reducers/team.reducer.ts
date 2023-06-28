@@ -19,6 +19,8 @@ import { TeamLoadSearchMemberSuccessAction } from '../actions/teams/search-membe
 import { TeamRemoveMemberRequestAction } from '../actions/teams/team-remove-member/team-load-remove-member-request.actions';
 import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-member/team-load-remove-member-success.actions';
 import { TeamLoadGlobalErrorAction } from '../actions/teams/team-load-global-error.actions';
+import { TeamLoadQuitSuccessAction } from '../actions/teams/quit-team/team-load-quit-success.actions';
+import { TeamLoadRequestPublicTeam } from '../actions/teams/request-public-team/team-load-request-public-team.actions';
 
 export const initialState: TeamState = {
   team: {
@@ -177,6 +179,12 @@ const _teamReducer = createReducer(
     authError: undefined,
     teamSearch: [],
   })),
+  on(new TeamLoadQuitSuccessAction().createAction(), (state, action) => ({
+    ...state,
+    authError: undefined,
+    teamInfo: {...initialState.teamInfo},
+  })),
+
 
 );
 

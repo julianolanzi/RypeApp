@@ -1,4 +1,5 @@
 export interface SearchMemberSucess {
+  id: string;
   nickname: string;
   name: string;
   country: string;
@@ -6,6 +7,7 @@ export interface SearchMemberSucess {
   url: string;
   team: any;
   urlCover: string;
+  isNotInvite: boolean;
   social: {
     discord: string;
     instagram: string;

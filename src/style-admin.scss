@@ -722,6 +722,7 @@ header .image-text .profession {
     .user-stats {
       width: auto;
       height: 40px;
+      display: flex;
 
       .user-stats-container {
         .user-stat {
@@ -730,6 +731,17 @@ header .image-text .profession {
           justify-content: center;
           align-items: center;
           color: var(--text-color);
+          font-size: .75rem;
+          gap: 10px;
+
+          p {
+            font-size: 1.375rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-color);
+            font-family: Rajdhani, sans-serif;
+            line-height: 1em;
+          }
         }
       }
     }
@@ -1011,6 +1023,92 @@ header .image-text .profession {
   line-height: 1em;
 }
 
+.user-short-description-avatar-small {
+
+  position: sticky;
+  width: 65px;
+  height: 69px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+
+  .user-avatar-content-small {
+    position: absolute;
+    left: 10px;
+    z-index: 3;
+
+    .hexagon-image-50-55 {
+      width: 50px;
+      height: 55px;
+      position: relative;
+
+      img {
+        width: 68px;
+        height: 74px;
+        clip-path: url(#avatar-img-small);
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+
+  .user-avatar-progress-small {
+    left: 5px;
+    z-index: 1;
+    position: absolute;
+
+    .hexagon-progress-61-68 {
+
+      width: 61px;
+      height: 68px;
+      position: relative;
+
+      svg {
+        clip-path: url(#avatar-progress-back-small);
+        -webkit-clip-path: url(#avatar-progress-back-small);
+        background-color: var(--pink-white);
+      }
+
+    }
+  }
+  
+
+  .user-avatar-progress-border-small {
+    left: 5px;
+    position: absolute;
+    .hexagon-progress-61-68 {
+      width: 61px;
+      height: 68px;
+      position: relative;
+      svg {
+        clip-path: url(#avatar-progress-small);
+        -webkit-clip-path: url(#avatar-progress-small);
+        background-color: var(--text-color);
+      }
+
+    }
+  }
+  
+}
+
+.user-short-description-avatar-small.navbar{
+  position: relative;
+
+  .user-avatar-progress-border-small.navbar{
+    left: 12px;
+  }
+  .user-avatar-progress-small.navbar{
+    left: 12px;
+  }
+  .user-avatar-content-small.navbar{
+    left: 17px;
+  } 
+}
+
+
 .user-short-description {
   padding-top: 62px;
   position: relative;
@@ -1144,7 +1242,7 @@ header .image-text .profession {
           width: 82px;
           height: 90px;
           clip-path: url(#avatar-82-90);
-          object-fit: fill;
+          object-fit: cover;
           position: absolute;
           top: 0;
           left: 0;
@@ -1160,7 +1258,7 @@ header .image-text .profession {
           width: 68px;
           height: 74px;
           clip-path: url(#avatar-img);
-          object-fit: fill;
+          object-fit: cover;
           position: absolute;
           top: 0;
           left: 0;
@@ -1176,7 +1274,7 @@ header .image-text .profession {
           width: 100px;
           height: 110px;
           clip-path: url(#avatar-img-big);
-          object-fit: fill;
+          object-fit: cover;
           position: absolute;
           top: 0;
           left: 0;
@@ -1265,6 +1363,7 @@ header .image-text .profession {
         position: relative;
         clip-path: url(#avatar-progress-front);
         -webkit-clip-path: url(#avatar-progress-front);
+
         svg {
 
           background-color: var(--pink-white);
@@ -1297,8 +1396,8 @@ header .image-text .profession {
     height: 50px;
 
     .user-stats-container {
-      width: 100px;
-      padding-left: 20px;
+      width: 80px;
+
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -1343,6 +1442,24 @@ header .image-text .profession {
     color: var(--text-color);
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 
+  }
+
+  .profile-header-info-actions {
+    margin-right: 20px;
+
+    .profile-header-info-action {
+      .profile-header-info-action-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #dd535d;
+        color: white;
+        cursor: pointer;
+      }
+    }
   }
 
 }

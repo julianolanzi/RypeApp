@@ -2,7 +2,7 @@
   <div class="container-cover-hub-account">
     <img src="./assets/img/teams/icon-team.png" alt="">
     <h2 class="title-cover-hub">Hub de Time</h2>
-    <p class="text-cover-hub">Busque um time para participar</p>
+    <p class="text-cover-hub">Membros do time</p>
   </div>
 
   <div class="container-hub-content">
@@ -11,7 +11,7 @@
       <h2 class="title">Membros</h2>
     </div>
 
-
+    <p *ngIf="this.team.members.length == 0" class="text-p">Sem membros no momento 🤷🏻‍♂️</p>
     <div class="grid grid-4-4-4">
       <div  *ngFor="let member of this.team.members" class="user-preview">
         <img class="user-preview-cover big" src="{{member.urlCover}}" alt="">
