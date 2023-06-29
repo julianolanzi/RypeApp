@@ -74,7 +74,6 @@ export class NotificationsComponent {
 
     this.subscriptions.add(subscription);
   }
-  
   refreshNotifications() {
     this.subscriptions.unsubscribe();
     this.isNotifica = false;
