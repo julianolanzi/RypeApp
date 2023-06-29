@@ -1066,47 +1066,52 @@ header .image-text .profession {
       width: 61px;
       height: 68px;
       position: relative;
+      clip-path: url(#avatar-progress-back-small);
+      -webkit-clip-path: url(#avatar-progress-back-small);
 
       svg {
-        clip-path: url(#avatar-progress-back-small);
-        -webkit-clip-path: url(#avatar-progress-back-small)!important;
+
         background-color: var(--pink-white);
       }
 
     }
   }
-  
+
 
   .user-avatar-progress-border-small {
     left: 5px;
     position: absolute;
+
     .hexagon-progress-61-68 {
       width: 61px;
       height: 68px;
       position: relative;
+      clip-path: url(#avatar-progress-small);
+      -webkit-clip-path: url(#avatar-progress-small);
+
       svg {
-        clip-path: url(#avatar-progress-small);
-        -webkit-clip-path: url(#avatar-progress-small)!important;
         background-color: var(--text-color);
       }
 
     }
   }
-  
+
 }
 
-.user-short-description-avatar-small.navbar{
+.user-short-description-avatar-small.navbar {
   position: relative;
 
-  .user-avatar-progress-border-small.navbar{
+  .user-avatar-progress-border-small.navbar {
     left: 12px;
   }
-  .user-avatar-progress-small.navbar{
+
+  .user-avatar-progress-small.navbar {
     left: 12px;
   }
-  .user-avatar-content-small.navbar{
+
+  .user-avatar-content-small.navbar {
     left: 17px;
-  } 
+  }
 }
 
 
@@ -1193,7 +1198,7 @@ header .image-text .profession {
         height: 110px;
         position: relative;
         clip-path: url(#avatar-border);
-        -webkit-clip-path: url(#avatar-border)!important;
+        -webkit-clip-path: url(#avatar-border) !important;
 
         svg {
 
@@ -1206,7 +1211,7 @@ header .image-text .profession {
         height: 130px;
         position: relative;
         clip-path: url(#avatar-border-not-progress);
-        -webkit-clip-path: url(#avatar-border-not-progress)!important;
+        -webkit-clip-path: url(#avatar-border-not-progress) !important;
 
         svg {
 
@@ -1219,10 +1224,9 @@ header .image-text .profession {
         height: 164px;
         position: relative;
         clip-path: url(#avatar-border-big);
-        -webkit-clip-path: url(#avatar-border-big)!important;
+        -webkit-clip-path: url(#avatar-border-big) !important;
 
         svg {
-
           background-color: var(--background-mode);
         }
       }
@@ -1293,10 +1297,10 @@ header .image-text .profession {
         width: 100px;
         height: 110px;
         position: relative;
-
+        clip-path: url(#progress-110);
+        -webkit-clip-path: url(#progress-110) !important;
         svg {
-          clip-path: url(#progress-110);
-          -webkit-clip-path: url(#progress-110)!important;
+        
           background-color: var(--text-color);
         }
       }
@@ -1308,7 +1312,7 @@ header .image-text .profession {
 
         svg {
           clip-path: url(#avatar-progress-back);
-          -webkit-clip-path: url(#avatar-progress-back)!important;
+          -webkit-clip-path: url(#avatar-progress-back) !important;
           background-color: var(--text-color);
         }
       }
@@ -1350,10 +1354,11 @@ header .image-text .profession {
         width: 84px;
         height: 92px;
         position: relative;
+        clip-path: url(#avatar-progress);
+        -webkit-clip-path: url(#avatar-progress);
 
         svg {
-          clip-path: url(#avatar-progress);
-          -webkit-clip-path: url(#avatar-progress);
+
           background-color: var(--pink-white);
         }
       }
