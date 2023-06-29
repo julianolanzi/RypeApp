@@ -1487,6 +1487,9 @@ header .image-text .profession {
     width: 15px;
     height: 15px;
     filter: brightness(100);
+    -webkit-filter: brightness(100);
+
+    
     cursor: pointer;
   }
 
@@ -1675,6 +1678,7 @@ header .image-text .profession {
           width: 15px;
           height: 15px;
           filter: brightness(100);
+          -webkit-filter: brightness(100);
         }
       }
 
@@ -1786,7 +1790,7 @@ header .image-text .profession {
     input:disabled {
       cursor: not-allowed;
       z-index: 1;
-
+      border: 1px solid var(--pink);
       label {
         background-color: var(--background-mode);
         padding: 0 6px;
