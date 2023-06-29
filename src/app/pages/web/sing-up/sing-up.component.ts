@@ -30,6 +30,7 @@ export class SingUpComponent {
         Validators.required,
         Validators.pattern('^((\\+55-?)|0)?[0-9]{11}$'),
       ]),
+
       email: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -142,7 +143,7 @@ export class SingUpComponent {
         console.log('imagem sem carregamento');
     }
 
-    let url =  './' + img;
+    let url = './' + img;
     return url;
   }
 }
