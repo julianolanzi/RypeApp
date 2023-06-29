@@ -61,7 +61,7 @@ export class TeamUserSearchComponent {
     if (this.memberSearch.invalid) {
       return;
     }
-    this.userSelect = this.memberSearch.value.key;
+    this.userSelect = this.memberSearch.value.key.toLowerCase();
     this.store.dispatch(new LoadingSmallActiveAction());
 
     this.store.dispatch(new TeamLoadSearchMemberRequestAction(this.userSelect));

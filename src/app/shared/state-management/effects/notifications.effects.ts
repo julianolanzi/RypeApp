@@ -40,6 +40,7 @@ export class NotificationsEffect {
             return new NotificationsGetUserSuccess(response);
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingSmallDisabledAction())
             return of(new NotificationGlobalError(error));
           })
         );
@@ -56,6 +57,7 @@ export class NotificationsEffect {
             return new TeamNotificationsGetSuccess(response);
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingSmallDisabledAction())
             return of(new NotificationGlobalError(error));
           })
         );

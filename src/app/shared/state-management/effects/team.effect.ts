@@ -77,7 +77,7 @@ export class TeamEffect {
             return new TeamLoadSuccessAction(response);
           }),
           catchError((error) => {
-            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(new LoadingSmallDisabledAction())
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new TeamLoadGlobalErrorAction(error));
@@ -186,7 +186,7 @@ export class TeamEffect {
             return new TeamLoadSearchMemberSuccessAction(response);
           }),
           catchError((error) => {
-            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(new LoadingSmallDisabledAction())
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new TeamLoadGlobalErrorAction(error));

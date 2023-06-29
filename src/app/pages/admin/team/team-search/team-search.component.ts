@@ -60,7 +60,7 @@ export class TeamSearchComponent {
     if (this.teamSearch.invalid) {
       return;
     }
-    this.teamKey = this.teamSearch.value.key;
+    this.teamKey = this.teamSearch.value.key.toLowerCase();
     this.store.dispatch(new LoadingSmallActiveAction());
     this.store.dispatch(new TeamLoadAction(this.teamKey));
   }
