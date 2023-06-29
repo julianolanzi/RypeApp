@@ -1,4 +1,4 @@
-<div class="dropdown-box header-dropdown">
+<div class="dropdown-box header-dropdown" [ngClass]="{'active': ((this.enableNotifications$ | async) == true)}">
   <div class="dropdown-box-header">
     <p class="dropdown-box-header-title">Notificações</p>
   </div>

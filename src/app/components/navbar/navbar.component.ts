@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { Subscription, Observable } from 'rxjs';
-import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { isNotifications, url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { NotificationsGetUserRequest } from 'src/app/shared/state-management/actions/notifications/user-notifications/get-notifications/notifications-load-request.actions';
 import { UserNotifications } from 'src/app/shared/state-management/selectors/notifications.selector';
 import { UserNotificationsSuccess } from 'src/app/models/notifications/notifications-user-success';
+import { LoadingNotificationsActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-active.actions';
+import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -23,9 +25,12 @@ export class NavbarComponent implements OnInit {
   public user!: UserLoginSuccess;
   private subscriptions: Subscription = new Subscription();
   url$!: Observable<string>;
+  enableNotifications$!: Observable<boolean>;
   constructor(
     private store: Store<GlobalState>
-  ) {}
+  ) {
+    this.enableNotifications$ = this.store.pipe(select(isNotifications))
+  }
 
   ngOnInit(): void {
     this.loadUser();
@@ -57,13 +62,29 @@ export class NavbarComponent implements OnInit {
       .subscribe((notif) => {
         this.notific = notif;
 
-        if(notif.length !== 0){
+        if (notif.length !== 0) {
           this.isNotifications = true;
-        }else{
+        } else {
           this.isNotifications = false;
         }
       });
 
     this.subscriptions.add(subscription);
+  }
+
+  public enableNotifications() {
+   
+    let containerNotifica = document.querySelector(
+      '.header-dropdown'
+    ) as HTMLElement;
+
+    let contain = containerNotifica.classList.contains('active');
+
+    if (contain == false) {
+      this.store.dispatch(new LoadingNotificationsActiveAction());
+    } if(contain == true){
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
+      console.log('Desativa');
+    }
   }
 }

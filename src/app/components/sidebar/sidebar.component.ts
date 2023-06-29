@@ -7,6 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription, of } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -54,12 +55,14 @@ export class SidebarComponent {
       sidebar.classList.toggle('close');
       sidebarContainer.classList.toggle('close');
       adminContent.classList.toggle('close');
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
     });
 
     list.forEach((linkItem, index) => {
       linkItem.addEventListener('click', () => {
         document.querySelector('.active')?.classList.remove('active');
         linkItem.classList.add('active');
+        this.store.dispatch(new LoadingNotificationsDisabledAction());
       });
     });
 
@@ -70,13 +73,15 @@ export class SidebarComponent {
           sidebar.classList.toggle('close');
           sidebarContainer.classList.toggle('close');
           adminContent.classList.toggle('close');
+          this.store.dispatch(new LoadingNotificationsDisabledAction());
         }
       });
     });
 
     modeSwitch.addEventListener('click', () => {
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
       body.classList.toggle('dark');
-
+      
       if (body.classList.contains('dark')) {
         modeText.innerText = 'Dark mode';
         let isDarkMode = true;
@@ -116,6 +121,7 @@ export class SidebarComponent {
           sidebar.classList.toggle('close');
           sidebarContainer.classList.toggle('close');
           adminContent.classList.toggle('close');
+          this.store.dispatch(new LoadingNotificationsDisabledAction());
         }
       });
     });

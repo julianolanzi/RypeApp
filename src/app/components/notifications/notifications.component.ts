@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
 import { UserNotificationsSuccess } from 'src/app/models/notifications/notifications-user-success';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
@@ -13,6 +13,7 @@ import { NotificationsGetUserRequest } from 'src/app/shared/state-management/act
 import { DeleteNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/delete-notifications/notifications-delete-load-request.actions';
 import { AcceptInviteNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/accept-invite-notifications/notifications-accept-invite-request.actions';
 import { RecuseInviteNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/recuse-invite-notifications/notifications-recuse-invite-request.actions';
+import { isNotifications } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
 @Component({
   selector: 'app-notifications',
@@ -24,22 +25,24 @@ export class NotificationsComponent {
   InviteNotification!: UserNotificationsSuccess;
   ischange: boolean = true;
   timer!: Number;
+  enableNotifications$!: Observable<boolean>;
 
   public user!: UserLoginSuccess;
   private subscriptions: Subscription = new Subscription();
   isNotifica: boolean = false;
   constructor(private store: Store<GlobalState>) {
+    this.enableNotifications$ = this.store.pipe(select(isNotifications));
   }
 
   ngOnInit(): void {
-    let toggle = document.querySelector('.link-notifications') as HTMLElement;
-    let containerNotifica = document.querySelector(
-      '.header-dropdown'
-    ) as HTMLElement;
+    // let toggle = document.querySelector('.link-notifications') as HTMLElement;
+    // let containerNotifica = document.querySelector(
+    //   '.header-dropdown'
+    // ) as HTMLElement;
 
-    toggle.addEventListener('click', () => {
-      containerNotifica.classList.toggle('active');
-    });
+    // toggle.addEventListener('click', () => {
+    //   containerNotifica.classList.toggle('active');
+    // });
     this.loadDataUser();
     this.loadNotifications();
   }

@@ -3,7 +3,7 @@ import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-manageme
 
 
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 import { select, Store } from '@ngrx/store';
