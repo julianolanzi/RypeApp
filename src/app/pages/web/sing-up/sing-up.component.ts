@@ -78,6 +78,7 @@ export class SingUpComponent {
     this.User.url = url;
 
     this.isLoading = true;
+    
     this.securityService.registrarUsuario(this.User).subscribe(
       (sucesso) => {
         this.processarSucesso(sucesso);
