@@ -1744,6 +1744,7 @@ header .image-text .profession {
       margin: 0;
       color: var(--text-color);
       font-weight: 600;
+      z-index: 20 !important;
     }
 
     input {
@@ -1785,6 +1786,21 @@ header .image-text .profession {
     input:disabled {
       cursor: not-allowed;
       z-index: 1;
+
+      label {
+        background-color: var(--background-mode);
+        padding: 0 6px;
+        font-size: 0.75rem;
+        top: -6px;
+        left: 12px;
+        top: -6px;
+        position: absolute;
+        display: block;
+        margin: 0;
+        color: var(--text-color);
+        font-weight: 600;
+        z-index: 20 !important;
+      }
     }
   }
 
