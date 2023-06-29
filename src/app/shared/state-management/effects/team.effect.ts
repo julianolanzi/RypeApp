@@ -37,6 +37,7 @@ import { TeamLoadSuccessPublicTeam } from '../actions/teams/request-public-team/
 import { TeamLoadQuitRequestAction } from '../actions/teams/quit-team/team-load-quit-request.actions';
 import { TeamLoadQuitSuccessAction } from '../actions/teams/quit-team/team-load-quit-success.actions';
 import { TeamLoadUpdateAuthDataPublicTeam } from '../actions/teams/request-public-team/team-load-update-auth-public-team.actions';
+import { LoadingSmallDisabledAction } from '../actions/global-pages/global-loading-small/loading-small-disabled.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -72,6 +73,7 @@ export class TeamEffect {
       exhaustMap((action: TeamLoadAction) => {
         return this.teamService.searchTeams(action.payload).pipe(
           map((response) => {
+            this.store.dispatch(new LoadingSmallDisabledAction())
             return new TeamLoadSuccessAction(response);
           }),
           catchError((error) => {
@@ -179,7 +181,7 @@ export class TeamEffect {
       exhaustMap((action: TeamLoadSearchMemberRequestAction) => {
         return this.userService.searchByUserKey(action.payload).pipe(
           map((response) => {
-            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(new LoadingSmallDisabledAction())
 
             return new TeamLoadSearchMemberSuccessAction(response);
           }),

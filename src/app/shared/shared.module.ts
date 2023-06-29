@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { NotificationsService } from '../services/notifications/notifications.service';
 import { LoadingComponent } from './loading/loading.component';
 import { ModalGenericComponent } from './modal-generic/modal-generic.component';
-import { ModalNotificationsComponent } from './modal-notifications/modal-notifications.component';
+import { SmallLoadingComponent } from './small-loading/small-loading.component';
 
 @NgModule({
   imports: [CommonModule],
   providers: [NotificationsService],
-  declarations: [LoadingComponent, ModalGenericComponent, ModalNotificationsComponent],
-  exports: [LoadingComponent, ModalGenericComponent],
+  declarations: [LoadingComponent, ModalGenericComponent, SmallLoadingComponent],
+  exports: [LoadingComponent, ModalGenericComponent, SmallLoadingComponent],
 })
 export class SharedModule {}

@@ -13,7 +13,8 @@ import { NotificationsGetUserRequest } from 'src/app/shared/state-management/act
 import { DeleteNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/delete-notifications/notifications-delete-load-request.actions';
 import { AcceptInviteNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/accept-invite-notifications/notifications-accept-invite-request.actions';
 import { RecuseInviteNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/recuse-invite-notifications/notifications-recuse-invite-request.actions';
-import { isNotifications } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { isNotifications, smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
 
 @Component({
   selector: 'app-notifications',
@@ -26,27 +27,22 @@ export class NotificationsComponent {
   ischange: boolean = true;
   timer!: Number;
   enableNotifications$!: Observable<boolean>;
+  enableSmallLoading$!: Observable<boolean>;
 
   public user!: UserLoginSuccess;
   private subscriptions: Subscription = new Subscription();
   isNotifica: boolean = false;
   constructor(private store: Store<GlobalState>) {
     this.enableNotifications$ = this.store.pipe(select(isNotifications));
+    this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
   }
 
   ngOnInit(): void {
-    // let toggle = document.querySelector('.link-notifications') as HTMLElement;
-    // let containerNotifica = document.querySelector(
-    //   '.header-dropdown'
-    // ) as HTMLElement;
-
-    // toggle.addEventListener('click', () => {
-    //   containerNotifica.classList.toggle('active');
-    // });
+   
     this.loadDataUser();
     this.loadNotifications();
   }
-  
+
   public loadDataUser() {
     const subscription = this.store
       .pipe(select(AuthSelector))
@@ -73,20 +69,18 @@ export class NotificationsComponent {
       .pipe(select(UserNotifications))
       .subscribe((response) => {
         this.Allnotifications = response;
-        if(this.Allnotifications.length == 0){
-          this.isNotifica = true;
-        }else{
-          this.isNotifica = false;
-        }
+        this.verifyNotifications();
       });
 
     this.subscriptions.add(subscription);
   }
   refreshNotifications() {
+    this.subscriptions.unsubscribe();
+    this.isNotifica = false;
     this.ischange = false;
     this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
+    this.store.dispatch(new LoadingSmallActiveAction());
     this.onTimer();
-
   }
   deleteNotification(item: UserNotificationsSuccess) {
     const newarray = [];
@@ -114,6 +108,14 @@ export class NotificationsComponent {
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  verifyNotifications(){
+    if (this.Allnotifications.length == 0) {
+      this.isNotifica = true;
+    } else {
+      this.isNotifica = false;
+    }
   }
 
 

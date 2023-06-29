@@ -23,15 +23,13 @@ const _globalPagesReducer = createReducer(
   on(new LoadingActiveAction().createAction(), (state) => ({
     ...state,
     isloading: true,
-    isSmallLoading: false,
-    isNotifications: false,
+
    
   })),
   on(new LoadingDisabledAction().createAction(), (state) => ({
     ...state,
     isloading: false,
-    isSmallLoading: false,
-    isNotifications: false,
+
   })),
   on(new UpdateImgAccountAction().createAction(), (state, action) => ({
     ...state,
@@ -43,24 +41,22 @@ const _globalPagesReducer = createReducer(
     ...state,
     isloading: false,
     isSmallLoading: true,
-    isNotifications: false,
  
   })),
   on(new LoadingSmallDisabledAction().createAction(), (state) => ({
     ...state,
     isloading: false,
     isSmallLoading: false,
-    isNotifications: false,
   })),
   on(new LoadingNotificationsActiveAction().createAction(), (state) => ({
     ...state,
-    isloading: false,
+
     isSmallLoading: false,
     isNotifications: true,
   })),
   on(new LoadingNotificationsDisabledAction().createAction(), (state) => ({
     ...state,
-    isloading: false,
+
     isSmallLoading: false,
     isNotifications: false,
   })),

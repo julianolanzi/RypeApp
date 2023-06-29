@@ -29,6 +29,7 @@ export class UserSocialComponent {
 
   public id!: string;
   constructor(private store: Store<GlobalState>) {
+    this.loading$ = this.store.pipe(select(isLoadingGlobal));
     this.updateSocialMedias = new FormGroup({
       discord: new FormControl(''),
       instagram: new FormControl(''),

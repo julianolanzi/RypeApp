@@ -68,6 +68,9 @@
           </div>
         </div> -->
       </div>
+      <div *ngIf="(enableSmallLoading$ | async) == true">
+        <app-small-loading></app-small-loading>
+      </div>
     </div>
     <div class="grid grid-4-4-4">
       <div class="user-preview" *ngFor="let team of Teams$ | async">

@@ -1,7 +1,5 @@
 import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
-
 import { GlobalState } from './../../shared/state-management/states/global.state';
-
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
@@ -84,7 +82,7 @@ export class NavbarComponent implements OnInit {
       this.store.dispatch(new LoadingNotificationsActiveAction());
     } if(contain == true){
       this.store.dispatch(new LoadingNotificationsDisabledAction());
-      console.log('Desativa');
+    
     }
   }
 }

@@ -24,6 +24,7 @@ import { AcceptInviteNotificationsSucess } from '../actions/notifications/accept
 import { RecuseInviteNotificationsRequest } from '../actions/notifications/recuse-invite-notifications/notifications-recuse-invite-request.actions';
 import { RecuseInviteNotificationsSuccess } from '../actions/notifications/recuse-invite-notifications/notifications-recuse-invite-success.actions';
 import { AcceptInviteNotificationsTeamUserReducer } from '../actions/notifications/accept-invite-notifications/notifications-aceept-reducer.actions';
+import { LoadingSmallDisabledAction } from '../actions/global-pages/global-loading-small/loading-small-disabled.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,7 @@ export class NotificationsEffect {
       exhaustMap((action: NotificationsGetUserRequest) => {
         return this.notificaService.getUserNotifications(action.payload).pipe(
           map((response) => {
+            this.store.dispatch(new LoadingSmallDisabledAction());
             return new NotificationsGetUserSuccess(response);
           }),
           catchError((error) => {

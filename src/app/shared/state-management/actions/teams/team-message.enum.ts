@@ -1,5 +1,7 @@
 export enum TeamMessageEnum {
 
+    LOAD_TEAM_CLEAR_STATE = '[TEAM] Load clear state team',
+
     LOAD_TEAM_CREATE_REQUEST = '[TEAM] Load create request team',
     LOAD_TEAM_CREATE_SUCCESS = '[TEAM] Load team create success',
 

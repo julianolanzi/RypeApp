@@ -14,6 +14,9 @@ import { AlertService } from 'src/app/services/utils/alert.service';
 import { RequestTeam } from 'src/app/models/notifications/notifications-request-team';
 import { InviteTeamNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/team-notifications/request-invite-team/notifications-team-invite-request.actions';
 import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actions/teams/request-public-team/team-load-request-public-team.actions';
+import { smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { TeamLoadClearStateAction } from 'src/app/shared/state-management/actions/teams/clear-state/team-load-clear-state.actions';
+import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
 
 @Component({
   selector: 'app-team-search',
@@ -24,8 +27,7 @@ export class TeamSearchComponent {
   teamSearch!: FormGroup;
   cover = './assets/img/teams/cover-team.jpg'
   notifications!: UserNotificationsSuccess[];
-  clicked = false;
-
+  enableSmallLoading$!: Observable<boolean>;
   Teams$: Observable<SearchTeamSuccess[]> =
     this.store.select(TeamSearchSelector);
   user: any;
@@ -39,6 +41,7 @@ export class TeamSearchComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(private store: Store<GlobalState>,  private Alerts: AlertService,) {
+    this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
     this.teamSearch = new FormGroup({
       key: new FormControl('', [Validators.required]),
     });
@@ -58,7 +61,7 @@ export class TeamSearchComponent {
       return;
     }
     this.teamKey = this.teamSearch.value.key;
-
+    this.store.dispatch(new LoadingSmallActiveAction());
     this.store.dispatch(new TeamLoadAction(this.teamKey));
   }
 
@@ -96,6 +99,10 @@ export class TeamSearchComponent {
   public disableButton(id:string){
     let idtag = document.getElementById(id);
     idtag?.setAttribute('disabled', 'disabled');
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+    this.store.dispatch(new TeamLoadClearStateAction());
   }
 
 }

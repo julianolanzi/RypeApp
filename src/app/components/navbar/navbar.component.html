@@ -1,11 +1,10 @@
 <div class="container-navbar">
   <div></div>
   <div class="container-user-info">
-    <div class="notifications">
-      <a class="d-flex link-notifications" (click)="enableNotifications()">
+    <div class="notifications" (click)="enableNotifications()">
+      <a class="d-flex link-notifications" >
         <i *ngIf="!isNotifications" class='material-symbols-outlined d-flex-center icon'>notifications</i>
         <i *ngIf="isNotifications" class='material-symbols-outlined d-flex-center icon'>notifications_active</i>
-
       </a>
     </div>
     <h3>{{user.nickname}}</h3>

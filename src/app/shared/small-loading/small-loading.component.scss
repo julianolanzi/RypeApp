@@ -1,0 +1,39 @@
+.container-small {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    display: flex;
+    flex-direction: column;
+  
+    p{
+      width: 384px;
+      margin: 0 auto 0;
+      font-size: 1.125rem;
+      line-height: 1.3333333333em;
+      font-weight: 500;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
+
+.c-loader {
+    animation: is-rotating 1s infinite;
+    border: 5px solid #e5e5e5;
+    border-radius: 50%;
+    border-top-color: var(--pink);
+    height: 30px;
+    width: 30px;
+  }
+  
+  @keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
+  }

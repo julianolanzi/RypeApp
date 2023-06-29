@@ -26,11 +26,16 @@
                 </div>
               </form>
             </div>
+            <div *ngIf="(enableSmallLoading$ | async) == true">
+              <app-small-loading></app-small-loading>
+            </div>
           </div>
+          
     </div>
-
+   
     <div class="grid grid-4-4-4">
         <div *ngFor="let member of resultSearch$ | async" class="user-preview">
+         
           <img class="user-preview-cover big" src="{{member.urlCover}}" alt="">
           <div class="user-preview-info">
             <div *ngIf="member.team.length > 0" class="tag-sticker" title="{{member.team[0]?.name}}" >
@@ -173,7 +178,8 @@
             </div>
           </div>
         </div>
-  
+       
       </div>
+     
 
 </section>
