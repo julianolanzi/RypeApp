@@ -1066,6 +1066,7 @@ header .image-text .profession {
       width: 61px;
       height: 68px;
       position: relative;
+
       clip-path: url(#avatar-progress-back-small);
       -webkit-clip-path: url(#avatar-progress-back-small);
 
@@ -1309,10 +1310,10 @@ header .image-text .profession {
         width: 84px;
         height: 92px;
         position: relative;
-
+        clip-path: url(#avatar-progress-back);
+        -webkit-clip-path: url(#avatar-progress-back) !important;
         svg {
-          clip-path: url(#avatar-progress-back);
-          -webkit-clip-path: url(#avatar-progress-back) !important;
+         
           background-color: var(--text-color);
         }
       }
@@ -1783,6 +1784,7 @@ header .image-text .profession {
 
     input:disabled {
       cursor: not-allowed;
+      z-index: 1;
     }
   }
 
