@@ -1,0 +1,203 @@
+.quick-post {
+    border-radius: 10px;
+    background-color: var(--sidebar-background);
+    box-shadow: 0 0 40px 0 rgba(0, 0, 0, .06);
+}
+
+.quick-post-header {
+    border-bottom: 1px solid #2f3749;
+}
+
+.quick-post-option {
+    height: 65px;
+    width: 100%;
+    background-color: var(--sidebar-background);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom: 4px solid var(--pink-white);
+}
+
+.quick-post-title {
+    display: flex;
+    padding: 20px;
+    color: var(--text-color);
+    align-items: center;
+    gap: 10px;
+
+    p {
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: Rajdhani, sans-serif;
+        line-height: 1em;
+    }
+}
+
+.form-content-post {
+    width: 100%;
+
+    input {
+        width: 100%;
+        background-color: var(--sidebar-background);
+        height: 40px;
+        padding: 0px 28px;
+        color: var(--text-color);
+    }
+
+    .container-imagem {
+        width: 100%;
+        height: 300px;
+
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+    }
+
+    .container-video {
+        width: 100%;
+        height: 300px;
+
+       
+    }
+}
+
+
+.video-teste {
+    width: 100%;
+    height: 300px;
+    display: flex;
+   
+}
+
+
+.form-content-text-area {
+    width: 100%;
+    background-color: var(--sidebar-mode-color);
+
+    textarea {
+        width: 100%;
+        height: 120px;
+        background-color: var(--sidebar-mode-color);
+        border-radius: 0;
+        border: none;
+        font-size: 0.875rem;
+        padding: 26px 28px 0;
+        resize: none;
+        color: var(--text-color);
+        transition: border-color 0.2s ease-in-out;
+        font-family: Rajdhani, sans-serif;
+        overflow: auto;
+        ;
+    }
+
+    .form-textarea-limit-text {
+        color: var(--text-color);
+        padding-top: 10px;
+        height: 40px;
+        padding: 0 28px;
+        font-size: .75rem;
+        font-weight: 500;
+        opacity: .6;
+        text-align: right;
+    }
+}
+
+.quick-post-footer {
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 76px;
+    padding: 0 28px;
+    border-top: 1px solid #2f3749;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    color: var(--text-color);
+}
+
+.quick-post-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .action {
+        cursor: pointer;
+    }
+
+    .action.active-text {
+        background-color: #0088ff;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        justify-content: center;
+        color: var(--white);
+    }
+
+    .action.active-img {
+        background-color: #0eb400;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        justify-content: center;
+        color: var(--white);
+    }
+
+    .action.active-video {
+        background-color: #fd434f;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        justify-content: center;
+        color: var(--white);
+    }
+
+    .cancel-post {
+        color: var(--text-color);
+        width: 80px;
+        height: 40px;
+        font-size: 0.75rem;
+        line-height: 40px;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--sidebar-background);
+        box-shadow: none;
+    }
+
+    .cancel-post:hover {
+        background-color: #dd535d;
+    }
+
+    .create-post {
+        width: 80px;
+        height: 40px;
+        font-size: 0.75rem;
+        line-height: 40px;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+    }
+}
+
+.form-content-preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+
+    span {
+        font-size: 50px;
+    }
+}

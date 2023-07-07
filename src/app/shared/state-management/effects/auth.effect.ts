@@ -29,7 +29,7 @@ export class AuthEffect {
         return this.AuthService.loginUser(action.payload).pipe(
           map((response) => {
             setTimeout(() => {
-              this.router.navigate(['dashboard']);
+              this.router.navigate(['feed']);
             }, 1000);
 
             this.store.dispatch(new UpdateImgAccountAction(response));
@@ -54,5 +54,5 @@ export class AuthEffect {
     private router: Router,
     private store: Store,
     private Alerts: AlertService
-  ) {}
+  ) { }
 }

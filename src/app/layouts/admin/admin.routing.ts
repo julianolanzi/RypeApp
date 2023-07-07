@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
-import { DashboardComponent } from './../../pages/admin/dashboard/dashboard.component';
+import { TimelineComponent } from 'src/app/pages/admin/feed/timeline/timeline.component';
 
 export const AdminRoutes: Routes = [
   // {
@@ -9,8 +9,8 @@ export const AdminRoutes: Routes = [
   //   canActivate: [AuthGuard],
   // },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'timeline',
+    component: TimelineComponent,
     canActivate: [AuthGuard],
   },
 ];

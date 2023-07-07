@@ -16,21 +16,22 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { AdminRoutes } from "./admin.routing";
 import { TeamService } from './../../services/teams/team.service';
 import { TeamModule } from './../../pages/admin/team/team.module';
+import { FeedModule } from 'src/app/pages/admin/feed/feed.module';
+import { FeedService } from 'src/app/services/feed/feed.service';
 
 @NgModule({
-    declarations: [
-        DashboardComponent,
-    ],
-    providers: [AuthService, UserService, DatePipe, AlertService, UploadImgService, TeamService],
-    imports: [
-      CommonModule,
-      RouterModule.forChild(AdminRoutes),
-      FormsModule,
-      ReactiveFormsModule,
-      HttpClientModule,
-      SharedModule,
-      AccountModule,
-      TeamModule
-    ],
-  })
-  export class AdminModule {}
+  declarations: [],
+  providers: [AuthService, UserService, DatePipe, AlertService, UploadImgService, TeamService, FeedService],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(AdminRoutes),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    SharedModule,
+    AccountModule,
+    TeamModule,
+    FeedModule,
+  ],
+})
+export class AdminModule { }

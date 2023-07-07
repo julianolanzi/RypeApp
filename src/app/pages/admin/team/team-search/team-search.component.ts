@@ -82,7 +82,7 @@ export class TeamSearchComponent {
       team: team.id,
       type: 'team'
     }
-    console.log(this.requestInvite);
+  
     this.store.dispatch(new InviteTeamNotificationsRequest(this.requestInvite));
    
   }
@@ -100,6 +100,7 @@ export class TeamSearchComponent {
     let idtag = document.getElementById(id);
     idtag?.setAttribute('disabled', 'disabled');
   }
+  
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
     this.store.dispatch(new TeamLoadClearStateAction());

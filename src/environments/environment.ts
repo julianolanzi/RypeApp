@@ -5,5 +5,6 @@ export const environment = {
     UrlUserTeam: 'https://user-team.api.rypegg.com',
     UrlNotifications: 'https://notifications.api.rypegg.com',
     // UrlNotifications: 'http://localhost:5080',
-    UrlImgUpload:'https://upload-img-api.rypegg.com'
+    UrlImgUpload:'https://upload-img-api.rypegg.com',
+    UrlFeed: 'https://feed-api.rypegg.com'
 };

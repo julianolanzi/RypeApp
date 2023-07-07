@@ -21,6 +21,7 @@ export abstract class BaseService {
   protected UrluserTeam:string = environment.UrlUserTeam;
   protected UrlNotifications:string = environment.UrlNotifications;
   protected UrlImgUpload:string = environment.UrlImgUpload;
+  protected UrlFeed:string = environment.UrlFeed;
  
 
   protected ObterHeaderJson() {

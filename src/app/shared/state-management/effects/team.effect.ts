@@ -274,7 +274,7 @@ export class TeamEffect {
       return this.teamService.quitTeam(action.payload).pipe(
         map((response) =>{
           this.store.dispatch(new LoadingDisabledAction());
-          console.log('chegando na action');
+      
           return new TeamLoadQuitSuccessAction(response);
         }),
         catchError((error) => {
