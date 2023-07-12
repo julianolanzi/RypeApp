@@ -1610,7 +1610,7 @@ header .image-text .profession {
   position: absolute;
   top: 22px;
   right: 19px;
-  z-index: 9999;
+  z-index: 90;
 
   .post-settings-wrap {
     position: relative;
@@ -1635,7 +1635,7 @@ header .image-text .profession {
       opacity: 1;
       visibility: visible;
       transform: translate(0px, 0px);
-  
+
     }
 
     .simple-dropdown {
@@ -1730,8 +1730,8 @@ header .image-text .profession {
     display: flex;
     -ms-flex-pack: end;
     justify-content: flex-end;
-    -ms-flex-direction: row-reverse;
-    flex-direction: row-reverse;
+    -ms-flex-direction: inherit;
+    flex-direction: inherit;
 
     .reaction-item {
       margin-left: 0;
@@ -2627,6 +2627,21 @@ header .image-text .profession {
 
       .profile-header-social-links {
         width: 200px;
+      }
+    }
+  }
+
+  .user-status {
+    .user-status-title-container {
+
+      align-items: center;
+
+      .user-status-title-action {
+        font-size: 0.8rem;
+      }
+
+      .user-status-title-name {
+        font-size: 0.8rem;
       }
     }
   }

@@ -16,6 +16,8 @@ import { FeedReactRequestAction } from "../actions/feed/react-post/feed-load-rea
 import { FeedReactSucessAction } from "../actions/feed/react-post/feed-load-react-success.actions";
 import { GlobalState } from "../states/global.state";
 import { FeedState } from "../states/feeed.state";
+import { FeedDeletePostRequestAction } from "../actions/feed/delete-post/feed-load-delete-post-request.actions";
+import { FeedDeletePostSuccessAction } from "../actions/feed/delete-post/feed-load-delete-post-success.actions";
 @Injectable({
     providedIn: 'root',
 })
@@ -71,67 +73,26 @@ export class FeedEffect {
             exhaustMap((action: FeedReactRequestAction) => {
                 return this.feedService.reactPost(action.payload).pipe(
                     map((response) => {
-                        // const data = this.state.value.feed.timeLine;
-
-                        // let index = data.findIndex((element: any) => element.id == action.payload?.id);
-
-                        // if(data[index].reacts.length == 0 ){
-
-                        //     let NewData = {
-                        //         id: data[index].id,
-                        //         title: data[index].title,
-                        //         text: data[index].text,
-                        //         type: data[index].type,
-                        //         reactUser: action.payload?.react,
-                        //         reacts: [{
-                        //             user: '64a85fbe3a97a',
-                        //             reactDate: new Date(),
-                        //             react: action.payload?.react,
-                        //             id: '64a85fbe3a97a',
-                        //         }],
-                        //         ranked: [
-                        //             {
-                        //                 reackRank: action.payload?.react,
-                        //                 qtd: 1,
-                        //             },
-                        //             {
-                        //                 reackRank: data[index].ranked[1].reackRank,
-                        //                 qtd: data[index].ranked[1].qtd
-                        //             },
-                        //             {
-                        //                 reackRank: data[index].ranked[2].reackRank,
-                        //                 qtd: data[index].ranked[2].qtd
-                        //             },
-                        //             {
-                        //                 reackRank: data[index].ranked[3].reackRank,
-                        //                 qtd: data[index].ranked[3].qtd
-                        //             },
-                        //             {
-                        //                 reackRank: data[index].ranked[4].reackRank,
-                        //                 qtd: data[index].ranked[4].qtd
-                        //             },
-                        //             {
-                        //                 reackRank: data[index].ranked[5].reackRank,
-                        //                 qtd: data[index].ranked[5].qtd
-                        //             },
-                                    
-                        //         ],
-                        //         enableEdit: data[index].enableEdit,
-                        //         urlPost: data[index].urlPost,
-                        //         urlVideo: data[index].urlVideo,
-                        //         comments: [...data[index].comments],
-                        //         createdAt: data[index].createdAt,
-                        //         lastUpdate: data[index].lastUpdate,
-                        //         author: {
-                        //             nickname: data[index].author.nickname,
-                        //             name: data[index].author.name,
-                        //             url: data[index].author.url,
-                        //         }
-                        //     }
-                        //     console.log(NewData);
-                        // }
-
+                        
                         return new FeedReactSucessAction(response);
+                    }),
+                    catchError((error) => {
+                        const err = error.error.error;
+                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        return of(new FeedLoadGlobalErrorAction(error));
+                    })
+                )
+            })
+        )
+    );
+
+    deletePost$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(FeedMessageEnum.LOAD_FEED_DELETE_POST_REQUEST),
+            exhaustMap((action: FeedDeletePostRequestAction) => {
+                return this.feedService.deletePost(action.payload).pipe(
+                    map((response) => {
+                        return new FeedDeletePostSuccessAction(action.payload);
                     }),
                     catchError((error) => {
                         const err = error.error.error;

@@ -24,17 +24,24 @@ export class FeedService extends BaseService {
     return response;
   }
 
-  loadTimeline(data: TimelineRequest | undefined): Observable<TimelineSuccess>{
+  loadTimeline(data: TimelineRequest | undefined): Observable<TimelineSuccess> {
     let response = this.http
-    .get(this.UrlFeed + '/posts/timeline/?limit='+ data?.limit + '&offset=' + data?.offset, this.ObterAuthHeaderJson())
-    .pipe(map(this.extractData), catchError(this.serviceError));
-  return response;
+      .get(this.UrlFeed + '/posts/timeline/?limit=' + data?.limit + '&offset=' + data?.offset, this.ObterAuthHeaderJson())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
   }
 
-  reactPost(data: ReactRequest | undefined):Observable<TimelineSuccess> {
+  reactPost(data: ReactRequest | undefined): Observable<TimelineSuccess> {
     let response = this.http
-    .put(this.UrlFeed +'/posts/react/'+ data?.id, data, this.ObterAuthHeaderJson())
-    .pipe(map(this.extractData), catchError(this.serviceError));
-  return response;
+      .put(this.UrlFeed + '/posts/react/' + data?.id, data, this.ObterAuthHeaderJson())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  deletePost(id: string | undefined): Observable<TimelineSuccess> {
+    let response = this.http
+      .delete(this.UrlFeed + '/posts/delete/' + id, this.ObterAuthHeaderJson())
+      .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
   }
 }

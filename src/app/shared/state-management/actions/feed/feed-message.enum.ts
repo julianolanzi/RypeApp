@@ -8,6 +8,9 @@ export enum FeedMessageEnum {
     LOAD_FEED_REACT_POST_REQUEST = '[FEED] Load react post request',
     LOAD_FEED_REACT_POST_SUCCESS = '[FEED] Load react post success',
 
+    LOAD_FEED_DELETE_POST_REQUEST = '[FEED] Load delete post request',
+    LOAD_FEED_DELETE_POST_SUCCESS = '[FEED] Load delete post success',
+
 
     LOAD_GLOBAL_ERROR = '[FEED] Load feed error',
 }
