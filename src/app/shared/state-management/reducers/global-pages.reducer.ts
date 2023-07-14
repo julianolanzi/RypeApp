@@ -56,7 +56,6 @@ const _globalPagesReducer = createReducer(
   })),
   on(new LoadingNotificationsDisabledAction().createAction(), (state) => ({
     ...state,
-
     isSmallLoading: false,
     isNotifications: false,
   })),

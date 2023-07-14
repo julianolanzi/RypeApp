@@ -1,0 +1,19 @@
+<ng-container *ngIf="mostrar">
+    <div class="modal-fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Comentários</h2>
+                    <span (click)="toggle()" class="material-symbols-outlined">
+                        close
+                        </span>
+                </div>
+                <div class="modal-body">
+                    <ng-content></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+</ng-container>

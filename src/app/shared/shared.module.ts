@@ -4,11 +4,16 @@ import { NotificationsService } from '../services/notifications/notifications.se
 import { LoadingComponent } from './loading/loading.component';
 import { ModalGenericComponent } from './modal-generic/modal-generic.component';
 import { SmallLoadingComponent } from './small-loading/small-loading.component';
+import { ModalEditPostComponent } from './modal-edit-post/modal-edit-post.component';
+import { ModalCommetsPostComponent } from './modal-commets-post/modal-commets-post.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   providers: [NotificationsService],
-  declarations: [LoadingComponent, ModalGenericComponent, SmallLoadingComponent],
-  exports: [LoadingComponent, ModalGenericComponent, SmallLoadingComponent],
+  declarations: [LoadingComponent, ModalGenericComponent, SmallLoadingComponent, ModalEditPostComponent, ModalCommetsPostComponent, CommentsComponent, EditPostComponent],
+  exports: [LoadingComponent, ModalGenericComponent, SmallLoadingComponent, ModalEditPostComponent, ModalCommetsPostComponent, CommentsComponent, EditPostComponent],
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -18,6 +18,14 @@ import { GlobalState } from "../states/global.state";
 import { FeedState } from "../states/feeed.state";
 import { FeedDeletePostRequestAction } from "../actions/feed/delete-post/feed-load-delete-post-request.actions";
 import { FeedDeletePostSuccessAction } from "../actions/feed/delete-post/feed-load-delete-post-success.actions";
+import { FeedPostEditRequestAction } from "../actions/feed/edit-post/feed-edit-post-request.actions";
+import { FeedPostEditSuccessAction } from "../actions/feed/edit-post/feed-edit-post-success.actions";
+import { PostCommentsLoadRequestAction } from "../actions/feed/comments-load/feed-load-comments-post-request.actions";
+import { PostCommentsLoadSuccessAction } from "../actions/feed/comments-load/feed-load-comments-post-success.actions";
+import { PostCommentsCreateRequestAction } from "../actions/feed/comments-create/load-create-comment-request.actions";
+import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
+import { PostCommentsDeleteRequestAction } from "../actions/feed/comments-delete/load-delete-comment-request.actions";
+import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
 @Injectable({
     providedIn: 'root',
 })
@@ -73,7 +81,7 @@ export class FeedEffect {
             exhaustMap((action: FeedReactRequestAction) => {
                 return this.feedService.reactPost(action.payload).pipe(
                     map((response) => {
-                        
+
                         return new FeedReactSucessAction(response);
                     }),
                     catchError((error) => {
@@ -86,7 +94,7 @@ export class FeedEffect {
         )
     );
 
-    deletePost$ = createEffect(() => 
+    deletePost$ = createEffect(() =>
         this.actions$.pipe(
             ofType(FeedMessageEnum.LOAD_FEED_DELETE_POST_REQUEST),
             exhaustMap((action: FeedDeletePostRequestAction) => {
@@ -103,6 +111,78 @@ export class FeedEffect {
             })
         )
     );
+
+    editPost$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FeedMessageEnum.LOAD_FEED_POST_EDIT_REQUEST),
+            exhaustMap((action: FeedPostEditRequestAction) => {
+                return this.feedService.updatePost(action.payload).pipe(
+                    map((response) => {
+                        return new FeedPostEditSuccessAction();
+                    }),
+                    catchError((error) => {
+                        const err = error.error.error;
+                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        return of(new FeedLoadGlobalErrorAction(error));
+                    })
+                )
+            })
+        )
+    );
+
+    loadComentsByPost$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FeedMessageEnum.LOAD_COMMENTS_POST_REQUEST),
+            exhaustMap((action: PostCommentsLoadRequestAction) => {
+                return this.feedService.loadCommentsByPost(action.payload).pipe(
+                    map((response) => {
+                        this.store.dispatch(new LoadingSmallDisabledAction());
+                        return new PostCommentsLoadSuccessAction(response);
+                    }),
+                    catchError((error) => {
+                        const err = error.error.error;
+                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        return of(new FeedLoadGlobalErrorAction(error));
+                    })
+                )
+            })
+        )
+    );
+
+    createComments$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(FeedMessageEnum.LOAD_CREATE_COMMENTS_POST_REQUEST),
+        exhaustMap((action: PostCommentsCreateRequestAction) => {
+            return this.feedService.createComment(action.payload).pipe(
+                map((response) => {
+                   
+                    return new PostCommentsCreateSuccessAction(response);
+                }),
+                catchError((error) => {
+                    const err = error.error.error;
+                    this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                    return of(new FeedLoadGlobalErrorAction(error));
+                })
+            )
+        })
+    ));
+    deleteComments$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(FeedMessageEnum.LOAD_DELETE_COMMENTS_POST_REQUEST),
+        exhaustMap((action: PostCommentsDeleteRequestAction) => {
+            return this.feedService.deleteComment(action.payload).pipe(
+                map((response) => {
+                   
+                    return new PostCommentsDeleteSuccessAction(response);
+                }),
+                catchError((error) => {
+                    const err = error.error.error;
+                    this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                    return of(new FeedLoadGlobalErrorAction(error));
+                })
+            )
+        })
+    ))
 
     constructor(private actions$: Actions, private Alerts: AlertService, private store: Store, private feedService: FeedService, private state: State<GlobalState>) {
 

@@ -12,6 +12,7 @@ export interface TimelineSuccess {
         pistola: number,
         aff: number
     },
+    qtdComments: number,
     ranked: [
         {
             reackRank: string;

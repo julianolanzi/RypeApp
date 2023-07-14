@@ -16,14 +16,14 @@ export class AdminComponent {
   }
 
   ngOnInit(): void {
-    let container = document.querySelector('.container-all') as HTMLElement;
+    // let container = document.querySelector('.container-all') as HTMLElement;
    
     
-    container.addEventListener('click', () => {
-      this.store.dispatch(new LoadingNotificationsDisabledAction());
+    // container.addEventListener('click', () => {
+    //   this.store.dispatch(new LoadingNotificationsDisabledAction());
     
       
-    });
+    // });
   }
 
 }

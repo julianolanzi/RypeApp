@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { EditPostRequest } from 'src/app/models/feed/edit-post';
 import { ReactRequest } from 'src/app/models/feed/react-request';
 import { TimelineRequest } from 'src/app/models/feed/timeline-request';
 import { TimelineSuccess } from 'src/app/models/feed/timeline-success';
 import { FeedDeletePostRequestAction } from 'src/app/shared/state-management/actions/feed/delete-post/feed-load-delete-post-request.actions';
+import { FeedPostEditRequestAction } from 'src/app/shared/state-management/actions/feed/edit-post/feed-edit-post-request.actions';
 import { FeedTimelineRequestAction } from 'src/app/shared/state-management/actions/feed/feed-timelime/feed-load-timeline-request.actions';
 import { FeedReactRequestAction } from 'src/app/shared/state-management/actions/feed/react-post/feed-load-react-request.actions';
 import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
@@ -19,6 +22,11 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
   styleUrls: ['./timeline.component.scss']
 })
 export class TimelineComponent {
+
+  UserUpdatePost!: any;
+  UpdatePostForm!: FormGroup;
+  UpdatePostRequest!: EditPostRequest;
+
   lastId: string = '';
   enableSmallLoading$!: Observable<boolean>;
   PageOffset: number = 1;
@@ -36,6 +44,14 @@ export class TimelineComponent {
 
   constructor(private store: Store<GlobalState>) {
     this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
+
+    this.UpdatePostForm = new FormGroup({
+      title: new FormControl(''),
+      text: new FormControl(''),
+      type: new FormControl(''),
+      urlPost: new FormControl(''),
+      urlVideo: new FormControl(''),
+    })
 
 
   }
@@ -58,8 +74,6 @@ export class TimelineComponent {
 
       }
     })
-
-
   }
   enablePostOptions(id: any) {
     let idtag = document.getElementById(id + 'settings');
@@ -83,7 +97,6 @@ export class TimelineComponent {
     }
     this.enableReact(id);
     this.store.dispatch(new FeedReactRequestAction(this.ReactAction));
-
   }
   loadTimeline() {
     this.timelineRequest = {
@@ -96,9 +109,29 @@ export class TimelineComponent {
 
 
   }
+  deletePost(id: any) {
+    this.store.dispatch(new FeedDeletePostRequestAction(id));
+  }
+  updatePost() {
+    const formData = Object.assign({}, this.UpdatePostRequest, this.UpdatePostForm.value);
 
-  deletePost(id:any) {
-   this.store.dispatch(new FeedDeletePostRequestAction(id));
+    this.UpdatePostRequest = {
+      ...formData,
+      id: this.UserUpdatePost.id,
+    }
+
+    this.store.dispatch(new FeedPostEditRequestAction(this.UpdatePostRequest))
+  }
+  openEditPost(post: any) {
+    this.UserUpdatePost = post;
+
+
+    this.UpdatePostForm.patchValue({
+      text: post.text,
+      type: post.type,
+      urlPost: post.urlPost,
+      urlVideo: post.urlVideo,
+    });
   }
 
 

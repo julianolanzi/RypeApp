@@ -4,9 +4,14 @@ import { FeedPostCreateRequestAction } from "../actions/feed/feed-post/feed-crea
 import { FeedLoadGlobalErrorAction } from "../actions/feed/feed-global-error.actions";
 import { FeedPostCreateSuccessAction } from "../actions/feed/feed-post/feed-create-post-success.actions";
 import { FeedTimelineSuccessAction } from "../actions/feed/feed-timelime/feed-load-timeline-success.actions";
-import { FeedReactRequestAction } from "../actions/feed/react-post/feed-load-react-request.actions";
 import { FeedReactSucessAction } from "../actions/feed/react-post/feed-load-react-success.actions";
 import { FeedDeletePostSuccessAction } from "../actions/feed/delete-post/feed-load-delete-post-success.actions";
+import { FeedPostEditRequestAction } from "../actions/feed/edit-post/feed-edit-post-request.actions";
+import { PostCommentsLoadClearAction } from "../actions/feed/comments-load/feed-load-comments-clear.actions";
+import { PostCommentsLoadSuccessAction } from "../actions/feed/comments-load/feed-load-comments-post-success.actions";
+import { PostCommentsLoadRequestAction } from "../actions/feed/comments-load/feed-load-comments-post-request.actions";
+import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
+import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
 
 export const initialState: FeedState = {
     createPost: {
@@ -70,6 +75,7 @@ export const initialState: FeedState = {
             url: '',
         }
     },
+    comments: [],
     timeLine: [],
     feedError: undefined,
 }
@@ -90,7 +96,6 @@ const _feedReducer = createReducer(
         ...state,
         timeLine: [...action.payload]
     })),
-
     on(new FeedReactSucessAction().createAction(), (state, action) => {
         const newArray = [];
 
@@ -123,12 +128,106 @@ const _feedReducer = createReducer(
         }
 
     }),
+    on(new FeedPostEditRequestAction().createAction(), (state, action) => {
+        const newArray = [];
 
+        for (let item of state.timeLine) {
+            if (item.id == action.payload.id) {
+                let newItem = {
+                    ...item,
+                    text: action.payload.text,
+                }
 
+                newArray.push(newItem);
+
+            }
+            else {
+                newArray.push(item);
+            }
+        }
+
+        return {
+            ...state,
+            timeLine: newArray,
+        }
+
+    }),
+    on(new PostCommentsLoadClearAction().createAction(), (state, action) => ({
+        ...state,
+        comments: [],
+    })),
     on(new FeedLoadGlobalErrorAction().createAction(), (state, action) => ({
         ...state,
         feedError: action.payload,
     })),
+    on(new PostCommentsLoadSuccessAction().createAction(), (state, action) => ({
+        ...state,
+        comments: [...action.payload]
+    })),
+    on(new PostCommentsCreateSuccessAction().createAction(), (state, action) => {
+
+        let newArrayTimeLine = []
+ 
+
+        for (let post of state.timeLine) {
+            if (post.id == action.payload.idPost) {
+                let newitem = {
+                    ...post,
+                    qtdComments: post.qtdComments + 1,
+                }
+
+                newArrayTimeLine.push(newitem);
+            } else {
+                newArrayTimeLine.push(post);
+            }
+        }
+
+
+
+        return {
+            ...state,
+            comments: [...state.comments, { ...action.payload }],
+            timeLine: newArrayTimeLine,
+
+        }
+    }),
+    on(new PostCommentsDeleteSuccessAction().createAction(), (state, action) => {
+        const newArray = [];
+        for (let item of state.comments) {
+            if (item._id != action.payload._id) {
+                newArray.push(item);
+            }
+        }
+
+        let newArrayTimeLine = []
+ 
+
+        for (let post of state.timeLine) {
+            if (post.id == action.payload.idPost) {
+                let newitem = {
+                    ...post,
+                    qtdComments: post.qtdComments - 1,
+                }
+
+                newArrayTimeLine.push(newitem);
+            } else {
+                newArrayTimeLine.push(post);
+            }
+        }
+
+        return {
+            ...state,
+            comments: newArray,
+            timeLine: newArrayTimeLine,
+        }
+
+    }),
+    on(new PostCommentsLoadRequestAction().createAction(), (state, action) => ({
+        ...state,
+        comments: [],
+    })),
+
+
 
 );
 
