@@ -1,7 +1,7 @@
-import { TeamDataSuccess } from './../../../../models/teams/team-data-sucess';
+import { TeamDataSuccess } from '../../../../models/teams/load-team/team-data-sucess';
 import { Component } from '@angular/core';
 
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { Observable, Subscription } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { select, Store } from '@ngrx/store';

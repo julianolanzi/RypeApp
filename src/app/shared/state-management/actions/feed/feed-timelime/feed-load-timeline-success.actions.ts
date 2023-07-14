@@ -1,4 +1,4 @@
-import { TimelineSuccess } from "src/app/models/feed/timeline-success";
+import { TimelineSuccess } from "src/app/models/feed/timeline/timeline-success";
 import { CustomAction } from "../../custom.actions";
 import { FeedMessageEnum } from "../feed-message.enum";
 import { createAction } from "@ngrx/store";

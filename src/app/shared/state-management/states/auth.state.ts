@@ -1,4 +1,4 @@
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 
 export interface AuthState {
   user: UserLoginSuccess;

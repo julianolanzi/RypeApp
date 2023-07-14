@@ -4,16 +4,16 @@ import { HttpClient } from "@angular/common/http";
 import { Store } from '@ngrx/store';
 
 import { BaseService } from "../base.service";
-import { PostRequest } from "src/app/models/feed/post";
-import { PostCreateSuccess } from "src/app/models/feed/post-create-sucess";
+import { PostCreateSuccess } from "src/app/models/feed/create-post/post-create-sucess";
 import { Observable, catchError, map } from "rxjs";
-import { TimelineRequest } from "src/app/models/feed/timeline-request";
-import { TimelineSuccess } from "src/app/models/feed/timeline-success";
-import { ReactRequest } from "src/app/models/feed/react-request";
-import { EditPostRequest } from "src/app/models/feed/edit-post";
+import { TimelineRequest } from "src/app/models/feed/timeline/timeline-request";
+import { ReactRequest } from "src/app/models/feed/reacts/react-request";
+import { EditPostRequest } from "src/app/models/feed/edit-post/edit-post-request";
 import { LoadCommentsSuccess } from "src/app/models/feed/comments/comments-load-success";
 import { CreateComment } from "src/app/models/feed/comments/comments-create";
 import { DeleteComment } from "src/app/models/feed/comments/comments-delete";
+import { PostCreateRequest } from "src/app/models/feed/create-post/post-create-request";
+import { TimelineSuccess } from "src/app/models/feed/timeline/timeline-success";
 
 
 @Injectable()
@@ -21,7 +21,7 @@ export class FeedService extends BaseService {
   constructor(private http: HttpClient, Store: Store) {
     super(Store);
   }
-  createPost(data: PostRequest | undefined): Observable<PostCreateSuccess> {
+  createPost(data: PostCreateRequest | undefined): Observable<PostCreateSuccess> {
     let response = this.http
       .post(this.UrlFeed + '/posts/create/', data, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));

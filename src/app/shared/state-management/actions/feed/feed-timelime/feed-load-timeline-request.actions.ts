@@ -1,7 +1,7 @@
 import { CustomAction } from "../../custom.actions";
 import { FeedMessageEnum } from "../feed-message.enum";
 import { createAction } from "@ngrx/store";
-import { TimelineRequest } from "src/app/models/feed/timeline-request";
+import { TimelineRequest } from "src/app/models/feed/timeline/timeline-request";
 
 
 

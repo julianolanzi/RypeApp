@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { select, Store } from '@ngrx/store';
 import { Subscription, throwError } from 'rxjs';
 
-import { UserLoginSuccess } from '../models/auth/user-login-success';
+import { UserLoginSuccess } from '../models/auth/login/user-login-success';
 import { AuthSelector } from '../shared/state-management/selectors/auth.selector';
 
 export abstract class BaseService {

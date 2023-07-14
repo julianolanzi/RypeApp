@@ -1,4 +1,4 @@
-export interface CreateTeam {
+export interface CreateTeamRequest {
     name: string;
     tagName: string;
     description: string;

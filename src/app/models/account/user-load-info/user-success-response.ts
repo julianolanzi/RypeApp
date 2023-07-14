@@ -1,6 +1,7 @@
-export interface UserUpdate {
+export interface UserSuccessResponse {
     id: string;
     idRype: string;
+    urlCover: string;
     nickname: string;
     name: string;
     lastname: string;
@@ -22,6 +23,7 @@ export interface UserUpdate {
         xbox: string;
         idGame:string;
     }
+
     address: {
         city: string;
         district: string;
@@ -39,5 +41,7 @@ export interface UserUpdate {
         description: string;
         createdAt: Date | undefined;
     }]
+    notifications: [],
+    posts:[],
     createdAt: Date | undefined;
 }

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 
 
 import { RequestInviteUser } from 'src/app/models/notifications/notifications-request-invite-user';
-import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
-import { SearchMemberSucess } from 'src/app/models/teams/team-search-member-success';
+import { TeamDataSuccess } from 'src/app/models/teams/load-team/team-data-sucess';
+import { SearchMemberSucess } from 'src/app/models/teams/search-members/team-search-member-success';
 
 import { AlertService } from 'src/app/services/utils/alert.service';
 import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';

@@ -18,6 +18,7 @@ import { TeamService } from './../../services/teams/team.service';
 import { TeamModule } from './../../pages/admin/team/team.module';
 import { FeedModule } from 'src/app/pages/admin/feed/feed.module';
 import { FeedService } from 'src/app/services/feed/feed.service';
+import { OverviewPlayerModule } from 'src/app/pages/admin/overview-player/overview-player.module';
 
 @NgModule({
   declarations: [],
@@ -32,6 +33,7 @@ import { FeedService } from 'src/app/services/feed/feed.service';
     AccountModule,
     TeamModule,
     FeedModule,
+    OverviewPlayerModule,
   ],
 })
 export class AdminModule { }

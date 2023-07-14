@@ -1,4 +1,4 @@
-export interface TeamUpdateInfo {
+export interface TeamUpdateInfoRequest {
   id: string;
   name: string;
   tagName: string;

@@ -1,4 +1,4 @@
-export interface PostRequest {
+export interface PostCreateRequest {
     title: string;
     text: string;
     type: string;

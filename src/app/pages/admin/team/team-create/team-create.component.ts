@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { CreateTeamRequest } from 'src/app/models/teams/create-team/create-team-request';
 
-import { CreateTeam } from 'src/app/models/teams/create-team';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadCreateRequestAction } from 'src/app/shared/state-management/actions/teams/create-team/team-load-create-request.actions';
 
@@ -24,7 +24,7 @@ export class TeamCreateComponent {
 
   loading$!: Observable<boolean>;
   private subscriptions: Subscription = new Subscription();
-  team!: CreateTeam;
+  team!: CreateTeamRequest;
 
   constructor(private store: Store<GlobalState>) {
     this.createTeam = new FormGroup({

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { PostRequest } from 'src/app/models/feed/post';
+import { PostCreateRequest } from 'src/app/models/feed/create-post/post-create-request';
 import { FeedPostCreateRequestAction } from 'src/app/shared/state-management/actions/feed/feed-post/feed-create-post-request.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
@@ -15,7 +15,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 export class CreatePostComponent {
   postForm!: FormGroup;
   private subscriptions: Subscription = new Subscription();
-  postRequest!: PostRequest;
+  postRequest!: PostCreateRequest;
   public user!: any;
   id!: string;
 

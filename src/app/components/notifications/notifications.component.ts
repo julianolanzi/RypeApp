@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { UserNotificationsSuccess } from 'src/app/models/notifications/notifications-user-success';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import {

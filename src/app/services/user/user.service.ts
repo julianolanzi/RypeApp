@@ -5,9 +5,9 @@ import { catchError, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from '../base.service';
-import { UserChangePass } from 'src/app/models/account/user-change-pass';
-import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
-import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
+import { UserSuccessResponse } from 'src/app/models/account/user-load-info/user-success-response';
+import { UserUpdateRequest } from 'src/app/models/account/update-user/user-update-request';
+import { UserChangePassRequest } from 'src/app/models/account/change-password/user-change-password-request';
 
 
 
@@ -35,7 +35,7 @@ export class UserService extends BaseService {
     return response;
   }
 
-  chagePassword(updatePass: UserChangePass | undefined): Observable<any> {
+  chagePassword(updatePass: UserChangePassRequest | undefined): Observable<any> {
     let response = this.http
       .put(
         this.UrluserTeam + '/users/updatepass/' + updatePass?.id,

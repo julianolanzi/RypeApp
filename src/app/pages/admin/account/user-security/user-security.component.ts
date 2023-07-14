@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { UserChangePassRequest } from 'src/app/models/account/change-password/user-change-password-request';
 
-import { UserChangePass } from 'src/app/models/account/user-change-pass';
 import { AccountUpdatePassLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-reset-password/account-update-pass-request-actions';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { LoadingDisabledAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-disabled.actions';
@@ -20,7 +20,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 })
 export class UserSecurityComponent {
   updatePass!: FormGroup;
-  user!: UserChangePass;
+  user!: UserChangePassRequest;
   loading$!: Observable<boolean>;
   data: any;
   id: string = '';

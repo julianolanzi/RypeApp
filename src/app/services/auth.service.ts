@@ -6,8 +6,9 @@ import { catchError, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from './base.service';
-import { UserLogin } from '../models/auth/user-login';
-import { UserLoginSuccess } from '../models/auth/user-login-success';
+
+import { UserLoginSuccess } from '../models/auth/login/user-login-success';
+import { UserLogin } from '../models/auth/login/user-login';
 
 @Injectable()
 export class AuthService extends BaseService {

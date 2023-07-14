@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRegister } from 'src/app/models/auth/user-register';
+import { UserRegisterRequest } from 'src/app/models/auth/register/user-register-request';
 import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { SecurityService } from 'src/app/services/security.service';
 export class SingUpComponent {
   cadastroForm!: FormGroup;
   errors: any[] = [];
-  User!: UserRegister;
+  User!: UserRegisterRequest;
   isRegisterSucess!: boolean;
   isLoading: boolean = false;
 

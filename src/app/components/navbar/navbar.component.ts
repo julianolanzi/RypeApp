@@ -1,4 +1,4 @@
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { GlobalState } from './../../shared/state-management/states/global.state';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';

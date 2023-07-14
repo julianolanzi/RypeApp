@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
-import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
-import { UpdateImgTeam } from 'src/app/models/teams/team-update-img';
-import { TeamUpdateInfo } from 'src/app/models/teams/team-update-request';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
+import { TeamDataSuccess } from 'src/app/models/teams/load-team/team-data-sucess';
+import { UpdateImgTeamRequest } from 'src/app/models/teams/team-update-img/team-update-img-request';
+import { TeamUpdateInfoRequest } from 'src/app/models/teams/team-update/team-update-request';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadUpdateRequestImg } from 'src/app/shared/state-management/actions/teams/team-img/team-load-update-img-request.actions';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
@@ -27,7 +27,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 export class TeamSettingsComponent {
   cover = './assets/img/teams/cover-team.jpg'
   updateForm!: FormGroup;
-  teamUpdate!: TeamUpdateInfo;
+  teamUpdate!: TeamUpdateInfoRequest;
   Team!: TeamDataSuccess;
   idTeam: string = '';
   loading$!: Observable<boolean>;
@@ -36,7 +36,7 @@ export class TeamSettingsComponent {
   url: any;
   file!: File;
   isprivate: string = '';
-  updateImgTeam!: UpdateImgTeam;
+  updateImgTeam!: UpdateImgTeamRequest;
 
   private subscriptions: Subscription = new Subscription();
 

@@ -1,4 +1,4 @@
-import { ReactRequest } from "src/app/models/feed/react-request";
+import { ReactRequest } from "src/app/models/feed/reacts/react-request";
 import { CustomAction } from "../../custom.actions";
 import { FeedMessageEnum } from "../feed-message.enum";
 import { createAction } from "@ngrx/store";

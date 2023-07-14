@@ -5,7 +5,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { TeamSearchSelector } from 'src/app/shared/state-management/selectors/team.selector';
-import { SearchTeamSuccess } from 'src/app/models/teams/search-team-sucess';
+import { SearchTeamSuccess } from 'src/app/models/teams/search-team/search-team-sucess';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadAction } from 'src/app/shared/state-management/actions/teams/team-load/team-load.actions';
