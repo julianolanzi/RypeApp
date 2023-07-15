@@ -8,6 +8,9 @@ import { Observable, Subscription, of } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
+import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview-player/rounting-id/op-load-routing-id.actions';
+import { Router } from '@angular/router';
+import { OpPlayerIdRequestAction } from 'src/app/shared/state-management/actions/overview-player/search-player/op-load-player-id-request.action';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,7 +24,7 @@ export class SidebarComponent {
   isAdminTeam$: Observable<boolean> | undefined;
   isUser!:any;
   public user!: UserLoginSuccess;
-  constructor(private store: Store<GlobalState>) {
+  constructor(private store: Store<GlobalState>, private router: Router) {
     this.isUser = true;
   }
   ngOnInit(): void {
@@ -180,6 +183,13 @@ export class SidebarComponent {
       });
 
     this.subscriptions.add(subscription);
+  }
+
+  OpenOverviewPlayer(){
+    
+    this.store.dispatch(new LoadOpRoutingIdAction(this.user.id));
+    this.store.dispatch(new OpPlayerIdRequestAction(this.user.id));
+    this.router.navigate(['player/'+ this.user.nickname]);
   }
 
   logaout(){

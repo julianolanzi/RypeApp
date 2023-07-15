@@ -5,7 +5,7 @@ import { AuthGuard } from "src/app/guards/auth.guard";
 
 export const OverviewPlayerRoutes: Routes = [
     {
-      path: 'player',
+      path: 'player/:nickname',
       component: OverviewPlayerComponent,
       canActivate: [AuthGuard],
     },

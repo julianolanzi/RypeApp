@@ -42,5 +42,5 @@ export enum TeamMessageEnum {
 
     LOAD_TEAM_UPDATE_AUTH_ROLE = '[TEAM] Load team auth role and data request public team',
 
-    LOAD_TEAM_GLOBAL_ERROR = '[TEAM] Load remove admin error',
+    LOAD_TEAM_GLOBAL_ERROR = '[TEAM] Load global error',
 }

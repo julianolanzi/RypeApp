@@ -19,10 +19,11 @@ import { TeamModule } from './../../pages/admin/team/team.module';
 import { FeedModule } from 'src/app/pages/admin/feed/feed.module';
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { OverviewPlayerModule } from 'src/app/pages/admin/overview-player/overview-player.module';
+import { OverviewService } from 'src/app/services/overview-player/overview-player.service';
 
 @NgModule({
   declarations: [],
-  providers: [AuthService, UserService, DatePipe, AlertService, UploadImgService, TeamService, FeedService],
+  providers: [AuthService, UserService, DatePipe, AlertService, UploadImgService, TeamService, FeedService, OverviewService],
   imports: [
     CommonModule,
     RouterModule.forChild(AdminRoutes),

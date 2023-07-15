@@ -1,1 +1,9 @@
-<p>overview-player works!</p>
+<section class="container-hub">
+    <app-header-player></app-header-player>
+</section>
+
+
+
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+  </div>

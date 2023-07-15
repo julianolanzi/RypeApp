@@ -42,7 +42,7 @@
             </a>
             <div class="sub-menu-container">
               <ul>
-                <div routerLink="/overview" *ngIf="this.isUser == true" class="sub-item d-flex">
+                <div (click)="OpenOverviewPlayer()" *ngIf="this.isUser == true" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Overview</span>
                 </div>

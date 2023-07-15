@@ -7,10 +7,11 @@ import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "src/app/shared/shared.module";
 import { YouTubePlayerModule } from "@angular/youtube-player";
+import { HeaderPlayerComponent } from './header-player/header-player.component';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
-    declarations: [OverviewPlayerComponent],
+    declarations: [OverviewPlayerComponent, HeaderPlayerComponent],
     providers: [provideNgxMask()],
     imports: [
         CommonModule,

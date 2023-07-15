@@ -18,7 +18,7 @@
     <div class="widget-box-status">
       <div class="widget-box-status-content">
         <div class="user-status">
-          <div class="user-status-avatar">
+          <div class="user-status-avatar" (click)="OpenOverviewPlayer(post)">
             <div class="user-avatar-small">
               <div class="user-avatar-content">
                 <div class="hexagon-image-31-35">
@@ -240,7 +240,7 @@
   <div class="quick-post-body">
     <form (ngSubmit)="updatePost()" [formGroup]="UpdatePostForm" #formDir="ngForm">
       <div class="user-status">
-        <div class="user-status-avatar">
+        <div class="user-status-avatar" >
           <div class="user-avatar-small">
             <div class="user-avatar-content">
               <div class="hexagon-image-31-35">

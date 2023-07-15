@@ -26,6 +26,8 @@ import { teamReducer } from './shared/state-management/reducers/team.reducer';
 import { notificationsReducer } from './shared/state-management/reducers/notifications.reducer';
 import { feedReducer } from './shared/state-management/reducers/feed.reducer';
 import { FeedEffect } from './shared/state-management/effects/feed.effects';
+import { OverviewPlayerReducer } from './shared/state-management/reducers/overviewplayer.reducer';
+import { OverviewPlayerEffect } from './shared/state-management/effects/overviewplayer.effects';
 
 @NgModule({
   declarations: [AppComponent, WebComponent, AdminComponent],
@@ -46,6 +48,7 @@ import { FeedEffect } from './shared/state-management/effects/feed.effects';
       globalPages: globalPagesReducer,
       notifications: notificationsReducer,
       feed: feedReducer,
+      overviewPlayer: OverviewPlayerReducer,
     }),
     EffectsModule.forRoot([
       AuthEffect,
@@ -53,6 +56,7 @@ import { FeedEffect } from './shared/state-management/effects/feed.effects';
       NotificationsEffect,
       TeamEffect,
       FeedEffect,
+      OverviewPlayerEffect,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge:25,
