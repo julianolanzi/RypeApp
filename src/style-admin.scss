@@ -1519,6 +1519,17 @@ header .image-text .profession {
     line-height: 1em;
   }
 
+  .user-stat-flag{
+    position: absolute;
+    top: -5px;
+    right: 11px;
+    background-color: var(--pink-white);
+    color: var(--white);
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 2px;
+  }
+
   img {
     display: block;
     width: 30px;
@@ -1541,7 +1552,7 @@ header .image-text .profession {
   }
 }
 
-.user-stat.big:after {
+.user-stat.big::after {
   content: "";
   width: 1px;
   height: 20px;
@@ -1550,6 +1561,8 @@ header .image-text .profession {
   top: 6px;
   right: 0;
 }
+
+
 
 
 

@@ -115,17 +115,26 @@
         <p class="user-stat-text">posts</p>
       </div>
     </div>
-   
+
     <div class="user-stat" *ngIf="this.user.country">
       <div class="user-stat big">
         <img *ngIf="this.user.country == 'brasil'" src="./assets/img/flags/brasil.png" alt="">
-          <img *ngIf="this.user.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
-          <img *ngIf="this.user.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
-          <img *ngIf="this.user.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
-          <p class="user-stat-text" *ngIf="this.user.country == 'brasil'">Brasil</p>
-          <p class="user-stat-text" *ngIf="this.user.country == 'méxico'">México</p>
-          <p class="user-stat-text" *ngIf="this.user.country == 'chile'">Chile</p>
-          <p class="user-stat-text" *ngIf="this.user.country == 'argentina'">Argentina</p>
+        <img *ngIf="this.user.country == 'méxico'" src="./assets/img/flags/mexico.png" alt="">
+        <img *ngIf="this.user.country == 'chile'" src="./assets/img/flags/chile.png" alt="">
+        <img *ngIf="this.user.country == 'argentina'" src="./assets/img/flags/argentina.png" alt="">
+        <p class="user-stat-text" *ngIf="this.user.country == 'brasil'">Brasil</p>
+        <p class="user-stat-text" *ngIf="this.user.country == 'méxico'">México</p>
+        <p class="user-stat-text" *ngIf="this.user.country == 'chile'">Chile</p>
+        <p class="user-stat-text" *ngIf="this.user.country == 'argentina'">Argentina</p>
+      </div>
+    </div>
+
+    <div class="user-stat" *ngIf="this.user.team[0]">
+      <div class="user-stat big">
+        <img class="user-stat-team" src="{{this.user.team[0].url}}" alt="">
+        <span class="user-stat-flag">Time</span>
+
+        <p class="user-stat-text">{{this.user.team[0].tagName}}</p>
       </div>
     </div>
 
