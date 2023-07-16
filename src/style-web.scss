@@ -6,6 +6,7 @@
   position: fixed;
   left: 0;
 }
+
 .logo {
   display: -ms-flexbox;
   display: flex;
@@ -79,6 +80,7 @@
   .item-form {
     margin-bottom: 10px;
     color: #fff;
+
     input {
       width: 100%;
       height: 54px;
@@ -91,8 +93,14 @@
       font-weight: 700;
       font-family: Rajdhani, sans-serif;
     }
+
     input::placeholder {
       color: #fff;
+    }
+
+    input::-webkit-calendar-picker-indicator {
+      background-color: #fff;
+      border-radius: 5px;
     }
   }
 }
@@ -113,6 +121,7 @@
     border-radius: 15%;
     cursor: pointer;
   }
+
   input:checked {
     background-color: var(--pink);
   }
@@ -144,7 +153,7 @@
   line-height: 48px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
-  border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   box-shadow: 3px 5px 10px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
   border-radius: 12px;
@@ -152,16 +161,16 @@
   font-weight: 700;
 }
 
-.bt-color{
+.bt-color {
   background-color: var(--pink);
   box-shadow: 4px 7px 12px 0 rgba(208, 64, 198, 0.2);
 }
 
-.login{
+.login {
   color: #fff;
 
-  span{
-    a{
+  span {
+    a {
       text-decoration: none;
       color: var(--pink);
     }
@@ -181,7 +190,7 @@
     top: 0;
     right: 16%;
 
-}
+  }
 }
 
 @media (max-width: 1350px) {
@@ -194,6 +203,7 @@
     width: 100%;
     position: static;
   }
+
   .landing-info-text {
     display: none;
   }

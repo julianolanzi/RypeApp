@@ -4,20 +4,20 @@ import { Observable, Subscription } from 'rxjs';
 
 import { select, Store } from '@ngrx/store';
 
-import { UpdateImg } from 'src/app/models/account/user-update-img';
 
 
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-management/actions/account/account-img/account-update-load-img-request.actions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
-import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
+import { UserSuccessResponse } from 'src/app/models/account/user-load-info/user-success-response';
+import { UserUpdateRequest } from 'src/app/models/account/update-user/user-update-request';
 import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-overview/account-load-request.actions';
 import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update/account-update-load.actions';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { UserUpdateImgRequest } from 'src/app/models/account/update-img/user-update-img-request';
 
 @Component({
   selector: 'app-user-profile',
@@ -37,7 +37,7 @@ export class UserProfileComponent {
   file!: File;
 
 
-  updateImg!: UpdateImg;
+  updateImg!: UserUpdateImgRequest;
   loading$!: Observable<boolean>;
 
   constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {

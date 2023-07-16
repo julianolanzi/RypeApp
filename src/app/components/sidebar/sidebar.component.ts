@@ -4,25 +4,33 @@ import {
 } from './../../shared/state-management/selectors/auth.selector';
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
+import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
+import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview-player/rounting-id/op-load-routing-id.actions';
+import { Router } from '@angular/router';
+import { OpPlayerIdRequestAction } from 'src/app/shared/state-management/actions/overview-player/search-player/op-load-player-id-request.action';
+import { OpPlayerTimelineRequestAction } from 'src/app/shared/state-management/actions/overview-player/load-timeline/op-load-timeline-request-actions';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
+  
 })
 export class SidebarComponent {
   private subscriptions: Subscription = new Subscription();
   isAdmin!: any;
-  isAdminTeam!: any;
+  isAdminTeam$: Observable<boolean> | undefined;
   isUser!:any;
   public user!: UserLoginSuccess;
-  constructor(private store: Store<GlobalState>) {
+  constructor(private store: Store<GlobalState>, private router: Router) {
     this.isUser = true;
   }
   ngOnInit(): void {
+    this.isAdminTeam$ = of(false);
+    this.isAdmin = false;
     this.getCookie();
     let sidebar = document.querySelector('nav') as HTMLElement;
     let sidebarContainer = document.querySelector(
@@ -51,12 +59,14 @@ export class SidebarComponent {
       sidebar.classList.toggle('close');
       sidebarContainer.classList.toggle('close');
       adminContent.classList.toggle('close');
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
     });
 
     list.forEach((linkItem, index) => {
       linkItem.addEventListener('click', () => {
         document.querySelector('.active')?.classList.remove('active');
         linkItem.classList.add('active');
+        this.store.dispatch(new LoadingNotificationsDisabledAction());
       });
     });
 
@@ -67,13 +77,15 @@ export class SidebarComponent {
           sidebar.classList.toggle('close');
           sidebarContainer.classList.toggle('close');
           adminContent.classList.toggle('close');
+          this.store.dispatch(new LoadingNotificationsDisabledAction());
         }
       });
     });
 
     modeSwitch.addEventListener('click', () => {
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
       body.classList.toggle('dark');
-
+      
       if (body.classList.contains('dark')) {
         modeText.innerText = 'Dark mode';
         let isDarkMode = true;
@@ -113,6 +125,7 @@ export class SidebarComponent {
           sidebar.classList.toggle('close');
           sidebarContainer.classList.toggle('close');
           adminContent.classList.toggle('close');
+          this.store.dispatch(new LoadingNotificationsDisabledAction());
         }
       });
     });
@@ -160,17 +173,25 @@ export class SidebarComponent {
         this.user = user;
 
         if (user.rolesTeam == 'admin' || user.rolesTeam == 'sub-admin') {
-          this.isAdminTeam = true;
+          this.isAdminTeam$ = of(true);
         }
         if (user.role == 'admin') {
           this.isAdmin = true;
         } else {
           this.isAdmin = false;
-          this.isAdminTeam = false;
+   
         }
       });
 
     this.subscriptions.add(subscription);
+  }
+
+  OpenOverviewPlayer(){
+    
+    this.store.dispatch(new LoadOpRoutingIdAction(this.user.id));
+    this.store.dispatch(new OpPlayerIdRequestAction(this.user.id));
+    this.store.dispatch(new OpPlayerTimelineRequestAction(this.user.id))
+    this.router.navigate(['player/'+ this.user.nickname]);
   }
 
   logaout(){

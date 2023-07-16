@@ -1,9 +1,9 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-
+import { environment } from '../../environments/environment';
 import { select, Store } from '@ngrx/store';
 import { Subscription, throwError } from 'rxjs';
 
-import { UserLoginSuccess } from '../models/auth/user-login-success';
+import { UserLoginSuccess } from '../models/auth/login/user-login-success';
 import { AuthSelector } from '../shared/state-management/selectors/auth.selector';
 
 export abstract class BaseService {
@@ -17,8 +17,12 @@ export abstract class BaseService {
 
   // protected UrlServiceV1: string = 'http://localhost:3000';
 
-  protected UrlServiceV1: string =
-  'https://jealous-trench-coat-bear.cyclic.app';
+  protected UrlAuth: string = environment.UrlAuth;
+  protected UrluserTeam:string = environment.UrlUserTeam;
+  protected UrlNotifications:string = environment.UrlNotifications;
+  protected UrlImgUpload:string = environment.UrlImgUpload;
+  protected UrlFeed:string = environment.UrlFeed;
+ 
 
   protected ObterHeaderJson() {
     return {

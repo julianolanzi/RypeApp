@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RecoveryPassword } from 'src/app/models/auth/recovery-password';
+import { RecoveryPasswordRequest } from 'src/app/models/auth/recovery-password/recovery-password-request';
 import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class RecoveryPasswordComponent {
   errors: any[] = [];
   isLoading: boolean = false;
   isPassRecoverySucess: boolean = false;
-  user!: RecoveryPassword;
+  user!: RecoveryPasswordRequest;
 
   constructor(
     private securityService: SecurityService,

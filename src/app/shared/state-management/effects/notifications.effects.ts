@@ -19,6 +19,12 @@ import { InviteUserNotificationsSuccess } from '../actions/notifications/team-no
 import { QuestionTeamNotificationsRequest } from '../actions/notifications/team-notifications/update-notifications/notifications-team-question-request.actions';
 import { QuestionTeamNotificationsSuccess } from '../actions/notifications/team-notifications/update-notifications/notifications-team-question-success.actions';
 import { NotificationGlobalError } from '../actions/notifications/notifications-global-erros.actions';
+import { AcceptInviteNotificationsRequest } from '../actions/notifications/accept-invite-notifications/notifications-accept-invite-request.actions';
+import { AcceptInviteNotificationsSucess } from '../actions/notifications/accept-invite-notifications/notifications-accept-invite-success.actions';
+import { RecuseInviteNotificationsRequest } from '../actions/notifications/recuse-invite-notifications/notifications-recuse-invite-request.actions';
+import { RecuseInviteNotificationsSuccess } from '../actions/notifications/recuse-invite-notifications/notifications-recuse-invite-success.actions';
+import { AcceptInviteNotificationsTeamUserReducer } from '../actions/notifications/accept-invite-notifications/notifications-aceept-reducer.actions';
+import { LoadingSmallDisabledAction } from '../actions/global-pages/global-loading-small/loading-small-disabled.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -30,9 +36,11 @@ export class NotificationsEffect {
       exhaustMap((action: NotificationsGetUserRequest) => {
         return this.notificaService.getUserNotifications(action.payload).pipe(
           map((response) => {
+            this.store.dispatch(new LoadingSmallDisabledAction());
             return new NotificationsGetUserSuccess(response);
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingSmallDisabledAction())
             return of(new NotificationGlobalError(error));
           })
         );
@@ -49,6 +57,7 @@ export class NotificationsEffect {
             return new TeamNotificationsGetSuccess(response);
           }),
           catchError((error) => {
+            this.store.dispatch(new LoadingSmallDisabledAction())
             return of(new NotificationGlobalError(error));
           })
         );
@@ -121,6 +130,48 @@ export class NotificationsEffect {
       })
     )
   );
+
+  acepptInvite$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(NotificationsEnum.LOAD_NOTIFICATIONS_ACCEPT_INVITE_REQUEST),
+      exhaustMap((action: AcceptInviteNotificationsRequest) => {
+        return this.notificaService.acceptInviteNotifications(action.payload).pipe(
+          map((response) => {
+
+            if(action.payload?.type == 'user'){
+              this.store.dispatch(new AcceptInviteNotificationsTeamUserReducer(action.payload));
+            }
+            this.Alerts.success('Agora voce faz parte do time ;)', 'Booa');
+            return new AcceptInviteNotificationsSucess(response);
+          }),
+          catchError((error) => {
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new NotificationGlobalError(error));
+          })
+        )
+      })
+    )
+  );
+  
+  recuseInvite$ = createEffect(() => 
+  this.actions$.pipe(
+    ofType(NotificationsEnum.LOAD_NOTIFICATIONS_RECUSE_INVITE_REQUEST),
+    exhaustMap((action: RecuseInviteNotificationsRequest) => {
+      return this.notificaService.recuseInviteNotifications(action.payload).pipe(
+        map((response) => {
+          
+          return new RecuseInviteNotificationsSuccess(response);
+        }),
+        catchError((error) => {
+          const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+          return of(new NotificationGlobalError(error));
+        })
+      )
+    })
+  )
+);
 
   constructor(
     private actions$: Actions,

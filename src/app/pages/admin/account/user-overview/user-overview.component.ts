@@ -3,7 +3,7 @@ import { AccountUpdateLoadImgRequestAction } from 'src/app/shared/state-manageme
 
 
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 import { select, Store } from '@ngrx/store';
@@ -13,13 +13,13 @@ import { AccountSelector } from 'src/app/shared/state-management/selectors/accou
 
 import { Observable, Subscription } from 'rxjs';
 
-import { UpdateImg } from 'src/app/models/account/user-update-img';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
-import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
-import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
+import { UserSuccessResponse } from 'src/app/models/account/user-load-info/user-success-response';
+import { UserUpdateRequest } from 'src/app/models/account/update-user/user-update-request';
 import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-overview/account-load-request.actions';
 import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update/account-update-load.actions';
+import { UserUpdateImgRequest } from 'src/app/models/account/update-img/user-update-img-request';
 
 
 
@@ -38,7 +38,7 @@ export class UserOverviewComponent {
   userUpdate!: UserUpdateRequest;
   url: any;
   file!: File;
-  updateImg!: UpdateImg;
+  updateImg!: UserUpdateImgRequest;
   loading$!: Observable<boolean>;
 
   constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {

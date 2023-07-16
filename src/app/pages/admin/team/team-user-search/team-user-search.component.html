@@ -2,7 +2,7 @@
     <div class="container-cover-hub-account">
         <img src="./assets/img/teams/icon-team.png" alt="">
         <h2 class="title-cover-hub">Hub de Time</h2>
-        <p class="text-cover-hub">Busque um time para participar</p>
+        <p class="text-cover-hub">Busque membros para participar</p>
     </div>
 
     <div class="container-hub-content">
@@ -26,11 +26,16 @@
                 </div>
               </form>
             </div>
+            <div *ngIf="(enableSmallLoading$ | async) == true">
+              <app-small-loading></app-small-loading>
+            </div>
           </div>
+          
     </div>
-
+   
     <div class="grid grid-4-4-4">
         <div *ngFor="let member of resultSearch$ | async" class="user-preview">
+         
           <img class="user-preview-cover big" src="{{member.urlCover}}" alt="">
           <div class="user-preview-info">
             <div *ngIf="member.team.length > 0" class="tag-sticker" title="{{member.team[0]?.name}}" >
@@ -162,16 +167,19 @@
 
              
               <div class="user-preview-actions">
-                <button *ngIf="member.team.length == 0 && this.isinviteAwait == false" (click)="inviteUserTeam(member)"
+                <button *ngIf="member.isNotInvite == false && member.team.length == 0 " id="{{member.id}}" (click)="inviteUserTeam(member);disableButton(member.id) "
                   class="button">Enviar Solicitação</button>
-                <button *ngIf="member.team.length == 0 && this.isinviteAwait == true" class="button">Solicitação
+
+    
+                <button  *ngIf="member.isNotInvite == true" disabled="disabled" class="button">Solicitação
                   Enviada</button>
   
               </div>
             </div>
           </div>
         </div>
-  
+       
       </div>
+     
 
 </section>

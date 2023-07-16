@@ -34,6 +34,10 @@ import { TeamLoadRemoveAdminRequestAction } from '../actions/teams/remove-admin/
 import { TeamLoadRemoveAdminSuccessAction } from '../actions/teams/remove-admin/team-load-remove-admin-success.actions';
 import { TeamLoadGlobalErrorAction } from '../actions/teams/team-load-global-error.actions';
 import { TeamLoadSuccessPublicTeam } from '../actions/teams/request-public-team/team-load-success-public-team.actions';
+import { TeamLoadQuitRequestAction } from '../actions/teams/quit-team/team-load-quit-request.actions';
+import { TeamLoadQuitSuccessAction } from '../actions/teams/quit-team/team-load-quit-success.actions';
+import { TeamLoadUpdateAuthDataPublicTeam } from '../actions/teams/request-public-team/team-load-update-auth-public-team.actions';
+import { LoadingSmallDisabledAction } from '../actions/global-pages/global-loading-small/loading-small-disabled.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -47,11 +51,9 @@ export class TeamEffect {
           map((response) => {
             setTimeout(() => {
               this.router.navigate(['team-overview']);
-            }, 3000);
+            }, 2000);
+            this.Alerts.success('Time criado com sucesso', 'Parabéns');
             this.store.dispatch(new LoadingDisabledAction());
-
-
-            // this.store.dispatch(new TeamLoadInfoRequestAction(response._id));
             return new TeamLoadCreateSuccessAction(response);
           }),
           catchError((error) => {
@@ -71,10 +73,11 @@ export class TeamEffect {
       exhaustMap((action: TeamLoadAction) => {
         return this.teamService.searchTeams(action.payload).pipe(
           map((response) => {
+            this.store.dispatch(new LoadingSmallDisabledAction())
             return new TeamLoadSuccessAction(response);
           }),
           catchError((error) => {
-            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(new LoadingSmallDisabledAction())
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new TeamLoadGlobalErrorAction(error));
@@ -89,7 +92,8 @@ export class TeamEffect {
       ofType(TeamMessageEnum.LOAD_TEAM_REQUEST_PUBLIC),
       exhaustMap((action: TeamLoadRequestPublicTeam) => {
         return this.teamService.joinTeam(action.payload).pipe(
-          map((respnse) => {
+          map((response) => {
+            this.store.dispatch(new TeamLoadUpdateAuthDataPublicTeam(action.payload.team));
             setTimeout(() => {
               this.router.navigate(['team-overview']);
             }, 2000);
@@ -177,12 +181,12 @@ export class TeamEffect {
       exhaustMap((action: TeamLoadSearchMemberRequestAction) => {
         return this.userService.searchByUserKey(action.payload).pipe(
           map((response) => {
-            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(new LoadingSmallDisabledAction())
 
             return new TeamLoadSearchMemberSuccessAction(response);
           }),
           catchError((error) => {
-            this.store.dispatch(new LoadingDisabledAction());
+            this.store.dispatch(new LoadingSmallDisabledAction());
             const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
             return of(new TeamLoadGlobalErrorAction(error));
@@ -263,6 +267,25 @@ export class TeamEffect {
       })
     )
   );
+
+  quiteTeam$ = createEffect(() => this.actions$.pipe(
+    ofType(TeamMessageEnum.LOAD_TEAM_QUIT_REQUEST),
+    exhaustMap((action: TeamLoadQuitRequestAction) => {
+      return this.teamService.quitTeam(action.payload).pipe(
+        map((response) =>{
+          this.store.dispatch(new LoadingDisabledAction());
+      
+          return new TeamLoadQuitSuccessAction(response);
+        }),
+        catchError((error) => {
+          this.store.dispatch(new LoadingDisabledAction());
+          const err = error.error.error;
+          this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+          return of(new TeamLoadGlobalErrorAction(error));
+        })
+      )
+    })
+  ));
 
   constructor(
     private actions$: Actions,

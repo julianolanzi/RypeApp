@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserRegister } from 'src/app/models/auth/user-register';
+import { UserRegisterRequest } from 'src/app/models/auth/register/user-register-request';
 import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { SecurityService } from 'src/app/services/security.service';
 export class SingUpComponent {
   cadastroForm!: FormGroup;
   errors: any[] = [];
-  User!: UserRegister;
+  User!: UserRegisterRequest;
   isRegisterSucess!: boolean;
   isLoading: boolean = false;
 
@@ -30,6 +30,7 @@ export class SingUpComponent {
         Validators.required,
         Validators.pattern('^((\\+55-?)|0)?[0-9]{11}$'),
       ]),
+
       email: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -77,6 +78,7 @@ export class SingUpComponent {
     this.User.url = url;
 
     this.isLoading = true;
+    
     this.securityService.registrarUsuario(this.User).subscribe(
       (sucesso) => {
         this.processarSucesso(sucesso);
@@ -142,7 +144,7 @@ export class SingUpComponent {
         console.log('imagem sem carregamento');
     }
 
-    let url = path + '/' + img;
+    let url = './' + img;
     return url;
   }
 }

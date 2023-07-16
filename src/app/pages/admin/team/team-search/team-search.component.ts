@@ -5,16 +5,18 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { TeamSearchSelector } from 'src/app/shared/state-management/selectors/team.selector';
-import { SearchTeamSuccess } from 'src/app/models/teams/search-team-sucess';
+import { SearchTeamSuccess } from 'src/app/models/teams/search-team/search-team-sucess';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadAction } from 'src/app/shared/state-management/actions/teams/team-load/team-load.actions';
-import { UserNotifications } from 'src/app/shared/state-management/selectors/notifications.selector';
 import { UserNotificationsSuccess } from 'src/app/models/notifications/notifications-user-success';
 import { AlertService } from 'src/app/services/utils/alert.service';
 import { RequestTeam } from 'src/app/models/notifications/notifications-request-team';
 import { InviteTeamNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/team-notifications/request-invite-team/notifications-team-invite-request.actions';
 import { TeamLoadRequestPublicTeam } from 'src/app/shared/state-management/actions/teams/request-public-team/team-load-request-public-team.actions';
+import { smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { TeamLoadClearStateAction } from 'src/app/shared/state-management/actions/teams/clear-state/team-load-clear-state.actions';
+import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
 
 @Component({
   selector: 'app-team-search',
@@ -25,7 +27,7 @@ export class TeamSearchComponent {
   teamSearch!: FormGroup;
   cover = './assets/img/teams/cover-team.jpg'
   notifications!: UserNotificationsSuccess[];
-
+  enableSmallLoading$!: Observable<boolean>;
   Teams$: Observable<SearchTeamSuccess[]> =
     this.store.select(TeamSearchSelector);
   user: any;
@@ -39,6 +41,7 @@ export class TeamSearchComponent {
   private subscriptions: Subscription = new Subscription();
 
   constructor(private store: Store<GlobalState>,  private Alerts: AlertService,) {
+    this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
     this.teamSearch = new FormGroup({
       key: new FormControl('', [Validators.required]),
     });
@@ -49,21 +52,21 @@ export class TeamSearchComponent {
   }
   ngOnInit(): void {
     this.loadUser();
-    this.loadNotifications();
+  
   }
 
   searchTeam() {
-    // this.Teams = [];
+
     if (this.teamSearch.invalid) {
       return;
     }
-    this.teamKey = this.teamSearch.value.key;
-
+    this.teamKey = this.teamSearch.value.key.toLowerCase();
+    this.store.dispatch(new LoadingSmallActiveAction());
     this.store.dispatch(new TeamLoadAction(this.teamKey));
   }
 
   joinTeamPublic(team: any) {
-    this.idTeam = team._id;
+    this.idTeam = team.id;
 
     const data = {
       user: this.user.id,
@@ -74,36 +77,14 @@ export class TeamSearchComponent {
   }
 
   requestTeamPrivate(team: any) {
-    if (this.notifications.length != 0) {
-
-      const invite = this.verifyInvite(team._id);
-
-    }else {
-      this.requestInvite = {
-        team: team._id,
-        type: 'team'
-      }
-      this.isinviteAwait = false;
-      this.store.dispatch(new InviteTeamNotificationsRequest(this.requestInvite));
+    
+    this.requestInvite = {
+      team: team.id,
+      type: 'team'
     }
-  }
-
-  public verifyInvite(id: string) {
-    for (let item of this.notifications) {
-      if (id == item.team) {
-        this.isinviteAwait = false;
-
-        this.Alerts.error('Voce já possui uma solicitação com esse time.', 'Ops');
-      }
-      if (id != item.team) {
-        this.isinviteAwait = true;
-        this.requestInvite = {
-          team: id,
-          type: 'team'
-        }
-        this.store.dispatch(new InviteTeamNotificationsRequest(this.requestInvite));
-      }
-    }
+  
+    this.store.dispatch(new InviteTeamNotificationsRequest(this.requestInvite));
+   
   }
 
   public loadUser() {
@@ -115,13 +96,14 @@ export class TeamSearchComponent {
     this.subscriptions.add(subscription);
   }
 
-  public loadNotifications() {
-    const subscription = this.store
-      .pipe(select(UserNotifications))
-      .subscribe((result) => {
-        this.notifications = result;
-      });
-
-    this.subscriptions.add(subscription);
+  public disableButton(id:string){
+    let idtag = document.getElementById(id);
+    idtag?.setAttribute('disabled', 'disabled');
   }
+  
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+    this.store.dispatch(new TeamLoadClearStateAction());
+  }
+
 }

@@ -23,11 +23,11 @@
             </a>
             <div class="sub-menu-container">
               <ul>
-                <div class="sub-item d-flex">
+                <!-- <div class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Dashboard</span>
-                </div>
-                <div class="sub-item d-flex">
+                </div> -->
+                <div class="sub-item d-flex" routerLink="feed">
                   <i class='material-symbols-outlined d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Feed</span>
                 </div>
@@ -42,7 +42,7 @@
             </a>
             <div class="sub-menu-container">
               <ul>
-                <div routerLink="/overview" *ngIf="this.isUser == true" class="sub-item d-flex">
+                <div (click)="OpenOverviewPlayer()" *ngIf="this.isUser == true" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Overview</span>
                 </div>
@@ -63,7 +63,7 @@
             </div>
           </li>
 
-          <li class="nav-link d-flex-colum d-flex">
+          <!-- <li class="nav-link d-flex-colum d-flex">
             <a class="d-flex">
               <i class='material-symbols-outlined  d-flex-center icon'>event</i>
               <span class="text nav-text">Treinos</span>
@@ -80,9 +80,9 @@
                 </div>
               </ul>
             </div>
-          </li>
+          </li> -->
 
-          <li class="nav-link d-flex-colum d-flex">
+          <!-- <li class="nav-link d-flex-colum d-flex">
             <a class="d-flex">
               <i class='material-symbols-outlined  d-flex-center icon'>verified</i>
               <span class="text nav-text">Eventos</span>
@@ -103,7 +103,7 @@
                 </div>
               </ul>
             </div>
-          </li>
+          </li> -->
 
           <li class="nav-link d-flex-colum d-flex">
             <a class="d-flex">
@@ -116,19 +116,19 @@
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Meu Clan</span>
                 </div>
-                <div  *ngIf="this.isAdminTeam == true" routerLink="team-settings" class="sub-item d-flex">
+                <div  *ngIf="this.isAdminTeam$ | async" routerLink="team-settings" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Alterar dados</span>
                 </div>
-                <div  *ngIf="this.isAdminTeam == true" routerLink="team-search-user" class="sub-item d-flex">
+                <div  *ngIf="this.isAdminTeam$ | async" routerLink="team-search-user" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Buscar Jogadores</span>
                 </div>
-                <div *ngIf="this.isAdminTeam == true" routerLink="team-members" class="sub-item d-flex">
+                <div *ngIf="this.isAdminTeam$ | async" routerLink="team-members" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Gerenciar Membros</span>
                 </div>
-                <div *ngIf="this.isAdminTeam == true" routerLink="team-admins" class="sub-item d-flex">
+                <div *ngIf="this.isAdminTeam$ | async" routerLink="team-admins" class="sub-item d-flex">
                   <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
                   <span>Gerenciar Adm,s</span>
                 </div>

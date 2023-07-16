@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { UserLoginSuccess } from '../models/auth/user-login-success';
+import { UserLoginSuccess } from '../models/auth/login/user-login-success';
 import { AuthService } from '../services/auth.service';
 import { AuthSelector } from '../shared/state-management/selectors/auth.selector';
 import { GlobalState } from '../shared/state-management/states/global.state';

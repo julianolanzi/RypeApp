@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
-import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
+import { UserSuccessResponse } from 'src/app/models/account/user-load-info/user-success-response';
+import { UserUpdateRequest } from 'src/app/models/account/update-user/user-update-request';
 import { AccountLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-overview/account-load-request.actions';
 import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update/account-update-load.actions';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
@@ -29,6 +29,7 @@ export class UserSocialComponent {
 
   public id!: string;
   constructor(private store: Store<GlobalState>) {
+    this.loading$ = this.store.pipe(select(isLoadingGlobal));
     this.updateSocialMedias = new FormGroup({
       discord: new FormControl(''),
       instagram: new FormControl(''),

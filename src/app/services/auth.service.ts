@@ -6,8 +6,9 @@ import { catchError, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from './base.service';
-import { UserLogin } from '../models/auth/user-login';
-import { UserLoginSuccess } from '../models/auth/user-login-success';
+
+import { UserLoginSuccess } from '../models/auth/login/user-login-success';
+import { UserLogin } from '../models/auth/login/user-login';
 
 @Injectable()
 export class AuthService extends BaseService {
@@ -17,7 +18,7 @@ export class AuthService extends BaseService {
 
   loginUser(loginUser: UserLogin | undefined): Observable<UserLoginSuccess> {
     let response = this.http
-      .post(this.UrlServiceV1 + '/auth/', loginUser, this.ObterHeaderJson())
+      .post(this.UrlAuth + '/auth/', loginUser, this.ObterHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

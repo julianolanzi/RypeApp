@@ -58,8 +58,11 @@ export const initialState: AccountState = {
         createdAt: undefined,
       },
     ],
+    notifications:[],
+    posts:[],
     createdAt: undefined,
   },
+ 
   authError: undefined,
   ischange: false,
 };

@@ -1,5 +1,5 @@
 import { createAction } from "@ngrx/store";
-import { SearchMemberSucess } from "src/app/models/teams/team-search-member-success";
+import { SearchMemberSucess } from "src/app/models/teams/search-members/team-search-member-success";
 import { CustomAction } from "../../custom.actions";
 import { TeamMessageEnum } from "../team-message.enum";
 

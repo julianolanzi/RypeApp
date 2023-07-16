@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { CustomAction } from './../custom.actions';
 import { AuthMessageEnum } from './auth-message.enum';
 

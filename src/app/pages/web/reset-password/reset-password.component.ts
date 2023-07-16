@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { resetPassword } from 'src/app/models/auth/resert-password';
+import { ResetPassword } from 'src/app/models/auth/reset-pass/reset-password-request';
+
 import { SecurityService } from 'src/app/services/security.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { SecurityService } from 'src/app/services/security.service';
 export class ResetPasswordComponent {
   resetForm!: FormGroup;
   errors: any[] = [];
-  user!: resetPassword;
+  user!: ResetPassword;
   ischangeSucess: boolean;
   isLoading: boolean = false;
   constructor(

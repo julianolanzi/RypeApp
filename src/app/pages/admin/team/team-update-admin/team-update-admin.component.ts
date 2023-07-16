@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { RemoveAdmin } from 'src/app/models/teams/manage-team/team-remove-admin';
 import { RemoveMembers } from 'src/app/models/teams/manage-team/team-remove-member';
-import { TeamDataSuccess } from 'src/app/models/teams/team-data-sucess';
+import { TeamDataSuccess } from 'src/app/models/teams/load-team/team-data-sucess';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadRemoveAdminRequestAction } from 'src/app/shared/state-management/actions/teams/remove-admin/team-load-remove-admin-request.actions';
 import { TeamRemoveMemberRequestAction } from 'src/app/shared/state-management/actions/teams/team-remove-member/team-load-remove-member-request.actions';

@@ -1,7 +1,7 @@
-import { TeamDataSuccess } from './../../../../models/teams/team-data-sucess';
+import { TeamDataSuccess } from '../../../../models/teams/load-team/team-data-sucess';
 import { Component } from '@angular/core';
 
-import { UserLoginSuccess } from 'src/app/models/auth/user-login-success';
+import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { Observable, Subscription } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { select, Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { TeamDataSelector, TeamLoadingTeam } from 'src/app/shared/state-manageme
 
 import { DatePipe } from '@angular/common';
 import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
+import { TeamLoadQuitRequestAction } from 'src/app/shared/state-management/actions/teams/quit-team/team-load-quit-request.actions';
 
 @Component({
   selector: 'app-team-overview',
@@ -26,6 +27,7 @@ export class TeamOverviewComponent {
   public user!: UserLoginSuccess;
   url: any;
   isprivate: string = '';
+  membersNumber: number = 0;
 
   isTeam: boolean = false;
   private subscriptions: Subscription = new Subscription();
@@ -33,9 +35,6 @@ export class TeamOverviewComponent {
   constructor(private store: Store<GlobalState>, private datePipe: DatePipe) {
     this.loading$ = this.store.pipe(select(isLoadingGlobal));
     this.isTeam = false;
-
-
-
   }
 
 
@@ -59,26 +58,33 @@ export class TeamOverviewComponent {
       .subscribe((user) => {
         this.user = user;
         this.idTeam = this.user.idTeam;
-        if (this.idTeam == '') {
+        if (user.rolesTeam == 'member' || user.rolesTeam == 'sub-admin') {
+          this.isadmin = false;
+        }else{
+          this.isadmin = true;
         }
       });
 
     this.subscriptions.add(subscription);
   }
 
-
-
+  quitTeam() {
+    this.store.dispatch(new LoadingActiveAction());
+    this.store.dispatch(new TeamLoadQuitRequestAction(this.Team._id));
+  }
 
   public loadTeamInfo() {
     const subscription = this.store
       .pipe(select(TeamDataSelector))
       .subscribe((team) => {
         this.Team = team;
+
         if (this.Team.idTeam != '') {
           this.isTeam = true;
         }
         this.url = team.url;
         this.isprivate = this.Team.private.toString();
+        this.membersNumber = this.Team.members.length + this.Team.adminMembers.length;
 
       });
 

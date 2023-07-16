@@ -1,0 +1,343 @@
+<div class="gap-timeline" *ngFor="let post of Posts$ | async">
+    <div class="widget-box no-padding" id="{{post.id}}">
+  
+      <div *ngIf="post.enableEdit == true" class="widget-box-settings">
+        <div class="post-settings-wrap">
+          <div (click)="enablePostOptions(post.id)" class="post-settings widget-box-post-settings-dropdown-trigger">
+            <span class="material-symbols-outlined">
+              more_horiz
+            </span>
+          </div>
+  
+          <div class="simple-dropdown  widget-box-post-settings-dropdown" id="{{post.id}}settings">
+            <p (click)="modaledit.toggle()" (click)="openEditPost(post)" class="simple-dropdown-link">Editar</p>
+            <p (click)="deletePost(post.id)" class="simple-dropdown-link">Deletar post</p>
+          </div>
+        </div>
+      </div>
+      <div class="widget-box-status">
+        <div class="widget-box-status-content">
+          <div class="user-status">
+            <div class="user-status-avatar" >
+              <div class="user-avatar-small">
+                <div class="user-avatar-content">
+                  <div class="hexagon-image-31-35">
+                    <svg width="31" height="35" viewBox="0 0 31 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-img-post">
+                          <path
+                            d="M4.01928 6.39181L12.3726 2.08125C14.223 1.12641 16.4188 1.11583 18.2783 2.0528L26.9249 6.40974C29.1171 7.51435 30.5 9.75971 30.5 12.2145V22.5002C30.5 24.9106 29.1661 27.1231 27.0344 28.2484L18.3891 32.8121C16.4702 33.825 14.1724 33.8137 12.2636 32.7818L3.90887 28.2652C1.80874 27.1299 0.5 24.9346 0.5 22.5472V12.1681C0.5 9.73587 1.85788 7.50716 4.01928 6.39181Z"
+                            stroke="black" />
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    <img src="{{post?.author?.url}}" alt="">
+                  </div>
+                </div>
+                <div class="user-avatar-progress">
+                  <div class="hexagon-border-front-40-44">
+                    <svg width="40" height="44" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-progress-front-post">
+                          <path
+                            d="M34.8649 9.57667L20.576 2.48194L22.015 0.563383L37.7665 8.43915C39.1047 9.10825 39.95 10.476 39.95 11.9721V29.4782C39.95 32.4242 38.3209 35.1287 35.7166 36.506L23.5351 42.9481C21.1789 44.1941 18.3551 44.1765 16.0146 42.9012L4.19613 36.4613C1.64043 35.0687 0.05 32.3909 0.05 29.4804V13.3507H2.18847L2.29581 27.7487C2.31763 30.6753 3.92612 33.3596 6.49661 34.7589L15.9641 39.913C18.3355 41.204 21.1963 41.2201 23.5821 39.9559L33.3881 34.7599C36.022 33.3643 37.669 30.6275 37.669 27.6468V14.0998C37.669 12.1819 36.5827 10.4296 34.8649 9.57667Z"
+                            fill="#E62479" stroke="#E62479" stroke-width="0.1" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+                <div class="user-avatar-progress-border">
+                  <div class="hexagon-border-40-44">
+                    <svg width="40" height="44" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-progress-back-post">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M17.8732 0.465966C19.0674 -0.148737 20.4743 -0.155623 21.6743 0.447509L37.6128 8.45805C39.0814 9.19614 40 10.7217 40 12.3794L39.5 30.5C39.5 32.1287 38.929 34.2476 37.5 35L21.7462 43.5159C20.507 44.1683 19.0347 44.1609 17.8019 43.4962L2.5 35C1.09164 34.2406 0.5 32.6136 0.5 31L0 12.3582C0 10.7152 0.902478 9.20082 2.35093 8.45529L17.8732 0.465966ZM20.6726 2.47775C20.1103 2.19514 19.4539 2.1983 18.8941 2.48644L3.37184 10.4758C2.69006 10.8267 2.24719 11.5517 2.24719 12.3582V31.2611C2.24719 32.053 2.67448 32.7678 3.33799 33.1256L18.8608 41.4957C19.4389 41.8074 20.1259 41.8108 20.7068 41.505L36.6446 33.1133C37.3175 32.759 37.7528 32.0389 37.7528 31.2395V12.3794C37.7528 11.5656 37.302 10.8355 36.6111 10.4883L20.6726 2.47775Z"
+                            fill="black" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="user-status-title-container">
+              <p class="user-status-title-name" *ngIf="post.author">
+                {{post.author.nickname[0].toUpperCase() + post.author.nickname.substring(1)}}
+              </p>
+              <p *ngIf="post.type == 'video' || post.type == 'text'" class="user-status-title-action">publicou um novo
+              </p>
+              <p *ngIf="post.type == 'imagem'" class="user-status-title-action">publicou uma nova </p>
+  
+              <p *ngIf="post.type == 'video'" class="user-status-title-name">Video</p>
+              <p *ngIf="post.type == 'text'" class="user-status-title-name">Post</p>
+              <p *ngIf="post.type == 'imagem'" class="user-status-title-name">Imagem</p>
+            </div>
+  
+            <p class="user-status-text">{{post.createdAt | date:'shortTime'}}</p>
+  
+          </div>
+          <p class="widget-box-status-text">{{post.text}}</p>
+        </div>
+        <div *ngIf="post.type == 'video'" class="widget-box-status-content-video">
+          <youtube-player class="video-teste" [height]="300" videoId="{{post.urlVideo}}"> </youtube-player>
+  
+        </div>
+        <div *ngIf="post.type == 'imagem'" class="widget-box-status-content-imagem">
+          <img [src]="post.urlPost" alt="">
+        </div>
+        <div class="widget-box-status-content">
+          <div class="content-actions">
+            <div class="content-action">
+              <div class="meta-line">
+                <div class="meta-line-list reaction-item-list" *ngIf="post.ranked">
+                  <div class="reaction-item" *ngIf="post.ranked[0].qtd > 0">
+                    <img *ngIf="post.ranked[0].reackRank == 'like'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+                    <img *ngIf="post.ranked[0].reackRank == 'love'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+                    <img *ngIf="post.ranked[0].reackRank == 'good'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+                    <img *ngIf="post.ranked[0].reackRank == 'omg'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+                    <img *ngIf="post.ranked[0].reackRank == 'pistola'"
+                      class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+                    <img *ngIf="post.ranked[0].reackRank == 'aff'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+                  </div>
+                  <div class="reaction-item" *ngIf="post.ranked[1].qtd > 0">
+                    <img *ngIf="post.ranked[1].reackRank == 'like'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+                    <img *ngIf="post.ranked[1].reackRank == 'love'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+                    <img *ngIf="post.ranked[1].reackRank == 'good'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+                    <img *ngIf="post.ranked[1].reackRank == 'omg'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+                    <img *ngIf="post.ranked[1].reackRank == 'pistola'"
+                      class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+                    <img *ngIf="post.ranked[1].reackRank == 'aff'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+                  </div>
+                  <div class="reaction-item" *ngIf="post.ranked[2].qtd > 0">
+                    <img *ngIf="post.ranked[2].reackRank == 'like'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+                    <img *ngIf="post.ranked[2].reackRank == 'love'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+                    <img *ngIf="post.ranked[2].reackRank == 'good'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+                    <img *ngIf="post.ranked[2].reackRank == 'omg'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+                    <img *ngIf="post.ranked[2].reackRank == 'pistola'"
+                      class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+                    <img *ngIf="post.ranked[2].reackRank == 'aff'" class="reaction-image reaction-item-dropdown-trigger"
+                      src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+                  </div>
+                </div>
+                <p *ngIf="!post?.reacts?.length" class="meta-line-text">Sem Reações</p>
+                <p *ngIf="post?.reacts?.length" class="meta-line-text">{{post.reactQtd.like + post.reactQtd.love +
+                  post.reactQtd.omg + post.reactQtd.good + post.reactQtd.pistola + post.reactQtd.aff}}</p>
+              </div>
+  
+            </div>
+            <div class="content-action">
+              <div class="meta-line">
+                <a (click)="modalcomments.toggle()" (click)="comments.loadComments(post)"  class="meta-line-link">{{post?.qtdComments}} Comentários</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="post-options">
+        <div class="post-option-wrap">
+  
+          <div class="post-option reaction-options-dropdown-trigger" (click)="enableReact(post.id)">
+            <span *ngIf="post.reactUser == 'not'" class="material-symbols-outlined">
+              recommend
+            </span>
+            <img *ngIf="post.reactUser == 'like'" class="reaction-image reaction-item-dropdown-trigger"
+              src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+            <img *ngIf="post.reactUser ==  'love'" class="reaction-image reaction-item-dropdown-trigger"
+              src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+            <img *ngIf="post.reactUser ==  'good'" class="reaction-image reaction-item-dropdown-trigger"
+              src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+            <img *ngIf="post.reactUser ==  'omg'" class="reaction-image reaction-item-dropdown-trigger"
+              src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+            <img *ngIf="post.reactUser ==  'pistola'" class="reaction-image reaction-item-dropdown-trigger"
+              src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+            <img *ngIf="post.reactUser ==  'aff'" class="reaction-image reaction-item-dropdown-trigger"
+              src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+            <p class="post-option-react">Reagir</p>
+          </div>
+          <div id="{{post.id}}react" class="reaction-options reaction-options-dropdown">
+            <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'like')">
+              <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png"
+                alt="">
+              <div class="xm-tooltip">
+                <p class="xm-tooltip-text">Like</p>
+              </div>
+            </div>
+            <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'love')">
+              <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png"
+                alt="">
+              <div class="xm-tooltip">
+                <p class="xm-tooltip-text">Amei</p>
+              </div>
+            </div>
+            <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'good')">
+              <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png"
+                alt="">
+              <div class="xm-tooltip">
+                <p class="xm-tooltip-text">Boooa</p>
+              </div>
+            </div>
+            <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'omg')">
+              <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png"
+                alt="">
+              <div class="xm-tooltip">
+                <p class="xm-tooltip-text">OMG</p>
+              </div>
+            </div>
+            <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'pistola')">
+              <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png"
+                alt="">
+              <div class="xm-tooltip">
+                <p class="xm-tooltip-text">Pistola</p>
+              </div>
+            </div>
+            <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'aff')">
+              <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png"
+                alt="">
+              <div class="xm-tooltip">
+                <p class="xm-tooltip-text">Aff</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="post-option">
+          <span class="material-symbols-outlined">
+            chat
+          </span>
+          <p (click)="modalcomments.toggle()" (click)="comments.loadComments(post)" class="post-option-react">Comentar</p>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  
+  <div *ngIf="(enableSmallLoading$ | async) == true">
+    <app-small-loading></app-small-loading>
+  </div>
+  
+  <app-modal-edit-post #modaledit>
+
+    <div class="quick-post-body">
+      <form (ngSubmit)="updatePost()" [formGroup]="UpdatePostForm" #formDir="ngForm">
+        <div class="user-status">
+          <div class="user-status-avatar" >
+            <div class="user-avatar-small">
+              <div class="user-avatar-content">
+                <div class="hexagon-image-31-35">
+                  <svg width="31" height="35" viewBox="0 0 31 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <clipPath id="avatar-img-post">
+                        <path
+                          d="M4.01928 6.39181L12.3726 2.08125C14.223 1.12641 16.4188 1.11583 18.2783 2.0528L26.9249 6.40974C29.1171 7.51435 30.5 9.75971 30.5 12.2145V22.5002C30.5 24.9106 29.1661 27.1231 27.0344 28.2484L18.3891 32.8121C16.4702 33.825 14.1724 33.8137 12.2636 32.7818L3.90887 28.2652C1.80874 27.1299 0.5 24.9346 0.5 22.5472V12.1681C0.5 9.73587 1.85788 7.50716 4.01928 6.39181Z"
+                          stroke="black" />
+  
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <img src="{{this.UserUpdatePost?.author?.url}}" alt="">
+                </div>
+              </div>
+              <div class="user-avatar-progress">
+                <div class="hexagon-border-front-40-44">
+                  <svg width="40" height="44" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <clipPath id="avatar-progress-front-post">
+                        <path
+                          d="M34.8649 9.57667L20.576 2.48194L22.015 0.563383L37.7665 8.43915C39.1047 9.10825 39.95 10.476 39.95 11.9721V29.4782C39.95 32.4242 38.3209 35.1287 35.7166 36.506L23.5351 42.9481C21.1789 44.1941 18.3551 44.1765 16.0146 42.9012L4.19613 36.4613C1.64043 35.0687 0.05 32.3909 0.05 29.4804V13.3507H2.18847L2.29581 27.7487C2.31763 30.6753 3.92612 33.3596 6.49661 34.7589L15.9641 39.913C18.3355 41.204 21.1963 41.2201 23.5821 39.9559L33.3881 34.7599C36.022 33.3643 37.669 30.6275 37.669 27.6468V14.0998C37.669 12.1819 36.5827 10.4296 34.8649 9.57667Z"
+                          fill="#E62479" stroke="#E62479" stroke-width="0.1" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+              <div class="user-avatar-progress-border">
+                <div class="hexagon-border-40-44">
+                  <svg width="40" height="44" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <clipPath id="avatar-progress-back-post">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M17.8732 0.465966C19.0674 -0.148737 20.4743 -0.155623 21.6743 0.447509L37.6128 8.45805C39.0814 9.19614 40 10.7217 40 12.3794L39.5 30.5C39.5 32.1287 38.929 34.2476 37.5 35L21.7462 43.5159C20.507 44.1683 19.0347 44.1609 17.8019 43.4962L2.5 35C1.09164 34.2406 0.5 32.6136 0.5 31L0 12.3582C0 10.7152 0.902478 9.20082 2.35093 8.45529L17.8732 0.465966ZM20.6726 2.47775C20.1103 2.19514 19.4539 2.1983 18.8941 2.48644L3.37184 10.4758C2.69006 10.8267 2.24719 11.5517 2.24719 12.3582V31.2611C2.24719 32.053 2.67448 32.7678 3.33799 33.1256L18.8608 41.4957C19.4389 41.8074 20.1259 41.8108 20.7068 41.505L36.6446 33.1133C37.3175 32.759 37.7528 32.0389 37.7528 31.2395V12.3794C37.7528 11.5656 37.302 10.8355 36.6111 10.4883L20.6726 2.47775Z"
+                          fill="black" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="user-status-title-container">
+            <p class="user-status-title-name" *ngIf="this.UserUpdatePost?.author">
+              {{this.UserUpdatePost?.author?.nickname[0].toUpperCase() +
+              this.UserUpdatePost?.author?.nickname.substring(1)}}
+            </p>
+            <p *ngIf="this.UserUpdatePost?.type == 'video' || this.UserUpdatePost?.type == 'text'"
+              class="user-status-title-action">publicou um novo
+            </p>
+            <p *ngIf="this.UserUpdatePost?.type == 'imagem'" class="user-status-title-action">publicou uma nova </p>
+  
+            <p *ngIf="this.UserUpdatePost?.type == 'video'" class="user-status-title-name">Video</p>
+            <p *ngIf="this.UserUpdatePost?.type == 'text'" class="user-status-title-name">Post</p>
+            <p *ngIf="this.UserUpdatePost?.type == 'imagem'" class="user-status-title-name">Imagem</p>
+          </div>
+  
+          <p class="user-status-text">{{this.UserUpdatePost?.createdAt | date:'shortTime'}}</p>
+  
+        </div>
+        <div class="body-edit-post">
+          <div class="form-content-post">
+            <div class="form-content-text-area">
+              <textarea formControlName="text">
+            </textarea>
+            </div>
+  
+  
+  
+          </div>
+          <div *ngIf="this.UserUpdatePost?.type == 'video'">
+            <div class="container-video">
+              <youtube-player class="video-teste" [height]="300" [videoId]="this.UserUpdatePost?.urlVideo">
+              </youtube-player>
+            </div>
+  
+          </div>
+  
+          <div *ngIf="this.UserUpdatePost?.type == 'imagem'">
+            <div class="no-margin widget-box-status-content-imagem ">
+              <img src="{{this.UserUpdatePost?.urlPost}}" alt="">
+            </div>
+  
+          </div>
+          <div class="container-button">
+            <button (click)="modaledit.toggle()" (click)="updatePost()" type="submit" class="button"> Alterar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+  </app-modal-edit-post>
+  
+  <app-modal-commets-post #modalcomments>
+  
+    <app-comments #comments></app-comments>
+   
+  </app-modal-commets-post>

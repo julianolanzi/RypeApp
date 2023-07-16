@@ -5,9 +5,9 @@ import { catchError, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { BaseService } from '../base.service';
-import { UserChangePass } from 'src/app/models/account/user-change-pass';
-import { UserSuccessResponse } from 'src/app/models/account/user-success-response';
-import { UserUpdateRequest } from 'src/app/models/account/user-update-request';
+import { UserSuccessResponse } from 'src/app/models/account/user-load-info/user-success-response';
+import { UserUpdateRequest } from 'src/app/models/account/update-user/user-update-request';
+import { UserChangePassRequest } from 'src/app/models/account/change-password/user-change-password-request';
 
 
 
@@ -21,7 +21,7 @@ export class UserService extends BaseService {
 
   GetUser(id: string | undefined): Observable<UserSuccessResponse> {
     let response = this.http
-      .get(this.UrlServiceV1 + '/users/' + id, this.ObterAuthHeaderJson())
+      .get(this.UrluserTeam + '/users/' + id, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
 
     return response;
@@ -29,16 +29,16 @@ export class UserService extends BaseService {
 
   updateUser(user: UserUpdateRequest): Observable<UserSuccessResponse> {
     let response = this.http
-      .put(this.UrlServiceV1 + '/users/' + user.id,  user, this.ObterAuthHeaderJson())
+      .put(this.UrluserTeam + '/users/' + user.id,  user, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
 
     return response;
   }
 
-  chagePassword(updatePass: UserChangePass | undefined): Observable<any> {
+  chagePassword(updatePass: UserChangePassRequest | undefined): Observable<any> {
     let response = this.http
       .put(
-        this.UrlServiceV1 + '/users/updatepass/' + updatePass?.id,
+        this.UrluserTeam + '/users/updatepass/' + updatePass?.id,
         updatePass,
         this.ObterAuthHeaderJson()
       )
@@ -48,7 +48,7 @@ export class UserService extends BaseService {
 
   searchByUserKey(key: string | undefined): Observable<any>{
     let response = this.http
-    .get(this.UrlServiceV1 + '/users/userkey/' + key, this.ObterAuthHeaderJson())
+    .get(this.UrlNotifications + '/notifications/user/searchUser/' + key, this.ObterAuthHeaderJson())
     .pipe(
       map(this.extractData),
       catchError(this.serviceError)

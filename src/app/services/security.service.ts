@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 
 
 import { BaseService } from './base.service';
-import { RecoveryPassword } from './../models/auth/recovery-password';
-import { ResetPassword } from '../models/auth/reset-password';
-import { UserRegister } from '../models/auth/user-register';
+import { RecoveryPasswordRequest } from '../models/auth/recovery-password/recovery-password-request';
+import { ResetPassword } from '../models/auth/reset-pass/reset-password-request';
+import { UserRegisterRequest } from '../models/auth/register/user-register-request';
 
 
 @Injectable()
@@ -16,10 +16,10 @@ export class SecurityService extends BaseService {
     super(Store);
   }
 
-  recoveryPassword(email: RecoveryPassword): Observable<any> {
+  recoveryPassword(email: RecoveryPasswordRequest): Observable<any> {
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/auth/forgot_password',
+        this.UrlAuth + '/auth/forgot_password',
         email,
         this.ObterHeaderJson()
       )
@@ -30,7 +30,7 @@ export class SecurityService extends BaseService {
   resetPassword(user: ResetPassword, token: string): Observable<any> {
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/auth/reset_password/' + token,
+        this.UrlAuth + '/auth/reset_password/' + token,
         user,
         this.ObterHeaderJson()
       )
@@ -38,9 +38,9 @@ export class SecurityService extends BaseService {
     return response;
   }
 
-  registrarUsuario(usuario: UserRegister): Observable<UserRegister> {
+  registrarUsuario(usuario: UserRegisterRequest): Observable<UserRegisterRequest> {
     let response = this.http
-      .post(this.UrlServiceV1 + '/users/', usuario, this.ObterHeaderJson())
+      .post(this.UrluserTeam + '/users/', usuario, this.ObterHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }

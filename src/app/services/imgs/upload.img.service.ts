@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseService } from '../base.service';
 import { Store } from '@ngrx/store';
-import { UpdateImg } from 'src/app/models/account/user-update-img';
-import { UpdateImgTeam } from 'src/app/models/teams/team-update-img';
+import { UserUpdateImgRequest } from 'src/app/models/account/update-img/user-update-img-request';
+import { UpdateImgTeamRequest } from 'src/app/models/teams/team-update-img/team-update-img-request';
 
 @Injectable({
   providedIn: 'root',
@@ -15,13 +15,13 @@ export class UploadImgService extends BaseService {
     super(store);
   }
 
-  uploadImgUser(img: UpdateImg): Observable<any> {
+  uploadImgUser(img: UserUpdateImgRequest): Observable<any> {
     const formData = new FormData();
     formData.append('file', img.file);
 
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/users/img/' + img.id,
+        this.UrlImgUpload + '/users/img/' + img.id,
         formData,
         this.ObterAuthHeaderUploadJson()
       )
@@ -29,13 +29,13 @@ export class UploadImgService extends BaseService {
     return response;
   }
 
-  uploadImgTeam(img: UpdateImgTeam): Observable<any> {
+  uploadImgTeam(img: UpdateImgTeamRequest): Observable<any> {
     const formData = new FormData();
     formData.append('file', img.file);
 
     let response = this.http
       .post(
-        this.UrlServiceV1 + '/teams/img/' + img.id,
+        this.UrlImgUpload + '/teams/img/' + img.id,
         formData,
         this.ObterAuthHeaderUploadJson()
       )

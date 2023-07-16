@@ -1,5 +1,7 @@
 export enum TeamMessageEnum {
 
+    LOAD_TEAM_CLEAR_STATE = '[TEAM] Load clear state team',
+
     LOAD_TEAM_CREATE_REQUEST = '[TEAM] Load create request team',
     LOAD_TEAM_CREATE_SUCCESS = '[TEAM] Load team create success',
 
@@ -35,5 +37,10 @@ export enum TeamMessageEnum {
     LOAD_TEAM_REMOVE_ADMIN_REQUEST = '[TEAM] Load remove admin request',
     LOAD_TEAM_REMOVE_ADMIN_SUCCESS = '[TEAM] Load remove admin success',
 
-    LOAD_TEAM_GLOBAL_ERROR = '[TEAM] Load remove admin error',
+    LOAD_TEAM_QUIT_REQUEST = '[TEAM] Load team quit request',
+    LOAD_TEAM_QUIT_SUCCESS = '[TEAM] Load team quit success',
+
+    LOAD_TEAM_UPDATE_AUTH_ROLE = '[TEAM] Load team auth role and data request public team',
+
+    LOAD_TEAM_GLOBAL_ERROR = '[TEAM] Load global error',
 }

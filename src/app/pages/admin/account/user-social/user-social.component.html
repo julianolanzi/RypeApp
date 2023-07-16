@@ -115,3 +115,7 @@
         </div>
     </div>
 </section>
+
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+</div>
