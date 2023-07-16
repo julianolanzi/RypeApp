@@ -34,7 +34,7 @@ export class OverviewPlayerComponent {
       .pipe(select(PlayerId))
       .subscribe((player) => {
         this.idPlayer = player;
-        console.log(this.idPlayer);
+       
       });
 
     this.subscriptions.add(subscription);

@@ -11,6 +11,7 @@ import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-managem
 import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview-player/rounting-id/op-load-routing-id.actions';
 import { Router } from '@angular/router';
 import { OpPlayerIdRequestAction } from 'src/app/shared/state-management/actions/overview-player/search-player/op-load-player-id-request.action';
+import { OpPlayerTimelineRequestAction } from 'src/app/shared/state-management/actions/overview-player/load-timeline/op-load-timeline-request-actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -189,6 +190,7 @@ export class SidebarComponent {
     
     this.store.dispatch(new LoadOpRoutingIdAction(this.user.id));
     this.store.dispatch(new OpPlayerIdRequestAction(this.user.id));
+    this.store.dispatch(new OpPlayerTimelineRequestAction(this.user.id))
     this.router.navigate(['player/'+ this.user.nickname]);
   }
 

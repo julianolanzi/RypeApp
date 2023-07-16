@@ -8,10 +8,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "src/app/shared/shared.module";
 import { YouTubePlayerModule } from "@angular/youtube-player";
 import { HeaderPlayerComponent } from './header-player/header-player.component';
+import { TimelinePlayerComponent } from './timeline-player/timeline-player.component';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
-    declarations: [OverviewPlayerComponent, HeaderPlayerComponent],
+    declarations: [OverviewPlayerComponent, HeaderPlayerComponent, TimelinePlayerComponent],
     providers: [provideNgxMask()],
     imports: [
         CommonModule,

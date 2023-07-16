@@ -648,7 +648,7 @@ header .image-text .profession {
 }
 
 .profile-header {
-  border-radius: 12px;
+
   background-color: var(--background-mode);
   box-shadow: 0 0 40px 0 rgba(0, 0, 0, .06);
 
@@ -2049,6 +2049,7 @@ header .image-text .profession {
   position: absolute;
   top: 0;
   left: 0;
+  cursor: pointer;
 
   .user-avatar-small {
     width: 40px;
