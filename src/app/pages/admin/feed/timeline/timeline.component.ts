@@ -31,8 +31,8 @@ export class TimelineComponent {
 
   lastId: string = '';
   enableSmallLoading$!: Observable<boolean>;
-  PageOffset: number = 1;
-  PageLimit: number = 10;
+  PageOffset: number = 0;
+  PageLimit: number = 30;
 
   ReactAction!: ReactRequest;
 

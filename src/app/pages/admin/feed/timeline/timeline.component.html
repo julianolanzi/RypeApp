@@ -65,7 +65,7 @@
           </div>
           <div class="user-status-title-container">
             <p class="user-status-title-name" *ngIf="post.author">
-              {{post.author.nickname[0].toUpperCase() + post.author.nickname.substring(1)}}
+              {{post.author.nickname}}
             </p>
             <p *ngIf="post.type == 'video' || post.type == 'text'" class="user-status-title-action">publicou um novo
             </p>
