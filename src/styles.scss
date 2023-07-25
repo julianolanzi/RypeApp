@@ -13,6 +13,12 @@
 }
 
 :root {
+
+  --navbar-background: #7750f8;
+
+  --sidebar-hover: #fff;
+
+
   /* ===== Colors ===== */
   --body-white-color: #e4e9f7;
   --body-dark-color: #151521;
@@ -32,7 +38,7 @@
 
   /* ====== ADMIN COLORS ====== */
 
-  --admin-body: #ebebeb;
+  --admin-body: #f8f8fb;
   --sidebar-background: #fff;
   --sidebar-text-color: #737380;
   --sidebar-mode-color: #ebebeb;
@@ -50,7 +56,7 @@
   --linear-gradient-2: to bottom, #fa0870, rgba(109, 109, 109, 0);
 
   /* ====== Transition ====== */
-  --tran-03: all 0.2s ease;
+  --tran-02: all 0.2s ease;
   --tran-03: all 0.3s ease;
   --tran-04: all 0.4s ease;
   --tran-05: all 0.5s ease;
@@ -62,16 +68,18 @@ body {
 }
 
 .container-admin.dark {
-  --admin-body: #25333c;
-  --sidebar-background: #35444d;
+  --admin-body: #161b28;
+  --sidebar-background: #1d2333;
   --sidebar-text-color: #ccc;
   --sidebar-mode-color: #25333c;
-  --background-mode: #35444d;
+  --background-mode: #1d2333;
   --text-color: #ccc;
   --text-color-background: #ccc;
   --background-input: #25333c;
   transition: var(--tran-05);
   --modal-background: #2e3d46;
+
+  --sidebar-hover: #293249;
 
   --linear-gradient: to bottom, rgb(255 0 112), rgba(255, 255, 255, 0);
   --linear-gradient-2: to bottom, #35444e, rgba(109, 109, 109, 0);

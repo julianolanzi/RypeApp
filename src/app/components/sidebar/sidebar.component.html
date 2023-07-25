@@ -1,191 +1,119 @@
-<div class="sidebar-container close">
-  <nav class="sidebar close">
-    <header>
-      <div class="d-flex image-text">
-        <span class="d-flex-center image">
-          <img src="../../../assets/img/logo-menu-platforma.png" alt="">
-        </span>
-        <div class="text d-flex-colum ">
-          <span class="name">RYPE</span>
+<div class="sidebar-container-mask">sadas</div>
+<div class="nav-bar-container">
+
+<div class="navbar-user">
+  <div class="user-short-description-avatar-small navbar">
+      <div class="user-avatar-content-small navbar">
+        <div class="hexagon-image-50-55">
+          <svg width="50" height="54" viewBox="0 0 50 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="avatar-img-small">
+                <path
+                  d="M4.08547 10.9017L21.8249 2.00288C23.6396 1.09253 25.7755 1.08241 27.5987 1.97552L45.8594 10.9203C48.0875 12.0118 49.5 14.2765 49.5 16.7576V37.6204C49.5 40.0579 48.1363 42.2906 45.9676 43.4034L27.7084 52.7734C25.8256 53.7397 23.5903 53.7288 21.717 52.7443L3.97618 43.4209C1.83863 42.2976 0.5 40.0818 0.5 37.6671V16.7117C0.5 14.2528 1.88757 12.0043 4.08547 10.9017Z"
+                  stroke="black" />
+              </clipPath>
+            </defs>
+          </svg>
+          <img src="{{this.user.url}}" alt="">
         </div>
       </div>
-      <i class='material-symbols-outlined  d-flex-center toggle'>chevron_right</i>
-    </header>
+      <div class="user-avatar-progress-small navbar">
+        <div class="hexagon-progress-61-68">
+          <svg width="61" height="67" viewBox="0 0 61 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="avatar-progress-back-small">
+                <path
+                  d="M51.9799 14.2574L31.0647 3.97607L32.5251 0.568436L55.9889 12.3003C58.7165 13.6642 60.4236 16.4681 60.3828 19.5175L60.0134 47.1163C59.9745 50.0168 58.359 52.6659 55.798 54.0284L33.4337 65.9266C31.0682 67.1851 28.2278 67.1673 25.8783 65.8793L4.17855 53.9843C1.63266 52.5887 0.05 49.9163 0.05 47.013V20.2155H3.30751L3.4866 44.3798C3.50824 47.2993 5.1089 49.9782 7.6696 51.3806L25.8746 61.3509C28.2292 62.6404 31.0717 62.6713 33.4538 61.4333L52.141 51.7209C54.8062 50.3357 56.4786 47.5818 56.4786 44.5781V21.4817C56.4786 18.413 54.7338 15.6112 51.9799 14.2574Z"
+                  fill="#E62479" stroke="#E62479" stroke-width="0.1" />
 
-    <div class="d-flex-colum menu-bar">
-      <div class="menu">
-
-        <ul class="menu-links">
-          <li class="nav-link d-flex-colum d-flex">
-            <a class="d-flex">
-              <i class='material-symbols-outlined d-flex-center  icon'>home_app_logo</i>
-              <span class="text nav-text">Home</span>
-            </a>
-            <div class="sub-menu-container">
-              <ul>
-                <!-- <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Dashboard</span>
-                </div> -->
-                <div class="sub-item d-flex" routerLink="feed">
-                  <i class='material-symbols-outlined d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Feed</span>
-                </div>
-
-              </ul>
-            </div>
-          </li>
-          <li class="nav-link d-flex-colum d-flex">
-            <a class="d-flex">
-              <i class='material-symbols-outlined d-flex-center icon'>account_circle</i>
-              <span class="text nav-text">Perfil</span>
-            </a>
-            <div class="sub-menu-container">
-              <ul>
-                <div (click)="OpenOverviewPlayer()" *ngIf="this.isUser == true" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Overview</span>
-                </div>
-                <div routerLink="/profile" *ngIf="this.isUser == true" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Perfil</span>
-                </div>
-                <div routerLink="/social" *ngIf="this.isUser == true" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Media e Stream</span>
-                </div>
-                <div routerLink="/security" *ngIf="this.isUser == true" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Alterar senha</span>
-                </div>
-
-              </ul>
-            </div>
-          </li>
-
-          <!-- <li class="nav-link d-flex-colum d-flex">
-            <a class="d-flex">
-              <i class='material-symbols-outlined  d-flex-center icon'>event</i>
-              <span class="text nav-text">Treinos</span>
-            </a>
-            <div class="sub-menu-container">
-              <ul>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Gerenciar</span>
-                </div>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Resultados</span>
-                </div>
-              </ul>
-            </div>
-          </li> -->
-
-          <!-- <li class="nav-link d-flex-colum d-flex">
-            <a class="d-flex">
-              <i class='material-symbols-outlined  d-flex-center icon'>verified</i>
-              <span class="text nav-text">Eventos</span>
-            </a>
-            <div class="sub-menu-container">
-              <ul>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Gerenciar</span>
-                </div>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Resultados</span>
-                </div>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Inscritos</span>
-                </div>
-              </ul>
-            </div>
-          </li> -->
-
-          <li class="nav-link d-flex-colum d-flex">
-            <a class="d-flex">
-              <i class='material-symbols-outlined  d-flex-center icon'>groups</i>
-              <span class="text nav-text">Time</span>
-            </a>
-            <div class="sub-menu-container">
-              <ul>
-                <div *ngIf="this.isUser == true" routerLink="team-overview" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Meu Clan</span>
-                </div>
-                <div  *ngIf="this.isAdminTeam$ | async" routerLink="team-settings" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Alterar dados</span>
-                </div>
-                <div  *ngIf="this.isAdminTeam$ | async" routerLink="team-search-user" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Buscar Jogadores</span>
-                </div>
-                <div *ngIf="this.isAdminTeam$ | async" routerLink="team-members" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Gerenciar Membros</span>
-                </div>
-                <div *ngIf="this.isAdminTeam$ | async" routerLink="team-admins" class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Gerenciar Adm,s</span>
-                </div>
-
-              </ul>
-            </div>
-          </li>
-
-          <li class="nav-link d-flex-colum d-flex">
-            <a class="d-flex">
-              <i class='material-symbols-outlined  d-flex-center icon'>chat</i>
-              <span class="text nav-text">Suporte</span>
-            </a>
-            <div class="sub-menu-container">
-              <ul>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Meus Tickets</span>
-                </div>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Criar Ticket</span>
-                </div>
-                <div class="sub-item d-flex">
-                  <i class='material-symbols-outlined  d-flex-center icon'>subdirectory_arrow_right</i>
-                  <span>Falar com Adm,s</span>
-                </div>
-
-              </ul>
-            </div>
-          </li>
-
-        </ul>
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
       </div>
+      <div class="user-avatar-progress-border-small navbar">
+        <div class="hexagon-progress-61-68">
+          <svg width="60" height="67" viewBox="0 0 60 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="avatar-progress-small">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M26.8097 0.705303C28.6012 -0.225133 30.7114 -0.235557 32.5115 0.677366L56.4192 12.8024C58.622 13.9196 60 16.2287 60 18.7379V47.2853C60 49.7505 58.6695 52.0264 56.526 53.1652L32.6193 65.8672C30.7605 66.8547 28.552 66.8435 26.7029 65.8374L3.41861 53.1681C1.30606 52.0186 0 49.7602 0 47.3179V18.7058C0 16.2189 1.35372 13.9267 3.5264 12.7982L26.8097 0.705303ZM31.0089 3.75041C30.1655 3.32265 29.1808 3.32742 28.3411 3.76357L5.05776 15.8565C4.0351 16.3877 3.37079 17.485 3.37079 18.7058V47.3179C3.37079 48.5166 4.01172 49.5986 5.00699 50.1401L28.2913 62.8094C29.1584 63.2812 30.1889 63.2864 31.0602 62.8235L54.9669 50.1215C55.9763 49.5852 56.6292 48.4953 56.6292 47.2853V18.7379C56.6292 17.5061 55.953 16.4011 54.9166 15.8755L31.0089 3.75041Z"
+                  fill="black" />
 
-      <div class="bottom-content">
-        <li class="">
-          <a (click)="logaout()" class="d-flex">
-            <i class='material-symbols-outlined  d-flex-center icon'>logout</i>
-            <span class="text nav-text">Sair</span>
+
+
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+      </div>
+  </div>
+  <div class="navbar-user-name">
+    <h2>{{this.user.nickname}}</h2>
+  </div>
+</div>
+
+<div class="navbar-menu-sidebar">
+    <nav>
+      <ul class="menu-links">
+        <li class="menu-link">
+          <a class="" >
+            <i class='material-symbols-outlined'>home</i>
+            <span >Home</span>
           </a>
-        </li>
-
-        <li class="mode d-flex">
-          <div class="d-flex sun-moon">
-            <i class='material-symbols-outlined d-flex-center  icon moon'>light_mode</i>
-            <i class='material-symbols-outlined d-flex-center  icon sun'>dark_mode</i>
-          </div>
-          <span class="mode-text text">Light mode</span>
-
-          <div class="d-flex-center toggle-switch">
-            <span class="switch"></span>
+          <div class="sub-menu-container">
+            <ul>
+              <li routerLink="feed" class="sub-menu-item">Feed</li>
+             
+            </ul>
           </div>
         </li>
+        <li class="menu-link">
+          <a class="" >
+            <i class='material-symbols-outlined'>account_circle</i>
+            <span class="text nav-text">Perfil</span>
+          </a>
+          <div class="sub-menu-container">
+            <ul>
+              <li (click)="OpenOverviewPlayer()" *ngIf="this.isUser == true" class="sub-menu-item">Overview</li>
+              <li routerLink="/profile" *ngIf="this.isUser == true" class="sub-menu-item">Perfil</li>
+              <li routerLink="/social" *ngIf="this.isUser == true" class="sub-menu-item">Media e Stream</li>
+              <li routerLink="/security" *ngIf="this.isUser == true" class="sub-menu-item">Alterar senha</li>
+            </ul>
+          </div>
+        </li>
+        <li class="menu-link">
+          <a class="" >
+            <i class='material-symbols-outlined'>groups</i>
+            <span class="text nav-text">Time</span>
+          </a>
+          <div class="sub-menu-container">
+            <ul>
+              <li *ngIf="this.isUser == true" routerLink="team-overview"  class="sub-menu-item">Meu Clan</li>
+              <li *ngIf="this.isAdminTeam$ | async" routerLink="team-settings" class="sub-menu-item">Alterar dados</li>
+              <li *ngIf="this.isAdminTeam$ | async" routerLink="team-search-user" class="sub-menu-item">Buscar Jogadores</li>
+              <li *ngIf="this.isAdminTeam$ | async" routerLink="team-members" class="sub-menu-item">Gerenciar Membros</li>
+              <li *ngIf="this.isAdminTeam$ | async" routerLink="team-admins" class="sub-menu-item">Gerenciar Adm,s</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+</div>
+<div class="navbar-actions">
+  <div class="bottom-content">
 
+    <li class="mode d-flex">
+      <div class="d-flex sun-moon">
+        <i class='material-symbols-outlined d-flex-center  icon moon'>light_mode</i>
+        <i class='material-symbols-outlined d-flex-center  icon sun'>dark_mode</i>
       </div>
-    </div>
+      <span class="mode-text">Light mode</span>
+      <div class="d-flex-center toggle-switch">
+        <span class="switch"></span>
+      </div>
+    </li>
 
-  </nav>
+  </div>
+</div>
 </div>

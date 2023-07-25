@@ -32,55 +32,25 @@ export class SidebarComponent {
     this.isAdminTeam$ = of(false);
     this.isAdmin = false;
     this.getCookie();
-    let sidebar = document.querySelector('nav') as HTMLElement;
-    let sidebarContainer = document.querySelector(
-      '.sidebar-container'
-    ) as HTMLElement;
-    let toggle = document.querySelector('.toggle') as HTMLElement;
-
-    let adminContent = document.querySelector(
-      '.container-admin-content'
-    ) as HTMLElement;
-
+    let modeText = document.querySelector('.mode-text') as HTMLElement;
     let modeSwitch = document.querySelector('.toggle-switch') as HTMLElement;
     let body = document.querySelector('.container-admin') as HTMLElement;
-    let modeText = document.querySelector('.mode-text') as HTMLElement;
 
-    let list = document.querySelectorAll('.nav-link');
 
-    let width =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
-
-    let subMenu = document.querySelectorAll('.sub-item');
-
-    toggle.addEventListener('click', () => {
-      sidebar.classList.toggle('close');
-      sidebarContainer.classList.toggle('close');
-      adminContent.classList.toggle('close');
-      this.store.dispatch(new LoadingNotificationsDisabledAction());
-    });
-
-    list.forEach((linkItem, index) => {
-      linkItem.addEventListener('click', () => {
-        document.querySelector('.active')?.classList.remove('active');
-        linkItem.classList.add('active');
-        this.store.dispatch(new LoadingNotificationsDisabledAction());
+    let menuActive = document.querySelectorAll('.menu-link');
+    
+    menuActive.forEach((element) => {
+      element.addEventListener('click', () => {
+        menuActive.forEach((element) => {
+          element.classList.remove('active');
+        });
+        element.classList.add('active');
       });
     });
+  
+    
+    
 
-    subMenu.forEach((linkItem, index) => {
- 
-      linkItem.addEventListener('click', () => {
-        if (width < 769) {
-          sidebar.classList.toggle('close');
-          sidebarContainer.classList.toggle('close');
-          adminContent.classList.toggle('close');
-          this.store.dispatch(new LoadingNotificationsDisabledAction());
-        }
-      });
-    });
 
     modeSwitch.addEventListener('click', () => {
       this.store.dispatch(new LoadingNotificationsDisabledAction());
@@ -102,35 +72,27 @@ export class SidebarComponent {
   }
 
   ngAfterViewInit(): void {
-    let sidebar = document.querySelector('nav') as HTMLElement;
-    let sidebarContainer = document.querySelector(
-      '.sidebar-container'
-    ) as HTMLElement;
-    let toggle = document.querySelector('.toggle') as HTMLElement;
-
-    let adminContent = document.querySelector(
-      '.container-admin-content'
-    ) as HTMLElement;
-    
     let width =
     window.innerWidth ||
     document.documentElement.clientWidth ||
     document.body.clientWidth;
+    let menuActive = document.querySelectorAll('.sub-menu-item');
+    console.log(menuActive);
+    let sidebar = document.querySelector('.sidebar-container') as HTMLElement;
+    let containerAll = document.querySelector('.container-all') as HTMLElement;
 
-    let subMenu = document.querySelectorAll('.sub-item');
-    subMenu.forEach((linkItem, index) => {
-   
-      linkItem.addEventListener('click', () => {
-        if (width < 769) {
-          sidebar.classList.toggle('close');
-          sidebarContainer.classList.toggle('close');
-          adminContent.classList.toggle('close');
-          this.store.dispatch(new LoadingNotificationsDisabledAction());
-        }
+    menuActive.forEach((element) => {
+      element.addEventListener('click', () => {
+        menuActive.forEach((element) => {
+          element.classList.remove('active');
+          sidebar.classList.add('close');
+          containerAll.classList.add('close');
+        });
+        element.classList.remove('active');
+        sidebar.classList.add('close');
+        containerAll.classList.add('close');
       });
     });
-
-    
   }
 
   setCookie(isDarkMode: boolean) {

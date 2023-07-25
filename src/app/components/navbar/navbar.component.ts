@@ -36,6 +36,26 @@ export class NavbarComponent implements OnInit {
     this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
     this.loadNotifications();
 
+
+    let sidebar = document.querySelector('.sidebar-container') as HTMLElement;
+    let containerAll = document.querySelector('.container-all') as HTMLElement;
+    let toggle = document.querySelector('.toggle') as HTMLElement;
+    let navmask = document.querySelector('.sidebar-container-mask') as HTMLElement;
+    
+    toggle.addEventListener('click', () => {
+      sidebar.classList.toggle('close');
+      containerAll.classList.toggle('close');
+
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
+    });
+    navmask.addEventListener('click', () => {
+      sidebar.classList.toggle('close');
+      containerAll.classList.toggle('close');
+
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
+    });
+    
+
   }
 
   public loadUser() {
@@ -84,5 +104,9 @@ export class NavbarComponent implements OnInit {
       this.store.dispatch(new LoadingNotificationsDisabledAction());
     
     }
+  }
+
+  public loadSidebar() {
+   
   }
 }
