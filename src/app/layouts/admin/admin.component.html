@@ -1,10 +1,14 @@
 <section id="darkmode" class="container-admin">
-  <app-sidebar></app-sidebar>
-  <div class="container-admin-content close">
+  <app-navbar></app-navbar>
+  <!-- <app-sidebar></app-sidebar> -->
+  <div class="container-admin-content">
     <div class="container-navbar">
-      <app-navbar></app-navbar>
+    
     </div>
-    <div class="container-all">
+    <div class="sidebar-container ">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="container-all ">
       <div class="container-content">
         <router-outlet></router-outlet>
       </div>
