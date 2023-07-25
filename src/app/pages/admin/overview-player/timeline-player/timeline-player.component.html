@@ -1,4 +1,7 @@
 <div class="gap-timeline" *ngFor="let post of Posts$ | async">
+  <div *ngIf="(enableSmallLoading$ | async) == true">
+    <app-small-loading></app-small-loading>
+  </div>
     <div class="widget-box no-padding" id="{{post.id}}">
   
       <div *ngIf="post.enableEdit == true" class="widget-box-settings">
@@ -231,9 +234,7 @@
   </div>
   
   
-  <div *ngIf="(enableSmallLoading$ | async) == true">
-    <app-small-loading></app-small-loading>
-  </div>
+
   
   <app-modal-edit-post #modaledit>
 

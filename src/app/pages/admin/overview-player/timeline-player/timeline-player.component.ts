@@ -44,6 +44,7 @@ export class TimelinePlayerComponent {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new LoadingSmallActiveAction());
     this.loadId();
     this.loadTimeLinePlayer();
   }

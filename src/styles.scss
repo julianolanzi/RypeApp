@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+/* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
   padding: 0;
@@ -63,11 +65,13 @@
 }
 
 body {
-  min-height: 100vh;
-  background-color: var(--body-dark-color);
+ 
+  background-color: var(--admin-body);
 }
 
 .container-admin.dark {
+ 
+
   --admin-body: #161b28;
   --sidebar-background: #1d2333;
   --sidebar-text-color: #ccc;
@@ -81,8 +85,12 @@ body {
 
   --sidebar-hover: #293249;
 
-  --linear-gradient: to bottom, rgb(255 0 112), rgba(255, 255, 255, 0);
-  --linear-gradient-2: to bottom, #35444e, rgba(109, 109, 109, 0);
+  --linear-gradient: to bottom,
+  rgb(255 0 112),
+  rgba(255, 255, 255, 0);
+  --linear-gradient-2: to bottom,
+  #35444e,
+  rgba(109, 109, 109, 0);
 }
 
 .d-flex {
@@ -100,6 +108,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .d-flex-colum-center {
   display: flex;
   flex-direction: column;
@@ -119,12 +128,15 @@ body {
 .gap-10 {
   gap: 10px;
 }
+
 .gap-5 {
   gap: 5px;
 }
+
 .mt-50 {
   margin-top: 50px;
 }
+
 .mt-15 {
   margin-top: 15px;
 }
@@ -148,11 +160,13 @@ body {
     color: var(--purple-white);
   }
 }
+
 .btn.primary {
   color: #fff;
   background-color: var(--web-menubackground);
   border: none;
 }
+
 .bt-background {
   width: 50%;
   padding: 12px 24px;
@@ -169,6 +183,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .btn.secundary {
   border: 1px;
   border-style: solid;
@@ -179,6 +194,7 @@ body {
   text-transform: uppercase;
   transition: all 0.3s ease;
 }
+
 .btn.secundary:hover {
   background-color: var(--purple-white);
 }
@@ -203,6 +219,7 @@ body {
   color: var(--text-color);
   border: 2px solid var(--pink-white);
 }
+
 .btn-admin.option2 {
   background-color: var(--pink-white);
   color: var(--text-color);
@@ -213,6 +230,7 @@ body {
   width: 100%;
   height: auto;
 }
+
 .container-all-apps {
   color: var(--white-palette);
   display: flex;
@@ -222,6 +240,7 @@ body {
   margin-right: auto;
   margin-top: 85px;
 }
+
 .link-primary {
   text-decoration: none;
   color: var(--pink);
@@ -230,6 +249,7 @@ body {
   font-family: Rajdhani, sans-serif;
   text-transform: uppercase;
 }
+
 .box-alerts {
   display: flex;
   width: 100%;
@@ -259,12 +279,14 @@ body {
     color: #ffffff;
     width: 100%;
     margin-bottom: 10px;
+
     ul {
       list-style: none;
       margin-top: 5px;
     }
   }
 }
+
 .alerts {
   display: flex;
   padding: 5px 0px;
@@ -279,6 +301,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .container-data {
   margin-top: 20px;
   border-radius: 10px;
@@ -299,6 +322,7 @@ body {
 
     .buttons-conteiner {
       display: flex;
+
       button {
         width: 100%;
         min-width: 140px;
@@ -314,10 +338,12 @@ body {
         background-color: var(--admin-mode);
         margin-right: 10px;
       }
+
       button:hover {
         background-color: var(--pink-white);
         color: var(--white);
       }
+
       button:last-child {
         margin-right: 0px;
       }
@@ -327,15 +353,18 @@ body {
   .container-two-options {
     display: flex;
     gap: 10px;
+
     .item-form {
       width: 100%;
     }
   }
+
   .midia-container {
     h1 {
       padding: 10px 0 10px 0;
       color: var(--text-color);
     }
+
     .social-container {
       display: grid;
       grid-template-columns: 50% 50%;
@@ -348,6 +377,7 @@ body {
       color: var(--text-color);
       font-size: 14px;
     }
+
     textarea {
       color: var(--text-color);
       width: 100%;
@@ -359,6 +389,7 @@ body {
       font-size: 14px;
       margin: 0px 0 10px 0;
     }
+
     p {
       font-size: 11px;
       color: var(--text-color);
@@ -366,6 +397,7 @@ body {
 
     div {
       margin: 5px 0 5px 0;
+
       input {
         width: 100%;
         height: 40px;
@@ -377,10 +409,12 @@ body {
         font-size: 14px;
         margin: 0px 0 10px 0;
       }
+
       input:disabled {
         opacity: 0.6;
         cursor: auto;
       }
+
       input::-webkit-calendar-picker-indicator {
         color: #fff;
         background-color: var(--white-palette);
@@ -457,6 +491,7 @@ body {
       background-color: var(--pink-white);
       margin: 10px 0 0 0;
     }
+
     button:disabled {
       opacity: 0.2;
       cursor: auto;
@@ -473,9 +508,11 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 35px;
+
     h1 {
       font-size: 20px;
     }
+
     p {
       font-size: 12px;
     }
@@ -487,6 +524,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+
     .container-img-2 {
       width: 300px;
       height: 300px;
@@ -508,6 +546,7 @@ body {
         border: 3px solid var(--text-color);
       }
     }
+
     .file {
       cursor: pointer;
       border: 2px solid var(--pink-white);
@@ -529,6 +568,7 @@ body {
         line-height: inherit;
       }
     }
+
     .btn-modal-close {
       width: 150px;
       border: 2px solid var(--pink-white);
@@ -541,6 +581,7 @@ body {
       color: var(--white);
       background-color: var(--pink-white);
     }
+
     .btn-modal-change {
       width: 150px;
       border: 2px solid var(--text-color-sucess);

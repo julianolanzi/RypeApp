@@ -12,6 +12,7 @@ import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/o
 import { Router } from '@angular/router';
 import { OpPlayerIdRequestAction } from 'src/app/shared/state-management/actions/overview-player/search-player/op-load-player-id-request.action';
 import { OpPlayerTimelineRequestAction } from 'src/app/shared/state-management/actions/overview-player/load-timeline/op-load-timeline-request-actions';
+import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -149,7 +150,7 @@ export class SidebarComponent {
   }
 
   OpenOverviewPlayer(){
-    
+    this.store.dispatch(new LoadingSmallActiveAction());
     this.store.dispatch(new LoadOpRoutingIdAction(this.user.id));
     this.store.dispatch(new OpPlayerIdRequestAction(this.user.id));
     this.store.dispatch(new OpPlayerTimelineRequestAction(this.user.id))

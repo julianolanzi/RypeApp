@@ -11,6 +11,7 @@ import { PostCommentsLoadSuccessAction } from "../actions/feed/comments-load/fee
 import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
 import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
 import { PostCommentsLoadRequestAction } from "../actions/feed/comments-load/feed-load-comments-post-request.actions";
+import { OpPlayerIdRequestAction } from "../actions/overview-player/search-player/op-load-player-id-request.action";
 
 
 
@@ -62,13 +63,18 @@ const _OverviewPlayerReducer = createReducer(
     initialState,
 
     on(new LoadOpRoutingIdAction().createAction(), (state, action) => ({
-        ...state,
+        ...initialState,
         id: action.payload,
         comments: [],
     })),
     on(new OpPlayerIdSuccessAction().createAction(), (state, action) => ({
         ...state,
         user: {...action.payload},
+        comments: [],
+    })),
+    on(new OpPlayerIdRequestAction().createAction(), (state, action) => ({
+        ...state,
+        user: {...initialState.user},
         comments: [],
     })),
     on(new OpPlayerTimelineSuccessAction().createAction(), (state, action) => ({

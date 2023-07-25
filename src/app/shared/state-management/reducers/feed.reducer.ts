@@ -12,6 +12,8 @@ import { PostCommentsLoadSuccessAction } from "../actions/feed/comments-load/fee
 import { PostCommentsLoadRequestAction } from "../actions/feed/comments-load/feed-load-comments-post-request.actions";
 import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
 import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
+import { FeedTimelineRequestAction } from "../actions/feed/feed-timelime/feed-load-timeline-request.actions";
+import { OpPlayerIdRequestAction } from "../actions/overview-player/search-player/op-load-player-id-request.action";
 
 export const initialState: FeedState = {
     createPost: {
@@ -96,6 +98,12 @@ const _feedReducer = createReducer(
         ...state,
         timeLine: [...action.payload]
     })),
+    on(new FeedTimelineRequestAction().createAction(), (state) => ({
+        ...state,
+        timeLine: [...initialState.timeLine]
+    })),
+    
+
     on(new FeedReactSucessAction().createAction(), (state, action) => {
         const newArray = [];
 

@@ -357,19 +357,22 @@
 .container-all {
   display: flex;
   top: 100px;
-  position: relative;
+  position: inherit;
   padding: 5px;
   margin-left: 300px;
+  margin-top: 80px;
 
   .container-content {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
+    margin-top: 20px;
   }
 }
 
 .container-all.close {
+  margin-top: 80px;
   margin-left: 90px;
   transition: var(--tran-03);
 }
@@ -401,6 +404,10 @@
   .container-all {
     top: 70px;
     margin: 0px;
+
+    .container-content{
+      margin-top: 70px
+    }
   }
 
   .container-all.close {
@@ -2661,6 +2668,7 @@
 
   .cancel-post:hover {
     background-color: #dd535d;
+    color: var(--white);
   }
 
   .create-post {
@@ -2738,7 +2746,7 @@
           margin-top: 5px;
 
           .comment-message {
-            background-color: var(--background-mode);
+            background-color: var(--admin-body);
             border-radius: 8px;
             padding: 10px 10px 10px 10px;
             font-size: 14px;
@@ -2796,7 +2804,7 @@
 
         button {
           color: var(--text-color);
-          background-color: var(--modal-background);
+          background-color: var(--sidebar-hover);
           margin-left: 16px;
           rotate: 332deg;
         }

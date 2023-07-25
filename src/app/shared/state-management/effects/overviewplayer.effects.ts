@@ -25,7 +25,7 @@ export class OverviewPlayerEffect {
             exhaustMap((action: OpPlayerIdRequestAction) => {
                 return this.OPService.getOverviewPlayer(action.payload).pipe(
                     map((response) => {
-                        this.store.dispatch(new LoadingDisabledAction());
+                        this.store.dispatch(new LoadingSmallDisabledAction());
                         return new OpPlayerIdSuccessAction(response);
                     }),
                     catchError((error) => {

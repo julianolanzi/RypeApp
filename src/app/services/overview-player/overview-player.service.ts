@@ -19,6 +19,7 @@ export class OverviewService extends BaseService {
                 this.ObterAuthHeaderJson()
             )
             .pipe(map(this.extractData), catchError(this.serviceError));
+            
         return response;
     }
 

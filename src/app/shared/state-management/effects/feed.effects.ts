@@ -68,7 +68,13 @@ export class FeedEffect {
                     catchError((error) => {
                         this.store.dispatch(new LoadingSmallDisabledAction());
                         const err = error.error.error;
-                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        console.log(err);
+                        if(err != undefined){
+                            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        }else{
+                            this.Alerts.error('Estamos com uma problema de comunicação para exibir sua timeline e já estamos verificando, tente novamente em alguns minutos ', 'Ops tivemos um problema');
+                        }
+                        
                         return of(new FeedLoadGlobalErrorAction(error));
                     })
                 )

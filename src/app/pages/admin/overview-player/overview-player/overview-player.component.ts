@@ -18,7 +18,11 @@ export class OverviewPlayerComponent {
   loading$!: Observable<boolean>;
   
   constructor(private store: Store<GlobalState>){
-    
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth' // Adiciona um efeito de rolagem suave
+    });
    
 
   }
