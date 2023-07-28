@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
@@ -16,7 +17,7 @@ import { AccountLoadRequestAction } from 'src/app/shared/state-management/action
 import { AccountUpdateLoadRequestAction } from 'src/app/shared/state-management/actions/account/account-update/account-update-load.actions';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
-import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { isLoadingGlobal, url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { UserUpdateImgRequest } from 'src/app/models/account/update-img/user-update-img-request';
 
 @Component({
@@ -36,11 +37,12 @@ export class UserProfileComponent {
   url: any;
   file!: File;
 
-
+  ImageProfile$!: Observable<string>;
   updateImg!: UserUpdateImgRequest;
   loading$!: Observable<boolean>;
 
   constructor(private datePipe: DatePipe, private store: Store<GlobalState>) {
+    this.ImageProfile$ = this.store.pipe(select(url));
     this.updateForm = new FormGroup({
       nickname: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
@@ -199,4 +201,6 @@ export class UserProfileComponent {
       };
     }
   }
+
+
 }

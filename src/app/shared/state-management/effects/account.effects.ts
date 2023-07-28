@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, of, exhaustMap } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -86,9 +87,13 @@ export class AccountEffect {
         return this.imgService.uploadImgUser(action.payload).pipe(
           map((response) => {
             if (!response) {
-              return new AccountLoadGlobalErrorAction();
+              return new AccountLoadGlobalErrorAction(response);
             } else {
               this.store.dispatch(new LoadingDisabledAction());
+
+              setTimeout(() => {
+                this.Router.navigate(['/profile']);
+              }, 2000);
               this.Alerts.success('Imagem atualizada com sucesso', 'Boa');
               return new AccountUpdateLoadImgSuccessAction(response);
             }
@@ -137,6 +142,7 @@ export class AccountEffect {
     private userService: UserService,
     private store: Store,
     private Alerts: AlertService,
-    private imgService: UploadImgService
+    private imgService: UploadImgService,
+    private Router: Router,
   ) {}
 }

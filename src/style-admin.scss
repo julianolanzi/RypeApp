@@ -189,7 +189,7 @@
     height: auto;
     width: auto;
     border-radius: 5px;
-
+    z-index: 10;
     ul {
       height: auto;
       list-style: none;
@@ -749,6 +749,8 @@
 }
 
 .profile-header.v2 {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   .profile-header-info {
     height: 112px;
     position: relative;
@@ -966,7 +968,7 @@
   min-width: 0;
 
   .grid-3-3-3 {
-    margin-top: 20px;
+    margin: 10px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 284px);
     justify-content: center;
@@ -2249,7 +2251,14 @@
       position: relative;
       font-size: 80%;
       font-weight: 400;
-
+      input[type="date"]{
+          
+      }::-webkit-calendar-picker-indicator{
+        background-color: #ffffff;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
       .form-two-options {
         display: grid;
         grid-template-columns: 2fr 50%;
@@ -2285,7 +2294,7 @@
 
 
       }
-
+      
       .social-link {
         position: absolute;
         top: 4px;

@@ -5,6 +5,9 @@ import { UserOverviewComponent } from './user-overview/user-overview.component';
 
 import { Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { UserUploadImageProfileComponent } from './user-upload-image-profile/user-upload-image-profile.component';
+import { CoverImageComponent } from 'src/app/shared/components/cover-image/cover-image.component';
+import { UserUploadCoverProfileComponent } from './user-upload-cover-profile/user-upload-cover-profile.component';
 
 
 export const AccountRoutes: Routes = [
@@ -26,6 +29,16 @@ export const AccountRoutes: Routes = [
   {
     path: 'social',
     component: UserSocialComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'upload-image-user',
+    component: UserUploadImageProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'upload-cover-user',
+    component: UserUploadCoverProfileComponent,
     canActivate: [AuthGuard],
   },
 ];

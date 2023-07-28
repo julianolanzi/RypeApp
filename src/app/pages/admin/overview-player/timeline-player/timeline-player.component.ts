@@ -8,11 +8,9 @@ import { TimelineSuccess } from 'src/app/models/feed/timeline/timeline-success';
 import { FeedDeletePostRequestAction } from 'src/app/shared/state-management/actions/feed/delete-post/feed-load-delete-post-request.actions';
 import { FeedPostEditRequestAction } from 'src/app/shared/state-management/actions/feed/edit-post/feed-edit-post-request.actions';
 import { FeedReactRequestAction } from 'src/app/shared/state-management/actions/feed/react-post/feed-load-react-request.actions';
-import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
-import { OpPlayerTimelineRequestAction } from 'src/app/shared/state-management/actions/overview-player/load-timeline/op-load-timeline-request-actions';
 import { smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
-import { PlayerId, PlayerTimeline } from 'src/app/shared/state-management/selectors/overviewplayer.selector';
+import { PlayerTimeline } from 'src/app/shared/state-management/selectors/overviewplayer.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({
@@ -44,25 +42,9 @@ export class TimelinePlayerComponent {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadingSmallActiveAction());
-    this.loadId();
-    this.loadTimeLinePlayer();
+   
   }
 
-  public loadId() {
-    const subscription = this.store
-      .pipe(select(PlayerId))
-      .subscribe((player) => {
-        this.idPlayer = player;
-      });
-
-    this.subscriptions.add(subscription);
-  }
-
-  loadTimeLinePlayer() {
-    this.store.dispatch(new LoadingSmallActiveAction());
-    this.store.dispatch(new OpPlayerTimelineRequestAction(this.idPlayer))
-  }
   openEditPost(post: any) {
   
     this.UserUpdatePost = post;

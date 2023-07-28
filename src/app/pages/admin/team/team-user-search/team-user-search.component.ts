@@ -62,7 +62,8 @@ export class TeamUserSearchComponent {
       return;
     }
     this.userSelect = this.memberSearch.value.key.toLowerCase();
-    this.store.dispatch(new LoadingSmallActiveAction());
+    this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Buscando jogadores ...'}));
+
 
     this.store.dispatch(new TeamLoadSearchMemberRequestAction(this.userSelect));
   }

@@ -105,7 +105,7 @@ export class TimelineComponent {
       limit: this.PageLimit,
       offset: this.PageOffset,
     }
-    this.store.dispatch(new LoadingSmallActiveAction());
+    this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Carregando Timeline ...'}));
     this.store.dispatch(new FeedTimelineRequestAction(this.timelineRequest));
 
 

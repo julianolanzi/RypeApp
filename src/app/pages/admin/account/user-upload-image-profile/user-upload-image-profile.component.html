@@ -1,0 +1,37 @@
+<section class="container-hub">
+    <app-header-profile></app-header-profile>
+
+    <div class="grid-column">
+      
+        <div class="container-image-crop">
+            <div class="container-img">
+
+                <img [src]="croppedImage" alt="image" />
+
+            </div>
+            <div>
+                <label class="file">
+                    <input type="file" accept="image/*" (change)="fileChangeEvent($event)"/>
+                    <span>Selecione sua foto</span>
+                  </label>
+            </div>
+            <div *ngIf="this.imagemNome" class="crooped">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="4/3"
+                format="png" (imageCropped)="imageCropped($event)" [containWithinAspectRatio]="containWithinAspectRatio" [alignImage]="'left'" [transform]="transform" [onlyScaleDown]="true" (imageLoaded)="imageLoaded()"
+                (cropperReady)="cropperReady($event)" [canvasRotation]="canvasRotation" [style.display]="showCropper ? null : 'none'" [resizeToWidth]="200" format="jpeg"  (loadImageFailed)="loadImageFailed()"></image-cropper>
+            </div>
+
+            <div *ngIf="this.imagemNome" class="">
+                <button class="btn-modal-change" (click)="uploadImageApi()">Atualizar</button>
+
+                
+            </div>
+        </div>
+    </div>
+
+     
+</section>
+
+<div *ngIf="loading$ | async">
+    <app-loading></app-loading>
+  </div>

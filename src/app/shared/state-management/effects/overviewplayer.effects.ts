@@ -10,7 +10,6 @@ import { OpPlayerIdRequestAction } from "../actions/overview-player/search-playe
 import { OverviewService } from "src/app/services/overview-player/overview-player.service";
 import { OpPlayerIdSuccessAction } from "../actions/overview-player/search-player/op-load-player-id-success.action";
 import { OpGlobalErrorAction } from "../actions/overview-player/op-load-global-error.actions";
-import { LoadingDisabledAction } from "../actions/global-pages/loading-load-disabled.actions";
 import { OpPlayerTimelineRequestAction } from "../actions/overview-player/load-timeline/op-load-timeline-request-actions";
 import { OpPlayerTimelineSuccessAction } from "../actions/overview-player/load-timeline/op-load-timeline-success-actions";
 import { LoadingSmallDisabledAction } from "../actions/global-pages/global-loading-small/loading-small-disabled.actions";
@@ -29,7 +28,7 @@ export class OverviewPlayerEffect {
                         return new OpPlayerIdSuccessAction(response);
                     }),
                     catchError((error) => {
-                        this.store.dispatch(new LoadingDisabledAction());
+                        this.Alerts.error('tivemos um problema para carregar as informações do jogador, estamos verificando tente novamente mais tarde.', 'Ops!');   
                         return of(new OpGlobalErrorAction(error));
                     })
                 )
@@ -47,7 +46,7 @@ export class OverviewPlayerEffect {
                         return new OpPlayerTimelineSuccessAction(response);
                     }),
                     catchError((error) => {
-                        this.store.dispatch(new LoadingSmallDisabledAction());
+                        this.Alerts.error('tivemos um problema para carregar a timeline do jogador, estamos verificando tente novamente mais tarde.', 'Ops!');
                         return of(new OpGlobalErrorAction(error));
                     })
                 )

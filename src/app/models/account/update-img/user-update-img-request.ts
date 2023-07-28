@@ -1,4 +1,4 @@
 export interface UserUpdateImgRequest {
-    file: File,
+    file: any,
     id: string,
 }

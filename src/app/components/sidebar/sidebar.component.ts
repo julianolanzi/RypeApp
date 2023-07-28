@@ -10,26 +10,27 @@ import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
 import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview-player/rounting-id/op-load-routing-id.actions';
 import { Router } from '@angular/router';
-import { OpPlayerIdRequestAction } from 'src/app/shared/state-management/actions/overview-player/search-player/op-load-player-id-request.action';
-import { OpPlayerTimelineRequestAction } from 'src/app/shared/state-management/actions/overview-player/load-timeline/op-load-timeline-request-actions';
-import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
+import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  
+
 })
 export class SidebarComponent {
   private subscriptions: Subscription = new Subscription();
   isAdmin!: any;
   isAdminTeam$: Observable<boolean> | undefined;
-  isUser!:any;
+  isUser!: any;
   public user!: UserLoginSuccess;
+
+  ImageProfile$!: Observable<string>;
   constructor(private store: Store<GlobalState>, private router: Router) {
     this.isUser = true;
   }
   ngOnInit(): void {
+    this.ImageProfile$ = this.store.pipe(select(url));
     this.isAdminTeam$ = of(false);
     this.isAdmin = false;
     this.getCookie();
@@ -39,7 +40,7 @@ export class SidebarComponent {
 
 
     let menuActive = document.querySelectorAll('.menu-link');
-    
+
     menuActive.forEach((element) => {
       element.addEventListener('click', () => {
         menuActive.forEach((element) => {
@@ -48,15 +49,15 @@ export class SidebarComponent {
         element.classList.add('active');
       });
     });
-  
-    
-    
+
+
+
 
 
     modeSwitch.addEventListener('click', () => {
       this.store.dispatch(new LoadingNotificationsDisabledAction());
       body.classList.toggle('dark');
-      
+
       if (body.classList.contains('dark')) {
         modeText.innerText = 'Dark mode';
         let isDarkMode = true;
@@ -74,11 +75,10 @@ export class SidebarComponent {
 
   ngAfterViewInit(): void {
     let width =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
     let menuActive = document.querySelectorAll('.sub-menu-item');
-    console.log(menuActive);
     let sidebar = document.querySelector('.sidebar-container') as HTMLElement;
     let containerAll = document.querySelector('.container-all') as HTMLElement;
 
@@ -142,22 +142,26 @@ export class SidebarComponent {
           this.isAdmin = true;
         } else {
           this.isAdmin = false;
-   
+
         }
       });
 
     this.subscriptions.add(subscription);
   }
 
-  OpenOverviewPlayer(){
-    this.store.dispatch(new LoadingSmallActiveAction());
-    this.store.dispatch(new LoadOpRoutingIdAction(this.user.id));
-    this.store.dispatch(new OpPlayerIdRequestAction(this.user.id));
-    this.store.dispatch(new OpPlayerTimelineRequestAction(this.user.id))
-    this.router.navigate(['player/'+ this.user.nickname]);
+  OpenOverviewPlayer() {
+ 
+    const currentRoute = this.router.url;
+    const urlProfile = '/profile/' + this.user.nickname;
+    if(currentRoute != urlProfile){
+      this.store.dispatch(new LoadOpRoutingIdAction(this.user.id));
+      this.router.navigate(['profile/' + this.user.nickname]);
+    }else{
+     
+    }
   }
 
-  logaout(){
+  logaout() {
     window.location.reload();
   }
 }

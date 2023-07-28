@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { PlayerSuccessResponse } from 'src/app/models/overview-player/player/player-success-respose';
 import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
+import { OpPlayerTimelineRequestAction } from 'src/app/shared/state-management/actions/overview-player/load-timeline/op-load-timeline-request-actions';
 import { smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { PlayerData } from 'src/app/shared/state-management/selectors/overviewplayer.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
@@ -13,6 +14,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
   styleUrls: ['./header-player.component.scss']
 })
 export class HeaderPlayerComponent {
+  enableUser!: boolean;
   user!: PlayerSuccessResponse;
   enableSmallLoading$!: Observable<boolean>;
 
@@ -22,20 +24,21 @@ export class HeaderPlayerComponent {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadingSmallActiveAction());
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+
+
     this.loadPlayer();
   }
 
   loadPlayer() {
     const subscription = this.store
       .pipe(select(PlayerData))
-      .subscribe((user) =>
-        this.user = user,
-       
-      );
-
+      .subscribe((user) => {
+        this.user = user;
+        if(this.user.name.length > 0){
+          this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Carregando Timeline do Jogador'}));
+          this.store.dispatch(new OpPlayerTimelineRequestAction(this.user.id))
+        }
+      });
     this.subscriptions.add(subscription);
   }
 

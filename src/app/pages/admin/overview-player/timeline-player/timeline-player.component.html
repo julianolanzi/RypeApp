@@ -1,6 +1,6 @@
 <div class="gap-timeline" *ngFor="let post of Posts$ | async">
   <div *ngIf="(enableSmallLoading$ | async) == true">
-    <app-small-loading></app-small-loading>
+    <app-small-loading><p class="loading-small-text"> </p></app-small-loading>
   </div>
     <div class="widget-box no-padding" id="{{post.id}}">
   

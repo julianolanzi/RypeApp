@@ -6,6 +6,7 @@ export enum GlobalMessageEnum {
 
     LOADING_SMALL_ACTIVE = '[LOADING] active on loading small page',
     LOADING_SMALL_DISABLED = '[LOADING] disabled on loading small page',
+    LOADING_SMALL_MESSAGE = '[LOADING - Message] Message on loading small page',
 
     NOTIFICATIONS_ACTIVE = '[GLOBAL] notifications active page',
     NOTIFICATIONS_DISABLED = '[GLOBAL] notifications disabled page',

@@ -1,4 +1,4 @@
-<div *ngIf="(enableSmallLoading$ | async) == false">
+<div *ngIf="this.user.nickname.length > 0">
 <div class="profile-header">
   <img class="profile-header-cover" src="{{this.user.urlCover}}" alt="">
 </div>
@@ -141,7 +141,8 @@
 
   </div>
 </div>
+</div>
 
   <div *ngIf="(enableSmallLoading$ | async) == true">
-    <app-small-loading></app-small-loading>
+    <app-small-loading> </app-small-loading>
   </div>

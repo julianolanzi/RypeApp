@@ -9,4 +9,9 @@ export const OverviewPlayerRoutes: Routes = [
       component: OverviewPlayerComponent,
       canActivate: [AuthGuard],
     },
+    {
+      path: 'profile/:nickname',
+      component: OverviewPlayerComponent,
+      canActivate: [AuthGuard],
+    },
   ];

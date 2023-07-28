@@ -79,7 +79,7 @@ export class NotificationsComponent {
     this.isNotifica = false;
     this.ischange = false;
     this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
-    this.store.dispatch(new LoadingSmallActiveAction());
+    this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Carregando Notificações'}));
     this.onTimer();
   }
   deleteNotification(item: UserNotificationsSuccess) {

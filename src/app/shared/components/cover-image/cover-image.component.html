@@ -1,0 +1,12 @@
+<div class="cover-content">
+    <div class="grid-cover" *ngFor="let item of ConverArray">
+        <div (click)="selectedCover(item.id)" id="{{item.id}}" class="imagem-cover">
+            <img src="{{item.urlCover}}" alt="">
+        </div>
+       
+    </div>
+    <div class="container-button">
+        <button class="button" (click)="sendCover()">Atualizar</button>
+    </div>
+   
+</div>

@@ -61,7 +61,8 @@ export class TeamSearchComponent {
       return;
     }
     this.teamKey = this.teamSearch.value.key.toLowerCase();
-    this.store.dispatch(new LoadingSmallActiveAction());
+    this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Buscando times ...'}));
+
     this.store.dispatch(new TeamLoadAction(this.teamKey));
   }
 

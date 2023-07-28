@@ -19,7 +19,7 @@ export interface PlayerSuccessResponse {
         twitch: string;
         psn: string;
         xbox: string;
-        idGame:string;
+        idGame: string;
     },
     qtdPosts: number,
     team: [{

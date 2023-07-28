@@ -1,4 +1,5 @@
 export interface UserSuccessResponse {
+    _id: string;
     id: string;
     idRype: string;
     urlCover: string;

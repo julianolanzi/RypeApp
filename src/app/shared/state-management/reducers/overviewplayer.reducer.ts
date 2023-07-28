@@ -65,16 +65,16 @@ const _OverviewPlayerReducer = createReducer(
     on(new LoadOpRoutingIdAction().createAction(), (state, action) => ({
         ...initialState,
         id: action.payload,
-        comments: [],
-    })),
-    on(new OpPlayerIdSuccessAction().createAction(), (state, action) => ({
-        ...state,
-        user: {...action.payload},
-        comments: [],
     })),
     on(new OpPlayerIdRequestAction().createAction(), (state, action) => ({
         ...state,
         user: {...initialState.user},
+        comments: [...initialState.comments],
+        timeline: [...initialState.timeline],
+    })),
+    on(new OpPlayerIdSuccessAction().createAction(), (state, action) => ({
+        ...state,
+        user: {...action.payload},
         comments: [],
     })),
     on(new OpPlayerTimelineSuccessAction().createAction(), (state, action) => ({

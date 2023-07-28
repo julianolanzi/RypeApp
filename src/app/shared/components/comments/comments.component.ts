@@ -53,7 +53,8 @@ export class CommentsComponent {
   }
 
   loadComments(post: any) {
-    this.store.dispatch(new LoadingSmallActiveAction());
+    this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Carregando Comentários'}));
+
     this.store.dispatch(new PostCommentsLoadRequestAction(post.id));
 
     this.dataPost = post;
