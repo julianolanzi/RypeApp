@@ -22,6 +22,7 @@ import { TeamSettingsComponent } from './team-settings/team-settings.component';
 import { TeamUpdateMemberComponent } from './team-update-member/team-update-member.component';
 import { TeamUpdateAdminComponent } from './team-update-admin/team-update-admin.component';
 import { TeamUserSearchComponent } from './team-user-search/team-user-search.component';
+import { HeaderTeamComponent } from './header-team/header-team.component';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
@@ -35,6 +36,7 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     TeamUpdateMemberComponent,
     TeamUpdateAdminComponent,
     TeamUserSearchComponent,
+    HeaderTeamComponent,
   ],
   providers: [provideNgxMask()],
   imports: [
