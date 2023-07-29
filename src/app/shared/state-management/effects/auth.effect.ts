@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AlertService } from 'src/app/services/utils/alert.service';
 
 import { LoadingDisabledAction } from '../actions/global-pages/loading-load-disabled.actions';
-import { UpdateImgAccountAction } from '../actions/global-pages/global-load-update-img.actions';
+import { UpdateImgAccountAction } from '../actions/global-pages/global-update-imgs/global-load-update-img.actions';
 
 @Injectable({
   providedIn: 'root',

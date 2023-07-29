@@ -28,6 +28,7 @@ import { feedReducer } from './shared/state-management/reducers/feed.reducer';
 import { FeedEffect } from './shared/state-management/effects/feed.effects';
 import { OverviewPlayerReducer } from './shared/state-management/reducers/overviewplayer.reducer';
 import { OverviewPlayerEffect } from './shared/state-management/effects/overviewplayer.effects';
+import { GlobalEffect } from './shared/state-management/effects/global.effects';
 
 @NgModule({
   declarations: [AppComponent, WebComponent, AdminComponent],
@@ -57,6 +58,7 @@ import { OverviewPlayerEffect } from './shared/state-management/effects/overview
       TeamEffect,
       FeedEffect,
       OverviewPlayerEffect,
+      GlobalEffect,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge:25,

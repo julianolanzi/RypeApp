@@ -25,6 +25,7 @@ import { AccountUpdateLoadRequestAction } from '../actions/account/account-updat
 import { AccountUpdatePassLoadSuccessAction } from '../actions/account/account-reset-password/account-update-pass-success-actions';
 
 import { AccountLoadGlobalErrorAction } from '../actions/account/account-global-error.actions';
+import { UploadImageSuccessAction } from '../actions/global-pages/upload-images-cover/loading-upload-cover-success.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,12 @@ export class AccountEffect {
             if (!response) {
               return new AccountLoadGlobalErrorAction();
             } else {
+              
+              let UrlCover = {
+                type: 'user',
+                url: response.urlCover,
+              }
+              this.store.dispatch(new UploadImageSuccessAction(UrlCover));
               this.store.dispatch(new LoadingDisabledAction());
               return new AccountLoadSuccessAction(response);
             }

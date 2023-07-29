@@ -1,6 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { CustomAction } from "../custom.actions";
-import { GlobalMessageEnum } from "./global-pages-message.enum";
+import { CustomAction } from "../../custom.actions";
+import { GlobalMessageEnum } from "../global-pages-message.enum";
 
 
 export class UpdateImgAccountAction implements CustomAction<any> {

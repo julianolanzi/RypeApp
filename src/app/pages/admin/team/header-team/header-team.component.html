@@ -1,1 +1,106 @@
-<p>header-team works!</p>
+<div class="container-cover-hub-account">
+    <img src="./assets/img/teams/icon-team.png" alt="">
+    <h2 class="title-cover-hub">Hub de Time</h2>
+    <p class="text-cover-hub">Alterar dados de perfil, foto, e muitos mais</p>
+  </div>
+
+  <div class="container-hub-content">
+    <div class="header-content">
+      <p class="pre-title">Meu Time</p>
+      <h2 class="title">Informações de Time</h2>
+    </div>
+  </div>
+
+  <div class="grid-column">
+    <div class="grid-3-3-3">
+        <div class="user-preview small">
+          <img class="user-preview-cover" src="{{ urlCover$ | async}}" alt="">
+          <div class="user-preview-info">
+            <div class="user-short-description">
+  
+              <div class="user-short-description-avatar">
+                <div class="user-avatar-border">
+                  <div class="hexagon-100-110">
+                    <svg width="100" height="110" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-border">
+                          <path
+                            d="M4.0803 23.3469L46.5221 2.0089C48.3397 1.09512 50.4802 1.08496 52.3063 1.98146L95.8645 23.3655C98.0898 24.458 99.5 26.7212 99.5 29.2003V79.7071C99.5 82.1425 98.1386 84.3736 95.9729 85.4874L52.4161 107.889C50.5304 108.859 48.2903 108.848 46.4142 107.86L3.97091 85.5049C1.83629 84.3806 0.5 82.1664 0.5 79.7538V29.1543C0.5 26.6974 1.88525 24.4505 4.0803 23.3469Z"
+                            stroke="black" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+  
+                <div class="user-avatar-content">
+                  <div class="hexagon-image-68-74">
+                    <svg width="68" height="74" viewBox="0 0 68 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-img">
+                          <path
+                            d="M4.10531 15.2262L30.7373 1.97992C32.5413 1.08265 34.6594 1.07267 36.4717 1.95289L63.8397 15.245C66.0786 16.3324 67.5 18.6028 67.5 21.0918V52.2023C67.5 54.6479 66.1273 56.8865 63.9476 57.9955L36.581 71.9198C34.7091 72.8723 32.4923 72.8615 30.6298 71.891L3.99636 58.0132C1.84763 56.8936 0.5 54.6717 0.5 52.2488V21.0461C0.5 18.5791 1.89651 16.3248 4.10531 15.2262Z"
+                            stroke="black" />
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    <img src="{{ImageProfile$ | async}}" alt="">
+                  </div>
+                </div>
+  
+                <div class="user-avatar-progress">
+                  <div class="hexagon-progress-84-92">
+  
+                    <svg width="84" height="92" viewBox="0 0 84 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-progress-back">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M37.5336 0.974292C40.0416 -0.310995 42.996 -0.325394 45.5161 0.935701L78.9868 17.685C82.0709 19.2283 84 22.4181 84 25.8841V65.319C84 68.7244 82.1373 71.8683 79.1364 73.4415L45.667 90.9877C43.0647 92.3519 39.9728 92.3364 37.384 90.9465L4.78605 73.4454C1.82849 71.8575 0 68.7378 0 65.364V25.8398C0 22.4046 1.8952 19.2381 4.93696 17.6793L37.5336 0.974292ZM43.4125 5.18075C42.2317 4.58985 40.8532 4.59644 39.6775 5.19892L7.08087 21.9039C5.64913 22.6376 4.7191 24.1535 4.7191 25.8398V65.364C4.7191 67.0199 5.6164 68.5146 7.00979 69.2626L39.6078 86.7638C40.8217 87.4155 42.2645 87.4226 43.4842 86.7832L76.9537 69.237C78.3668 68.4961 79.2809 66.9905 79.2809 65.319V25.8841C79.2809 24.1825 78.3342 22.6561 76.8833 21.9301L43.4125 5.18075Z"
+                            fill="black" />
+  
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+  
+                <div class="user-avatar-progress-border">
+                  <div class="hexagon-border-84-92">
+                    <svg width="84" height="92" viewBox="0 0 84 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <clipPath id="avatar-progress">
+                          <path
+                            d="M74.6636 20.1059L43.0732 3.95962L45.7169 0.0641043L79.5177 16.7415C82.2317 18.0806 83.95 20.8445 83.95 23.8709V65.1833C83.95 68.1281 82.3223 70.8316 79.7197 72.2095L45.2763 90.4442C42.9185 91.6925 40.0917 91.6748 37.7496 90.3973L4.19296 72.0926C1.63903 70.6995 0.05 68.0226 0.05 65.1134V25.9095H4.65037L4.91492 61.4302C4.9367 64.3556 6.54378 67.0388 9.1125 68.4387L37.746 84.0435C40.0931 85.3226 42.922 85.3533 45.2962 84.1254L74.6981 68.919C77.3713 67.5365 79.05 64.7783 79.05 61.7687V27.2739C79.05 24.2504 77.3558 21.4819 74.6636 20.1059Z"
+                            fill="#E62479" stroke="#E62479" stroke-width="0.1" />
+  
+  
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        <div (click)="uploadImageTeam()"  class="upload-box">
+          <span class="material-symbols-outlined">
+            account_box
+          </span>
+  
+          <p class="upload-box-title">Alterar avatar</p>
+          <p class="upload-box-text">110x110px tamanho idela</p>
+        </div>
+        <div (click)="uploadCoverTeam()" class="upload-box">
+          <span class="material-symbols-outlined">
+            reset_image
+          </span>
+  
+          <p class="upload-box-title">alterar Capa</p>
+          <p class="upload-box-text">110x110px tamanho idela</p>
+        </div>
+      </div>
+  </div>

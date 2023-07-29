@@ -69,12 +69,12 @@ export class FeedEffect {
                         this.store.dispatch(new LoadingSmallDisabledAction());
                         const err = error.error.error;
                         console.log(err);
-                        if(err != undefined){
+                        if (err != undefined) {
                             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-                        }else{
+                        } else {
                             this.Alerts.error('Estamos com uma problema de comunicação para exibir sua timeline e já estamos verificando, tente novamente em alguns minutos ', 'Ops tivemos um problema');
                         }
-                        
+
                         return of(new FeedLoadGlobalErrorAction(error));
                     })
                 )
@@ -155,40 +155,40 @@ export class FeedEffect {
         )
     );
 
-    createComments$ = createEffect(() => 
-    this.actions$.pipe(
-        ofType(FeedMessageEnum.LOAD_CREATE_COMMENTS_POST_REQUEST),
-        exhaustMap((action: PostCommentsCreateRequestAction) => {
-            return this.feedService.createComment(action.payload).pipe(
-                map((response) => {
-                   
-                    return new PostCommentsCreateSuccessAction(response);
-                }),
-                catchError((error) => {
-                    const err = error.error.error;
-                    this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-                    return of(new FeedLoadGlobalErrorAction(error));
-                })
-            )
-        })
-    ));
-    deleteComments$ = createEffect(() => 
-    this.actions$.pipe(
-        ofType(FeedMessageEnum.LOAD_DELETE_COMMENTS_POST_REQUEST),
-        exhaustMap((action: PostCommentsDeleteRequestAction) => {
-            return this.feedService.deleteComment(action.payload).pipe(
-                map((response) => {
-                   
-                    return new PostCommentsDeleteSuccessAction(response);
-                }),
-                catchError((error) => {
-                    const err = error.error.error;
-                    this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-                    return of(new FeedLoadGlobalErrorAction(error));
-                })
-            )
-        })
-    ))
+    createComments$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FeedMessageEnum.LOAD_CREATE_COMMENTS_POST_REQUEST),
+            exhaustMap((action: PostCommentsCreateRequestAction) => {
+                return this.feedService.createComment(action.payload).pipe(
+                    map((response) => {
+
+                        return new PostCommentsCreateSuccessAction(response);
+                    }),
+                    catchError((error) => {
+                        const err = error.error.error;
+                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        return of(new FeedLoadGlobalErrorAction(error));
+                    })
+                )
+            })
+        ));
+    deleteComments$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FeedMessageEnum.LOAD_DELETE_COMMENTS_POST_REQUEST),
+            exhaustMap((action: PostCommentsDeleteRequestAction) => {
+                return this.feedService.deleteComment(action.payload).pipe(
+                    map((response) => {
+
+                        return new PostCommentsDeleteSuccessAction(response);
+                    }),
+                    catchError((error) => {
+                        const err = error.error.error;
+                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        return of(new FeedLoadGlobalErrorAction(error));
+                    })
+                )
+            })
+        ))
 
     constructor(private actions$: Actions, private Alerts: AlertService, private store: Store, private feedService: FeedService, private state: State<GlobalState>) {
 

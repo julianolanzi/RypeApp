@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { UserSuccessResponse } from 'src/app/models/account/user-load-info/user-success-response';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
-import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { isUrlCoverUser, url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { Router } from '@angular/router';
 @Component({
@@ -13,28 +13,21 @@ import { Router } from '@angular/router';
 })
 export class HeaderProfileComponent {
   ImageProfile$!: Observable<string>;
+  
+  urlCover$!: Observable<string>;
   public user!: UserSuccessResponse;
-  private subscriptions: Subscription = new Subscription();
   constructor(private store: Store<GlobalState>,private Router: Router) { 
     this.ImageProfile$ = this.store.pipe(select(url));
-
+    this.urlCover$ = this.store.pipe(select(isUrlCoverUser));
 
   }
 
   ngOnInit(): void {
   
-    this.loadUser();
+
   }
 
-  public loadUser() {
-    const subscription = this.store
-      .pipe(select(AccountSelector))
-      .subscribe((response) => {
-        this.user = response;
-
-      });
-    this.subscriptions.add(subscription);
-  }
+ 
 
   uploadImageUser() {
     this.Router.navigate(['upload-image-user']);

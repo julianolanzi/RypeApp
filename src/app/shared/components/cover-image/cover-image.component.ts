@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { RequestImagensCover } from 'src/app/models/imgs/images-cover-request';
+import { AuthSelector, idUser } from '../../state-management/selectors/auth.selector';
+import { GlobalState } from '../../state-management/states/global.state';
+import { UploadImageCoverRequestAction } from '../../state-management/actions/global-pages/upload-images-cover/loading-upload-cover-request.actions';
+import { Router } from '@angular/router';
+import { TeamDataSelector } from '../../state-management/selectors/team.selector';
 
 @Component({
   selector: 'app-cover-image',
@@ -19,29 +27,85 @@ export class CoverImageComponent {
       id: "cofd3",
       urlCover: './assets/covers/cofd3.png',
     },
+    {
+      id: "fr841",
+      urlCover: './assets/covers/fr841.png',
+    },
+    {
+      id: "fr842",
+      urlCover: './assets/covers/fr842.png',
+    },
+    {
+      id: "ft1",
+      urlCover: './assets/covers/ft1.png',
+    },
+    {
+      id: "ft2",
+      urlCover: './assets/covers/ft2.png',
+    },
+    {
+      id: "ft3",
+      urlCover: './assets/covers/ft3.png',
+    },
+    {
+      id: "ft4",
+      urlCover: './assets/covers/ft4.png',
+    },
+    {
+      id: "ft5",
+      urlCover: './assets/covers/ft5.png',
+    },
+    {
+      id: "ft6",
+      urlCover: './assets/covers/ft6.png',
+    },
+    {
+      id: "ft7",
+      urlCover: './assets/covers/ft7.png',
+    },
 
   ];
   ConverSelected: any;
   IsSelected: boolean = false;
-  consteructor() {
+  idUser!: string;
+  idTeam!: string;
 
+  private subscriptions: Subscription = new Subscription();
+  ImagemSelected!: RequestImagensCover;
+
+  constructor(private store: Store<GlobalState>, private router: Router) {
 
   }
 
-  OnInit() {
-    console.log(this.ConverArray);
+  ngOnInit(): void {
+
+  }
+
+  LoadIdUser() {
+    const subscription = this.store
+      .pipe(select(AuthSelector))
+      .subscribe((user) => {
+        this.idUser = user.id;
+      });
+
+    this.subscriptions.add(subscription);
+  }
+  LoadIdTeam(){
+    const subscription = this.store
+    .pipe(select(TeamDataSelector))
+    .subscribe((team) => {
+      this.idTeam = team._id;
+    });
   }
 
   selectedCover(item: any) {
     this.BoderCover(item);
-    
-    // this.ConverSelected = item;
+
+    this.ConverSelected = item;
   }
 
   BoderCover(item: any) {
-    console.log(item);
     let idtag = document.getElementById(item.id);
-    console.log(idtag);
     idtag?.classList.toggle('selected');
 
     let btn = document.querySelector('.container-button');
@@ -59,6 +123,32 @@ export class CoverImageComponent {
   }
 
   sendCover() {
-    console.log(this.ConverSelected);
+    const local = this.router.url;
+
+    if (local == "/upload-cover-user") {
+      this.LoadIdUser();
+     
+      this.ImagemSelected = {
+        url: this.ConverSelected.urlCover,
+        type: "user",
+        id: this.idUser,
+      }
+      this.store.dispatch(new UploadImageCoverRequestAction(this.ImagemSelected));
+      
+    } else {
+      this.LoadIdTeam();
+      this.ImagemSelected = {
+        url: this.ConverSelected.urlCover,
+        type: "team",
+        id: this.idTeam,
+      }
+      this.store.dispatch(new UploadImageCoverRequestAction(this.ImagemSelected));
+
+    }
+    console.log(local);
+
+
+
+
   }
 }

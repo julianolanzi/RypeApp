@@ -6,6 +6,7 @@ import { BaseService } from '../base.service';
 import { Store } from '@ngrx/store';
 import { UserUpdateImgRequest } from 'src/app/models/account/update-img/user-update-img-request';
 import { UpdateImgTeamRequest } from 'src/app/models/teams/team-update-img/team-update-img-request';
+import { RequestImagensCover } from 'src/app/models/imgs/images-cover-request';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,18 @@ export class UploadImgService extends BaseService {
       .post(
         this.UrlImgUpload + '/teams/img/' + img.id,
         formData,
+        this.ObterAuthHeaderUploadJson()
+      )
+      .pipe(map(this.extractData), catchError(this.serviceError));
+    return response;
+  }
+
+  uploadImgCover(body: RequestImagensCover | undefined): Observable<any> {
+  
+    let response = this.http
+      .put(
+        this.UrlImgUpload + '/cover/upload-cover/' + body?.id,
+        body,
         this.ObterAuthHeaderUploadJson()
       )
       .pipe(map(this.extractData), catchError(this.serviceError));

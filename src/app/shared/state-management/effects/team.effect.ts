@@ -38,6 +38,8 @@ import { TeamLoadQuitRequestAction } from '../actions/teams/quit-team/team-load-
 import { TeamLoadQuitSuccessAction } from '../actions/teams/quit-team/team-load-quit-success.actions';
 import { TeamLoadUpdateAuthDataPublicTeam } from '../actions/teams/request-public-team/team-load-update-auth-public-team.actions';
 import { LoadingSmallDisabledAction } from '../actions/global-pages/global-loading-small/loading-small-disabled.actions';
+import { UploadImageSuccessAction } from '../actions/global-pages/upload-images-cover/loading-upload-cover-success.actions';
+import { UpdateImgTeamAction } from '../actions/global-pages/global-update-imgs/global-load-update-img-team.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -73,6 +75,9 @@ export class TeamEffect {
       exhaustMap((action: TeamLoadAction) => {
         return this.teamService.searchTeams(action.payload).pipe(
           map((response) => {
+
+           
+           
             this.store.dispatch(new LoadingSmallDisabledAction())
             return new TeamLoadSuccessAction(response);
           }),
@@ -119,7 +124,12 @@ export class TeamEffect {
         return this.teamService.getById(action.payload).pipe(
           map((response) => {
             this.store.dispatch(new LoadingDisabledAction());
-
+            let UrlCover = {
+              type: 'team',
+              url: response.urlCover,
+            }
+            this.store.dispatch(new UpdateImgTeamAction(response));
+            this.store.dispatch(new UploadImageSuccessAction(UrlCover));
             return new TeamLoadInfoSuccessAction(response);
           }),
           catchError((error) => {

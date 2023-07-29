@@ -5,4 +5,8 @@ export interface GlobalPageState {
   isSmallLoading: boolean,
   isSmallLoadingMessage: string,
   isNotifications: boolean,
+  urlTeam: string,
+  coverUser: string,
+  coverTeam: string,
+  GlobalError?: Error,
 }

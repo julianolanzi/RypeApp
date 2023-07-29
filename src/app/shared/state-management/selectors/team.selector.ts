@@ -9,6 +9,7 @@ const _teamInfo = (state: TeamState) => state.teamInfo;
 const _loadingTeam = (state: TeamState) => state.isLoadingTeam;
 const _searchMembers = (state: TeamState) => state.searchMembers;
 
+
 export const TeamInfoSelector = createSelector(TeamGlobalSelector, _team);
 export const TeamSearchSelector = createSelector(
   TeamGlobalSelector,

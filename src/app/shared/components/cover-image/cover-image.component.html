@@ -1,6 +1,6 @@
 <div class="cover-content">
     <div class="grid-cover" *ngFor="let item of ConverArray">
-        <div (click)="selectedCover(item.id)" id="{{item.id}}" class="imagem-cover">
+        <div (click)="selectedCover(item)" id="{{item.id}}" class="imagem-cover">
             <img src="{{item.urlCover}}" alt="">
         </div>
        
