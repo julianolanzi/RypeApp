@@ -10,7 +10,7 @@ import { FeedPostEditRequestAction } from 'src/app/shared/state-management/actio
 import { FeedReactRequestAction } from 'src/app/shared/state-management/actions/feed/react-post/feed-load-react-request.actions';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
 import { smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
-import { PlayerTimeline } from 'src/app/shared/state-management/selectors/overviewplayer.selector';
+import { PlayerTimeline } from 'src/app/shared/state-management/selectors/overview.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({

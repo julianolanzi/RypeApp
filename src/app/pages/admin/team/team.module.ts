@@ -25,6 +25,7 @@ import { TeamUserSearchComponent } from './team-user-search/team-user-search.com
 import { HeaderTeamComponent } from './header-team/header-team.component';
 import { UpdateImgTeamComponent } from './update-img-team/update-img-team.component';
 import { UpdateCoverTeamComponent } from './update-cover-team/update-cover-team.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
@@ -52,6 +53,7 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    ImageCropperModule,
   ],
 })
 export class TeamModule {}

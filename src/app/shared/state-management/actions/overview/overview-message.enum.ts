@@ -1,4 +1,4 @@
-export enum OverviewPlayerMessageEnum {
+export enum OverviewMessageEnum {
 
     LOAD_ROUTING_ID = '[OVERVIEW PLAYER] Load routing id',
 

@@ -26,8 +26,8 @@ import { teamReducer } from './shared/state-management/reducers/team.reducer';
 import { notificationsReducer } from './shared/state-management/reducers/notifications.reducer';
 import { feedReducer } from './shared/state-management/reducers/feed.reducer';
 import { FeedEffect } from './shared/state-management/effects/feed.effects';
-import { OverviewPlayerReducer } from './shared/state-management/reducers/overviewplayer.reducer';
-import { OverviewPlayerEffect } from './shared/state-management/effects/overviewplayer.effects';
+import { OverviewReducer } from './shared/state-management/reducers/overview.reducer';
+import { OverviewEffect } from './shared/state-management/effects/overview.effects';
 import { GlobalEffect } from './shared/state-management/effects/global.effects';
 
 @NgModule({
@@ -49,7 +49,7 @@ import { GlobalEffect } from './shared/state-management/effects/global.effects';
       globalPages: globalPagesReducer,
       notifications: notificationsReducer,
       feed: feedReducer,
-      overviewPlayer: OverviewPlayerReducer,
+      overview: OverviewReducer,
     }),
     EffectsModule.forRoot([
       AuthEffect,
@@ -57,7 +57,7 @@ import { GlobalEffect } from './shared/state-management/effects/global.effects';
       NotificationsEffect,
       TeamEffect,
       FeedEffect,
-      OverviewPlayerEffect,
+      OverviewEffect,
       GlobalEffect,
     ]),
     StoreDevtoolsModule.instrument({

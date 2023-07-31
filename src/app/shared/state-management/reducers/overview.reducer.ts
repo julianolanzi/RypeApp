@@ -1,9 +1,8 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { OverviewPlayerState } from "../states/overview-player.state";
-import { LoadOpRoutingIdAction } from "../actions/overview-player/rounting-id/op-load-routing-id.actions";
-import { OpPlayerIdSuccessAction } from "../actions/overview-player/search-player/op-load-player-id-success.action";
-import { OpGlobalErrorAction } from "../actions/overview-player/op-load-global-error.actions";
-import { OpPlayerTimelineSuccessAction } from "../actions/overview-player/load-timeline/op-load-timeline-success-actions";
+import { LoadOpRoutingIdAction } from "../actions/overview/rounting-id/op-load-routing-id.actions";
+import { OpPlayerIdSuccessAction } from "../actions/overview/search-player/op-load-player-id-success.action";
+import { OpGlobalErrorAction } from "../actions/overview/op-load-global-error.actions";
+import { OpPlayerTimelineSuccessAction } from "../actions/overview/load-timeline/op-load-timeline-success-actions";
 import { FeedReactSucessAction } from "../actions/feed/react-post/feed-load-react-success.actions";
 import { FeedDeletePostSuccessAction } from "../actions/feed/delete-post/feed-load-delete-post-success.actions";
 import { FeedPostEditRequestAction } from "../actions/feed/edit-post/feed-edit-post-request.actions";
@@ -11,12 +10,14 @@ import { PostCommentsLoadSuccessAction } from "../actions/feed/comments-load/fee
 import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
 import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
 import { PostCommentsLoadRequestAction } from "../actions/feed/comments-load/feed-load-comments-post-request.actions";
-import { OpPlayerIdRequestAction } from "../actions/overview-player/search-player/op-load-player-id-request.action";
+import { OpPlayerIdRequestAction } from "../actions/overview/search-player/op-load-player-id-request.action";
+import { OverviewState } from "../states/overview.state";
 
 
 
-export const initialState: OverviewPlayerState = {
+export const initialState: OverviewState = {
     id: '',
+    idTeam: '',
     user: {
         id: '',
         idRype: '',
@@ -56,10 +57,36 @@ export const initialState: OverviewPlayerState = {
     },
     comments: [],
     timeline: [],
+    team: {
+        _id: '',
+        idTeam: '',
+        name: '',
+        tagName: '',
+        ranking: '',
+        admin: {
+          url: '',
+          nickname: '',
+          country: '',
+        },
+        description: '',
+        emailTeam: '',
+        discordTeam: '',
+        facebookTeam: '',
+        youtubeTeam: '',
+        instagramTeam: '',
+        url: '',
+        urlCover: '',
+        members: [],
+        adminMembers: [],
+        lines: [],
+        private: false,
+    
+        createdAt: undefined,
+      },
     OverviewPlayerError: undefined,
 };
 
-const _OverviewPlayerReducer = createReducer(
+const _OverviewReducer = createReducer(
     initialState,
 
     on(new LoadOpRoutingIdAction().createAction(), (state, action) => ({
@@ -213,6 +240,6 @@ const _OverviewPlayerReducer = createReducer(
     
 )
 
-export function OverviewPlayerReducer(state: any, action: Action) {
-    return _OverviewPlayerReducer(state, action);
+export function OverviewReducer(state: any, action: Action) {
+    return _OverviewReducer(state, action);
 }

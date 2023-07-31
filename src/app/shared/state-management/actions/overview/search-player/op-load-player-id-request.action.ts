@@ -1,11 +1,11 @@
 import { createAction } from "@ngrx/store";
-import { OverviewPlayerMessageEnum } from "../overview-player-message.enum";
+import { OverviewMessageEnum } from "../overview-message.enum";
 import { CustomAction } from "../../custom.actions";
 
 
 
 export class OpPlayerIdRequestAction implements CustomAction<string> {
-    readonly type: string = OverviewPlayerMessageEnum.LOAD_PLAYER_ID_REQUEST;
+    readonly type: string = OverviewMessageEnum.LOAD_PLAYER_ID_REQUEST;
 
     constructor(public payload?: string) { }
 

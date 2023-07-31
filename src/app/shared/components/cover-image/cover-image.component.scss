@@ -31,15 +31,14 @@
     }
 
     .container-button{
-        bottom: 0;
-        position: fixed;
-        display: flex;
-        width: 80%;
-        justify-content: center;
-        margin-bottom: 20px;
-        visibility: hidden;
-        opacity: 0;
+        visibility: visible;
+        opacity: 1;
         transition: var(--tran-05);
+        max-width: 1184px;
+        width: 80%;
+        bottom: 10px;
+        margin: auto;
+        position: fixed;
     }
     .container-button.active{
         visibility: visible;

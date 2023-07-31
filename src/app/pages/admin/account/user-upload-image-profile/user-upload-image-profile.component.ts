@@ -104,8 +104,6 @@ export class UserUploadImageProfileComponent {
     this.store.dispatch(new AccountUpdateLoadImgRequestAction(this.updateImg));
 
   }
-
-
   dataURItoBlob(dataURI: string) {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);

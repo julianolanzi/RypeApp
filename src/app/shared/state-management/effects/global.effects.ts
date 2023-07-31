@@ -24,7 +24,7 @@ export class GlobalEffect {
             exhaustMap((action: UploadImageCoverRequestAction) => {
                 return this.ImageService.uploadImgCover(action.payload).pipe(
                     map((response) => {
-
+                        this.Alerts.success('Atualizada com sucesso', 'Foto de Capa');
                         return new UploadImageSuccessAction(response);
 
                     }),

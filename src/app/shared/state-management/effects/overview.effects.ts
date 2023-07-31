@@ -3,27 +3,28 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { State, Store } from "@ngrx/store";
 import { AlertService } from "src/app/services/utils/alert.service";
 import { GlobalState } from "../states/global.state";
-import { OverviewPlayerMessageEnum } from "../actions/overview-player/overview-player-message.enum";
+import { OverviewMessageEnum } from "../actions/overview/overview-message.enum";
 
 import { exhaustMap, catchError, map, of } from 'rxjs';
-import { OpPlayerIdRequestAction } from "../actions/overview-player/search-player/op-load-player-id-request.action";
+import { OpPlayerIdRequestAction } from "../actions/overview/search-player/op-load-player-id-request.action";
 import { OverviewService } from "src/app/services/overview-player/overview-player.service";
-import { OpPlayerIdSuccessAction } from "../actions/overview-player/search-player/op-load-player-id-success.action";
-import { OpGlobalErrorAction } from "../actions/overview-player/op-load-global-error.actions";
-import { OpPlayerTimelineRequestAction } from "../actions/overview-player/load-timeline/op-load-timeline-request-actions";
-import { OpPlayerTimelineSuccessAction } from "../actions/overview-player/load-timeline/op-load-timeline-success-actions";
+import { OpPlayerIdSuccessAction } from "../actions/overview/search-player/op-load-player-id-success.action";
+import { OpGlobalErrorAction } from "../actions/overview/op-load-global-error.actions";
+import { OpPlayerTimelineRequestAction } from "../actions/overview/load-timeline/op-load-timeline-request-actions";
+import { OpPlayerTimelineSuccessAction } from "../actions/overview/load-timeline/op-load-timeline-success-actions";
 import { LoadingSmallDisabledAction } from "../actions/global-pages/global-loading-small/loading-small-disabled.actions";
 @Injectable({
     providedIn: 'root',
 })
 
-export class OverviewPlayerEffect {
+export class OverviewEffect {
     loadPLayerId$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(OverviewPlayerMessageEnum.LOAD_PLAYER_ID_REQUEST),
+            ofType(OverviewMessageEnum.LOAD_PLAYER_ID_REQUEST),
             exhaustMap((action: OpPlayerIdRequestAction) => {
                 return this.OPService.getOverviewPlayer(action.payload).pipe(
                     map((response) => {
+                        console.log(response);
                         this.store.dispatch(new LoadingSmallDisabledAction());
                         return new OpPlayerIdSuccessAction(response);
                     }),
@@ -38,7 +39,7 @@ export class OverviewPlayerEffect {
 
     loadTimeLine$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(OverviewPlayerMessageEnum.LOAD_PLAYER_TIMELINE_REQUEST),
+            ofType(OverviewMessageEnum.LOAD_PLAYER_TIMELINE_REQUEST),
             exhaustMap((action: OpPlayerTimelineRequestAction) => {
                 return this.OPService.getTimelinePlayer(action.payload).pipe(
                     map((response) => {

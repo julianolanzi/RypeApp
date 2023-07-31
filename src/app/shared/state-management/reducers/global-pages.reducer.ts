@@ -15,6 +15,7 @@ import { UploadImageCoverRequestAction } from '../actions/global-pages/upload-im
 import { UploadImageSuccessAction } from '../actions/global-pages/upload-images-cover/loading-upload-cover-success.actions';
 import { GlobalErrorAction } from '../actions/global-pages/global-load-error.action';
 import { UpdateImgTeamAction } from '../actions/global-pages/global-update-imgs/global-load-update-img-team.actions';
+import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-update-img-success.actions';
 
 export const initialState: GlobalPageState = {
   isloading: false,
@@ -85,6 +86,14 @@ const _globalPagesReducer = createReducer(
     return {
       ...state,
       url: action.payload.url,
+      isloading: false,
+    }
+  }),
+  on(new TeamLoadUpdateSuccessImg().createAction(), (state, action) => {
+
+    return {
+      ...state,
+      urlTeam: action.payload.url,
       isloading: false,
     }
   }),

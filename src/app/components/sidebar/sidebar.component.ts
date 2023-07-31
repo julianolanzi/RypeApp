@@ -8,7 +8,7 @@ import { Observable, Subscription, of } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
-import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview-player/rounting-id/op-load-routing-id.actions';
+import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview/rounting-id/op-load-routing-id.actions';
 import { Router } from '@angular/router';
 import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 
