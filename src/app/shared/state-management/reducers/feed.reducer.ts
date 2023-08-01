@@ -13,7 +13,7 @@ import { PostCommentsLoadRequestAction } from "../actions/feed/comments-load/fee
 import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
 import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
 import { FeedTimelineRequestAction } from "../actions/feed/feed-timelime/feed-load-timeline-request.actions";
-import { OpPlayerIdRequestAction } from "../actions/overview/search-player/op-load-player-id-request.action";
+import { OpPlayerIdRequestAction } from "../actions/overview/user/search-player/op-load-player-id-request.action";
 
 export const initialState: FeedState = {
     createPost: {

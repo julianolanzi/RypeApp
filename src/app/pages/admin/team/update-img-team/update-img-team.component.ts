@@ -8,7 +8,7 @@ import { AlertService } from 'src/app/services/utils/alert.service';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadUpdateRequestImg } from 'src/app/shared/state-management/actions/teams/team-img/team-load-update-img-request.actions';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
-import { TeamDataSelector } from 'src/app/shared/state-management/selectors/team.selector';
+import { TeamInfoSelector } from 'src/app/shared/state-management/selectors/team.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 
 @Component({
@@ -54,7 +54,7 @@ export class UpdateImgTeamComponent {
 
    loadTeam(){
     const subscription = this.store
-    .pipe(select(TeamDataSelector))
+    .pipe(select(TeamInfoSelector))
     .subscribe((team) => {
       this.croppedImage = team.url;
       this.team = team;

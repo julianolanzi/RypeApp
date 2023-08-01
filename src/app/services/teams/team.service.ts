@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 
 import { BaseService } from '../base.service';
-import { CreateTeamSuccess } from 'src/app/models/teams/create-team/create-team-success';
 import { RemoveMembers } from 'src/app/models/teams/manage-team/team-remove-member';
 import { PromoteAdmin } from 'src/app/models/teams/manage-team/team-promote-admin';
 import { RemoveAdmin } from 'src/app/models/teams/manage-team/team-remove-admin';
@@ -18,7 +17,7 @@ export class TeamService extends BaseService {
   constructor(private http: HttpClient, Store: Store) {
     super(Store);
   }
-  createTeam(data: CreateTeamRequest | undefined): Observable<CreateTeamSuccess> {
+  createTeam(data: CreateTeamRequest | undefined): Observable<TeamDataSuccess> {
     let response = this.http
       .post(this.UrluserTeam + '/teams/', data, this.ObterAuthHeaderJson())
       .pipe(map(this.extractData), catchError(this.serviceError));

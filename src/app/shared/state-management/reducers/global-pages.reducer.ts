@@ -46,7 +46,6 @@ const _globalPagesReducer = createReducer(
     url: action.payload.url,
   })),
   on(new UpdateImgTeamAction().createAction(), (state, action) => {
-    console.log(action.payload);
     return {
       ...state,
       urlTeam: action.payload.url,
@@ -107,7 +106,6 @@ const _globalPagesReducer = createReducer(
 
     let urlUser = state.coverUser;
     let urlTeam = state.coverTeam;
-    console.log(action.payload.type);
     if (action.payload.type === 'user') {
       urlUser = action.payload.url;
     } else {

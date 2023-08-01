@@ -1,7 +1,5 @@
-<section *ngIf="this.Team._id" class="container-hub">
-
-  <div class="profile-header v2">
-    <img class="profile-header-cover" src="{{this.Team.urlCover}}" alt="">
+<div class="profile-header v2" *ngIf="this.team.name.length > 0">
+    <img class="profile-header-cover" src="{{this.team.urlCover}}" alt="">
     <div class="profile-header-info">
       <div class="user-short-description big">
         <a class="user-short-description-avatar">
@@ -30,28 +28,28 @@
                   </clipPath>
                 </defs>
               </svg>
-              <img src="{{this.Team.url}}" alt="">
+              <img src="{{this.team.url}}" alt="">
             </div>
           </div>
 
         </a>
-        <p class="user-short-description-title">{{this.Team.name}}</p>
-        <p class="user-short-description-text"> {{this.Team.tagName}}</p>
+        <p class="user-short-description-title">{{this.team.name}}</p>
+        <p class="user-short-description-text"> {{this.team.tagName}}</p>
       </div>
       <div class="user-stats">
         <div class="user-stat big">
-          <div class="user-stat-icon" *ngIf="this.Team.private == false">
+          <div class="user-stat-icon" *ngIf="this.team.private == false">
             <span class="material-symbols-outlined">
               public
             </span>
           </div>
-          <div class="user-stat-icon" *ngIf="this.Team.private == true">
+          <div class="user-stat-icon" *ngIf="this.team.private == true">
             <span class="material-symbols-outlined">
               lock
             </span>
           </div>
-          <p class="user-stat-text"*ngIf="this.Team.private == true">Privado</p>
-          <p class="user-stat-text"*ngIf="this.Team.private == false">Público</p>
+          <p class="user-stat-text"*ngIf="this.team.private == true">Privado</p>
+          <p class="user-stat-text"*ngIf="this.team.private == false">Público</p>
         </div>
         <div class="user-stat big">
           <p class="user-stat-title">{{this.membersNumber +1}}</p>
@@ -59,21 +57,17 @@
         </div>
         
       </div>
-      <div *ngIf="this.isadmin == false" class="profile-header-info-actions">
+      <!-- <div *ngIf="this.isadmin == false" class="profile-header-info-actions">
         <button (click)="quitTeam()" class="profile-header-info-action">
           <span class="material-symbols-outlined">
             exit_to_app
           </span>
 
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
-</section>
 
-<app-team-setup *ngIf="this.Team._id == ''"></app-team-setup>
-
-
-<div *ngIf="loading$ | async">
-  <app-loading></app-loading>
-</div>
+  <div *ngIf="(enableSmallLoading$ | async) == true">
+    <app-small-loading> </app-small-loading>
+  </div>

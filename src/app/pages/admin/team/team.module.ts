@@ -11,7 +11,6 @@ import {
   provideNgxMask,
 } from 'ngx-mask';
 
-import { TeamOverviewComponent } from './team-overview/team-overview.component';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { TeamRoutes } from './team.routing';
@@ -31,7 +30,6 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
-    TeamOverviewComponent,
     TeamSetupComponent,
     TeamCreateComponent,
     TeamSearchComponent,

@@ -89,7 +89,7 @@
           </a>
           <div class="sub-menu-container">
             <ul>
-              <li *ngIf="this.isUser == true" routerLink="team-overview"  class="sub-menu-item">Meu Clan</li>
+              <li *ngIf="this.isUser == true" (click)="OpenOverviewTeam()" class="sub-menu-item">Meu Clan</li>
               <li *ngIf="this.isAdminTeam$ | async" routerLink="team-settings" class="sub-menu-item">Alterar dados</li>
               <li *ngIf="this.isAdminTeam$ | async" routerLink="team-search-user" class="sub-menu-item">Buscar Jogadores</li>
               <li *ngIf="this.isAdminTeam$ | async" routerLink="team-members" class="sub-menu-item">Gerenciar Membros</li>

@@ -23,6 +23,7 @@ export interface PlayerSuccessResponse {
     },
     qtdPosts: number,
     team: [{
+        _id: string;
         teamName: string;
         tagName: string;
         ranking: number;

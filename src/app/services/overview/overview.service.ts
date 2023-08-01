@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { PlayerSuccessResponse } from "src/app/models/overview-player/player/player-success-respose";
 import { Observable, catchError, map } from "rxjs";
 import { TimelineSuccess } from "src/app/models/feed/timeline/timeline-success";
+import { TeamDataSuccess } from "src/app/models/teams/load-team/team-data-sucess";
 
 @Injectable()
 export class OverviewService extends BaseService {
@@ -32,6 +33,13 @@ export class OverviewService extends BaseService {
             .pipe(map(this.extractData), catchError(this.serviceError));
         return response;
     }
+
+    getById(id: string | undefined): Observable<TeamDataSuccess> {
+        let response = this.http
+          .get(this.UrluserTeam + '/teams/' + id, this.ObterAuthHeaderJson())
+          .pipe(map(this.extractData), catchError(this.serviceError));
+        return response;
+      }
 
 
 }

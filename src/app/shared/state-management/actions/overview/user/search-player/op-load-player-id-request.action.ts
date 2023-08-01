@@ -1,6 +1,6 @@
 import { createAction } from "@ngrx/store";
-import { OverviewMessageEnum } from "../overview-message.enum";
-import { CustomAction } from "../../custom.actions";
+import { OverviewMessageEnum } from "../../overview-message.enum";
+import { CustomAction } from "../../../custom.actions";
 
 
 

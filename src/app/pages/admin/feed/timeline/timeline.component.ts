@@ -13,7 +13,7 @@ import { FeedTimelineRequestAction } from 'src/app/shared/state-management/actio
 import { FeedReactRequestAction } from 'src/app/shared/state-management/actions/feed/react-post/feed-load-react-request.actions';
 import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
-import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview/rounting-id/op-load-routing-id.actions';
+import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview/user/rounting-id/op-load-routing-id.actions';
 import { TimeLineInfo } from 'src/app/shared/state-management/selectors/feed.selector';
 import { smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
@@ -141,6 +141,8 @@ export class TimelineComponent {
     this.store.dispatch(new LoadOpRoutingIdAction(player.author.id));
     this.router.navigate(['player/'+ player.author.nickname]);
   }
+
+  
 
 
 }

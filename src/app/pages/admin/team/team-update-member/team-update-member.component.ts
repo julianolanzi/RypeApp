@@ -6,15 +6,13 @@ import { Observable, Subscription } from 'rxjs';
 import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { RemoveMembers } from 'src/app/models/teams/manage-team/team-remove-member';
 import { TeamDataSuccess } from 'src/app/models/teams/load-team/team-data-sucess';
-import { SearchMemberSucess } from 'src/app/models/teams/search-members/team-search-member-success';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamRemoveMemberRequestAction } from 'src/app/shared/state-management/actions/teams/team-remove-member/team-load-remove-member-request.actions';
-import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
+import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/info-team/team-load-info-request.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import {
-  SearchMembers,
-  TeamDataSelector,
+  TeamInfoSelector,
   TeamLoadingTeam,
 } from 'src/app/shared/state-management/selectors/team.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
@@ -65,7 +63,7 @@ export class TeamUpdateMemberComponent {
 
   public loadTeamInfo() {
     const subscription = this.store
-      .pipe(select(TeamDataSelector))
+      .pipe(select(TeamInfoSelector))
       .subscribe((team) => {
         this.team = team;
       });

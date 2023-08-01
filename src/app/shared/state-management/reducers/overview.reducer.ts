@@ -1,8 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { LoadOpRoutingIdAction } from "../actions/overview/rounting-id/op-load-routing-id.actions";
-import { OpPlayerIdSuccessAction } from "../actions/overview/search-player/op-load-player-id-success.action";
+import { LoadOpRoutingIdAction } from "../actions/overview/user/rounting-id/op-load-routing-id.actions";
 import { OpGlobalErrorAction } from "../actions/overview/op-load-global-error.actions";
-import { OpPlayerTimelineSuccessAction } from "../actions/overview/load-timeline/op-load-timeline-success-actions";
+import { OpPlayerTimelineSuccessAction } from "../actions/overview/user/load-timeline/op-load-timeline-success-actions";
 import { FeedReactSucessAction } from "../actions/feed/react-post/feed-load-react-success.actions";
 import { FeedDeletePostSuccessAction } from "../actions/feed/delete-post/feed-load-delete-post-success.actions";
 import { FeedPostEditRequestAction } from "../actions/feed/edit-post/feed-edit-post-request.actions";
@@ -10,8 +9,12 @@ import { PostCommentsLoadSuccessAction } from "../actions/feed/comments-load/fee
 import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
 import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
 import { PostCommentsLoadRequestAction } from "../actions/feed/comments-load/feed-load-comments-post-request.actions";
-import { OpPlayerIdRequestAction } from "../actions/overview/search-player/op-load-player-id-request.action";
+import { OpPlayerIdRequestAction } from "../actions/overview/user/search-player/op-load-player-id-request.action";
 import { OverviewState } from "../states/overview.state";
+import { LoadOpRoutingTeamIdAction } from "../actions/overview/team/routing-id-team/op-load-routing-team-id.actions";
+import { OpTeamIdSuccessAction } from "../actions/overview/team/load-info-team/op-load-team-id-success.action";
+import { OpPlayerIdSuccessAction } from "../actions/overview/user/search-player/op-load-player-id-success.action";
+import { OpTeamIdRequestAction } from "../actions/overview/team/load-info-team/op-load-team-id-request.action";
 
 
 
@@ -44,6 +47,7 @@ export const initialState: OverviewState = {
         },
         team: [
             {
+                _id: '',
                 teamName: '',
                 tagName: '',
                 ranking: 0,
@@ -64,9 +68,9 @@ export const initialState: OverviewState = {
         tagName: '',
         ranking: '',
         admin: {
-          url: '',
-          nickname: '',
-          country: '',
+            url: '',
+            nickname: '',
+            country: '',
         },
         description: '',
         emailTeam: '',
@@ -80,9 +84,9 @@ export const initialState: OverviewState = {
         adminMembers: [],
         lines: [],
         private: false,
-    
+
         createdAt: undefined,
-      },
+    },
     OverviewPlayerError: undefined,
 };
 
@@ -90,19 +94,32 @@ const _OverviewReducer = createReducer(
     initialState,
 
     on(new LoadOpRoutingIdAction().createAction(), (state, action) => ({
-        ...initialState,
+        ...state,
         id: action.payload,
+    })),
+    on(new LoadOpRoutingTeamIdAction().createAction(), (state, action) => ({
+        ...state,
+        idTeam: action.payload,
     })),
     on(new OpPlayerIdRequestAction().createAction(), (state, action) => ({
         ...state,
-        user: {...initialState.user},
+        user: { ...initialState.user },
         comments: [...initialState.comments],
         timeline: [...initialState.timeline],
     })),
+    on(new OpTeamIdRequestAction().createAction(), (state, action) => ({
+        ...state,
+        team: { ...initialState.team },
+    })),
     on(new OpPlayerIdSuccessAction().createAction(), (state, action) => ({
         ...state,
-        user: {...action.payload},
+        user: { ...action.payload },
         comments: [],
+    })),
+    on(new OpTeamIdSuccessAction().createAction(), (state, action) => ({
+        ...state,
+        team: { ...action.payload },
+
     })),
     on(new OpPlayerTimelineSuccessAction().createAction(), (state, action) => ({
         ...state,
@@ -141,7 +158,6 @@ const _OverviewReducer = createReducer(
         }
 
     }),
-   
     on(new FeedPostEditRequestAction().createAction(), (state, action) => {
         const newArray = [];
 
@@ -166,7 +182,6 @@ const _OverviewReducer = createReducer(
         }
 
     }),
-
     on(new PostCommentsLoadSuccessAction().createAction(), (state, action) => ({
         ...state,
         comments: [...action.payload]
@@ -174,7 +189,7 @@ const _OverviewReducer = createReducer(
     on(new PostCommentsCreateSuccessAction().createAction(), (state, action) => {
 
         let newArrayTimeLine = []
- 
+
 
         for (let post of state.timeline) {
             if (post.id == action.payload.idPost) {
@@ -207,7 +222,7 @@ const _OverviewReducer = createReducer(
         }
 
         let newArrayTimeLine = []
- 
+
 
         for (let post of state.timeline) {
             if (post.id == action.payload.idPost) {
@@ -237,7 +252,7 @@ const _OverviewReducer = createReducer(
         ...state,
         OverviewPlayerError: action.payload,
     })),
-    
+
 )
 
 export function OverviewReducer(state: any, action: Action) {

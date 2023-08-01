@@ -130,7 +130,7 @@
       </div>
     </div>
 
-    <div class="user-stat" *ngIf="this.user.team[0]">
+    <div (click)="OvewViewTeam()" class="user-stat" *ngIf="this.user.team[0]">
       <div class="user-stat big">
         <img class="user-stat-team" src="{{this.user.team[0].url}}" alt="">
         <span class="user-stat-flag">Time</span>

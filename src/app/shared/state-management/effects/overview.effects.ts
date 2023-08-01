@@ -6,13 +6,16 @@ import { GlobalState } from "../states/global.state";
 import { OverviewMessageEnum } from "../actions/overview/overview-message.enum";
 
 import { exhaustMap, catchError, map, of } from 'rxjs';
-import { OpPlayerIdRequestAction } from "../actions/overview/search-player/op-load-player-id-request.action";
-import { OverviewService } from "src/app/services/overview-player/overview-player.service";
-import { OpPlayerIdSuccessAction } from "../actions/overview/search-player/op-load-player-id-success.action";
+import { OpPlayerIdRequestAction } from "../actions/overview/user/search-player/op-load-player-id-request.action";
+import { OverviewService } from "src/app/services/overview/overview.service";
 import { OpGlobalErrorAction } from "../actions/overview/op-load-global-error.actions";
-import { OpPlayerTimelineRequestAction } from "../actions/overview/load-timeline/op-load-timeline-request-actions";
-import { OpPlayerTimelineSuccessAction } from "../actions/overview/load-timeline/op-load-timeline-success-actions";
+import { OpPlayerTimelineRequestAction } from "../actions/overview/user/load-timeline/op-load-timeline-request-actions";
+import { OpPlayerTimelineSuccessAction } from "../actions/overview/user/load-timeline/op-load-timeline-success-actions";
 import { LoadingSmallDisabledAction } from "../actions/global-pages/global-loading-small/loading-small-disabled.actions";
+import { OpPlayerIdSuccessAction } from "../actions/overview/user/search-player/op-load-player-id-success.action";
+import { OpTeamIdRequestAction } from "../actions/overview/team/load-info-team/op-load-team-id-request.action";
+import { LoadingDisabledAction } from "../actions/global-pages/loading-load-disabled.actions";
+import { OpTeamIdSuccessAction } from "../actions/overview/team/load-info-team/op-load-team-id-success.action";
 @Injectable({
     providedIn: 'root',
 })
@@ -24,7 +27,6 @@ export class OverviewEffect {
             exhaustMap((action: OpPlayerIdRequestAction) => {
                 return this.OPService.getOverviewPlayer(action.payload).pipe(
                     map((response) => {
-                        console.log(response);
                         this.store.dispatch(new LoadingSmallDisabledAction());
                         return new OpPlayerIdSuccessAction(response);
                     }),
@@ -55,6 +57,26 @@ export class OverviewEffect {
         )
 
     )
+
+    getInfoTeam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(OverviewMessageEnum.LOAD_TEAM_ID_REQUEST),
+      exhaustMap((action: OpTeamIdRequestAction) => {
+        return this.OPService.getById(action.payload).pipe(
+          map((response) => {
+            this.store.dispatch(new LoadingSmallDisabledAction());
+            return new OpTeamIdSuccessAction(response);
+          }),
+          catchError((error) => {
+            this.store.dispatch(new LoadingDisabledAction());
+            const err = error.error.error;
+            this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+            return of(new OpGlobalErrorAction(error));
+          })
+        );
+      })
+    )
+  );
 
     constructor(
         private actions$: Actions,

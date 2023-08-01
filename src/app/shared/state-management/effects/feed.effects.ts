@@ -68,7 +68,6 @@ export class FeedEffect {
                     catchError((error) => {
                         this.store.dispatch(new LoadingSmallDisabledAction());
                         const err = error.error.error;
-                        console.log(err);
                         if (err != undefined) {
                             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
                         } else {

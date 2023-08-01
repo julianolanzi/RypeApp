@@ -6,7 +6,7 @@ import { AuthSelector, idUser } from '../../state-management/selectors/auth.sele
 import { GlobalState } from '../../state-management/states/global.state';
 import { UploadImageCoverRequestAction } from '../../state-management/actions/global-pages/upload-images-cover/loading-upload-cover-request.actions';
 import { Router } from '@angular/router';
-import { TeamDataSelector } from '../../state-management/selectors/team.selector';
+import { TeamInfoSelector } from '../../state-management/selectors/team.selector';
 
 @Component({
   selector: 'app-cover-image',
@@ -92,7 +92,7 @@ export class CoverImageComponent {
   }
   LoadIdTeam(){
     const subscription = this.store
-    .pipe(select(TeamDataSelector))
+    .pipe(select(TeamInfoSelector))
     .subscribe((team) => {
       this.idTeam = team._id;
     });
@@ -145,7 +145,6 @@ export class CoverImageComponent {
       this.store.dispatch(new UploadImageCoverRequestAction(this.ImagemSelected));
 
     }
-    console.log(local);
 
 
 

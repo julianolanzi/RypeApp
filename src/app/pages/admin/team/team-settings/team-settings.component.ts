@@ -9,12 +9,12 @@ import { UpdateImgTeamRequest } from 'src/app/models/teams/team-update-img/team-
 import { TeamUpdateInfoRequest } from 'src/app/models/teams/team-update/team-update-request';
 import { LoadingActiveAction } from 'src/app/shared/state-management/actions/global-pages/loading-load-active.actions';
 import { TeamLoadUpdateRequestImg } from 'src/app/shared/state-management/actions/teams/team-img/team-load-update-img-request.actions';
-import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/update-team/team-load-info-request.actions';
+import { TeamLoadInfoRequestAction } from 'src/app/shared/state-management/actions/teams/info-team/team-load-info-request.actions';
 import { TeamLoadUpdateRequestAction } from 'src/app/shared/state-management/actions/teams/update/team-load-update-info.actions';
 import { AuthSelector } from 'src/app/shared/state-management/selectors/auth.selector';
 import { isLoadingGlobal } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import {
-  TeamDataSelector,
+  TeamInfoSelector,
   TeamLoadingTeam,
 } from 'src/app/shared/state-management/selectors/team.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
@@ -140,7 +140,7 @@ export class TeamSettingsComponent {
 
   public loadTeamInfo() {
     const subscription = this.store
-      .pipe(select(TeamDataSelector))
+      .pipe(select(TeamInfoSelector))
       .subscribe((team) => {
         this.Team = team;
         this.url = team.url;

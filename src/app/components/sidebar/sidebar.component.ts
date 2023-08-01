@@ -8,9 +8,10 @@ import { Observable, Subscription, of } from 'rxjs';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
-import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview/rounting-id/op-load-routing-id.actions';
+import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview/user/rounting-id/op-load-routing-id.actions';
 import { Router } from '@angular/router';
 import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { LoadOpRoutingTeamIdAction } from 'src/app/shared/state-management/actions/overview/team/routing-id-team/op-load-routing-team-id.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -145,7 +146,7 @@ export class SidebarComponent {
 
         }
       });
-
+   
     this.subscriptions.add(subscription);
   }
 
@@ -160,6 +161,18 @@ export class SidebarComponent {
      
     }
   }
+
+  OpenOverviewTeam() {
+    if(this.user.idTeam){
+      this.store.dispatch(new LoadOpRoutingTeamIdAction(this.user.idTeam));
+      this.router.navigate(['team-profile']);
+    }
+    if(this.user.idTeam == ""){
+      this.router.navigate(['team-setup']);
+    }
+  }
+
+ 
 
   logaout() {
     window.location.reload();

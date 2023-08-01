@@ -3,10 +3,10 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { LoadAuthErrorAction } from '../actions/auth/auth-load-error.actions';
 import { LoadAuthSuccessAction } from '../actions/auth/auth-load-success.actions';
 import { AuthState } from '../states/auth.state';
-import { TeamLoadCreateSuccessAction } from '../actions/teams/create-team/team-load-create-success.actions';
 import { TeamLoadQuitSuccessAction } from '../actions/teams/quit-team/team-load-quit-success.actions';
 import { TeamLoadUpdateAuthDataPublicTeam } from '../actions/teams/request-public-team/team-load-update-auth-public-team.actions';
 import { AcceptInviteNotificationsTeamUserReducer } from '../actions/notifications/accept-invite-notifications/notifications-aceept-reducer.actions';
+import { TeamLoadInfoSuccessAction } from '../actions/teams/info-team/team-load-info-success.actions';
 
 export const initialState: AuthState = {
   user: {
@@ -45,15 +45,7 @@ const _authReducer = createReducer(
     isAuthenticated: false,
     isLoadingTeam: false,
   })),
-  on(new TeamLoadCreateSuccessAction().createAction(), (state, action) => ( {
-    user: {
-      ...state.user,
-      idTeam: action.payload._id,
-      rolesTeam: "admin",
-    },
-    loading: false,
-    isAuthenticated: true,
-  }) ),
+  
 
   on(new TeamLoadQuitSuccessAction().createAction(), (state, action) => ({
     ...state,
@@ -83,6 +75,16 @@ const _authReducer = createReducer(
       ...state.user,
       idTeam: action.payload.team,
       rolesTeam: "member",
+    },
+    authError: undefined,
+    
+  })),
+  on(new TeamLoadInfoSuccessAction().createAction(), (state, action) => ({
+    ...state,
+    user: {
+      ...state.user,
+      idTeam: action.payload._id,
+      rolesTeam: "admin",
     },
     authError: undefined,
     

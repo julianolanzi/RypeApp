@@ -2,7 +2,6 @@ import { TeamSettingsComponent } from './team-settings/team-settings.component';
 
 import { Routes } from '@angular/router';
 
-import { TeamOverviewComponent } from './team-overview/team-overview.component';
 import { TeamSetupComponent } from './team-setup/team-setup.component';
 import { TeamCreateComponent } from './team-create/team-create.component';
 import { TeamSearchComponent } from './team-search/team-search.component';
@@ -15,11 +14,7 @@ import { UpdateCoverTeamComponent } from './update-cover-team/update-cover-team.
 import { UpdateImgTeamComponent } from './update-img-team/update-img-team.component';
 
 export const TeamRoutes: Routes = [
-  {
-    path: 'team-overview',
-    component: TeamOverviewComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'team-setup',
     component: TeamSetupComponent,

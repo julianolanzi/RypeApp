@@ -1,22 +1,24 @@
 import { NgModule } from "@angular/core";
-import { OverviewPlayerComponent } from "./overview-player/overview-player.component";
 import { IConfig, NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
 import { CommonModule } from "@angular/common";
-import { OverviewPlayerRoutes } from "./overview-player.routing";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "src/app/shared/shared.module";
 import { YouTubePlayerModule } from "@angular/youtube-player";
-import { HeaderPlayerComponent } from './header-player/header-player.component';
-import { TimelinePlayerComponent } from './timeline-player/timeline-player.component';
+import { HeaderPlayerComponent } from './Player/header-player/header-player.component';
+import { TimelinePlayerComponent } from './Player/timeline-player/timeline-player.component';
+import { OverviewRoutes } from "./overview.routing";
+import { OverviewPlayerComponent } from "./Player/overview-player/overview-player.component";
+import { OverviewTeamComponent } from './Team/overview-team/overview-team.component';
+import { HeaderTeamComponent } from './Team/header-team/header-team.component';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
-    declarations: [OverviewPlayerComponent, HeaderPlayerComponent, TimelinePlayerComponent],
+    declarations: [OverviewPlayerComponent, HeaderPlayerComponent, TimelinePlayerComponent, OverviewTeamComponent, HeaderTeamComponent],
     providers: [provideNgxMask()],
     imports: [
         CommonModule,
-        RouterModule.forChild(OverviewPlayerRoutes),
+        RouterModule.forChild(OverviewRoutes),
         NgxMaskDirective,
         NgxMaskPipe,
         FormsModule,
@@ -26,4 +28,4 @@ export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
     ],
 })
 
-export class OverviewPlayerModule { }
+export class OverviewModule { }

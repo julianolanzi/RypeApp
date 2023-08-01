@@ -17,10 +17,9 @@ import { TeamLoadUpdateRequestAction } from '../actions/teams/update/team-load-u
 import { TeamLoadUpdateSuccessAction } from '../actions/teams/update/team-load-success-info.actions';
 import { UploadImgService } from 'src/app/services/imgs/upload.img.service';
 import { TeamLoadCreateRequestAction } from '../actions/teams/create-team/team-load-create-request.actions';
-import { TeamLoadCreateSuccessAction } from '../actions/teams/create-team/team-load-create-success.actions';
 import { TeamLoadAction } from '../actions/teams/team-load/team-load.actions';
-import { TeamLoadInfoRequestAction } from '../actions/teams/update-team/team-load-info-request.actions';
-import { TeamLoadInfoSuccessAction } from '../actions/teams/update-team/team-load-info-success.actions';
+import { TeamLoadInfoRequestAction } from '../actions/teams/info-team/team-load-info-request.actions';
+import { TeamLoadInfoSuccessAction } from '../actions/teams/info-team/team-load-info-success.actions';
 import { TeamLoadUpdateRequestImg } from '../actions/teams/team-img/team-load-update-img-request.actions';
 import { TeamLoadUpdateSuccessImg } from '../actions/teams/team-img/team-load-update-img-success.actions';
 import { TeamLoadSearchMemberRequestAction } from '../actions/teams/search-members/team-load-search-member-request.actions';
@@ -52,11 +51,10 @@ export class TeamEffect {
         return this.teamService.createTeam(action.payload).pipe(
           map((response) => {
             setTimeout(() => {
-              this.router.navigate(['team-overview']);
+              this.router.navigate(['team-settings']);
             }, 2000);
             this.Alerts.success('Time criado com sucesso', 'Parabéns');
-            this.store.dispatch(new LoadingDisabledAction());
-            return new TeamLoadCreateSuccessAction(response);
+            return new TeamLoadInfoRequestAction(response._id);
           }),
           catchError((error) => {
             this.store.dispatch(new LoadingDisabledAction());
