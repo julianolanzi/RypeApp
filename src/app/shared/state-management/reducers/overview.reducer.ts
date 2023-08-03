@@ -1,3 +1,4 @@
+import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { Action, createReducer, on } from "@ngrx/store";
 import { LoadOpRoutingIdAction } from "../actions/overview/user/rounting-id/op-load-routing-id.actions";
 import { OpGlobalErrorAction } from "../actions/overview/op-load-global-error.actions";
@@ -67,10 +68,26 @@ export const initialState: OverviewState = {
         name: '',
         tagName: '',
         ranking: '',
+        
         admin: {
             url: '',
             nickname: '',
             country: '',
+            name: '',
+            urlCover: '',
+            _id: '',
+
+            social: {
+                discord: '',
+                facebook: '',
+                youtube: '',
+                instagram: '',
+                twitter: '',
+                twitch: '',
+                psn: '',
+                xbox: '',
+                idGame: '',
+              }
         },
         description: '',
         emailTeam: '',

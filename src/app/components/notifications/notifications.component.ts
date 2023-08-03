@@ -28,6 +28,7 @@ export class NotificationsComponent {
   timer!: Number;
   enableNotifications$!: Observable<boolean>;
   enableSmallLoading$!: Observable<boolean>;
+  notificationsAll$!: Observable<UserNotificationsSuccess[]>;
 
   public user!: UserLoginSuccess;
   private subscriptions: Subscription = new Subscription();
@@ -35,12 +36,13 @@ export class NotificationsComponent {
   constructor(private store: Store<GlobalState>) {
     this.enableNotifications$ = this.store.pipe(select(isNotifications));
     this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
+    this.notificationsAll$ = this.store.pipe(select(UserNotifications));
   }
 
   ngOnInit(): void {
    
     this.loadDataUser();
-    this.loadNotifications();
+   
   }
 
   public loadDataUser() {
@@ -64,16 +66,7 @@ export class NotificationsComponent {
       }
     }, 1000);
   }
-  public loadNotifications() {
-    const subscription = this.store
-      .pipe(select(UserNotifications))
-      .subscribe((response) => {
-        this.Allnotifications = response;
-        this.verifyNotifications();
-      });
-
-    this.subscriptions.add(subscription);
-  }
+ 
   refreshNotifications() {
     this.subscriptions.unsubscribe();
     this.isNotifica = false;
@@ -83,28 +76,18 @@ export class NotificationsComponent {
     this.onTimer();
   }
   deleteNotification(item: UserNotificationsSuccess) {
-    const newarray = [];
-
-    for (let index of this.Allnotifications) {
-      if (index != item) {
-        newarray.push(index);
-        this.Allnotifications = newarray;
-      }
-    }
-
     this.store.dispatch(new DeleteNotificationsRequest(item._id));
-
-    if (newarray.length == 0) {
-      this.Allnotifications = [];
-    }
+    this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
   }
   acceptRequest(item: UserNotificationsSuccess) {
     this.InviteNotification = item;
     this.store.dispatch(new AcceptInviteNotificationsRequest(this.InviteNotification));
+    this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
   }
   rejectRequest(item: UserNotificationsSuccess) {
     this.InviteNotification = item;
     this.store.dispatch(new RecuseInviteNotificationsRequest(this.InviteNotification));
+    this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

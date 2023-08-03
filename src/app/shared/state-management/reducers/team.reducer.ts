@@ -32,6 +32,21 @@ export const initialState: TeamState = {
       url: '',
       nickname: '',
       country: '',
+      name: '',
+      urlCover: '',
+      _id: '',
+
+      social: {
+        discord: '',
+        facebook: '',
+        youtube: '',
+        instagram: '',
+        twitter: '',
+        twitch: '',
+        psn: '',
+        xbox: '',
+        idGame: '',
+      }
     },
     description: '',
     emailTeam: '',

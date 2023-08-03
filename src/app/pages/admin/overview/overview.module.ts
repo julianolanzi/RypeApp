@@ -11,10 +11,11 @@ import { OverviewRoutes } from "./overview.routing";
 import { OverviewPlayerComponent } from "./Player/overview-player/overview-player.component";
 import { OverviewTeamComponent } from './Team/overview-team/overview-team.component';
 import { HeaderTeamComponent } from './Team/header-team/header-team.component';
+import { MembersTeamComponent } from './Team/members-team/members-team.component';
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
-    declarations: [OverviewPlayerComponent, HeaderPlayerComponent, TimelinePlayerComponent, OverviewTeamComponent, HeaderTeamComponent],
+    declarations: [OverviewPlayerComponent, HeaderPlayerComponent, TimelinePlayerComponent, OverviewTeamComponent, HeaderTeamComponent, MembersTeamComponent],
     providers: [provideNgxMask()],
     imports: [
         CommonModule,

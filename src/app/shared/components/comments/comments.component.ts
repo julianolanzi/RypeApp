@@ -13,6 +13,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostCommentsCreateRequestAction } from '../../state-management/actions/feed/comments-create/load-create-comment-request.actions';
 import { PostCommentsDeleteRequestAction } from '../../state-management/actions/feed/comments-delete/load-delete-comment-request.actions';
 import { DeleteComment } from 'src/app/models/feed/comments/comments-delete';
+import { Router } from '@angular/router';
+import { LoadingNotificationsDisabledAction } from '../../state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
+import { LoadOpRoutingIdAction } from '../../state-management/actions/overview/user/rounting-id/op-load-routing-id.actions';
 
 @Component({
   selector: 'app-comments',
@@ -35,7 +38,7 @@ export class CommentsComponent {
 
 
 
-  constructor(private store: Store<GlobalState>) {
+  constructor(private store: Store<GlobalState>, private router: Router) {
     this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
 
     this.createCommentForm = new FormGroup({
@@ -99,6 +102,12 @@ export class CommentsComponent {
     }
     
     this.store.dispatch(new PostCommentsDeleteRequestAction(this.deleteComment));
+  }
+
+  ovewviewPlayer(item: any) {
+    this.store.dispatch(new LoadingNotificationsDisabledAction());
+    this.store.dispatch(new LoadOpRoutingIdAction(item.authorComment.user));
+    this.router.navigate(['player/'+ item.authorComment.nickname]);
   }
 
 

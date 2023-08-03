@@ -56,7 +56,6 @@ export class TeamSearchComponent {
   }
 
   searchTeam() {
-
     if (this.teamSearch.invalid) {
       return;
     }

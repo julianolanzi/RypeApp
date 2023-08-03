@@ -10,7 +10,7 @@ import { UserLoginSuccess } from 'src/app/models/auth/login/user-login-success';
 import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
 import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview/user/rounting-id/op-load-routing-id.actions';
 import { Router } from '@angular/router';
-import { url } from 'src/app/shared/state-management/selectors/global-pages.selector';
+import { isNotifications, url } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { LoadOpRoutingTeamIdAction } from 'src/app/shared/state-management/actions/overview/team/routing-id-team/op-load-routing-team-id.actions';
 
 @Component({
@@ -25,7 +25,6 @@ export class SidebarComponent {
   isAdminTeam$: Observable<boolean> | undefined;
   isUser!: any;
   public user!: UserLoginSuccess;
-
   ImageProfile$!: Observable<string>;
   constructor(private store: Store<GlobalState>, private router: Router) {
     this.isUser = true;
@@ -56,7 +55,7 @@ export class SidebarComponent {
 
 
     modeSwitch.addEventListener('click', () => {
-      this.store.dispatch(new LoadingNotificationsDisabledAction());
+      
       body.classList.toggle('dark');
 
       if (body.classList.contains('dark')) {
@@ -89,10 +88,12 @@ export class SidebarComponent {
           element.classList.remove('active');
           sidebar.classList.add('close');
           containerAll.classList.add('close');
+         
         });
         element.classList.remove('active');
         sidebar.classList.add('close');
         containerAll.classList.add('close');
+    
       });
     });
   }
@@ -151,7 +152,7 @@ export class SidebarComponent {
   }
 
   OpenOverviewPlayer() {
- 
+    this.store.dispatch(new LoadingNotificationsDisabledAction());
     const currentRoute = this.router.url;
     const urlProfile = '/profile/' + this.user.nickname;
     if(currentRoute != urlProfile){
@@ -163,6 +164,7 @@ export class SidebarComponent {
   }
 
   OpenOverviewTeam() {
+    this.store.dispatch(new LoadingNotificationsDisabledAction());
     if(this.user.idTeam){
       this.store.dispatch(new LoadOpRoutingTeamIdAction(this.user.idTeam));
       this.router.navigate(['team-profile']);

@@ -15,7 +15,7 @@
       </div>
     </div>
     <div *ngIf="(enableSmallLoading$ | async) == false">
-      <div *ngFor="let notification of this.Allnotifications">
+      <div *ngFor="let notification of notificationsAll$ | async">
 
         <div class="dropdown-box-list-item">
           <div class="item-container">

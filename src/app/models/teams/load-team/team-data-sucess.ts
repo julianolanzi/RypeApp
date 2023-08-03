@@ -8,6 +8,21 @@ export interface TeamDataSuccess {
     url: string;
     nickname: string;
     country: string;
+    name: string;
+    urlCover: string;
+    _id: string;
+
+    social: {
+      discord: string;
+      instagram: string;
+      facebook: string;
+      youtube: string;
+      twitter: string;
+      twitch: string;
+      psn: string;
+      xbox: string;
+      idGame:string;
+  }
   };
   description: string;
   emailTeam: string;

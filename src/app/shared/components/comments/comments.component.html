@@ -3,7 +3,7 @@
         <div *ngFor="let comment of Comments$ | async">
             <div class="comment-item">
                 <div class="comment-user">
-                    <div class="user-status-avatar">
+                    <div (click)="ovewviewPlayer(comment)" class="user-status-avatar">
                         <div class="user-avatar-small">
                             <div class="user-avatar-content">
                                 <div class="hexagon-image-31-35">

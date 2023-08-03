@@ -126,7 +126,7 @@
             <div class="user-preview-actions">
 
               <button class="button" *ngIf="team.private == false" id="{{team.id}}"   (click)="joinTeamPublic(team); disableButton(team.id);">Entrar</button>
-              <button class="button" *ngIf="team.isNotInvite == false" id="{{team.id}}" 
+              <button class="button" *ngIf="team.isNotInvite == false && team.private == true" id="{{team.id}}" 
                 (click)="requestTeamPrivate(team); disableButton(team.id);">Solicitar</button>
               <button class="button" *ngIf="team.isNotInvite == true" disabled>Solicitação
                 enviada</button>
