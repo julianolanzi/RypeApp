@@ -251,7 +251,8 @@
       align-items: center;
       border-radius: 6px;
       cursor: pointer;
-      .text{
+
+      .text {
         opacity: 1;
         visibility: visible;
         transition: var(--tran-03);
@@ -275,14 +276,14 @@
 .sidebar-container.close .nav-bar-container .navbar-actions {
   width: 60px;
 
-   .logout {
-      
-      .text{
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--tran-03);
-      }
+  .logout {
+
+    .text {
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--tran-03);
     }
+  }
 
 
   .mode {
@@ -1050,7 +1051,8 @@
       right: 37px;
       color: var(--white);
     }
-    .tag-sticker.admin{
+
+    .tag-sticker.admin {
       background-color: var(--pink-white);
     }
 
@@ -2173,7 +2175,32 @@
   line-height: 1.7142857143em;
   font-weight: 500;
   color: var(--text-color);
-  font-family: Rajdhani, sans-seri
+  font-family: Rajdhani, sans-seri;
+  height: auto;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+.widget-box-status-text.all-text {
+  height: auto;
+  max-height: none;
+}
+
+.widget-box-status-text-button {
+  margin-top: 20px;
+  font-size: .875rem;
+  line-height: 1.7142857143em;
+  font-weight: 500;
+  color: var(--text-color);
+  font-family: Rajdhani, sans-seri;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.widget-box-status-text-button:hover {
+
+  color: var(--pink-white);
+
 }
 
 .user-status-avatar {

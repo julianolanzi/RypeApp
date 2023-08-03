@@ -107,9 +107,6 @@ export class TimelineComponent {
     }
     this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Carregando Timeline ...'}));
     this.store.dispatch(new FeedTimelineRequestAction(this.timelineRequest));
-
-
-
   }
   deletePost(id: any) {
     this.store.dispatch(new FeedDeletePostRequestAction(id));
@@ -140,6 +137,17 @@ export class TimelineComponent {
     
     this.store.dispatch(new LoadOpRoutingIdAction(player.author.id));
     this.router.navigate(['player/'+ player.author.nickname]);
+  }
+
+  loadMoreText(id:any){
+ 
+    let idtag = document.getElementById(id + 'more-text');
+    idtag?.classList.toggle('all-text');
+    let modeText = document.querySelector('.widget-box-status-text-button') as HTMLElement;
+    if(idtag?.classList.contains('all-text')){
+      modeText.innerText = 'Ver menos';
+    }
+   
   }
 
   

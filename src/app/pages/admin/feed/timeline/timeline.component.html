@@ -79,7 +79,8 @@
           <p class="user-status-text">{{post.createdAt | date:'shortTime'}}</p>
 
         </div>
-        <p class="widget-box-status-text">{{post.text}}</p>
+        <p  id="{{post.id}}more-text" class="widget-box-status-text">{{post.text}}</p>
+        <p *ngIf="post.text.length > 500" (click)="loadMoreText(post.id)" class="widget-box-status-text-button">Ver Mais</p>
       </div>
       <div *ngIf="post.type == 'video'" class="widget-box-status-content-video">
         <youtube-player class="video-teste" [height]="300" videoId="{{post.urlVideo}}"> </youtube-player>
