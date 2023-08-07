@@ -1,0 +1,16 @@
+<form (ngSubmit)="createPostText()" [formGroup]="postFormText" #formDir="ngForm">
+    <div class="form-content-text-area">
+        <textarea formControlName="text" maxlength="1500"
+            placeholder="{{this.user.nickname.toUpperCase()}} Aqui voce coloca o que está pensando !!!"></textarea>
+        <div class="alert" *ngIf="text?.invalid && formDir.submitted">
+            <p class="form-alert">Campo abrigatório Ou Inválido</p>
+        </div>
+        <p class="form-textarea-limit-text">{{this.counterText}}/1500</p>
+    </div>
+
+    <div *ngIf="this.postFormText.valid" class="quick-post-footer-createad">
+        <button type="submit" [disabled]="!this.postFormText.valid" class="button create-post">postar</button>
+    </div>
+
+
+</form>

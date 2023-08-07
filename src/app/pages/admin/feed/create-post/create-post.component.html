@@ -11,75 +11,39 @@
         </div>
     </div>
     <div class="quick-post-body">
-        <form (ngSubmit)="createPost()" [formGroup]="postForm" #formDir="ngForm">
-            <div class="form-content-post">
-                <div class="form-content-text-area">
-                    <textarea formControlName="text"
-                        placeholder="{{this.user.nickname.toUpperCase()}} Aqui voce coloca o que está pensando !!!"></textarea>
-                        <div class="alert" *ngIf="text?.invalid && formDir.submitted">
-                            <p class="form-alert">Campo abrigatório</p>
-                          </div>
-                    <!-- <p class="form-textarea-limit-text">998/1000</p> -->
-                </div>
-                <div *ngIf="this.isVideo == true">
-                    <div class="container-video">
-                        <div *ngIf="this.disableVideo == true">
-                            <youtube-player  class="video-teste" [height]="300" [videoId]="videoId"> </youtube-player>
-                        </div>
-                        <div class="form-content-preview" *ngIf="this.enablePreviewVideo == true"> <span
-                                class="material-symbols-outlined">
-                                youtube_activity
-                            </span>Informe o video</div>
-                        <div class="form-content-preview" *ngIf="this.isUrlVideoValid == true">
-                            <span class="material-symbols-outlined">
-                                scan_delete
-                            </span> Video Inválido
-                        </div>
-                    </div>
-                    <input type="text" formControlName="urlVideo" (change)="onSelectVideo($event)"
-                        placeholder="Insira o link do Video">
-                </div>
-                <div *ngIf="this.isImage == true">
-                    <div class="container-imagem">
-                        <img *ngIf="this.disableImagem == true" [src]="this.url" alt="">
-                        <div class="form-content-preview" *ngIf="this.isUrlImgValid == true">
-                            <span class="material-symbols-outlined">
-                                scan_delete
-                            </span> Imagem inválida
-                        </div>
-                        <div class="form-content-preview" *ngIf="this.enablePreview == true"> <span
-                                class="material-symbols-outlined">
-                                gallery_thumbnail
-                            </span> Informe a imagem</div>
-                    </div>
+        <div class="form-content-post">
+            <div *ngIf="this.istext == true">
+                <app-text-post></app-text-post>
+            </div>
+            <div *ngIf="this.isImage == true">
+                <app-image-post></app-image-post>
+            </div>
+            <div *ngIf="this.isVideo == true">
+                <app-video-post></app-video-post>
+            </div>
+        </div>
 
-                    <input type="text" formControlName="urlPost" (change)="onSelectImg($event)"
-                        placeholder="Insira o link da Imagem">
+        <div class="quick-post-footer">
+            <div class="quick-post-footer-actions">
+                <div (click)="isOnlyText()" class="action" [ngClass]="{'active-text': this.istext == true}">
+                    <span class="material-symbols-outlined">
+                        edit_note
+                    </span>
+                    <p> texto</p>
+                </div>
+                <div (click)="isImageUrl()" class="action" [ngClass]="{'active-img': this.isImage == true}">
+                    <span class="material-symbols-outlined">
+                        photo_camera
+                    </span>
+                    <p> Imagem</p>
+                </div>
+                <div (click)="isVideoYoutube()" class="action" [ngClass]="{'active-video': this.isVideo == true}">
+                    <span class="material-symbols-outlined">
+                        youtube_activity
+                    </span>
+                    <p> Youtube</p>
                 </div>
             </div>
-            <div class="quick-post-footer">
-                <div class="quick-post-footer-actions">
-                    <div (click)="isOnlyText()" class="action" [ngClass]="{'active-text': this.istext == true}">
-                        <span class="material-symbols-outlined">
-                            edit_note
-                        </span>
-                    </div>
-                    <div (click)="isImageUrl()" class="action" [ngClass]="{'active-img': this.isImage == true}">
-                        <span class="material-symbols-outlined">
-                            photo_camera
-                        </span>
-                    </div>
-                    <div (click)="isVideoYoutube()" class="action" [ngClass]="{'active-video': this.isVideo == true}">
-                        <span class="material-symbols-outlined">
-                            youtube_activity
-                        </span>
-                    </div>
-                </div>
-                <div class="quick-post-footer-actions">
-                    <button class="button cancel-post" (click)="this.postForm.reset()">descartar</button>
-                    <button type="submit" [disabled]="!this.postForm.valid" class="button create-post">postar</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

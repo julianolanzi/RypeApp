@@ -19,7 +19,7 @@
   --navbar-background: #7750f8;
 
   --sidebar-hover: #fff;
-
+  --post-background: #fcfcfd;
 
   /* ===== Colors ===== */
   --body-white-color: #e4e9f7;
@@ -65,14 +65,16 @@
 }
 
 body {
- 
+
   background-color: var(--admin-body);
 }
 
 .container-admin.dark {
- 
+
 
   --admin-body: #161b28;
+  --post-background: #21283b;
+
   --sidebar-background: #1d2333;
   --sidebar-text-color: #ccc;
   --sidebar-mode-color: #25333c;
@@ -86,11 +88,11 @@ body {
   --sidebar-hover: #293249;
 
   --linear-gradient: to bottom,
-  rgb(255 0 112),
-  rgba(255, 255, 255, 0);
+    rgb(255 0 112),
+    rgba(255, 255, 255, 0);
   --linear-gradient-2: to bottom,
-  #35444e,
-  rgba(109, 109, 109, 0);
+    #35444e,
+    rgba(109, 109, 109, 0);
 }
 
 .d-flex {
@@ -119,9 +121,11 @@ body {
   color: var(--text-color) !important;
   font-size: 32px;
 }
-.loading-small-text{
+
+.loading-small-text {
   color: var(--text-color);
 }
+
 .text-p {
   color: var(--text-color) !important;
   font-size: 16px;

@@ -1,0 +1,23 @@
+<form (ngSubmit)="createPostYoutube()" [formGroup]="postFormYoutube" #formDir="ngForm">
+    <div class="form-content-text-area v2">
+        <textarea formControlName="text" maxlength="1500"
+            placeholder="{{this.user.nickname.toUpperCase()}} Aqui voce coloca o que está pensando !!!"></textarea>
+        <p class="form-textarea-limit-text">{{this.counterText}}/1500</p>
+    </div>
+
+    <div>
+        <div *ngIf="this.enablePreviewVideo == true" class="container-video">
+            <div>
+                <youtube-player class="video-teste" [height]="300" [videoId]="videoId"> </youtube-player>
+            </div>
+           
+        </div>
+        <input type="text" formControlName="urlVideo" (change)="onSelectVideo($event)"
+            placeholder="Insira o link do Video">
+    </div>
+
+    <div *ngIf="this.postFormYoutube.valid" class="quick-post-footer-createad">
+        <button type="submit" [disabled]="!this.postFormYoutube.valid" class="button create-post">postar</button>
+    </div>
+
+</form>

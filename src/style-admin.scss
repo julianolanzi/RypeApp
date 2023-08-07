@@ -2649,12 +2649,12 @@
 
 .form-content-text-area {
   width: 100%;
-  background-color: var(--sidebar-mode-color);
+  background-color: var(--post-background);
 
   textarea {
     width: 100%;
     height: 120px;
-    background-color: var(--sidebar-background);
+    background-color: var(--post-background);
     border-radius: 0;
     border: none;
     font-size: 0.875rem;
@@ -2669,21 +2669,26 @@
 
   .form-textarea-limit-text {
     color: var(--text-color);
-    padding-top: 10px;
-    height: 40px;
-    padding: 0 28px;
-    font-size: .75rem;
+    height: 23px;
+    padding: 0 7px;
+    font-size: 0.75rem;
     font-weight: 500;
-    opacity: .6;
+    opacity: 0.6;
     text-align: right;
+
+  }
+}
+
+.form-content-text-area.v2 {
+  textarea {
+    height: 55px;
   }
 }
 
 .quick-post-footer {
   display: flex;
-  -ms-flex-align: center;
+  width: 100%;
   align-items: center;
-  justify-content: space-between;
   min-height: 76px;
   padding: 0 28px;
   border-top: 1px solid #2f3749;
@@ -2695,10 +2700,25 @@
 .quick-post-footer-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  justify-content: space-between;
+  height: 65px;
+  width: 100%;
+  gap: 5px;
 
   .action {
     cursor: pointer;
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .action:hover {
+    background-color: var(--sidebar-hover);
+    box-shadow: 3px 5px 20px 0 rgba(0, 0, 0, 0.1);
   }
 
   .action.active-text {
@@ -2763,6 +2783,14 @@
     justify-content: center;
     box-shadow: none;
   }
+}
+
+.quick-post-footer-createad {
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 20px;
 }
 
 .form-content-preview {

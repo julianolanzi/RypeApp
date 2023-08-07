@@ -18,13 +18,16 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { ImageCropperModule } from "ngx-image-cropper";
 import { YouTubePlayerModule } from "@angular/youtube-player";
 import { FeedPageComponent } from './feed-page/feed-page.component';
+import { TextPostComponent } from './create-post/text-post/text-post.component';
+import { ImagePostComponent } from './create-post/image-post/image-post.component';
+import { VideoPostComponent } from './create-post/video-post/video-post.component';
 
 
 
 export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
-    declarations: [TimelineComponent, CreatePostComponent, FeedPageComponent],
+    declarations: [TimelineComponent, CreatePostComponent, FeedPageComponent, TextPostComponent, ImagePostComponent, VideoPostComponent],
     providers: [provideNgxMask()],
     imports: [
         CommonModule,
