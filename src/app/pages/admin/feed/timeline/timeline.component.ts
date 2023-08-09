@@ -7,6 +7,7 @@ import { EditPostRequest } from 'src/app/models/feed/edit-post/edit-post-request
 import { ReactRequest } from 'src/app/models/feed/reacts/react-request';
 import { TimelineRequest } from 'src/app/models/feed/timeline/timeline-request';
 import { TimelineSuccess } from 'src/app/models/feed/timeline/timeline-success';
+import { FeedDeletePostImgRequestAction } from 'src/app/shared/state-management/actions/feed/delete-post/feed-load-delete-post-img-request.actions';
 import { FeedDeletePostRequestAction } from 'src/app/shared/state-management/actions/feed/delete-post/feed-load-delete-post-request.actions';
 import { FeedPostEditRequestAction } from 'src/app/shared/state-management/actions/feed/edit-post/feed-edit-post-request.actions';
 import { FeedTimelineRequestAction } from 'src/app/shared/state-management/actions/feed/feed-timelime/feed-load-timeline-request.actions';
@@ -108,8 +109,15 @@ export class TimelineComponent {
     this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Carregando Timeline ...'}));
     this.store.dispatch(new FeedTimelineRequestAction(this.timelineRequest));
   }
-  deletePost(id: any) {
-    this.store.dispatch(new FeedDeletePostRequestAction(id));
+  deletePost(post: any) {
+    if(post.type == 'imagem'){
+      this.store.dispatch(new FeedDeletePostRequestAction(post.id));
+      this.store.dispatch(new FeedDeletePostImgRequestAction(post.postImageName));
+    }else{
+      this.store.dispatch(new FeedDeletePostRequestAction(post.id));
+    }
+
+    
   }
   updatePost() {
     const formData = Object.assign({}, this.UpdatePostRequest, this.UpdatePostForm.value);

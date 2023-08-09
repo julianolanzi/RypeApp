@@ -15,7 +15,6 @@ import { FeedTimelineSuccessAction } from "../actions/feed/feed-timelime/feed-lo
 import { FeedReactRequestAction } from "../actions/feed/react-post/feed-load-react-request.actions";
 import { FeedReactSucessAction } from "../actions/feed/react-post/feed-load-react-success.actions";
 import { GlobalState } from "../states/global.state";
-import { FeedState } from "../states/feeed.state";
 import { FeedDeletePostRequestAction } from "../actions/feed/delete-post/feed-load-delete-post-request.actions";
 import { FeedDeletePostSuccessAction } from "../actions/feed/delete-post/feed-load-delete-post-success.actions";
 import { FeedPostEditRequestAction } from "../actions/feed/edit-post/feed-edit-post-request.actions";
@@ -26,6 +25,8 @@ import { PostCommentsCreateRequestAction } from "../actions/feed/comments-create
 import { PostCommentsCreateSuccessAction } from "../actions/feed/comments-create/load-create-comment-success.actions";
 import { PostCommentsDeleteRequestAction } from "../actions/feed/comments-delete/load-delete-comment-request.actions";
 import { PostCommentsDeleteSuccessAction } from "../actions/feed/comments-delete/load-delete-comment-success.actions";
+import { FeedPostCreateImageRequestAction } from "../actions/feed/feed-post/feed-create-post-request-image.actions";
+import { FeedDeletePostImgRequestAction } from "../actions/feed/delete-post/feed-load-delete-post-img-request.actions";
 @Injectable({
     providedIn: 'root',
 })
@@ -40,7 +41,27 @@ export class FeedEffect {
                     map((response) => {
                         this.Alerts.success('Post criado com sucesso', 'Booa');
                         this.store.dispatch(new LoadingDisabledAction());
+                        return new FeedPostCreateSuccessAction(response);
+                    }),
+                    catchError((error) => {
+                        this.store.dispatch(new LoadingDisabledAction());
+                        const err = error.error.error;
+                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        return of(new FeedLoadGlobalErrorAction(error));
+                    })
+                )
+            })
+        )
+    );
 
+    createPostWithImage$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FeedMessageEnum.LOAD_FEED_POST_IMAGE_REQUEST),
+            exhaustMap((action: FeedPostCreateImageRequestAction) => {
+                return this.feedService.createPostWithImage(action.payload).pipe(
+                    map((response) => {
+                        this.Alerts.success('Post criado com sucesso', 'Booa');
+                        this.store.dispatch(new LoadingDisabledAction());
                         return new FeedPostCreateSuccessAction(response);
                     }),
                     catchError((error) => {
@@ -106,6 +127,25 @@ export class FeedEffect {
                 return this.feedService.deletePost(action.payload).pipe(
                     map((response) => {
                         return new FeedDeletePostSuccessAction(action.payload);
+                    }),
+                    catchError((error) => {
+                        const err = error.error.error;
+                        this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
+                        return of(new FeedLoadGlobalErrorAction(error));
+                    })
+                )
+            })
+        )
+    );
+
+    deletePostImg$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(FeedMessageEnum.LOAD_FEED_DELETE_POST_IMAGE_REQUEST),
+            exhaustMap((action: FeedDeletePostImgRequestAction) => {
+                return this.feedService.deletePostWithImagem(action.payload).pipe(
+                    map((response) => {
+
+                        return new FeedDeletePostSuccessAction();
                     }),
                     catchError((error) => {
                         const err = error.error.error;

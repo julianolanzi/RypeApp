@@ -3,6 +3,7 @@ export interface TimelineSuccess {
     title: string;
     text: string;
     type: string;
+    postImageName: string;
     reactUser: string;
     reactQtd: {
         like: number,

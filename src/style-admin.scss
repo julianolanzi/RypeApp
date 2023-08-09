@@ -2626,8 +2626,15 @@
     img {
       width: 100%;
       height: 300px;
-      object-fit: cover;
+      object-fit: contain;
     }
+  }
+  .crooped{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
   }
 
   .container-video {
@@ -2682,6 +2689,34 @@
 .form-content-text-area.v2 {
   textarea {
     height: 55px;
+  }
+}
+
+.file-container {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .file {
+    cursor: pointer;
+    border: 2px dashed var(--pink-white);
+    width: 90%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+  }
+
+  input {
+    position: absolute;
+    top: -100px;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
   }
 }
 

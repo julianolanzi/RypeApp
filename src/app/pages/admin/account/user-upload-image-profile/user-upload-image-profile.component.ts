@@ -1,8 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { ImageCroppedEvent, ImageTransform, Dimensions, base64ToFile, ImageCropperComponent } from 'ngx-image-cropper';
-import { Router } from '@angular/router';
 import { AccountSelector } from 'src/app/shared/state-management/selectors/account.selector';
 import { GlobalState } from 'src/app/shared/state-management/states/global.state';
 

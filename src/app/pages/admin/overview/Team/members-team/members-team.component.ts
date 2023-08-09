@@ -31,7 +31,6 @@ export class MembersTeamComponent {
       .pipe(select(TeamInfo))
       .subscribe((response) => {
         this.team = response;
-        console.log(response);
       });
     this.subscriptions.add(subscription);
   }
@@ -41,7 +40,6 @@ export class MembersTeamComponent {
     this.router.navigate(['player/'+ name]);
   }
   OpenOverviewPlayerMembers(item:any){
-    console.log(item);
     this.store.dispatch(new LoadOpRoutingIdAction(item._id));
     this.router.navigate(['player/'+ item.nickname]);
   }

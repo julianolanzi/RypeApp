@@ -1,1 +1,31 @@
-<p>image-post works!</p>
+<form (ngSubmit)="createPostImage()" [formGroup]="postFormImage" #formDir="ngForm">
+    <div class="form-content-text-area v2">
+        <textarea formControlName="text" maxlength="1500"
+            placeholder="{{this.user.nickname.toUpperCase()}} Aqui voce coloca o que está pensando !!!"></textarea>
+        <p class="form-textarea-limit-text">{{this.counterText}}/1500</p>
+    </div>
+
+    <div class="file-container">
+        <label class="file">
+            <input type="file" accept="image/*" formControlName="file" (change)="fileChangeEvent($event)" />
+            <span>Selecione sua foto</span>
+        </label>
+    </div>
+
+    <div  *ngIf="this.imagemNome" class="container-imagem">
+        <img [src]="croppedImage" alt="image" />
+    </div>
+
+    <div *ngIf="this.imagemNome" class="crooped">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="16/9"
+            format="png" (imageCropped)="imageCropped($event)" [containWithinAspectRatio]="containWithinAspectRatio"
+            [alignImage]="'left'" [transform]="transform"  (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady($event)" 
+            [style.display]="showCropper ? null : 'none'" [resizeToWidth]="500" [resizeToHeight]="300" format="jpeg"
+            (loadImageFailed)="loadImageFailed()"></image-cropper>
+    </div>
+
+    <div *ngIf="this.postFormImage.valid"  class="quick-post-footer-createad">
+        <button type="submit" [disabled]="!this.postFormImage.valid" class="button create-post">postar</button>
+    </div>
+</form>

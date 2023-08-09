@@ -1,5 +1,6 @@
 export enum FeedMessageEnum {
     LOAD_FEED_POST_REQUEST = '[FEED] Load feed post request',
+    LOAD_FEED_POST_IMAGE_REQUEST = '[FEED] Load feed post image request',
     LOAD_FEED_POST_SUCCESS = '[FEED] Load feed post success',
 
     LOAD_FEED_TIMELINE_REQUEST = '[FEED] Load feed timeline request',
@@ -9,6 +10,7 @@ export enum FeedMessageEnum {
     LOAD_FEED_REACT_POST_SUCCESS = '[FEED] Load react post success',
 
     LOAD_FEED_DELETE_POST_REQUEST = '[FEED] Load delete post request',
+    LOAD_FEED_DELETE_POST_IMAGE_REQUEST = '[FEED] Load delete post img request',
     LOAD_FEED_DELETE_POST_SUCCESS = '[FEED] Load delete post success',
 
     LOAD_FEED_POST_EDIT_REQUEST = '[FEED] Load feed post edit request',

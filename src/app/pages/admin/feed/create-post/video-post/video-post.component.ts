@@ -99,7 +99,5 @@ export class VideoPostComponent {
       this.Alerts.error('Url inválida');
     }
 
-
-
   }
 }
