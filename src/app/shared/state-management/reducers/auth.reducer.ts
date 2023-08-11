@@ -45,7 +45,7 @@ const _authReducer = createReducer(
     isAuthenticated: false,
     isLoadingTeam: false,
   })),
-  
+
 
   on(new TeamLoadQuitSuccessAction().createAction(), (state, action) => ({
     ...state,
@@ -55,7 +55,7 @@ const _authReducer = createReducer(
       rolesTeam: "",
     },
     authError: undefined,
-    
+
   })),
 
   on(new TeamLoadUpdateAuthDataPublicTeam().createAction(), (state, action) => ({
@@ -66,7 +66,7 @@ const _authReducer = createReducer(
       rolesTeam: "member",
     },
     authError: undefined,
-    
+
   })),
 
   on(new AcceptInviteNotificationsTeamUserReducer().createAction(), (state, action) => ({
@@ -77,23 +77,36 @@ const _authReducer = createReducer(
       rolesTeam: "member",
     },
     authError: undefined,
-    
+
   })),
-  on(new TeamLoadInfoSuccessAction().createAction(), (state, action) => ({
-    ...state,
-    user: {
-      ...state.user,
-      idTeam: action.payload._id,
-      rolesTeam: "admin",
-    },
-    authError: undefined,
-    
-  })),
+  on(new TeamLoadInfoSuccessAction().createAction(), (state, action) => {
 
+    let rolesTeam = '';
 
+    if(state.user.id == action.payload.admin._id){
+      rolesTeam = "admin";
 
+    }else{
+      rolesTeam = "member";
+    }
+
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        idTeam: action.payload._id,
+        rolesTeam: rolesTeam,
+      },
+      authError: undefined,
+
+    }
+  }),
 
 );
+
+
+
+
 
 export function authReducer(state: any, action: Action) {
   return _authReducer(state, action);

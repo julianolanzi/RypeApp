@@ -21,7 +21,7 @@ export class HeaderPlayerComponent {
   enableSmallLoading$!: Observable<boolean>;
 
   private subscriptions: Subscription = new Subscription();
-  constructor(private store: Store<GlobalState>, private router: Router,) {
+  constructor(private store: Store<GlobalState>, private router: Router) {
     this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
   }
 

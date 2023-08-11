@@ -20,6 +20,7 @@ import { TeamRemoveMemberSuccessAction } from '../actions/teams/team-remove-memb
 import { TeamLoadGlobalErrorAction } from '../actions/teams/team-load-global-error.actions';
 import { TeamLoadQuitSuccessAction } from '../actions/teams/quit-team/team-load-quit-success.actions';
 import { TeamLoadClearStateAction } from '../actions/teams/clear-state/team-load-clear-state.actions';
+import { AcceptInviteNotificationsSucess } from '../actions/notifications/accept-invite-notifications/notifications-accept-invite-success.actions';
 
 export const initialState: TeamState = {
   team: {
@@ -155,22 +156,23 @@ const _teamReducer = createReducer(
     searchMembers: [...action.payload],
   })),
 
-  on(new TeamRemoveMemberRequestAction().createAction(), (state, action) => ({
+  on(new TeamRemoveMemberRequestAction().createAction(), (state) => ({
     ...state,
     authError: undefined,
     teamSearch: [],
     team: {...initialState.team},
   })),
-  on(new TeamRemoveMemberSuccessAction().createAction(), (state, action) => ({
+  on(new TeamRemoveMemberSuccessAction().createAction(), (state) => ({
     ...state,
     authError: undefined,
     teamSearch: [],
   })),
-  on(new TeamLoadQuitSuccessAction().createAction(), (state, action) => ({
+  on(new TeamLoadQuitSuccessAction().createAction(), (state) => ({
     ...state,
     authError: undefined,
     team: {...initialState.team},
   })),
+
   on(new TeamLoadClearStateAction().createAction(), (state, action) => ({
     ...state,
     authError: undefined,

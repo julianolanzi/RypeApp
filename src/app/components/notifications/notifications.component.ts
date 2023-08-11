@@ -15,6 +15,10 @@ import { AcceptInviteNotificationsRequest } from 'src/app/shared/state-managemen
 import { RecuseInviteNotificationsRequest } from 'src/app/shared/state-management/actions/notifications/recuse-invite-notifications/notifications-recuse-invite-request.actions';
 import { isNotifications, smallLoading } from 'src/app/shared/state-management/selectors/global-pages.selector';
 import { LoadingSmallActiveAction } from 'src/app/shared/state-management/actions/global-pages/global-loading-small/loading-small-active.actions';
+import { LoadOpRoutingTeamIdAction } from 'src/app/shared/state-management/actions/overview/team/routing-id-team/op-load-routing-team-id.actions';
+import { Router } from '@angular/router';
+import { LoadingNotificationsDisabledAction } from 'src/app/shared/state-management/actions/global-pages/global-notifications/loading-notifications-disabled.actions';
+import { LoadOpRoutingIdAction } from 'src/app/shared/state-management/actions/overview/user/rounting-id/op-load-routing-id.actions';
 
 @Component({
   selector: 'app-notifications',
@@ -33,16 +37,16 @@ export class NotificationsComponent {
   public user!: UserLoginSuccess;
   private subscriptions: Subscription = new Subscription();
   isNotifica: boolean = false;
-  constructor(private store: Store<GlobalState>) {
+  constructor(private store: Store<GlobalState>,private router: Router) {
     this.enableNotifications$ = this.store.pipe(select(isNotifications));
     this.enableSmallLoading$ = this.store.pipe(select(smallLoading));
     this.notificationsAll$ = this.store.pipe(select(UserNotifications));
   }
 
   ngOnInit(): void {
-   
+
     this.loadDataUser();
-   
+
   }
 
   public loadDataUser() {
@@ -66,34 +70,46 @@ export class NotificationsComponent {
       }
     }, 1000);
   }
- 
+
   refreshNotifications() {
     this.subscriptions.unsubscribe();
     this.isNotifica = false;
     this.ischange = false;
     this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
-    this.store.dispatch(new LoadingSmallActiveAction({flag: true, message: 'Carregando Notificações'}));
+    this.store.dispatch(new LoadingSmallActiveAction({ flag: true, message: 'Carregando Notificações' }));
     this.onTimer();
   }
   deleteNotification(item: UserNotificationsSuccess) {
     this.store.dispatch(new DeleteNotificationsRequest(item._id));
-    this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
   }
   acceptRequest(item: UserNotificationsSuccess) {
     this.InviteNotification = item;
     this.store.dispatch(new AcceptInviteNotificationsRequest(this.InviteNotification));
-    this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
   }
   rejectRequest(item: UserNotificationsSuccess) {
     this.InviteNotification = item;
     this.store.dispatch(new RecuseInviteNotificationsRequest(this.InviteNotification));
-    this.store.dispatch(new NotificationsGetUserRequest(this.user.id));
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  verifyNotifications(){
+  overviewNofitification(notification: any){
+   console.log(notification);
+    if(notification.type == "user"){
+      this.store.dispatch(new LoadOpRoutingTeamIdAction(notification.team));
+      this.router.navigate(['team-overview']);
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
+    }
+    if(notification.type == "team"){
+      this.store.dispatch(new LoadOpRoutingIdAction(notification.user));
+      this.router.navigate(['player/'+ notification.description.name]);
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
+    }
+      
+  }
+
+  verifyNotifications() {
     if (this.Allnotifications.length == 0) {
       this.isNotifica = true;
     } else {

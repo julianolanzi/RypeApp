@@ -23,8 +23,8 @@ import { AcceptInviteNotificationsRequest } from '../actions/notifications/accep
 import { AcceptInviteNotificationsSucess } from '../actions/notifications/accept-invite-notifications/notifications-accept-invite-success.actions';
 import { RecuseInviteNotificationsRequest } from '../actions/notifications/recuse-invite-notifications/notifications-recuse-invite-request.actions';
 import { RecuseInviteNotificationsSuccess } from '../actions/notifications/recuse-invite-notifications/notifications-recuse-invite-success.actions';
-import { AcceptInviteNotificationsTeamUserReducer } from '../actions/notifications/accept-invite-notifications/notifications-aceept-reducer.actions';
 import { LoadingSmallDisabledAction } from '../actions/global-pages/global-loading-small/loading-small-disabled.actions';
+import { TeamLoadInfoRequestAction } from '../actions/teams/info-team/team-load-info-request.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -131,18 +131,23 @@ export class NotificationsEffect {
     )
   );
 
-  acepptInvite$ = createEffect(() => 
+  acepptInvite$ = createEffect(() =>
     this.actions$.pipe(
       ofType(NotificationsEnum.LOAD_NOTIFICATIONS_ACCEPT_INVITE_REQUEST),
       exhaustMap((action: AcceptInviteNotificationsRequest) => {
         return this.notificaService.acceptInviteNotifications(action.payload).pipe(
           map((response) => {
 
-            if(action.payload?.type == 'user'){
-              this.store.dispatch(new AcceptInviteNotificationsTeamUserReducer(action.payload));
+            if (response.type == "user") {
+              this.store.dispatch(new TeamLoadInfoRequestAction(action.payload?.team));
+              this.Alerts.success('Agora voce faz parte do time ;)', 'Booa');
+            } else {
+              this.Alerts.success('Solicitação aprovada com sucesso', 'Booa');
+              this.store.dispatch(new TeamLoadInfoRequestAction(action.payload?.team));
+
             }
-            this.Alerts.success('Agora voce faz parte do time ;)', 'Booa');
             return new AcceptInviteNotificationsSucess(response);
+
           }),
           catchError((error) => {
             const err = error.error.error;
@@ -153,25 +158,25 @@ export class NotificationsEffect {
       })
     )
   );
-  
-  recuseInvite$ = createEffect(() => 
-  this.actions$.pipe(
-    ofType(NotificationsEnum.LOAD_NOTIFICATIONS_RECUSE_INVITE_REQUEST),
-    exhaustMap((action: RecuseInviteNotificationsRequest) => {
-      return this.notificaService.recuseInviteNotifications(action.payload).pipe(
-        map((response) => {
-          
-          return new RecuseInviteNotificationsSuccess(response);
-        }),
-        catchError((error) => {
-          const err = error.error.error;
+
+  recuseInvite$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NotificationsEnum.LOAD_NOTIFICATIONS_RECUSE_INVITE_REQUEST),
+      exhaustMap((action: RecuseInviteNotificationsRequest) => {
+        return this.notificaService.recuseInviteNotifications(action.payload).pipe(
+          map((response) => {
+
+            return new RecuseInviteNotificationsSuccess(response);
+          }),
+          catchError((error) => {
+            const err = error.error.error;
             this.Alerts.error(err, 'Ops alguma coisa nao deu certo');
-          return of(new NotificationGlobalError(error));
-        })
-      )
-    })
-  )
-);
+            return of(new NotificationGlobalError(error));
+          })
+        )
+      })
+    )
+  );
 
   constructor(
     private actions$: Actions,
@@ -179,5 +184,5 @@ export class NotificationsEffect {
     private router: Router,
     private store: Store,
     private Alerts: AlertService
-  ) {}
+  ) { }
 }

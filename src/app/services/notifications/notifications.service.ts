@@ -65,13 +65,13 @@ export class NotificationsService extends BaseService {
     return response;
   }
 
-  acceptInviteNotifications(data: UserNotificationsSuccess | undefined):Observable<string>{
+  acceptInviteNotifications(data: UserNotificationsSuccess | undefined):Observable<any>{
     let response = this.http
     .put(this.UrlNotifications + '/notifications/acceptInvite', data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));
     return response;
   }
-  recuseInviteNotifications(data: UserNotificationsSuccess | undefined):Observable<string>{
+  recuseInviteNotifications(data: UserNotificationsSuccess | undefined):Observable<any>{
     let response = this.http
     .put(this.UrlNotifications + '/notifications/recuseInvite', data, this.ObterAuthHeaderJson())
     .pipe(map(this.extractData), catchError(this.serviceError));

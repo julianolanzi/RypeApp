@@ -282,7 +282,7 @@ export class TeamEffect {
       return this.teamService.quitTeam(action.payload).pipe(
         map((response) =>{
           this.store.dispatch(new LoadingDisabledAction());
-      
+          this.router.navigate(['/team-setup']);
           return new TeamLoadQuitSuccessAction(response);
         }),
         catchError((error) => {
