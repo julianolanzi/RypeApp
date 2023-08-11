@@ -107,6 +107,48 @@
           background-image: url(../../../assets/img/flags/icones-nofitications.png);
           background-position: 24px -1px;
         }
+        .flag-like {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: -31px -89px;
+        }
+        .flag-love {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: -32px -115px;
+        }
+        .flag-good {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: -32px -143px;
+        }
+        .flag-omg {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: -32px -170px;
+        }
+        .flag-pistola {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: -32px -200px;
+        }
+        .flag-aff {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-image: url(../../../assets/img/flags/icones-nofitications.png);
+          background-position: -32px -228px;
+        }
       }
 
     }
@@ -120,6 +162,13 @@
           font-family: Rajdhani, sans-serif;
           line-height: 1em;
         }
+        strong {
+          font-size: 1rem;
+          font-weight: 700;
+          color: var(--pink-white);
+          font-family: Rajdhani, sans-serif;
+          line-height: 1em;
+        }
       }
 
       .item-description {
@@ -128,6 +177,10 @@
           font-size: .875rem;
           font-weight: 500;
           line-height: 1.4285714286em;
+        }
+        .item-description-link{
+          cursor: pointer;
+          color: var(--pink-white);
         }
       }
 

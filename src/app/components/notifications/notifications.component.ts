@@ -95,13 +95,17 @@ export class NotificationsComponent {
   }
 
   overviewNofitification(notification: any){
-   console.log(notification);
     if(notification.type == "user"){
       this.store.dispatch(new LoadOpRoutingTeamIdAction(notification.team));
       this.router.navigate(['team-overview']);
       this.store.dispatch(new LoadingNotificationsDisabledAction());
     }
     if(notification.type == "team"){
+      this.store.dispatch(new LoadOpRoutingIdAction(notification.user));
+      this.router.navigate(['player/'+ notification.description.name]);
+      this.store.dispatch(new LoadingNotificationsDisabledAction());
+    }
+    if(notification.type == "like" || notification.type == "love" || notification.type == "good" || notification.type == "omg" || notification.type == "pistola" ||notification.type == "aff"){
       this.store.dispatch(new LoadOpRoutingIdAction(notification.user));
       this.router.navigate(['player/'+ notification.description.name]);
       this.store.dispatch(new LoadingNotificationsDisabledAction());

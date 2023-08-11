@@ -140,16 +140,27 @@
                     <div *ngIf="notification.type == 'user'" class="flag-user"></div>
                     <div *ngIf="notification.type == 'platform'" class="flag-platform"> </div>
                     <div *ngIf="notification.type == 'team'" class="flag-team"></div>
+                    <div *ngIf="notification.type == 'like'" class="flag-like"></div>
+                    <div *ngIf="notification.type == 'love'" class="flag-love"></div>
+                    <div *ngIf="notification.type == 'good'" class="flag-good"></div>
+                    <div *ngIf="notification.type == 'omg'" class="flag-omg"></div>
+                    <div *ngIf="notification.type == 'pistola'" class="flag-pistola"></div>
+                    <div *ngIf="notification.type == 'aff'" class="flag-aff"></div>
                   </div>
                 </div>
               </div>
             </a>
             <div class="item-content">
               <div class="item-title">
-                <h2>{{notification.title}}</h2>
+                <h2> <strong>{{notification.description.name.toLocaleUpperCase()}}</strong> {{notification.title}}</h2>
               </div>
               <div class="item-description">
-                <p>{{notification.description.message}}</p>
+                <p *ngIf="notification.type == 'like'">{{notification.description.message}} de Curtir <a class="item-description-link">Post</a></p>
+                <p *ngIf="notification.type == 'love'">{{notification.description.message}} de Amei <a class="item-description-link">Post</a></p>
+                <p *ngIf="notification.type == 'good'">{{notification.description.message}} de Troll <a class="item-description-link">Post</a></p>
+                <p *ngIf="notification.type == 'omg'">{{notification.description.message}} de OMG <a class="item-description-link">Post</a></p>
+                <p *ngIf="notification.type == 'pistola'">{{notification.description.message}} de Hack <a class="item-description-link">Post</a></p>
+                <p *ngIf="notification.type == 'aff'">{{notification.description.message}} de Noob <a class="item-description-link">Post</a></p>
               </div>
               <div *ngIf="notification.request == true" class="item-request">
                 <button (click)="rejectRequest(notification)" class="recusar">recusar</button>

@@ -79,8 +79,9 @@
           <p class="user-status-text">{{post.createdAt | date:'shortTime'}}</p>
 
         </div>
-        <p  id="{{post.id}}more-text" class="widget-box-status-text">{{post.text}}</p>
-        <p *ngIf="post.text.length > 500" (click)="loadMoreText(post.id)" class="widget-box-status-text-button">Ver Mais</p>
+        <p id="{{post.id}}more-text" class="widget-box-status-text">{{post.text}}</p>
+        <p *ngIf="post.text.length > 500" (click)="loadMoreText(post.id)" class="widget-box-status-text-button">Ver Mais
+        </p>
       </div>
       <div *ngIf="post.type == 'video'" class="widget-box-status-content-video">
         <youtube-player class="video-teste" [height]="300" videoId="{{post.urlVideo}}"> </youtube-player>
@@ -96,48 +97,48 @@
               <div class="meta-line-list reaction-item-list" *ngIf="post.ranked">
                 <div class="reaction-item" *ngIf="post.ranked[0].qtd > 0">
                   <img *ngIf="post.ranked[0].reackRank == 'like'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+                    src="./assets/reacts/like.png" alt="">
                   <img *ngIf="post.ranked[0].reackRank == 'love'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+                    src="./assets/reacts/mvp.png"alt="">
                   <img *ngIf="post.ranked[0].reackRank == 'good'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+                    src="./assets/reacts/troll.png" alt="">
                   <img *ngIf="post.ranked[0].reackRank == 'omg'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+                    src="./assets/reacts/OMG.png" alt="">
                   <img *ngIf="post.ranked[0].reackRank == 'pistola'"
                     class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+                    src="./assets/reacts/hack.png" alt="">
                   <img *ngIf="post.ranked[0].reackRank == 'aff'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+                    src="./assets/reacts/noob.png" alt="">
                 </div>
                 <div class="reaction-item" *ngIf="post.ranked[1].qtd > 0">
                   <img *ngIf="post.ranked[1].reackRank == 'like'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+                    src="./assets/reacts/like.png" alt="">
                   <img *ngIf="post.ranked[1].reackRank == 'love'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+                    src="./assets/reacts/mvp.png"alt="">
                   <img *ngIf="post.ranked[1].reackRank == 'good'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+                    src="./assets/reacts/troll.png" alt="">
                   <img *ngIf="post.ranked[1].reackRank == 'omg'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+                    src="./assets/reacts/OMG.png" alt="">
                   <img *ngIf="post.ranked[1].reackRank == 'pistola'"
                     class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+                    src="./assets/reacts/hack.png" alt="">
                   <img *ngIf="post.ranked[1].reackRank == 'aff'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+                    src="./assets/reacts/noob.png" alt="">
                 </div>
                 <div class="reaction-item" *ngIf="post.ranked[2].qtd > 0">
                   <img *ngIf="post.ranked[2].reackRank == 'like'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+                    src="./assets/reacts/like.png" alt="">
                   <img *ngIf="post.ranked[2].reackRank == 'love'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+                    src="./assets/reacts/mvp.png"alt="">
                   <img *ngIf="post.ranked[2].reackRank == 'good'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+                    src="./assets/reacts/troll.png" alt="">
                   <img *ngIf="post.ranked[2].reackRank == 'omg'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+                    src="./assets/reacts/OMG.png" alt="">
                   <img *ngIf="post.ranked[2].reackRank == 'pistola'"
                     class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+                    src="./assets/reacts/hack.png" alt="">
                   <img *ngIf="post.ranked[2].reackRank == 'aff'" class="reaction-image reaction-item-dropdown-trigger"
-                    src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+                  src="./assets/reacts/noob.png" alt=""> alt="">
                 </div>
               </div>
               <p *ngIf="!post?.reacts?.length" class="meta-line-text">Sem Reações</p>
@@ -148,7 +149,8 @@
           </div>
           <div class="content-action">
             <div class="meta-line">
-              <a (click)="modalcomments.toggle()" (click)="comments.loadComments(post)"  class="meta-line-link">{{post?.qtdComments}} Comentários</a>
+              <a (click)="modalcomments.toggle()" (click)="comments.loadComments(post)"
+                class="meta-line-link">{{post?.qtdComments}} Comentários</a>
             </div>
           </div>
         </div>
@@ -162,60 +164,54 @@
             recommend
           </span>
           <img *ngIf="post.reactUser == 'like'" class="reaction-image reaction-item-dropdown-trigger"
-            src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png" alt="">
+            src="./assets/reacts/like.png" alt="">
           <img *ngIf="post.reactUser ==  'love'" class="reaction-image reaction-item-dropdown-trigger"
-            src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png" alt="">
+            src="./assets/reacts/mvp.png" alt="">
           <img *ngIf="post.reactUser ==  'good'" class="reaction-image reaction-item-dropdown-trigger"
-            src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png" alt="">
+            src="./assets/reacts/troll.png" alt="">
           <img *ngIf="post.reactUser ==  'omg'" class="reaction-image reaction-item-dropdown-trigger"
-            src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png" alt="">
+            src="./assets/reacts/OMG.png" alt="">
           <img *ngIf="post.reactUser ==  'pistola'" class="reaction-image reaction-item-dropdown-trigger"
-            src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png" alt="">
+            src="./assets/reacts/hack.png" alt="">
           <img *ngIf="post.reactUser ==  'aff'" class="reaction-image reaction-item-dropdown-trigger"
-            src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png" alt="">
+            src="./assets/reacts/noob.png" alt="">
           <p class="post-option-react">Reagir</p>
         </div>
         <div id="{{post.id}}react" class="reaction-options reaction-options-dropdown">
           <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'like')">
-            <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/like.png"
-              alt="">
+            <img class="reaction-option-image" src="./assets/reacts/like.png" alt="">
             <div class="xm-tooltip">
               <p class="xm-tooltip-text">Like</p>
             </div>
           </div>
           <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'love')">
-            <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/love.png"
-              alt="">
+            <img class="reaction-option-image" src="./assets/reacts/mvp.png" alt="">
             <div class="xm-tooltip">
-              <p class="xm-tooltip-text">Amei</p>
+              <p class="xm-tooltip-text">MVP</p>
             </div>
           </div>
           <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'good')">
-            <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/funny.png"
-              alt="">
+            <img class="reaction-option-image" src="./assets/reacts/troll.png" alt="">
             <div class="xm-tooltip">
-              <p class="xm-tooltip-text">Boooa</p>
+              <p class="xm-tooltip-text">troll</p>
             </div>
           </div>
           <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'omg')">
-            <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/wow.png"
-              alt="">
+            <img class="reaction-option-image" src="./assets/reacts/OMG.png" alt="">
             <div class="xm-tooltip">
               <p class="xm-tooltip-text">OMG</p>
             </div>
           </div>
           <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'pistola')">
-            <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/angry.png"
-              alt="">
+            <img class="reaction-option-image" src="./assets/reacts/hack.png" alt="">
             <div class="xm-tooltip">
-              <p class="xm-tooltip-text">Pistola</p>
+              <p class="xm-tooltip-text">hack</p>
             </div>
           </div>
           <div class="reaction-option text-tooltip-tft" (click)="reactedPost(post.id, 'aff')">
-            <img class="reaction-option-image" src="https://odindesignthemes.com/vikinger-dark/img/reaction/sad.png"
-              alt="">
+            <img class="reaction-option-image" src="./assets/reacts/noob.png" alt="">
             <div class="xm-tooltip">
-              <p class="xm-tooltip-text">Aff</p>
+              <p class="xm-tooltip-text">noob</p>
             </div>
           </div>
         </div>
@@ -241,7 +237,7 @@
   <div class="quick-post-body">
     <form (ngSubmit)="updatePost()" [formGroup]="UpdatePostForm" #formDir="ngForm">
       <div class="user-status">
-        <div class="user-status-avatar" >
+        <div class="user-status-avatar">
           <div class="user-avatar-small">
             <div class="user-avatar-content">
               <div class="hexagon-image-31-35">
@@ -340,5 +336,5 @@
 <app-modal-commets-post #modalcomments>
 
   <app-comments #comments></app-comments>
- 
+
 </app-modal-commets-post>
