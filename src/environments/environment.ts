@@ -8,6 +8,6 @@ export const environment = {
     // UrlNotifications: 'http://localhost:5080',
     UrlImgUpload:'https://upload-img-api.rypegg.com',
     // UrlImgUpload:'http://localhost:5090',
-    UrlFeed: 'http://localhost:9030',
-    // UrlFeed: 'https://feed-api.rypegg.com'
+    // UrlFeed: 'http://localhost:9030',
+    UrlFeed: 'https://feed-api.rypegg.com'
 };

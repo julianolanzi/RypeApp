@@ -20,6 +20,7 @@ import { FeedModule } from 'src/app/pages/admin/feed/feed.module';
 import { FeedService } from 'src/app/services/feed/feed.service';
 import { OverviewService } from 'src/app/services/overview/overview.service';
 import { OverviewModule } from 'src/app/pages/admin/overview/overview.module';
+import { EventsModule } from 'src/app/pages/admin/events/events.module';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { OverviewModule } from 'src/app/pages/admin/overview/overview.module';
     TeamModule,
     FeedModule,
     OverviewModule,
+    EventsModule
   ],
 })
 export class AdminModule { }

@@ -31,8 +31,8 @@
     }
 
     .container-button{
-        visibility: visible;
-        opacity: 1;
+        visibility: hidden;
+        opacity: 0;
         transition: var(--tran-05);
         max-width: 1184px;
         width: 80%;

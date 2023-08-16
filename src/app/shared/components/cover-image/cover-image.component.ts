@@ -90,26 +90,37 @@ export class CoverImageComponent {
 
     this.subscriptions.add(subscription);
   }
-  LoadIdTeam(){
+  LoadIdTeam() {
     const subscription = this.store
-    .pipe(select(TeamInfoSelector))
-    .subscribe((team) => {
-      this.idTeam = team._id;
-    });
+      .pipe(select(TeamInfoSelector))
+      .subscribe((team) => {
+        this.idTeam = team._id;
+      });
   }
 
   selectedCover(item: any) {
     this.BoderCover(item);
-
+    this.enablebutton(item);
     this.ConverSelected = item;
   }
 
+  enablebutton(item: any) {
+    let idtag = document.getElementById(item.id);
+    let btn = document.querySelector('.container-button');
+    if (idtag?.classList.contains('selected')) {
+      console.log('tem tag');
+    
+    } else {
+      console.log('não tem tag');
+     
+     
+    }
+
+  }
   BoderCover(item: any) {
     let idtag = document.getElementById(item.id);
     idtag?.classList.toggle('selected');
-
     let btn = document.querySelector('.container-button');
-    btn?.classList.toggle('active');
 
     document.addEventListener("mouseup", function (event) {
       var obj = document.getElementById(item.id);
@@ -127,14 +138,14 @@ export class CoverImageComponent {
 
     if (local == "/upload-cover-user") {
       this.LoadIdUser();
-     
+
       this.ImagemSelected = {
         url: this.ConverSelected.urlCover,
         type: "user",
         id: this.idUser,
       }
       this.store.dispatch(new UploadImageCoverRequestAction(this.ImagemSelected));
-      
+
     } else {
       this.LoadIdTeam();
       this.ImagemSelected = {

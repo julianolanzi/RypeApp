@@ -106,7 +106,7 @@ export class NotificationsComponent {
       this.store.dispatch(new LoadingNotificationsDisabledAction());
     }
     if(notification.type == "like" || notification.type == "love" || notification.type == "good" || notification.type == "omg" || notification.type == "pistola" ||notification.type == "aff"){
-      this.store.dispatch(new LoadOpRoutingIdAction(notification.user));
+      this.store.dispatch(new LoadOpRoutingIdAction(notification.description.author));
       this.router.navigate(['player/'+ notification.description.name]);
       this.store.dispatch(new LoadingNotificationsDisabledAction());
     }
