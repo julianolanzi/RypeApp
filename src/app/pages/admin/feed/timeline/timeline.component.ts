@@ -29,7 +29,7 @@ export class TimelineComponent {
   UserUpdatePost!: any;
   UpdatePostForm!: FormGroup;
   UpdatePostRequest!: EditPostRequest;
-
+  apiLoaded = false;
   lastId: string = '';
   enableSmallLoading$!: Observable<boolean>;
   PageOffset: number = 0;
@@ -61,7 +61,12 @@ export class TimelineComponent {
   ngOnInit(): void {
     this.loadTimeline();
 
-
+    if (!this.apiLoaded) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(tag);
+      this.apiLoaded = true;
+    }
   }
   enableReact(id: any) {
     let idtag = document.getElementById(id + 'react');
