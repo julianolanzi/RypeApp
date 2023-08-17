@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,9 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
   styleUrls: ['./text-post.component.scss']
 })
 export class TextPostComponent {
+
+  @Output() resetPost = new EventEmitter();
+
   postFormText!: FormGroup;
   postRequestText!: PostCreateRequest;
   public user!: any;
@@ -48,7 +51,8 @@ export class TextPostComponent {
     }
 
     this.store.dispatch(new FeedPostCreateRequestAction(this.postRequestText));
-
+    this.postFormText.reset();
+    this.resetPost.emit();
   }
 
   ngOnInit(): void {

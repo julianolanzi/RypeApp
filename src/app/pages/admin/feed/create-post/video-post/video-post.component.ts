@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
   styleUrls: ['./video-post.component.scss']
 })
 export class VideoPostComponent {
+  @Output() resetPost = new EventEmitter();
   postFormYoutube!: FormGroup;
   postRequestYoutube!: PostCreateRequest;
   public user!: any;
@@ -56,6 +57,7 @@ export class VideoPostComponent {
 
     this.postFormYoutube.reset();
     this.enablePreviewVideo = false;
+    this.resetPost.emit();
   }
   ngOnInit(): void {
     this.loadUser()

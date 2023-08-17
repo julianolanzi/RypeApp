@@ -54,4 +54,10 @@ export class CreatePostComponent {
     this.istext = false;
     this.isVideo = true;
   }
+
+  clearPosts($event: any){
+    this.isImage = false;
+    this.istext = false;
+    this.isVideo = false;
+  }
 }

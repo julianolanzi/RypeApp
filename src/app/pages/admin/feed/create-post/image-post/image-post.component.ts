@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
@@ -15,6 +15,7 @@ import { GlobalState } from 'src/app/shared/state-management/states/global.state
   styleUrls: ['./image-post.component.scss']
 })
 export class ImagePostComponent {
+  @Output() resetPost = new EventEmitter();
   postFormImage!: FormGroup;
   postRequestImage!: PostCreateImageRequest;
   public user!: any;
@@ -76,6 +77,7 @@ export class ImagePostComponent {
     this.imagemNome = '';
     this.showCropper = false;
     this.counterText = 0;
+    this.resetPost.emit();
   }
   public loadUser() {
     const subscription = this.store
