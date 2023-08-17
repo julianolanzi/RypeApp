@@ -109,10 +109,10 @@ export class CoverImageComponent {
     let btn = document.querySelector('.container-button');
     if (idtag?.classList.contains('selected')) {
       console.log('tem tag');
-    
+      btn?.classList.add('active');
     } else {
       console.log('não tem tag');
-     
+      btn?.classList.remove('active');
      
     }
 

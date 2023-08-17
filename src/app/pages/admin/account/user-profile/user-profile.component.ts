@@ -191,16 +191,7 @@ export class UserProfileComponent {
     this.store.dispatch(new AccountUpdateLoadImgRequestAction(this.updateImg));
   }
 
-  onselectFile(e: any) {
-    if (e.target.files) {
-      this.file = e.srcElement.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.url = event.target.result;
-      };
-    }
-  }
+ 
 
 
 }

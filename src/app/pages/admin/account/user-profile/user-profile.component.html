@@ -203,28 +203,3 @@
 <div *ngIf="loading$ | async">
   <app-loading></app-loading>
 </div>
-
-<app-modal-generic #modal>
-  <div class="container-content-modal">
-    <div class="title-modal">
-      <h1>Altere sua foto de perfil</h1>
-      <p>Selecione a foto que voce deseja</p>
-    </div>
-    <div class="modal-center">
-      <div class="container-img">
-
-        <img [src]="this.url" alt="image" />
-
-      </div>
-      <label class="file">
-        <input type="file" accept="image/*" (change)="onselectFile($event)" />
-        <span>Selecione sua foto</span>
-      </label>
-
-      <button (click)="modal.toggle()" (click)="changeImg()" class="btn-modal-change">Alterar</button>
-      <button (click)="modal.toggle()" class="btn-modal-close">Fechar</button>
-
-    </div>
-
-  </div>
-</app-modal-generic>
