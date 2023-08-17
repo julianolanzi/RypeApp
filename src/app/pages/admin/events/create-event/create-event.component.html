@@ -6,7 +6,54 @@
     <div class="widget-box">
         <p class="widget-box-title">Informações sobre o Evento</p>
         <div class="widget-box-content">
-            <form action=""></form>
+            <form (ngSubmit)="createEvent()" class="form" [formGroup]="createEventForm" #formDir="ngForm">
+                <div class="form-row">
+                    <div class="form-item">
+                        <div class="form-input">
+                            <label for="">Nome</label>
+                            <input type="text" formControlName="name" placeholder="Nome" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-item">
+                        <div class="form-input">
+                            <label>Jogo</label>
+                            <select name="game" id="game" formControlName="game" data-placeholder="Selecione o jogo ">
+                                <option value="">Selecione o jogo ...</option>
+                                <option value="brasil">Call Of Duty Mobile</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-input">
+                            <label>Plataforma</label>
+                            <select name="platform" id="platform" formControlName="platform"
+                                data-placeholder="Selecione a plataforma ">
+                                <option value="">Selecione a plataforma ...</option>
+                                <option value="brasil">PC</option>
+                                <option value="brasil">Mobile</option>
+                                <option value="brasil">Tablet</option>
+                                <option value="brasil">PlayStation 4</option>
+                                <option value="brasil">PlayStation 5</option>
+                                <option value="brasil">Xbox One</option>
+                                <option value="brasil">Xbox Series</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-input">
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-input">
+
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>

@@ -57,7 +57,7 @@
         </div>
         
       </div>
-      <div *ngIf="this.isAdmin == false" class="profile-header-info-actions">
+      <div *ngIf="!this.isAdminTeam$" class="profile-header-info-actions">
         <button (click)="quitTeam()" class="profile-header-info-action">
           <span class="material-symbols-outlined">
             exit_to_app
