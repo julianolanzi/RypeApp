@@ -159,6 +159,8 @@ export class TimelineComponent {
     let modeText = document.querySelector('.widget-box-status-text-button') as HTMLElement;
     if(idtag?.classList.contains('all-text')){
       modeText.innerText = 'Ver menos';
+    }else{
+      modeText.innerText = 'Ver mais';
     }
    
   }

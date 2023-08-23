@@ -27,7 +27,7 @@ export class VideoPostComponent {
 
   constructor(private store: Store<GlobalState>, private Alerts: AlertService) {
     this.postFormYoutube = new FormGroup({
-      text: new FormControl('',[Validators.required]),
+      text: new FormControl('', [Validators.required]),
       urlVideo: new FormControl('', [Validators.required, Validators.minLength(10)]),
     })
 
@@ -87,16 +87,29 @@ export class VideoPostComponent {
 
 
     if (start != -1) {
+
       let last = Urlinfo.indexOf('&');
-      start = start + 2;
-      let result = Urlinfo.substring(start, last);
-      this.videoId = result;
-      this.enablePreviewVideo = true;
+
+      if (last.length > 0) {
+        start = start + 2;
+        let result = Urlinfo.substring(start, last);
+        this.videoId = result;
+
+        this.enablePreviewVideo = true;
+      } else {
+        start = start + 2;
+        let result = Urlinfo.substring(start);
+        this.videoId = result;
+        console.log(result);
+        this.enablePreviewVideo = true;
+      }
+
     }
     if (start2 != -1) {
       let UrlMobile = Urlinfo.split('/');
       this.videoId = UrlMobile[3];
       this.enablePreviewVideo = true;
+      console.log(UrlMobile[3]);
     } if (start == -1 && start2 == -1) {
       this.Alerts.error('Url inválida');
     }
